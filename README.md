@@ -48,6 +48,20 @@ package.json: reventaba con `MIDDLEWARE_INVOCATION_FAILED`. Para un flag
 estático el middleware sobraba de todos modos — así no hay invocación serverless
 por petición y la raíz sigue siendo estática.
 
+## Despliegue
+
+Vercel, conectado a `main` de este repo: cada push despliega.
+
+Dos cosas que ya han mordido una vez:
+
+- **`COMING_SOON` se lee en build.** Cambiarla en el panel no basta: hay que
+  volver a desplegar (*Deployments* → el último → *Redeploy*) o empujar un
+  commit.
+- **Un proyecto pausado devuelve 404 en todos sus dominios**, aunque el
+  despliegue esté READY y correctamente aliaseado. Pausar "bloquea el
+  Production Deployment activo", así que el síntoma no se parece en nada a la
+  causa. Se ve en *Settings* del proyecto.
+
 ## Pendiente antes de publicar la home
 
 - Las dos capturas de la sección "Two things, done properly" son placeholders.
