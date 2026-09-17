@@ -1,0 +1,158 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Tokens del frame de Figma "Homepage" (node 135:524), portados desde el
+   borrador emmvi-for-installers.html. Tipografía DM Sans.
+   La escala tipográfica se pasó a clamp(): el borrador tenía h1 fijo en 64px
+   sin override móvil, que desborda en pantallas chicas.
+   ========================================================================== */
+
+@theme {
+  /* --- color --- */
+  --color-paper: #ffffff;
+  --color-paper-alt: #f8f8f8;        /* bandas de sección */
+  --color-paper-panel: #f9fafd;      /* paneles grandes, radius 32 */
+  --color-ink: #171717;              /* títulos y texto primario */
+  --color-ink-soft: #666666;         /* cuerpo de texto */
+  --color-ink-black: #000000;        /* nav activo, labels de link */
+  --color-line: #eaeaea;
+  --color-violet: #635dff;           /* violeta de marca, del divisor del logo */
+  /* El violeta de marca rinde 4.36:1 sobre #f8f8f8: falla AA en texto chico.
+     Esta variante oscurecida da 5.77:1 sobre la banda y 6.14:1 sobre papel. */
+  --color-violet-ink: #4f49e6;
+  /* Variante aclarada para texto chico sobre fondo oscuro: el violeta de marca
+     se queda en 3.76:1 sobre el centro iluminado del degradado radial. Esta da
+     5.24:1 alli y 6.33:1 en los bordes. */
+  --color-violet-light: #827dff;
+
+  /* --- radios --- */
+  --radius-sm: 8px;                  /* botones, chips */
+  --radius-md: 12px;                 /* cards */
+  --radius-lg: 32px;                 /* paneles grandes */
+
+  /* --- layout --- */
+  --container-wrap: 1296px;
+  --spacing-gut: 52px;
+
+  /* --- tipografía --- */
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  /* Stack mono del sistema: cero peticiones extra. Se usa solo para artefactos
+     reales (numeros de paso, nombres de archivo, recuentos, marcas de hora),
+     nunca como decoracion "tecnica". */
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+  --text-display: clamp(2.25rem, 1.15rem + 4.4vw, 4rem);          /* h1 → 64px */
+  --text-display--line-height: 1.06;
+  --text-display--letter-spacing: -0.025em;
+  --text-display--font-weight: 800;
+
+  --text-h2: clamp(2rem, 1.35rem + 2.6vw, 3.1875rem);             /* → 51px */
+  --text-h2--line-height: 1.1;
+  --text-h2--letter-spacing: -0.02em;
+  --text-h2--font-weight: 800;
+
+  --text-h3: 1.5rem;                                              /* 24px */
+  --text-h3--line-height: 1.3;
+  --text-h3--letter-spacing: -0.021em;
+  --text-h3--font-weight: 700;
+
+  --text-lede: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);            /* → 24px */
+  --text-lede--line-height: 1.417;
+  --text-lede--letter-spacing: -0.008em;
+
+  --text-body: 1.125rem;                                          /* 18px */
+  --text-body--line-height: 1.611;
+
+  --text-small: 0.875rem;                                         /* 14px */
+  --text-small--line-height: 1.43;
+
+  --text-eyebrow: 1rem;                                           /* 16px */
+  --text-eyebrow--line-height: 1.5;
+  --text-eyebrow--font-weight: 500;
+}
+
+:root {
+  /* Gradiente "night" del Figma: paneles oscuros (demo, mockup de teléfono). */
+  --night: linear-gradient(180deg, #171717 0%, #000000 48%, #7d7d7d 100%);
+  /* El diseño de marca es claro. Sin modo oscuro hasta que exista en Figma. */
+  color-scheme: light;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+    }
+  }
+}
+
+@utility bg-night {
+  background-image: var(--night);
+}
+
+/* --------------------------------------------------------------------------
+   ReplyProof: la respuesta llega sola. El estado por defecto es "ya entregada",
+   asi que si la animacion no corre (reduced motion, pestana oculta, render sin
+   cabeza) el panel se ve completo igual.
+   -------------------------------------------------------------------------- */
+@keyframes reply-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes tick-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.reply-proof__tick {
+  animation: tick-in 400ms cubic-bezier(0.22, 1, 0.36, 1) 1600ms both;
+}
+
+.reply-proof__reply {
+  animation: reply-arrive 620ms cubic-bezier(0.16, 1, 0.3, 1) 2200ms both;
+  transform-origin: bottom right;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reply-proof__tick,
+  .reply-proof__reply {
+    animation: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   <dialog> en modal NO bloquea el scroll del fondo por si solo: con el menu
+   abierto la pagina segui desplazandose detras. Se bloquea aqui.
+   -------------------------------------------------------------------------- */
+html:has(dialog[open]) {
+  overflow: hidden;
+}
