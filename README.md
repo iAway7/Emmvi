@@ -35,10 +35,18 @@ legible, conserva lo escrito y registra la causa en el log del servidor.
 
 ## Página de espera
 
-Con `COMING_SOON=1`, `middleware.ts` sirve `/coming-soon` en la raíz mediante
-**rewrite**, no redirect: la URL sigue siendo `emmvi.com/`. Quitar la variable
-devuelve la home completa, sin que nadie se quede con una `/coming-soon`
-guardada ni indexada.
+Con `COMING_SOON=1`, la raíz sirve la página de espera en vez de la home. La URL
+sigue siendo `emmvi.com/`, así que nadie se queda con una `/coming-soon`
+guardada ni indexada. La ruta `/coming-soon` existe igualmente, para
+previsualizarla con la home todavía servida en la raíz.
+
+**La variable se lee en build**, así que cambiarla exige volver a desplegar.
+
+Esto se resolvía antes con `middleware.ts`, pero Next 16 emite el middleware con
+sintaxis ESM y Vercel lo carga como CommonJS sin `"type": "module"` en
+package.json: reventaba con `MIDDLEWARE_INVOCATION_FAILED`. Para un flag
+estático el middleware sobraba de todos modos — así no hay invocación serverless
+por petición y la raíz sigue siendo estática.
 
 ## Pendiente antes de publicar la home
 

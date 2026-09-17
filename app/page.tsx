@@ -2,16 +2,32 @@ import type { Metadata } from "next";
 import Image from "next/image";
 
 import { CalendlyButton } from "@/components/calendly-button";
+import { ComingSoon, comingSoonMetadata } from "@/components/coming-soon";
 import { ContactForm } from "@/components/contact-form";
 import { CtaLink } from "@/components/cta-link";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 
-export const metadata: Metadata = {
-  title: "Emmvi · Get more customers without doing more work",
-  description:
-    "We build the website and the systems behind it, so the work that happens after someone fills in a form does not depend on anyone remembering.",
-};
+/**
+ * COMING_SOON=1 sirve la pagina de espera en la raiz.
+ *
+ * Se resuelve aqui y no en middleware: Next 16 emite el middleware con sintaxis
+ * ESM pero Vercel lo carga como CommonJS sin "type":"module" en package.json, y
+ * revienta con MIDDLEWARE_INVOCATION_FAILED. Para un flag estatico el middleware
+ * sobraba igualmente: esto se resuelve en build, sin invocacion serverless por
+ * peticion.
+ *
+ * A cambio, cambiar la variable exige volver a desplegar.
+ */
+const comingSoon = process.env.COMING_SOON === "1";
+
+export const metadata: Metadata = comingSoon
+  ? comingSoonMetadata
+  : {
+      title: "Emmvi · Get more customers without doing more work",
+      description:
+        "We build the website and the systems behind it, so the work that happens after someone fills in a form does not depend on anyone remembering.",
+    };
 
 const familiar = [
   "I run a great business, but not enough people know about it.",
@@ -158,6 +174,8 @@ const wrap =
 const section = "py-16 lg:py-[104px]";
 
 export default function Home() {
+  if (comingSoon) return <ComingSoon />;
+
   return (
     <>
       <SiteHeader />

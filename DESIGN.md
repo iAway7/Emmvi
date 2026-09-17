@@ -148,10 +148,15 @@ contesta en menos de un minuto, así que la página **mantiene reserva de llamad
 y correo**. Y no promete fecha de lanzamiento, porque no hay ninguna que se
 pueda cumplir.
 
-`middleware.ts` la sirve en la raíz cuando `COMING_SOON=1`, por **rewrite y no
-redirect**: la URL sigue siendo `emmvi.com/`, así que al quitar la variable
-aparece la home sin que nadie tenga una `/coming-soon` guardada ni indexada.
-Comprobado en producción en los dos sentidos.
+`app/page.tsx` la sirve en la raíz cuando `COMING_SOON=1`: la URL sigue siendo
+`emmvi.com/`, así que al quitar la variable aparece la home sin que nadie tenga
+una `/coming-soon` guardada ni indexada. Comprobado en build de producción en
+los dos sentidos.
+
+Se hacía con `middleware.ts` y **fallaba en Vercel**: Next 16 lo emite con
+sintaxis ESM y Vercel lo carga como CommonJS sin `"type": "module"`, dando
+`MIDDLEWARE_INVOCATION_FAILED`. Para un flag estático el middleware sobraba —
+resolverlo en build evita una invocación serverless por petición.
 
 El `title` y la `description` describen Emmvi, no el estado del sitio, con
 `title: { absolute: ... }` porque la plantilla `%s · Emmvi` del layout sí se
