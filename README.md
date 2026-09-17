@@ -57,10 +57,14 @@ Dos cosas que ya han mordido una vez:
 - **`COMING_SOON` se lee en build.** Cambiarla en el panel no basta: hay que
   volver a desplegar (*Deployments* → el último → *Redeploy*) o empujar un
   commit.
-- **Un proyecto pausado devuelve 404 en todos sus dominios**, aunque el
-  despliegue esté READY y correctamente aliaseado. Pausar "bloquea el
-  Production Deployment activo", así que el síntoma no se parece en nada a la
-  causa. Se ve en *Settings* del proyecto.
+- **El Framework Preset del proyecto tiene que ser Next.js.** Si está en
+  *Other*, Vercel publica solo `public/` como sitio estático: las imágenes
+  responden 200 y todas las páginas dan 404, con el despliegue en READY y los
+  dominios bien asignados. El síntoma no se parece a la causa. Está en
+  *Settings* → *Build and Deployment* → *Framework Settings*.
+
+  Prueba rápida para reconocerlo: si `/emmvi-mark.svg` responde y `/` no, es
+  esto.
 
 ## Pendiente antes de publicar la home
 
