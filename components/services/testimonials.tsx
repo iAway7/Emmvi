@@ -36,7 +36,7 @@ const testimonials: Testimonial[] = [
     name: "Jared White",
     role: "JBZ Beats",
     initials: "JW",
-    photo: "/testimonials/jared-white.jpg",
+    photo: "/testimonials/jared-white.png",
   },
   {
     quote:

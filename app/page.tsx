@@ -134,7 +134,7 @@ const testimonials: Testimonial[] = [
       "Gustavo and Nico do great work. I've been really happy with multiple websites they've built for me. They have a great eye for design and a strong focus on user experience, making sure everything not only looks good but is easy to navigate. They're talented, reliable, and easy to work with.",
     name: "Jared White",
     org: "JBZ Beats",
-    photo: "/testimonials/jared-white.jpg",
+    photo: "/testimonials/jared-white.png",
     initials: "JW",
   },
   {

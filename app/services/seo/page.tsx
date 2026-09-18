@@ -307,7 +307,7 @@ export default function SeoPage() {
               </blockquote>
               <figcaption className="mt-6 flex items-center gap-3">
                 <Image
-                  src="/testimonials/jared-white.jpg"
+                  src="/testimonials/jared-white.png"
                   alt=""
                   width={40}
                   height={40}
