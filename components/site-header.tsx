@@ -16,7 +16,8 @@ import { Wordmark } from "./wordmark";
 const links = [
   { href: "/#services", label: "Services" },
   { href: "/#who", label: "Who we work with" },
-  { href: "/#about", label: "About" },
+  // Pagina propia, no el ancla de la seccion "Meet Emmvi" de la home.
+  { href: "/about-us", label: "About" },
   { href: "/#faq", label: "FAQ" },
 ];
 
