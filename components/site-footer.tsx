@@ -1,3 +1,7 @@
+import Link from "next/link";
+
+import { Wordmark } from "./wordmark";
+
 /** Mismas anclas absolutas que el header, por la misma razon: el footer
  *  tambien se monta fuera de la home. "Contact" ya no es un ancla sino
  *  `/contact`, que es una pagina de verdad. */
@@ -32,10 +36,19 @@ export function SiteFooter() {
     <footer className="border-t border-line pt-18 pb-14">
       <div className="mx-auto max-w-[var(--container-wrap)] px-6 lg:px-[var(--spacing-gut)]">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] lg:gap-12">
-          <p className="max-w-[24em] text-body text-ink-soft">
-            Websites and the systems that run behind them, for small businesses
-            in Europe and the Americas.
-          </p>
+          <div>
+            <Link
+              href="/"
+              aria-label="Emmvi, home"
+              className="inline-flex rounded-sm text-ink focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
+            >
+              <Wordmark className="h-8 w-auto" />
+            </Link>
+            <p className="mt-5 max-w-[24em] text-body text-ink-soft">
+              Websites and the systems that run behind them, for small
+              businesses in Europe and the Americas.
+            </p>
+          </div>
 
           {columns.map((col) => (
             <nav key={col.title} aria-label={col.title}>
