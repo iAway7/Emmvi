@@ -1,17 +1,20 @@
+/** Mismas anclas absolutas que el header, por la misma razon: el footer
+ *  tambien se monta fuera de la home. "Contact" ya no es un ancla sino
+ *  `/contact`, que es una pagina de verdad. */
 const columns = [
   {
     title: "Services",
     links: [
-      { href: "#services", label: "Design and build" },
-      { href: "#services", label: "CRM and automation" },
+      { href: "/#services", label: "Design and build" },
+      { href: "/#services", label: "CRM and automation" },
       { href: "/for/installers", label: "For installers" },
     ],
   },
   {
     title: "Company",
     links: [
-      { href: "#about", label: "About" },
-      { href: "#contact", label: "Contact" },
+      { href: "/#about", label: "About" },
+      { href: "/contact", label: "Contact" },
     ],
   },
   {

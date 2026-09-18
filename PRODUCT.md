@@ -19,8 +19,10 @@ real es "¿esto me va a dar más problemas de los que me quita?".
 Trabajo a resolver: dejar de perder presupuestos por no contestar a tiempo y no
 hacer seguimiento.
 
-Mercado: inglés, clientes en Europa y América. El equipo son dos personas, una
-en España y una en Argentina, lo que cubre ambas jornadas laborales.
+Mercado: inglés, clientes en Europa y América. Emmvi opera desde España y
+Argentina, lo que cubre ambas jornadas laborales. **El tamaño del equipo no se
+comunica**: Emmvi se presenta como empresa, no como un par de personas. Se
+pueden nombrar personas y ciudades; nunca cuántos son.
 
 ## Product Purpose
 
@@ -98,9 +100,13 @@ Contrastes medidos de la paleta (no estimados):
 | `#171717` ink sobre `#ffffff` | 17.93:1 | AA texto |
 | `#666666` ink-soft sobre `#ffffff` | 5.74:1 | AA texto |
 | `#666666` ink-soft sobre `#f8f8f8` | 5.41:1 | AA texto |
-| `#635dff` violeta sobre `#ffffff` | 4.63:1 | AA texto |
-| `#ffffff` sobre `#635dff` violeta | 4.63:1 | AA texto (botones) |
-| `#635dff` violeta sobre `#f8f8f8` | 4.36:1 | **solo texto grande** |
+| `#423af4` violeta sobre `#ffffff` | 6.68:1 | AA texto |
+| `#ffffff` sobre `#423af4` violeta | 6.68:1 | AA texto (botones) |
+| `#423af4` violeta sobre `#f8f8f8` | 6.29:1 | AA texto |
+| `#423af4` violeta sobre `#1a1a1a` | 2.61:1 | **no vale ni en texto grande** |
+| `#847ff8` violet-light sobre `#1a1a1a` | 5.28:1 | AA texto |
 
-La única restricción real: el violeta sobre la banda gris `#f8f8f8` se queda en
-4.36:1. Ahí se usa solo en texto ≥18px o en superficies, nunca en texto chico.
+La única restricción real: **sobre fondo oscuro el violeta de marca no llega**.
+Se queda en 2.61:1, por debajo del 3:1 del texto grande, así que ahí va
+`--color-violet-light`. En claro no hay límite: pasa AA de texto chico sobre
+papel, sobre la banda gris y sobre el panel.

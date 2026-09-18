@@ -117,13 +117,25 @@ const steps: { n: string; title: string; body: string; chips: Chip[] }[] = [
   },
 ];
 
-const testimonials = [
+type Testimonial = {
+  title: string;
+  quote: string;
+  name: string;
+  org: string;
+  /** Sin foto: cae en las iniciales. */
+  photo?: string;
+  initials: string;
+};
+
+const testimonials: Testimonial[] = [
   {
     title: "Finally getting leads",
     quote:
       "Gustavo and Nico do great work. I've been really happy with multiple websites they've built for me. They have a great eye for design and a strong focus on user experience, making sure everything not only looks good but is easy to navigate. They're talented, reliable, and easy to work with.",
     name: "Jared White",
     org: "JBZ Beats",
+    photo: "/testimonials/jared-white.jpg",
+    initials: "JW",
   },
   {
     title: "Automation that works",
@@ -131,13 +143,18 @@ const testimonials = [
       "I was drowning in manual work and reached out to Nico for help with automations. He set up email flows, follow-ups, and little systems I didn't even know I needed. Everything feels more organized now. Super grateful, this was a game-changer for me.",
     name: "Adriana Patania",
     org: "Local gym",
+    photo: "/testimonials/adriana-patania-1.png",
+    initials: "AP",
   },
   {
     title: "Smooth website redesign",
     quote:
       "Gus helped me redesign my website and honestly, it turned out way better than I imagined. It looks clean, it loads fast, and it works great on phones too. He really listened to what I needed and made the process super smooth. Totally recommend him.",
     name: "Alicia Ryz",
+    // Logo de Kurokink, no un retrato: es lo unico que hay de ella.
     org: "Ecommerce store",
+    photo: "/testimonials/alicia-ryz.png",
+    initials: "AR",
   },
 ];
 
@@ -149,7 +166,7 @@ const faqs = [
   },
   {
     q: "Are you a fit for a small business?",
-    a: "That is most of our work. We are two people, so we are not built for enterprise projects. If your company is small enough that the owner still reads the enquiries, we are probably a good fit.",
+    a: "That is most of our work. We are not built for enterprise projects and we do not pretend otherwise. If your company is small enough that the owner still reads the enquiries, we are probably a good fit.",
   },
   {
     q: "I already have a website. Do I need a new one?",
@@ -259,14 +276,14 @@ export default function Home() {
               Meet Emmvi
             </h2>
             <p className="mt-6 max-w-[38em] text-body text-pretty text-white/80">
-              We are two people. Gus designs and builds, from Valencia. Nico
-              sets up the systems and the automations, from Argentina. That is
-              the whole company, so you talk to the people doing the work, and
-              nothing gets handed to someone you have not met.
+              Emmvi builds websites and the systems that run behind them,
+              from Valencia and from Argentina. Gus leads design and build.
+              Nico leads systems and automation. You talk to the people doing
+              the work, and nothing gets handed to someone you have not met.
             </p>
             <p className="mt-6 max-w-[38em] text-body text-pretty text-white/80">
-              Between the two time zones, most of the working day is covered for
-              clients in Europe and the Americas.
+              Between the two locations, most of the working day is covered
+              for clients in Europe and the Americas.
             </p>
             <div className="mt-9">
               <CtaLink href="#contact" variant="light">
@@ -438,10 +455,29 @@ export default function Home() {
                   <p className="flex-1 text-[1rem] leading-[26px] tracking-[-0.2px] text-pretty text-ink-soft">
                     {t.quote}
                   </p>
-                  <cite className="mt-6 block border-t border-line pt-5 text-[1rem] font-semibold not-italic leading-6 tracking-[-0.2px] text-ink">
-                    {t.name}
-                    <span className="block font-normal text-ink-soft">
-                      {t.org}
+                  <cite className="mt-6 flex items-center gap-3 border-t border-line pt-5 not-italic">
+                    {t.photo ? (
+                      <Image
+                        src={t.photo}
+                        alt=""
+                        width={40}
+                        height={40}
+                        loading="lazy"
+                        className="size-10 shrink-0 rounded-full object-cover"
+                      />
+                    ) : (
+                      <span
+                        aria-hidden="true"
+                        className="grid size-10 shrink-0 place-items-center rounded-full bg-[#f0edff] text-small font-bold text-violet-ink"
+                      >
+                        {t.initials}
+                      </span>
+                    )}
+                    <span className="text-[1rem] leading-6 tracking-[-0.2px]">
+                      <span className="block font-semibold text-ink">
+                        {t.name}
+                      </span>
+                      <span className="block text-ink-soft">{t.org}</span>
                     </span>
                   </cite>
                 </blockquote>

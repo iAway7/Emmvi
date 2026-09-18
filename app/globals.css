@@ -16,14 +16,33 @@
   --color-ink-soft: #666666;         /* cuerpo de texto */
   --color-ink-black: #000000;        /* nav activo, labels de link */
   --color-line: #eaeaea;
-  --color-violet: #635dff;           /* violeta de marca, del divisor del logo */
-  /* El violeta de marca rinde 4.36:1 sobre #f8f8f8: falla AA en texto chico.
-     Esta variante oscurecida da 5.77:1 sobre la banda y 6.14:1 sobre papel. */
-  --color-violet-ink: #4f49e6;
-  /* Variante aclarada para texto chico sobre fondo oscuro: el violeta de marca
-     se queda en 3.76:1 sobre el centro iluminado del degradado radial. Esta da
-     5.24:1 alli y 6.33:1 en los bordes. */
-  --color-violet-light: #827dff;
+  --color-violet: #423af4;           /* violeta de marca */
+  /* Existia como variante oscurecida porque el violeta anterior (#635dff) se
+     quedaba en 4.36:1 sobre la banda gris y fallaba AA en texto chico. El
+     violeta nuevo ya pasa en todas las superficies claras — 6.68:1 sobre papel,
+     6.29:1 sobre la banda, 6.40:1 sobre el panel — asi que el token es hoy un
+     alias. Se conserva como costura: si el violeta vuelve a cambiar por uno
+     mas claro, aqui es donde se arregla el texto chico sin tocar las paginas. */
+  --color-violet-ink: #423af4;
+  /* Variante aclarada para fondo oscuro, y ahi SI hace falta: el violeta nuevo
+     es mas oscuro que el anterior y cae a 2.61:1 sobre el centro del degradado
+     radial de la pagina de espera — no llega ni al 3:1 de texto grande. Esta
+     (35% de blanco) da 5.28:1 alli, 5.44:1 sobre #171717 y 6.37:1 sobre negro. */
+  --color-violet-light: #847ff8;
+
+  /* Acento del badge de /services/email-marketing, del Figma. El rosa de marca
+     rinde 2.78:1 sobre el relleno del badge: falla AA en texto chico. El texto
+     usa la variante oscurecida (4.73:1 ahi, 4.95:1 sobre papel) y el rosa
+     original se queda en el borde, que es decorativo. */
+  --color-pink: #ff5d92;
+  --color-pink-ink: #d81b60;
+  --color-pink-wash: #fff8fc;
+
+  /* Badge "SEO Package" de /services/seo. El teal del Figma ya pasa AA de
+     sobra sobre su propio relleno (7.23:1), asi que no hace falta variante oscurecida. */
+  --color-teal-ink: #006158;
+  --color-teal-line: #bad7d5;
+  --color-teal-wash: #f8feff;
 
   /* --- radios --- */
   --radius-sm: 8px;                  /* botones, chips */
@@ -74,6 +93,9 @@
 :root {
   /* Gradiente "night" del Figma: paneles oscuros (demo, mockup de teléfono). */
   --night: linear-gradient(180deg, #171717 0%, #000000 48%, #7d7d7d 100%);
+  /* Paneles oscuros de Email Marketing: banda de cifras y testimonios. Es un
+     degradado horizontal, distinto del --night vertical de la home. */
+  --dusk: linear-gradient(90deg, #242428 0%, #16151e 50%, #080714 100%);
   /* El diseño de marca es claro. Sin modo oscuro hasta que exista en Figma. */
   color-scheme: light;
 }
@@ -106,6 +128,10 @@
 
 @utility bg-night {
   background-image: var(--night);
+}
+
+@utility bg-dusk {
+  background-image: var(--dusk);
 }
 
 /* --------------------------------------------------------------------------
@@ -155,4 +181,162 @@
    -------------------------------------------------------------------------- */
 html:has(dialog[open]) {
   overflow: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   Cinta de logos de /services/website-design.
+
+   Dos copias de la misma lista y un desplazamiento de -50%: al terminar, la
+   copia 2 esta exactamente donde arrancaba la 1, asi que la vuelta no se ve.
+   El hueco entre logos va como padding-right de cada lista y NO como gap del
+   carril: con gap en el carril el -50% cae a mitad de hueco y la costura salta.
+   -------------------------------------------------------------------------- */
+@keyframes marquee-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee {
+  position: relative;
+  overflow: hidden;
+  /* Los logos se desvanecen contra el papel en vez de cortarse en seco. */
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: marquee-left var(--marquee-duration, 45s) linear infinite;
+}
+
+.marquee__list {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 40px;
+  padding-right: 40px;
+}
+
+@media (min-width: 900px) {
+  .marquee__list {
+    gap: 56px;
+    padding-right: 56px;
+  }
+}
+
+/* WCAG 2.2.2 pide poder parar lo que se mueve solo. Sin dots ni flechas, el
+   raton para en hover y el teclado en focus-within. Queda fuera quien navegue
+   con pantalla tactil y sin la preferencia de sistema puesta. */
+.marquee:hover .marquee__track,
+.marquee:focus-within .marquee__track {
+  animation-play-state: paused;
+}
+
+/* Sin movimiento se cae a la reticula centrada de antes, con una sola copia:
+   parar la animacion sin mas dejaria la mitad de los logos fuera del recorte.
+   `animation: none` pone animation-name en none, asi que el
+   `animation-duration: .01ms !important` de la capa base ya no pinta nada. */
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+  .marquee__track {
+    display: block;
+    width: auto;
+    animation: none;
+  }
+  .marquee__list {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-right: 0;
+    row-gap: 32px;
+  }
+  .marquee__list[aria-hidden="true"] {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Timeline de "Navigating the Web Design Journey": la linea violeta sigue al
+   scroll y cada nodo se enciende al pasar.
+
+   Va con animation-timeline, sin JS. Donde no hay soporte, o con reduced
+   motion, se queda el estado del Figma: tramo violeta fijo de 186px y solo el
+   primer nodo en violeta. Por eso el `height` base es 186px y el color de
+   partida lo ponen las clases de Tailwind en el JSX.
+
+   El "ahora" es el centro del viewport, igual para la linea y para los nodos:
+   la linea recorta 50vh por cada punta de su rango `cover`, y cada nodo conmuta
+   al 50% del suyo, que es justo cuando cruza ese centro.
+   -------------------------------------------------------------------------- */
+@keyframes journey-progress {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes journey-node {
+  0%,
+  46% {
+    border-color: var(--color-line);
+  }
+  54%,
+  100% {
+    border-color: var(--color-violet);
+  }
+}
+
+@keyframes journey-week {
+  0%,
+  46% {
+    color: var(--color-ink-black);
+  }
+  54%,
+  100% {
+    color: var(--color-violet);
+  }
+}
+
+.journey__progress {
+  height: 186px;
+  transform-origin: top;
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .journey__progress {
+      /* Deja de ser un tramo fijo y pasa a cubrir el rail entero, escalado. */
+      height: auto;
+      bottom: 1rem;
+      transform: scaleY(0);
+      animation: journey-progress linear both;
+      animation-timeline: view();
+      animation-range: cover 50vh cover calc(100% - 50vh);
+    }
+
+    .journey__node,
+    .journey__week {
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+    }
+
+    .journey__node {
+      animation-name: journey-node;
+    }
+
+    .journey__week {
+      animation-name: journey-week;
+    }
+  }
 }

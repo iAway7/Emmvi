@@ -3,13 +3,26 @@
 import { headers } from "next/headers";
 import { Resend } from "resend";
 
-import { escapeHtml, isRateLimited, validate } from "@/lib/contact";
+import { escapeHtml, isRateLimited, normalizeText, validate } from "@/lib/contact";
+
+/**
+ * Campos extra del formulario de /services/website-design, que el Figma dibuja
+ * con apellido y tres preguntas de calificacion. La home no los envia, asi que
+ * llegan vacios y no cambian nada de su comportamiento.
+ */
+export type SalesExtras = {
+  lastName: string;
+  pages: string;
+  hosting: string;
+  budget: string;
+};
 
 export type ContactState = {
   status: "idle" | "success" | "error";
   message: string;
   /** Devuelto en error para repoblar el formulario sin JS. */
   values?: { name: string; email: string; company: string; message: string };
+  extras?: SalesExtras;
 };
 
 const resendApiKey = process.env.RESEND_API_KEY;
@@ -34,8 +47,18 @@ export async function submitContact(
     return { status: "success", message: "Thanks. We will be in touch." };
   }
 
+  const field = (key: string) => normalizeText(String(formData.get(key) ?? ""));
+  const extras: SalesExtras = {
+    lastName: field("lastName"),
+    pages: field("pages"),
+    hosting: field("hosting"),
+    budget: field("budget"),
+  };
+
+  // El nombre viaja partido en dos cuando lo manda el formulario de ventas.
+  const firstName = String(formData.get("name") ?? "");
   const raw = {
-    name: formData.get("name"),
+    name: extras.lastName ? `${firstName} ${extras.lastName}` : firstName,
     email: formData.get("email"),
     company: formData.get("company"),
     message: formData.get("message"),
@@ -47,11 +70,12 @@ export async function submitContact(
       status: "error",
       message: result.error,
       values: {
-        name: String(raw.name ?? ""),
+        name: firstName,
         email: String(raw.email ?? ""),
         company: String(raw.company ?? ""),
         message: String(raw.message ?? ""),
       },
+      extras,
     };
   }
 
@@ -61,7 +85,8 @@ export async function submitContact(
     return {
       status: "error",
       message: "Too many messages from this connection. Try again in a few minutes.",
-      values: result.values,
+      values: { ...result.values, name: firstName },
+      extras,
     };
   }
 
@@ -69,10 +94,20 @@ export async function submitContact(
     console.error(
       "[contact] Falta configuracion. Requiere RESEND_API_KEY, CONTACT_FROM_EMAIL y CONTACT_TO_EMAIL.",
     );
-    return { status: "error", message: GENERIC_ERROR, values: result.values };
+    return {
+      status: "error",
+      message: GENERIC_ERROR,
+      values: { ...result.values, name: firstName },
+      extras,
+    };
   }
 
   const { name, email, company, message } = result.values;
+  const qualifiers: [string, string][] = [
+    ["Pages", extras.pages],
+    ["Hosting with us", extras.hosting],
+    ["Budget", extras.budget],
+  ];
 
   try {
     const { error } = await resend.emails.send({
@@ -84,6 +119,9 @@ export async function submitContact(
         `<p><strong>Name:</strong> ${escapeHtml(name)}</p>`,
         `<p><strong>Email:</strong> ${escapeHtml(email)}</p>`,
         company ? `<p><strong>Company:</strong> ${escapeHtml(company)}</p>` : "",
+        ...qualifiers
+          .filter(([, value]) => value)
+          .map(([label, value]) => `<p><strong>${label}:</strong> ${escapeHtml(value)}</p>`),
         `<p><strong>Message:</strong></p>`,
         `<p>${escapeHtml(message).replace(/\n/g, "<br>")}</p>`,
       ].join("\n"),
@@ -91,11 +129,21 @@ export async function submitContact(
 
     if (error) {
       console.error("[contact] Resend devolvio un error:", error);
-      return { status: "error", message: GENERIC_ERROR, values: result.values };
+      return {
+        status: "error",
+        message: GENERIC_ERROR,
+        values: { ...result.values, name: firstName },
+        extras,
+      };
     }
   } catch (err) {
     console.error("[contact] Fallo el envio:", err);
-    return { status: "error", message: GENERIC_ERROR, values: result.values };
+    return {
+      status: "error",
+      message: GENERIC_ERROR,
+      values: { ...result.values, name: firstName },
+      extras,
+    };
   }
 
   return {

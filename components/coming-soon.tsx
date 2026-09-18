@@ -8,9 +8,12 @@ import { Wordmark } from "@/components/wordmark";
  * de marca ocupa el sitio que en esa referencia ocupaba el dorado.
  *
  * Contraste sobre el degradado radial (#1a1a1a centro -> #000 bordes):
- *   - violeta #635dff: 3.76:1 en el centro. Vale para el titular (texto grande,
- *     pide 3:1) pero NO para texto chico, de ahi --color-violet-light para el
- *     eyebrow (5.24:1 centro, 6.33:1 borde).
+ *   - violeta de marca #423af4: 2.61:1 en el centro. **No vale ni para el
+ *     titular**, que como texto grande pide 3:1. Con el violeta anterior
+ *     (#635dff, 3.76:1) si pasaba, y por eso el titular lo llevaba.
+ *   - --color-violet-light #847ff8: 5.28:1 en el centro, 6.37:1 en el borde.
+ *     Lo llevan ahora el titular, el eyebrow y el divisor, asi que sobre
+ *     oscuro hay un solo violeta en vez de dos.
  *   - blanco al 70%: 7.93:1 o mejor.
  *
  * Mantiene reserva de llamada y correo: la promesa de Emmvi es que toda
@@ -35,15 +38,15 @@ export function ComingSoon() {
         Websites and automation
       </p>
 
-      <h1 className="mt-4 text-[clamp(2rem,1.2rem+3.5vw,3.5rem)] font-extrabold tracking-[0.02em] text-balance text-violet uppercase">
+      <h1 className="mt-4 text-[clamp(2rem,1.2rem+3.5vw,3.5rem)] font-extrabold tracking-[0.02em] text-balance text-violet-light uppercase">
         Being rebuilt
       </h1>
 
       {/* Regla — rombo — regla, como en la referencia. */}
       <div aria-hidden="true" className="mt-9 flex items-center gap-4">
-        <span className="h-px w-16 bg-violet/40 sm:w-24" />
-        <span className="size-1.5 rotate-45 bg-violet" />
-        <span className="h-px w-16 bg-violet/40 sm:w-24" />
+        <span className="h-px w-16 bg-violet-light/40 sm:w-24" />
+        <span className="size-1.5 rotate-45 bg-violet-light" />
+        <span className="h-px w-16 bg-violet-light/40 sm:w-24" />
       </div>
 
       <p className="mt-9 max-w-[46ch] text-lede text-pretty text-white/70">
