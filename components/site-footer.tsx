@@ -36,6 +36,14 @@ const columns = [
   },
 ];
 
+/**
+ * Los enlaces miden 44px de alto en movil y 32px en escritorio (`lg:min-h-8`).
+ *
+ * WCAG 2.2 AA pide 24x24 (SC 2.5.8); los 44 son AAA (SC 2.5.5). Tenerlos a 44
+ * en escritorio dejaba 20px de aire muerto por fila —el texto solo ocupa 24—
+ * y con cinco servicios la columna se estiraba sin motivo. En movil se quedan
+ * en 44 porque ahi si se pulsa con el dedo.
+ */
 export function SiteFooter() {
   return (
     <footer className="border-t border-line pt-18 pb-14">
@@ -65,7 +73,7 @@ export function SiteFooter() {
                   <li key={l.label}>
                     <a
                       href={l.href}
-                      className="inline-flex min-h-[44px] items-center text-[1rem] text-ink-soft transition-colors hover:text-ink focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
+                      className="inline-flex min-h-[44px] items-center text-[1rem] text-ink-soft transition-colors hover:text-ink focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet lg:min-h-8"
                     >
                       {l.label}
                     </a>
