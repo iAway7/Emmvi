@@ -3,8 +3,8 @@ import Image from "next/image";
 
 import { CtaLink } from "@/components/cta-link";
 import { ClientMarquee } from "@/components/services/client-marquee";
-import { WebsiteDesignFooter } from "@/components/services/footer";
-import { WebsiteDesignHeader } from "@/components/services/header";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
 import { Journey } from "@/components/services/journey";
 import { SalesForm } from "@/components/services/sales-form";
 import { Testimonials } from "@/components/services/testimonials";
@@ -174,7 +174,7 @@ const showcase = [
 export default function WebsiteDesignPage() {
   return (
     <>
-      <WebsiteDesignHeader current="/services/website-design" />
+      <SiteHeader />
 
       <main id="top">
         {/* --- Hero --------------------------------------------------- */}
@@ -441,7 +441,7 @@ export default function WebsiteDesignPage() {
         </section>
       </main>
 
-      <WebsiteDesignFooter />
+      <SiteFooter />
     </>
   );
 }

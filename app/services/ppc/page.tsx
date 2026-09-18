@@ -3,8 +3,8 @@ import Image from "next/image";
 
 import { CtaLink } from "@/components/cta-link";
 import { FaqAccordion, type FaqItem } from "@/components/services/faq-accordion";
-import { WebsiteDesignFooter } from "@/components/services/footer";
-import { WebsiteDesignHeader } from "@/components/services/header";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
 import { CheckIcon } from "@/components/services/icons";
 import { SalesForm } from "@/components/services/sales-form";
 
@@ -220,7 +220,7 @@ const faqs: FaqItem[] = [
 export default function PpcPage() {
   return (
     <>
-      <WebsiteDesignHeader current="/services/ppc" />
+      <SiteHeader />
 
       <main id="top">
         {/* --- Hero ---------------------------------------------------- */}
@@ -626,7 +626,7 @@ export default function PpcPage() {
         </section>
       </main>
 
-      <WebsiteDesignFooter />
+      <SiteFooter />
     </>
   );
 }

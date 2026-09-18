@@ -3,8 +3,8 @@ import Image from "next/image";
 
 import { CtaLink } from "@/components/cta-link";
 import { FaqAccordion, type FaqItem } from "@/components/services/faq-accordion";
-import { WebsiteDesignFooter } from "@/components/services/footer";
-import { WebsiteDesignHeader } from "@/components/services/header";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
 import { PackageTabs, type PackageTab } from "@/components/services/package-tabs";
 import { SalesForm } from "@/components/services/sales-form";
 
@@ -124,7 +124,7 @@ const faqs: FaqItem[] = [
 export default function SeoPage() {
   return (
     <>
-      <WebsiteDesignHeader current="/services/seo" />
+      <SiteHeader />
 
       <main id="top">
         {/* --- Hero ---------------------------------------------------- */}
@@ -404,7 +404,7 @@ export default function SeoPage() {
         </section>
       </main>
 
-      <WebsiteDesignFooter />
+      <SiteFooter />
     </>
   );
 }

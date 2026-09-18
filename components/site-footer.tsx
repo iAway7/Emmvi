@@ -9,15 +9,20 @@ const columns = [
   {
     title: "Services",
     links: [
-      { href: "/#services", label: "Design and build" },
-      { href: "/#services", label: "CRM and automation" },
+      { href: "/services/website-design", label: "Web Design" },
+      { href: "/services/email-marketing", label: "Email Marketing" },
+      { href: "/services/seo", label: "SEO Services" },
+      { href: "/services/ppc", label: "PPC" },
       { href: "/for/installers", label: "For installers" },
     ],
   },
   {
     title: "Company",
+    // "About" apunta a la pagina, no al ancla de la home: existe /about-us y es
+    // la unica via que queda para llegar, desde que todas las paginas montan
+    // este footer en lugar del de la replica del Figma.
     links: [
-      { href: "/#about", label: "About" },
+      { href: "/about-us", label: "About" },
       { href: "/contact", label: "Contact" },
     ],
   },

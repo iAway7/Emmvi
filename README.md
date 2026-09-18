@@ -66,6 +66,28 @@ Dos cosas que ya han mordido una vez:
   Prueba rápida para reconocerlo: si `/emmvi-mark.svg` responde y `/` no, es
   esto.
 
+## Cabecera y pie
+
+**Todas las páginas montan `SiteHeader` y `SiteFooter`**, salvo la de espera,
+que va sin ninguna de las dos a propósito.
+
+Antes había dos juegos: el del sitio vivo y una réplica del Figma
+(`components/services/header.tsx` y `footer.tsx`) que usaban las cuatro páginas
+de servicio y about-us. La réplica traía una barra de utilidades con un buscador
+desactivado, y una nav que enlazaba entre las páginas de servicio.
+
+Como esa nav era **lo único** que enlazaba a esas cinco páginas, la columna
+"Services" del footer pasa a enlazarlas —antes repetía dos veces el mismo ancla
+`/#services`— y "About" apunta a `/about-us` en vez de al ancla de la home.
+
+Dos consecuencias de las que conviene acordarse:
+
+- `components/services/header.tsx` y `components/services/footer.tsx` **ya no
+  los usa nadie**. Se dejan por si hace falta volver atrás; si no, se borran.
+- Con ellos desaparecen los **enlaces a redes sociales** (LinkedIn, X e
+  Instagram, todos `/emmvi`), que solo vivían en ese footer. No se han llevado
+  al `SiteFooter` porque no está comprobado que esas cuentas existan.
+
 ## Fotos de los testimonios
 
 En `public/testimonials/`. Jared y Adriana son retratos reales; **el de Alicia

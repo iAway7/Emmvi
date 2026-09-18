@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 
 import { CtaLink } from "@/components/cta-link";
-import { WebsiteDesignFooter } from "@/components/services/footer";
-import { WebsiteDesignHeader } from "@/components/services/header";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
 import { SalesForm } from "@/components/services/sales-form";
 
 /**
@@ -117,7 +117,7 @@ const team = [
 export default function AboutUsPage() {
   return (
     <>
-      <WebsiteDesignHeader current="/about-us" />
+      <SiteHeader />
 
       <main id="top">
         {/* --- Our Mission --------------------------------------------- */}
@@ -338,7 +338,7 @@ export default function AboutUsPage() {
         </section>
       </main>
 
-      <WebsiteDesignFooter />
+      <SiteFooter />
     </>
   );
 }
