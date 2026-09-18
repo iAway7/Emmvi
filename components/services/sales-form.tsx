@@ -28,8 +28,15 @@ const BUDGET_RANGES = [
 
 const initialState: ContactState = { status: "idle", message: "" };
 
+/**
+ * `mt-auto`: en una fila de dos columnas, "How many pages do you need?" ocupa
+ * dos lineas y "Company Name (Optional)" una, asi que el select arrancaba mas
+ * abajo que el input de al lado. Las celdas del grid ya se estiran a la altura
+ * de la mas alta; empujando el control al fondo, los dos quedan alineados sea
+ * cual sea el largo de la etiqueta.
+ */
 const fieldClass =
-  "h-12 w-full rounded-sm border border-line bg-paper px-4 text-[1rem] leading-6 text-ink " +
+  "mt-auto h-12 w-full rounded-sm border border-line bg-paper px-4 text-[1rem] leading-6 text-ink " +
   "focus-visible:border-violet focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet";
 
 const labelClass = "mb-2 block text-small leading-5 text-ink-soft";
@@ -91,8 +98,8 @@ export function SalesForm() {
         </p>
       ) : null}
 
-      <div className="grid gap-5 sm:grid-cols-2">
-        <div>
+      <div className="grid items-stretch gap-5 sm:grid-cols-2">
+        <div className="flex flex-col">
           <label htmlFor="s-name" className={labelClass}>
             Full Name
             <Required />
@@ -109,7 +116,7 @@ export function SalesForm() {
           />
         </div>
 
-        <div>
+        <div className="flex flex-col">
           <label htmlFor="s-last" className={labelClass}>
             Last Name
             <Required />
@@ -126,7 +133,7 @@ export function SalesForm() {
           />
         </div>
 
-        <div className="sm:col-span-2">
+        <div className="flex flex-col sm:col-span-2">
           <label htmlFor="s-email" className={labelClass}>
             Email Address
             <Required />
@@ -144,7 +151,7 @@ export function SalesForm() {
           />
         </div>
 
-        <div>
+        <div className="flex flex-col">
           <label htmlFor="s-company" className={labelClass}>
             Company Name (Optional)
           </label>
@@ -159,7 +166,7 @@ export function SalesForm() {
           />
         </div>
 
-        <div>
+        <div className="flex flex-col">
           <label htmlFor="s-pages" className={labelClass}>
             How many pages do you need?
             <Required />
@@ -178,7 +185,7 @@ export function SalesForm() {
           </select>
         </div>
 
-        <div className="sm:col-span-2">
+        <div className="flex flex-col sm:col-span-2">
           <label htmlFor="s-hosting" className={labelClass}>
             Are you going to host the website with us?
             <Required />
@@ -197,7 +204,7 @@ export function SalesForm() {
           </select>
         </div>
 
-        <div className="sm:col-span-2">
+        <div className="flex flex-col sm:col-span-2">
           <label htmlFor="s-budget" className={labelClass}>
             What&rsquo;s your budget?
             <Required />
@@ -216,7 +223,7 @@ export function SalesForm() {
           </select>
         </div>
 
-        <div className="sm:col-span-2">
+        <div className="flex flex-col sm:col-span-2">
           <label htmlFor="s-message" className={labelClass}>
             How Can We Help You?
             <Required />

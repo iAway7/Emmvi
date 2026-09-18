@@ -51,7 +51,11 @@ const benefits = [
 ];
 
 /** Las tres ilustraciones son las del propio Figma, ya en public/illustrations
- *  desde la home: navegador, portátil con código y cohete, en ese orden. */
+ *  desde la home: navegador, portátil con código y cohete, en ese orden.
+ *
+ *  El Figma dibuja la segunda tarjeta con borde negro. No es que esa tarjeta
+ *  sea especial: es el estado hover, capturado en el archivo. Aquí va como
+ *  hover en las tres, no fijo en una. */
 const kickoff = [
   {
     n: "01",
@@ -66,7 +70,6 @@ const kickoff = [
     body: "Next, we take the meticulously crafted Figma design and replicate it in WordPress. This step is all about turning the static design into a dynamic, functional website.",
     illo: "/illustrations/coding.svg",
     alt: "A laptop with a connection running out to a separate node.",
-    featured: true,
   },
   {
     n: "03",
@@ -277,9 +280,7 @@ export default function WebsiteDesignPage() {
             {kickoff.map((k) => (
               <li
                 key={k.n}
-                className={`flex flex-col rounded-md border bg-paper p-8 ${
-                  k.featured ? "border-ink-black" : "border-line"
-                }`}
+                className="flex flex-col rounded-md border border-line bg-paper p-8 transition-colors duration-150 hover:border-ink-black"
               >
                 <Image
                   src={k.illo}
