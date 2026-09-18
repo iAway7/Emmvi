@@ -66,6 +66,19 @@ Dos cosas que ya han mordido una vez:
   Prueba rápida para reconocerlo: si `/emmvi-mark.svg` responde y `/` no, es
   esto.
 
+## Página 404
+
+`app/not-found.tsx` captura cualquier ruta que no exista y sustituye a la
+pantalla por defecto de Next. Devuelve 404 de verdad, no un 200 disfrazado, y
+va con `robots: noindex`.
+
+No es un callejón sin salida: además de volver a la home ofrece contacto, con
+el mismo criterio que la página de espera.
+
+La ilustración (`public/figma/404.svg`) es line-art en la paleta del sitio, así
+que entra sin recolorear. Va con `alt=""` porque el h1 ya dice en palabras lo
+que el dibujo cuenta.
+
 ## Cabecera y pie
 
 **Todas las páginas montan `SiteHeader` y `SiteFooter`**, salvo la de espera,

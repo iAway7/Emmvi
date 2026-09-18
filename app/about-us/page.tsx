@@ -232,17 +232,23 @@ export default function AboutUsPage() {
             className="mx-auto mt-6 h-[105px] w-px bg-[#4e5a74]"
           />
 
-          {/* Cuatro columnas de 191px con 177 de hueco a 1296 de ancho: el hueco
-              va en porcentaje para que la proporción del archivo aguante a
-              cualquier ancho. La octava celda queda vacía, como en el Figma.
+          {/* El Figma pone cuatro columnas de 191px con 177 de hueco (13.66%) a
+              1296 de ancho. Copiar ese porcentaje daba peor resultado que el
+              propio archivo: "Nicolas Mastromarino" mide 205px en DM Sans y no
+              entra en 191 —en la Roboto del Figma sí—, se partía en dos líneas,
+              y como los cuatro de su fila comparten fila de `subgrid`, los
+              otros tres heredaban una fila de 56px para un texto de 28. Se veía
+              como un hueco muerto entre el nombre y el cargo.
 
-              Foto, nombre y cargo van en `subgrid` para que los tres se alineen
-              de columna a columna: "Nicolas Mastromarino" mide 205px en DM Sans
-              y se parte en dos líneas —en la Roboto del Figma entraba en una—,
-              lo que sin esto bajaba su cargo una línea respecto a los otros
-              tres de la fila. Donde no hay subgrid queda el apilado normal, que
-              es justo ese desajuste. */}
-          <ul className="mt-10 grid list-none grid-cols-2 gap-x-8 gap-y-10 min-[900px]:grid-cols-4 min-[900px]:gap-x-[13.66%]">
+              El hueco baja al 9% para que la columna llegue a ~217px y el
+              nombre más largo entre en una línea. Se pierde la proporción
+              literal del archivo y se gana la intención, que era una pila
+              apretada. La octava celda sigue vacía, como en el Figma.
+
+              El `subgrid` se queda: por debajo de ~1100px las columnas vuelven
+              a estrecharse y algún nombre se parte, y entonces es lo que
+              mantiene los cargos alineados de columna a columna. */}
+          <ul className="mt-10 grid list-none grid-cols-2 gap-x-8 gap-y-10 min-[900px]:grid-cols-4 min-[900px]:gap-x-[9%]">
             {team.map((p) => (
               <li
                 key={p.name}
