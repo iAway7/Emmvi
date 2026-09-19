@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { CtaLink } from "./cta-link";
 import { MobileMenu } from "./mobile-menu";
+import { NavDropdown } from "./nav-dropdown";
 import { Wordmark } from "./wordmark";
 
 /**
@@ -13,8 +14,29 @@ import { Wordmark } from "./wordmark";
  * header tienen su propia seccion con ese id, asi que no hace falta salir de
  * la pagina para llegar al formulario.
  */
+/**
+ * Las cinco paginas de servicio. Cuelgan de "Services" en la nav en vez de
+ * quedarse solo en el pie, que hasta ahora era la unica via para llegar a
+ * ellas desde dentro del sitio.
+ *
+ * "Full-Stack Development" no vive bajo /services/ como las otras cuatro: es
+ * la URL que el WordPress tenia indexada y se conserva. Ver next.config.ts.
+ */
+const services = [
+  { href: "/services/website-design/", label: "Web Design" },
+  { href: "/services/email-marketing/", label: "Email Marketing" },
+  { href: "/services/seo/", label: "SEO Services" },
+  { href: "/services/ppc/", label: "PPC" },
+  { href: "/full-stack-development-services/", label: "Full-Stack Development" },
+];
+
+/**
+ * `children` convierte una entrada en desplegable. "Services" dejo de ser un
+ * ancla a la seccion de la home: ahora abre el menu, que es lo que un visitante
+ * espera de esa palabra en una barra de navegacion.
+ */
 const links = [
-  { href: "/#services", label: "Services" },
+  { href: "/#services", label: "Services", children: services },
   { href: "/#who", label: "Who we work with" },
   // Pagina propia, no el ancla de la seccion "Meet Emmvi" de la home.
   { href: "/about-us/", label: "About" },
@@ -37,12 +59,16 @@ export function SiteHeader() {
           <ul className="flex items-center gap-6">
             {links.map((l) => (
               <li key={l.href}>
-                <a
-                  href={l.href}
-                  className="inline-flex min-h-[44px] items-center text-[1rem] leading-6 text-ink-soft transition-colors hover:text-ink-black focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
-                >
-                  {l.label}
-                </a>
+                {l.children ? (
+                  <NavDropdown label={l.label} items={l.children} />
+                ) : (
+                  <a
+                    href={l.href}
+                    className="inline-flex min-h-[44px] items-center text-[1rem] leading-6 text-ink-soft transition-colors hover:text-ink-black focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
+                  >
+                    {l.label}
+                  </a>
+                )}
               </li>
             ))}
           </ul>

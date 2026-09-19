@@ -36,6 +36,21 @@ export const metadata: Metadata = pageMetadata({
   legacy: true,
 });
 
+/**
+ * Año de fundación. **Los años de experiencia se calculan, no se escriben.**
+ *
+ * El texto decia "over 8+ years" —redundante, y ademas ya iban nueve—, que es
+ * lo que pasa con un numero cosido a mano en una pagina de "sobre nosotros":
+ * caduca cada enero y nadie lo nota hasta que un cliente hace la resta.
+ *
+ * Se resuelve en build, asi que se pone al dia con cada despliegue. Redondea
+ * al año natural: si la fundacion fue a final de 2017, en enero dira un año de
+ * mas durante unos meses. Con "over" delante sigue siendo defendible, y es
+ * mejor trato que un literal que se queda corto para siempre.
+ */
+const FOUNDED = 2017;
+const yearsSinceFounding = new Date().getFullYear() - FOUNDED;
+
 const wrap =
   "mx-auto w-full max-w-[var(--container-wrap)] px-6 lg:px-[var(--spacing-gut)]";
 const h2Class = "text-h2 text-balance text-ink";
@@ -173,11 +188,11 @@ export default function AboutUsPage() {
               <Divider tone="violet-light" />
             </div>
             <p className={`mt-6 ${lead30} text-paper`}>
-              At Emmvi, we believe in simplicity and honesty. Founded in 2017 by
-              a team of professionals with over 8+ years of experience in digital
-              marketing, design, and development, our company was born out of a
-              passion for helping entrepreneurs establish effective online
-              presences.
+              At Emmvi, we believe in simplicity and honesty. Founded in{" "}
+              {FOUNDED} by a team of professionals with over {yearsSinceFounding}{" "}
+              years of experience in digital marketing, design, and development,
+              our company was born out of a passion for helping entrepreneurs
+              establish effective online presences.
             </p>
           </div>
         </section>

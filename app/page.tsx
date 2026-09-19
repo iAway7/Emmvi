@@ -44,14 +44,39 @@ const familiar = [
   "I just want someone who can take this off my plate, and tell me if I really need all those extra tools everyone keeps talking about.",
 ];
 
-const services = [
+type Service = {
+  title: string;
+  body: string;
+  /** Marcador visible mientras no haya imagen. Se renderiza tal cual. */
+  shot?: string;
+  image?: { src: string; alt: string; width: number; height: number };
+};
+
+const services: Service[] = [
   {
     shot: "[Screenshot of a site you built]",
     title: "Design and build",
     body: "Sites built to do one specific job: get the enquiry, book the call, sell the thing. Design, copy, build and hosting. Usually WordPress, sometimes not, depending on what the site has to do.",
   },
   {
-    shot: "[Screenshot of a dashboard or automation flow]",
+    /**
+     * Imagen de marca de GoHighLevel, la herramienta con la que se monta buena
+     * parte de esto y que el propio cuerpo de la tarjeta nombra.
+     *
+     * Es 1400x628 (2.23:1). El hueco de las tarjetas pasa de 16:9 a 7/3
+     * (2.33:1) por esto: a 16:9 el `object-cover` recortaba 283 px de ancho y
+     * partia el robot por la mitad, que parecia un error. A 7/3 el recorte cae
+     * en vertical —14 px arriba y abajo, fondo vacio— y la imagen entra
+     * entera. El fondo tiene degradado, de #221b44 a la izquierda a #00001e a
+     * la derecha, asi que `object-contain` sobre un color plano tampoco valia:
+     * se veria la costura.
+     */
+    image: {
+      src: "/home/gohighlevel.webp",
+      alt: "The GoHighLevel logo.",
+      width: 1400,
+      height: 628,
+    },
     title: "CRM and automation",
     body: "Lead routing, instant replies, quote follow-ups, review requests and reporting that builds itself. Put together with GoHighLevel, Kickserv, Airtable, Stripe and Zapier, connected so nobody retypes anything.",
   },
@@ -264,9 +289,20 @@ export default function Home() {
                   key={s.title}
                   className="flex flex-col gap-4 rounded-md border border-line bg-paper p-8"
                 >
-                  <div className="flex aspect-video items-center justify-center rounded-sm bg-paper-panel p-4 text-center text-small text-ink-soft">
-                    {s.shot}
-                  </div>
+                  {s.image ? (
+                    <Image
+                      src={s.image.src}
+                      alt={s.image.alt}
+                      width={s.image.width}
+                      height={s.image.height}
+                      className="aspect-[7/3] w-full rounded-sm object-cover"
+                      sizes="(min-width: 768px) 30rem, 90vw"
+                    />
+                  ) : (
+                    <div className="flex aspect-[7/3] items-center justify-center rounded-sm bg-paper-panel p-4 text-center text-small text-ink-soft">
+                      {s.shot}
+                    </div>
+                  )}
                   <h3 className="text-h3 text-balance text-ink">{s.title}</h3>
                   <p className="text-[1rem] leading-[26px] tracking-[-0.2px] text-pretty text-ink-soft">
                     {s.body}
@@ -284,15 +320,18 @@ export default function Home() {
             <h2 className="text-[2rem] font-bold tracking-[-1px] text-balance text-white lg:text-[3rem]">
               Meet Emmvi
             </h2>
+            {/* Sin nombres propios y sin repartir roles entre personas: las
+                dos cosas dicen cuanta gente hay. Ciudades si — eso es donde se
+                trabaja, no cuantos. Ver PRODUCT.md. */}
             <p className="mt-6 max-w-[38em] text-body text-pretty text-white/80">
-              Emmvi builds websites and the systems that run behind them,
-              from Valencia and from Argentina. Gus leads design and build.
-              Nico leads systems and automation. You talk to the people doing
-              the work, and nothing gets handed to someone you have not met.
+              Emmvi builds websites and the systems that run behind them, from
+              Valencia and from Argentina. Design, build and automation all
+              happen in house, so you talk to the people doing the work and
+              nothing is handed to a supplier you have never met.
             </p>
             <p className="mt-6 max-w-[38em] text-body text-pretty text-white/80">
-              Between the two locations, most of the working day is covered
-              for clients in Europe and the Americas.
+              Working across both time zones covers most of the working day for
+              clients in Europe and the Americas.
             </p>
             <div className="mt-9">
               <CtaLink href="#contact" variant="light">

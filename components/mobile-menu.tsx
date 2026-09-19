@@ -13,11 +13,13 @@ import { Wordmark } from "./wordmark";
  * Por debajo de 900px la nav del header se oculta, asi que este es el unico
  * acceso a Services / Who we work with / About / FAQ.
  */
-export function MobileMenu({
-  links,
-}: {
-  links: { href: string; label: string }[];
-}) {
+type NavLink = {
+  href: string;
+  label: string;
+  children?: readonly { href: string; label: string }[];
+};
+
+export function MobileMenu({ links }: { links: readonly NavLink[] }) {
   const ref = useRef<HTMLDialogElement>(null);
   const [open, setOpen] = useState(false);
 
@@ -102,17 +104,41 @@ export function MobileMenu({
 
           <nav aria-label="Main" className="flex-1 overflow-y-auto px-6 pb-10">
             <ul className="border-t border-line">
-              {links.map((l) => (
-                <li key={l.href} className="border-b border-line">
-                  <a
-                    href={l.href}
-                    onClick={close}
-                    className="flex min-h-[64px] items-center text-h3 text-ink focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
-                  >
-                    {l.label}
-                  </a>
-                </li>
-              ))}
+              {links.map((l) =>
+                l.children ? (
+                  /* Con submenu el titulo deja de ser enlace y pasa a ser
+                     encabezado: en una pantalla estrecha no hay sitio para un
+                     desplegable, asi que los hijos se ven directamente. Un
+                     acordeon aqui solo anadiria un toque mas para llegar a lo
+                     mismo. */
+                  <li key={l.href} className="border-b border-line py-5">
+                    <h2 className="text-h3 text-ink">{l.label}</h2>
+                    <ul className="mt-1">
+                      {l.children.map((c) => (
+                        <li key={c.href}>
+                          <a
+                            href={c.href}
+                            onClick={close}
+                            className="flex min-h-[52px] items-center text-lede text-ink-soft focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
+                          >
+                            {c.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                ) : (
+                  <li key={l.href} className="border-b border-line">
+                    <a
+                      href={l.href}
+                      onClick={close}
+                      className="flex min-h-[64px] items-center text-h3 text-ink focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
+                    >
+                      {l.label}
+                    </a>
+                  </li>
+                ),
+              )}
             </ul>
 
             <a
