@@ -158,8 +158,9 @@ Sin destino todavía, y todas indexadas:
 |---|---|
 | `/cookie-preference/` | No existe. **El footer apunta a `/cookies`**: conviene usar la URL vieja, que ya está indexada, en vez de estrenar una. |
 
-`/web-hosting/` y `/full-stack-development-services/` **se retiran a
-propósito**, porque son servicios que el posicionamiento nuevo no ofrece.
+`/web-hosting/`, `/full-stack-development-services/` y `/ux-ui-audits/` **se
+retiran a propósito**, porque son servicios que el posicionamiento nuevo no
+ofrece.
 
 Van con **410 Gone**, no con 404. La diferencia importa: un 404 dice "no lo
 encuentro", que para un buscador puede ser un fallo pasajero, y Google
