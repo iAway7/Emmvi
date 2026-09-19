@@ -80,7 +80,7 @@ const body: Post["body"] = [
   { kind: "p", text: "Start small, test what works, and refine over time. Before long, you’ll have a system in place that’s working for your business 24/7." },
   { kind: "p", text: [
     "Want help building your funnel or setting up your email automation?",
-    { text: "Get in touch—we’d be happy to help you build something that converts", href: "/contact" },
+    { text: "Get in touch—we’d be happy to help you build something that converts", href: "/contact-us" },
     ".",
   ] },
 ];

@@ -130,7 +130,7 @@ const body: Post["body"] = [
   ] },
   { kind: "p", text: [
     "👉",
-    { text: "Book a Free Strategy Call", href: "/contact" },
+    { text: "Book a Free Strategy Call", href: "/contact-us" },
     "and let’s make your business work harder (so you don’t have to).",
   ] },
 ];

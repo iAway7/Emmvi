@@ -122,7 +122,7 @@ const body: Post["body"] = [
   ] },
   { kind: "p", text: [
     "Ready to optimize your workflow with Zapier?",
-    { text: "Contact us today", href: "/contact" },
+    { text: "Contact us today", href: "/contact-us" },
     ", and we’ll set it up for you!",
   ] },
 ];

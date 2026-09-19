@@ -97,7 +97,7 @@ const body: Post["body"] = [
     "At",
     { text: "Emmvi", bold: true },
     ", we specialize in conversion-focused web design that doesn’t just look great — it works. Want a free audit of your current site?",
-    { text: "Let’s talk", bold: true, href: "/contact" },
+    { text: "Let’s talk", bold: true, href: "/contact-us" },
     ".",
   ] },
 ];

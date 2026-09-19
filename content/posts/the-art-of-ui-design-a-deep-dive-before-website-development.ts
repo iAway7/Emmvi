@@ -173,7 +173,7 @@ const body: Post["body"] = [
   { kind: "p", text: "A strong UI design isn’t just about looking good—it’s about creating an experience that’s seamless, efficient, and tailored to the needs of the user. Whether you’re building a new website or redesigning an existing one, focusing on a thoughtful and thorough UI design process will set your project up for success." },
   { kind: "p", text: [
     "Ready to start designing a website that prioritizes user experience and business goals?",
-    { text: "Let’s connect", href: "/contact" },
+    { text: "Let’s connect", href: "/contact-us" },
     "and create something exceptional together!",
   ] },
 ];

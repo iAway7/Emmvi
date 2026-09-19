@@ -412,7 +412,7 @@ export default function Home() {
                   Solar, EV chargers, security, heating and cooling. This is the
                   one we have gone deepest on, and we have a page just for it.{" "}
                   <Link
-                    href="/for/installers"
+                    href="/for/installers/"
                     className="text-ink underline underline-offset-[3px] transition-colors hover:text-violet focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
                   >
                     See what we build for installers

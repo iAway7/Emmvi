@@ -58,7 +58,7 @@ export const SITE_TAGLINE = SITE_TAGLINE_LINES.replace("\n", " ");
  * sirve para que elija una de las dos por su cuenta. La ruta sigue existiendo
  * para previsualizar, pero con noindex.
  */
-const currentRoutes = ["/", "/contact", "/blog", "/privacy-policy"] as const;
+const currentRoutes = ["/", "/contact-us", "/blog", "/privacy-policy"] as const;
 
 /**
  * Las cinco pantallas reconstruidas del Figma: el posicionamiento viejo de menu

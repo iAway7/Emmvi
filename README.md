@@ -140,6 +140,15 @@ Dos cosas que hay que mantener en pie con la barra activada:
 `next.config.ts` redirige con 308 las cinco páginas que se movieron de sitio.
 `/about-us/` no necesita regla: la ruta nueva se llama igual.
 
+**La página de contacto vive en `/contact-us/`**, que es la URL que WordPress
+tenía indexada, no en `/contact`. Es una página que sobrevive al relanzamiento,
+así que usar la que Google ya conoce le ahorra el salto para siempre. `/contact`
+queda redirigida por si alguien la guardó durante las horas que existió.
+
+**Los enlaces internos se escriben con barra final.** Con `trailingSlash: true`,
+un `href="/about-us"` provoca un 308 al pulsarlo — y el pie usa `<a>`, no
+`<Link>`, así que sería una recarga completa.
+
 Dos reglas que conviene no romper:
 
 - **No bloquear el rastreo.** Un `Disallow` impide que Google lea los 301, y
@@ -197,8 +206,7 @@ enseña lo que tuvo tráfico, no lo que existe.
 
 Del marcado Gutenberg a los bloques hay un paso de conversión que conserva el
 ≥95% del texto en los diecisiete. Lo único reescrito son los enlaces internos:
-apuntaban a rutas viejas y van al destino actual —`/contact-us` → `/contact`,
-`/seo` → `/services/seo`— en vez de encadenar una redirección. Los que
+apuntaban a rutas viejas y van al destino actual —`/seo` → `/services/seo`— en vez de encadenar una redirección. Los que
 llevaban a una página retirada se quedan en texto llano, porque un enlace a un
 410 desde dentro de un artículo es un callejón.
 

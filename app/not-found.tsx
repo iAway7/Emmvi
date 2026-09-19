@@ -43,7 +43,7 @@ export default function NotFound() {
 
             <div className="mt-9 flex flex-wrap gap-3">
               <CtaLink href="/">Go to the homepage</CtaLink>
-              <CtaLink href="/contact" variant="ghost">
+              <CtaLink href="/contact-us/" variant="ghost">
                 Get in touch
               </CtaLink>
             </div>

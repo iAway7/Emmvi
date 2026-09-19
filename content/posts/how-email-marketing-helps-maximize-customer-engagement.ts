@@ -89,7 +89,7 @@ const body: Post["body"] = [
   { kind: "p", text: "So if you're looking to boost customer engagement, start by looking in your inbox. Your next big win might be just one email away." },
   { kind: "p", text: [
     { text: "Need help with email strategy or automation?", bold: true },
-    { text: "Let’s chat", href: "/contact" },
+    { text: "Let’s chat", href: "/contact-us" },
     ". Whether you're building a list from scratch or want to increase your open rates, there’s always room to level up your email game.",
   ] },
 ];

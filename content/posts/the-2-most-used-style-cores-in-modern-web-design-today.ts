@@ -59,7 +59,7 @@ const body: Post["body"] = [
   { kind: "p", text: "Which one fits your brand better?just one email away." },
   { kind: "p", text: [
     { text: "Need help picking up a style?", bold: true },
-    { text: "Let’s chat", href: "/contact" },
+    { text: "Let’s chat", href: "/contact-us" },
     ". Whether you’re building a Clean Minimalist, or a Neo-Brutalist site we are here to help you.",
   ] },
 ];

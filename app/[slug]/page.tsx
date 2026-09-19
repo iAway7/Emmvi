@@ -69,7 +69,7 @@ export default async function PostPage({
       <main className={`${wrap} py-16 lg:py-24`}>
         <article>
           <Link
-            href="/blog"
+            href="/blog/"
             className="inline-flex min-h-[44px] items-center rounded-sm text-small text-ink-soft transition-colors hover:text-ink focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
           >
             ← All articles
@@ -111,8 +111,8 @@ export default async function PostPage({
             remembering.
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
-            <CtaLink href="/contact">Get in touch</CtaLink>
-            <CtaLink href="/blog" variant="ghost">
+            <CtaLink href="/contact-us/">Get in touch</CtaLink>
+            <CtaLink href="/blog/" variant="ghost">
               Read more articles
             </CtaLink>
           </div>

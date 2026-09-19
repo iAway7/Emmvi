@@ -9,11 +9,11 @@ const columns = [
   {
     title: "Services",
     links: [
-      { href: "/services/website-design", label: "Web Design" },
-      { href: "/services/email-marketing", label: "Email Marketing" },
-      { href: "/services/seo", label: "SEO Services" },
-      { href: "/services/ppc", label: "PPC" },
-      { href: "/for/installers", label: "For installers" },
+      { href: "/services/website-design/", label: "Web Design" },
+      { href: "/services/email-marketing/", label: "Email Marketing" },
+      { href: "/services/seo/", label: "SEO Services" },
+      { href: "/services/ppc/", label: "PPC" },
+      { href: "/for/installers/", label: "For installers" },
     ],
   },
   {
@@ -22,9 +22,9 @@ const columns = [
     // la unica via que queda para llegar, desde que todas las paginas montan
     // este footer en lugar del de la replica del Figma.
     links: [
-      { href: "/about-us", label: "About" },
-      { href: "/blog", label: "Blog" },
-      { href: "/contact", label: "Contact" },
+      { href: "/about-us/", label: "About" },
+      { href: "/blog/", label: "Blog" },
+      { href: "/contact-us/", label: "Contact" },
     ],
   },
   /**
@@ -36,8 +36,8 @@ const columns = [
   {
     title: "Legal",
     links: [
-      { href: "/legal-notice", label: "Legal Notice" },
-      { href: "/privacy-policy", label: "Privacy Policy" },
+      { href: "/legal-notice/", label: "Legal Notice" },
+      { href: "/privacy-policy/", label: "Privacy Policy" },
     ],
     cookieButton: true,
   },

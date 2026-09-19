@@ -44,7 +44,7 @@ export function gone(title: string) {
   <main>
     <h1>This page is no longer here</h1>
     <p>We stopped offering ${title}. The page was removed rather than left to rot, which is why you are seeing this instead of an error.</p>
-    <p><a href="/">Go to the homepage</a> &nbsp;·&nbsp; <a href="/contact">Tell us what you need</a></p>
+    <p><a href="/">Go to the homepage</a> &nbsp;·&nbsp; <a href="/contact-us/">Tell us what you need</a></p>
   </main>
 </body>
 </html>`;

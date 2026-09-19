@@ -21,7 +21,7 @@ import { pageMetadata } from "@/lib/site";
  */
 
 export const metadata: Metadata = pageMetadata({
-  path: "/contact",
+  path: "/contact-us",
   title: "Contact",
   description:
     "Tell us what you are trying to fix, or book a thirty-minute call.",

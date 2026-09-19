@@ -17,7 +17,7 @@ const links = [
   { href: "/#services", label: "Services" },
   { href: "/#who", label: "Who we work with" },
   // Pagina propia, no el ancla de la seccion "Meet Emmvi" de la home.
-  { href: "/about-us", label: "About" },
+  { href: "/about-us/", label: "About" },
   { href: "/#faq", label: "FAQ" },
 ];
 

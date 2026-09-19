@@ -22,12 +22,18 @@ import type { NextConfig } from "next";
  * encontrada igualmente, y ademas deja al visitante en un sitio que no es el
  * que buscaba. Las que no tienen equivalente siguen pendientes, en el README.
  */
+/**
+ * `/contact` fue una URL nuestra durante unas horas. La pagina vive ahora en
+ * `/contact-us/`, que es la que el WordPress tenia indexada: usar la que
+ * Google ya conoce ahorra el salto para siempre, en vez de redirigirla.
+ */
+const ownRedirects = [["/contact", "/contact-us/"]];
+
 const legacyRedirects = [
   ["/website-design", "/services/website-design/"],
   ["/email-marketing", "/services/email-marketing/"],
   ["/seo", "/services/seo/"],
   ["/ppc", "/services/ppc/"],
-  ["/contact-us", "/contact/"],
 ];
 
 const nextConfig: NextConfig = {
@@ -55,7 +61,7 @@ const nextConfig: NextConfig = {
   },
 
   async redirects() {
-    return legacyRedirects.map(([source, destination]) => ({
+    return [...legacyRedirects, ...ownRedirects].map(([source, destination]) => ({
       source,
       destination,
       // 308. Es lo que le dice a Google que traslade la URL vieja a la nueva

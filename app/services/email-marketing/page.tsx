@@ -369,7 +369,7 @@ export default function EmailMarketingPage() {
                   By submitting this form, I confirm that I have read and
                   understood the Emmvi{" "}
                   <Link
-                    href="/privacy-policy"
+                    href="/privacy-policy/"
                     className="text-ink underline underline-offset-[3px] hover:text-violet"
                   >
                     Privacy Statement

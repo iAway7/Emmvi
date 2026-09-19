@@ -47,7 +47,7 @@ const body: Post["body"] = [
   { kind: "p", text: "Incorporating automated email series into your marketing strategy offers numerous benefits, from improving efficiency to providing personalized experiences that increase customer engagement. By automating your email workflows, segmenting your audience, and using data to refine your approach, you can create highly targeted campaigns that lead to higher conversions and improved ROI." },
   { kind: "p", text: "The power of email marketing lies not just in sending messages but in delivering the right message at the right time. Automated series allow you to engage with your audience consistently, nurture leads, and drive conversions—all while maximizing your resources. If you’re looking to increase your ROI, investing in email marketing automation should be a top priority." },
   { kind: "p", text: [
-    { text: "Are you ready to take your email marketing to the next level?", href: "/contact" },
+    { text: "Are you ready to take your email marketing to the next level?", href: "/contact-us" },
     "The possibilities are endless, and the results speak for themselves!",
   ] },
 ];

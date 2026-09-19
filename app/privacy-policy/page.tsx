@@ -517,7 +517,7 @@ export default function PrivacyPolicy() {
 
           <p className="mt-14 text-body text-ink-soft">
             Questions about any of this?{" "}
-            <Link href="/contact" className={a}>
+            <Link href="/contact-us/" className={a}>
               Get in touch
             </Link>
             .
