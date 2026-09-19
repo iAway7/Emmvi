@@ -328,6 +328,29 @@ Pendiente: consentimiento. Hoy el contenedor carga antes de que nadie acepte
 nada, que es lo que un gestor de cookies tiene que resolver — ver la nota sobre
 Calendly en *Política de privacidad*.
 
+### Aviso legal
+
+`app/legal-notice/page.tsx`. Lo enlazaba el pie desde las veinticuatro páginas
+y devolvía 404. **No existía tampoco en el WordPress anterior**, así que no es
+una URL recuperada: es un hueco que ya estaba abierto antes de la migración.
+
+Es otra cosa que la política de privacidad, aunque se confundan. La de
+privacidad cuenta qué se hace con los datos (RGPD); esta identifica a quien
+responde del sitio y fija las condiciones de uso, que es lo que pide la LSSI-CE
+a un sitio con actividad comercial en España. Se solapan solo en la
+identificación, y por eso las dos leen el mismo `controller` de `lib/site.ts`
+— una identidad legal que diverja entre dos páginas del mismo sitio es peor
+problema que la duplicación.
+
+Nada está inventado: no hay teléfono porque no hay uno publicado, y no hay
+datos de registro mercantil porque el titular es persona física. Donde la LSSI
+pediría un dato que no existe, el hueco se queda vacío.
+
+El apartado *"The blog is opinion, not advice"* no es relleno. Los diecisiete
+artículos recomiendan proveedores de hosting y herramientas concretas, y
+conviene decir que son opiniones antes de que alguien contrate algo por
+leerlas.
+
 ### La miniatura
 
 `app/opengraph-image.tsx` dibuja en build la tarjeta de 1200x630 que sale al

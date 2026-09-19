@@ -47,6 +47,38 @@ export const SITE_TAGLINE_LINES =
 export const SITE_TAGLINE = SITE_TAGLINE_LINES.replace("\n", " ");
 
 /* --------------------------------------------------------------------------
+   Quien responde del sitio
+   -------------------------------------------------------------------------- */
+
+/**
+ * Datos identificativos del responsable, que publican la politica de
+ * privacidad (RGPD) y el aviso legal (LSSI-CE).
+ *
+ * Viven aqui y no dentro de una de las dos paginas porque las dos los
+ * necesitan, y una identidad legal que diverge entre dos paginas del mismo
+ * sitio es un problema mayor que la duplicacion.
+ *
+ * **Es una persona fisica, no una sociedad**: Emmvi es nombre comercial y
+ * quien responde legalmente es el titular. De ahi que el texto diga "trading
+ * name of" y no "a company registered in", y que no haya datos registrales de
+ * sociedad que dar.
+ *
+ * Que aparezca un nombre propio no contradice la regla de PRODUCT.md de no dar
+ * el tamano del equipo: identifica a quien responde, que las dos normas
+ * obligan a publicar, y no dice cuanta gente trabaja aqui.
+ *
+ * Falta el codigo postal. Aldaia tiene el suyo y no se pone a ojo: un dato
+ * identificativo mal puesto es peor que uno incompleto.
+ */
+export const controller = {
+  tradingName: SITE_NAME,
+  legalName: "Jorge Gustavo Polin Barrionuevo",
+  registeredAddress: "Av. de la Música 2, Aldaia, Valencia, Spain",
+  /** Validado contra el digito de control: 55434019 mod 23 = 17 -> "V". */
+  taxId: "55434019V",
+};
+
+/* --------------------------------------------------------------------------
    Que entra en el buscador
    -------------------------------------------------------------------------- */
 
@@ -58,7 +90,13 @@ export const SITE_TAGLINE = SITE_TAGLINE_LINES.replace("\n", " ");
  * sirve para que elija una de las dos por su cuenta. La ruta sigue existiendo
  * para previsualizar, pero con noindex.
  */
-const currentRoutes = ["/", "/contact-us", "/blog", "/privacy-policy"] as const;
+const currentRoutes = [
+  "/",
+  "/contact-us",
+  "/blog",
+  "/privacy-policy",
+  "/legal-notice",
+] as const;
 
 /**
  * Las cinco pantallas reconstruidas del Figma: el posicionamiento viejo de menu
