@@ -42,3 +42,4 @@ next-env.d.ts
 
 # .env.example documenta la configuracion y si debe versionarse
 !.env.example
+.env
