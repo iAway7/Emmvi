@@ -28,16 +28,10 @@ const columns = [
     ],
   },
   /**
-   * "Cookie preferences" estaba aqui apuntando a /cookies, que no existe: un
-   * 404 en todas las paginas del sitio. Vuelve cuando se instale el gestor de
-   * consentimiento, y entonces no sera un enlace a una pagina sino el
-   * disparador que abre su panel.
+   * "Legal Notice" apunta a /legal-notice, que todavia no existe.
    *
-   * Ojo con la URL: el WordPress anterior tenia /cookie-preference/ y esa es
-   * la que sigue indexada. Si el gestor publica una pagina, conviene que sea
-   * esa y no una nueva.
-   *
-   * "Legal Notice" apunta a /legal-notice, que tampoco existe todavia.
+   * "Cookie preferences" no es un enlace, es un boton: ver `CookiePreferences`
+   * mas abajo.
    */
   {
     title: "Legal",
@@ -45,6 +39,7 @@ const columns = [
       { href: "/legal-notice", label: "Legal Notice" },
       { href: "/privacy-policy", label: "Privacy Policy" },
     ],
+    cookieButton: true,
   },
 ];
 
@@ -56,6 +51,37 @@ const columns = [
  * y con cinco servicios la columna se estiraba sin motivo. En movil se quedan
  * en 44 porque ahi si se pulsa con el dedo.
  */
+/**
+ * Abre el panel de preferencias de CookieYes.
+ *
+ * **La pieza entera es la clase `cky-banner-element`.** El script de CookieYes
+ * la busca al cargar y le engancha el evento el solo; aqui no hay ni una linea
+ * de JavaScript escuchando este boton, y no hace falta.
+ *
+ * Es un <button> y no un <a href="#"> a proposito. CookieYes se carga desde
+ * GTM y puede no estar vivo —no lo esta en local, donde el dominio no coincide
+ * con el registrado en su cuenta—: un enlace saltaria al principio de la
+ * pagina al pulsarlo, y un boton sin nadie escuchando no hace absolutamente
+ * nada, que es el fallo correcto.
+ *
+ * Sustituye al widget flotante de CookieYes, que conviene dejar desactivado en
+ * su panel: se coloca abajo a la izquierda y acabaria siendo un circulo
+ * permanente tapando la pagina.
+ *
+ * Y sustituye tambien a la URL /cookie-preference/ que tenia el WordPress: el
+ * panel es un modal, no una pagina, asi que esa URL no vuelve por aqui.
+ */
+function CookiePreferences() {
+  return (
+    <button
+      type="button"
+      className="cky-banner-element inline-flex min-h-[44px] items-center text-left text-[1rem] text-ink-soft transition-colors hover:text-ink focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet lg:min-h-8"
+    >
+      Cookie preferences
+    </button>
+  );
+}
+
 export function SiteFooter() {
   return (
     <footer className="border-t border-line pt-18 pb-14">
@@ -91,6 +117,11 @@ export function SiteFooter() {
                     </a>
                   </li>
                 ))}
+                {"cookieButton" in col ? (
+                  <li>
+                    <CookiePreferences />
+                  </li>
+                ) : null}
               </ul>
             </nav>
           ))}
