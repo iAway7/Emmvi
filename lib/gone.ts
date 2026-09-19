@@ -17,7 +17,19 @@
  * salida. Va con estilos en linea y tipografia del sistema: es una respuesta
  * suelta, fuera del layout del sitio, y no tiene acceso a sus tokens.
  */
-export function gone(title: string) {
+/**
+ * @param title  Lo que ya no esta, en minusculas. Encaja en "We stopped
+ *   offering ...".
+ * @param explicacion  Sustituye a esa frase cuando no aplica. /cookie-preference/
+ *   no es un servicio retirado: es una pagina que se convirtio en un panel, y
+ *   decirle a alguien que "dejamos de ofrecer preferencias de cookies" seria
+ *   absurdo y ademas lo dejaria sin saber donde estan ahora.
+ */
+export function gone(title: string, explicacion?: string) {
+  const razon =
+    explicacion ??
+    `We stopped offering ${title}. The page was removed rather than left to rot, which is why you are seeing this instead of an error.`;
+
   const body = `<!doctype html>
 <html lang="en">
 <head>
@@ -43,7 +55,7 @@ export function gone(title: string) {
 <body>
   <main>
     <h1>This page is no longer here</h1>
-    <p>We stopped offering ${title}. The page was removed rather than left to rot, which is why you are seeing this instead of an error.</p>
+    <p>${razon}</p>
     <p><a href="/">Go to the homepage</a> &nbsp;·&nbsp; <a href="/contact-us/">Tell us what you need</a></p>
   </main>
 </body>

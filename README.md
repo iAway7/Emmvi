@@ -167,9 +167,16 @@ Sin destino todavía, y todas indexadas:
 |---|---|
 | `/cookie-preference/` | No existe. **El footer apunta a `/cookies`**: conviene usar la URL vieja, que ya está indexada, en vez de estrenar una. |
 
-`/web-hosting/`, `/full-stack-development-services/` y `/ux-ui-audits/` **se
-retiran a propósito**, porque son servicios que el posicionamiento nuevo no
-ofrece.
+`/web-hosting/` y `/ux-ui-audits/` **se retiran a propósito**, porque son
+servicios que el posicionamiento nuevo no ofrece.
+`/full-stack-development-services/` estuvo retirada unas horas y volvió: es la
+única de las tres cuyo servicio se sigue vendiendo.
+
+`/cookie-preference/` se retira por otro motivo: las preferencias son ahora el
+panel de CookieYes, que abre el botón del pie. No es un servicio retirado sino
+una página que dejó de ser página, así que su 410 lleva explicación propia —
+`gone()` la acepta como segundo argumento— y le dice al visitante dónde están
+ahora en vez de que "dejamos de ofrecerlas".
 
 Van con **410 Gone**, no con 404. La diferencia importa: un 404 dice "no lo
 encuentro", que para un buscador puede ser un fallo pasajero, y Google
