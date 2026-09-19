@@ -96,6 +96,7 @@ const currentRoutes = [
   "/blog",
   "/privacy-policy",
   "/legal-notice",
+  "/full-stack-development-services",
 ] as const;
 
 /**
