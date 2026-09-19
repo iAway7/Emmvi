@@ -79,6 +79,266 @@ La ilustración (`public/figma/404.svg`) es line-art en la paleta del sitio, as�
 que entra sin recolorear. Va con `alt=""` porque el h1 ya dice en palabras lo
 que el dibujo cuenta.
 
+## Buscador y enlaces compartidos
+
+Todo lo que decide qué ve Google y qué se ve al pegar un enlace está en
+`lib/site.ts`, y de ahí lo leen `app/robots.ts`, `app/sitemap.ts`,
+`app/opengraph-image.tsx` y las siete páginas.
+
+**El sitio está abierto al buscador incluso con la página de espera puesta**,
+y es a propósito. `COMING_SOON` decide qué se sirve en la raíz; no toca el
+`robots.txt`, ni el sitemap, ni el `noindex`.
+
+Una primera versión de esto cerraba el sitio entero mientras durase la espera,
+partiendo de que el dominio era nuevo y no había nada indexado. Era falso: el
+WordPress anterior dejó 18 URLs en el índice de Google, rastreadas hasta
+mediados de septiembre de 2026. Con un índice vivo, cerrar el rastreo hace lo
+contrario de lo que se busca — ver *Migración del WordPress*, abajo.
+
+`noindex` queda solo en `/coming-soon` (duplicado exacto de la raíz) y en el
+404. El resto se indexa.
+
+**Las cinco pantallas del Figma viejo** (`/about-us` y las cuatro de
+`/services/`) entran hoy en el sitemap como cualquier otra. Son el
+posicionamiento que el relanzamiento abandona, así que la decisión de dejarlas
+o no en el buscador está aplazada hasta que la home nueva esté publicada.
+Cuando toque, se cambia `indexLegacyPages` en `lib/site.ts`: ese booleano las
+saca del sitemap y les pone `noindex` a la vez. Siguen accesibles para quien
+tenga el enlace.
+
+`pageMetadata()` arma título, descripción, canónica y Open Graph de cada
+página. El Open Graph se escribe entero en cada una en vez de heredarlo del
+layout porque **Next fusiona la metadata en superficie**: una página que declare
+`openGraph` sustituye al del padre completo, y el `siteName` heredado se
+perdería sin avisar.
+
+La canónica hace falta aunque hoy no haya parámetros: en cuanto se envíe
+tráfico con `?utm_source=` desde el outreach, cada campaña crea una URL distinta
+con el mismo contenido.
+
+### Migración del WordPress
+
+El sitio vivía en WordPress hasta septiembre de 2026, cuando se perdió el
+hosting. Al reconstruirlo en Next cambiaron las rutas, así que **las URLs que
+Google tiene indexadas devolvían 404**: `/seo/`, `/ppc/`, `/website-design/`,
+`/email-marketing/`, `/contact-us/` y una docena más.
+
+`next.config.ts` redirige con 308 las cinco que tienen equivalente real. El
+regex que compila Next (`^/seo(?:/)?$`) captura también la forma con barra
+final, que es la que Google tiene guardada, así que no hay cadena de redirects.
+
+`/about-us/` no necesita regla: la ruta nueva se llama igual y Next normaliza
+la barra final.
+
+Dos reglas que conviene no romper:
+
+- **No bloquear el rastreo.** Un `Disallow` impide que Google lea los 301, y
+  sin leerlos no traslada nada. El 301 solo sirve si se puede rastrear.
+- **No redirigir a la home lo que no tiene equivalente.** Google trata un
+  redirect a una página no relacionada como *soft 404* —la descarta igual— y
+  encima deja al visitante donde no quería ir.
+
+El Wayback Machine solo archivó la home (mayo de 2024, título "Emmvi — Digital
+Marketing Agency"): 25 capturas del dominio y ninguna de una página interior.
+El contenido viejo no se recupera de ningún sitio.
+
+Sin destino todavía, y todas indexadas:
+
+| URL vieja | Qué falta |
+|---|---|
+| `/cookie-preference/` | No existe. **El footer apunta a `/cookies`**: conviene usar la URL vieja, que ya está indexada, en vez de estrenar una. |
+
+`/web-hosting/` y `/full-stack-development-services/` **se retiran a
+propósito**, porque son servicios que el posicionamiento nuevo no ofrece.
+
+Van con **410 Gone**, no con 404. La diferencia importa: un 404 dice "no lo
+encuentro", que para un buscador puede ser un fallo pasajero, y Google
+reintenta durante meses antes de soltar la URL. Un 410 dice "existía y se ha
+ido", y la retira en días.
+
+Se hace con un Route Handler (`app/web-hosting/route.ts`) y no con
+`notFound()`, porque el App Router solo sabe devolver 404 — no hay un `gone()`.
+Tampoco con middleware, por el fallo de ESM/CommonJS ya documentado arriba. Un
+segmento estático gana a `app/[slug]`, así que responde antes que la ruta de
+los artículos.
+
+La forma con barra final, que es la que Google tiene indexada, entra por el 308
+de normalización de Next y termina en el 410. Verificado: un salto.
+
+Llevan cuerpo HTML en vez de ir vacías porque durante unas semanas seguirá
+llegando gente desde el buscador.
+
+`/privacy-policy/` ya está hecha. Ver *Política de privacidad*, abajo.
+
+### El blog
+
+**Diecisiete artículos, recuperados del backup del WordPress**, no reescritos.
+`/blog/` y los diecisiete están en el sitemap con **los slugs intactos**: la URL
+es lo único que tenía valor y cambiarla tira el ejercicio entero.
+
+El backup (`.wpress` de All-in-One WP Migration, agosto de 2026) llevaba dentro
+`database.sql`, y de ahí salieron los textos íntegros, las fechas de
+publicación originales y las meta descriptions que había escrito RankMath.
+
+**Search Console solo enseñaba ocho.** Los otros nueve aparecieron al abrir la
+base de datos. Es el motivo de trabajar del backup y no del panel: el panel
+enseña lo que tuvo tráfico, no lo que existe.
+
+Del marcado Gutenberg a los bloques hay un paso de conversión que conserva el
+≥95% del texto en los diecisiete. Lo único reescrito son los enlaces internos:
+apuntaban a rutas viejas y van al destino actual —`/contact-us` → `/contact`,
+`/seo` → `/services/seo`— en vez de encadenar una redirección. Los que
+llevaban a una página retirada se quedan en texto llano, porque un enlace a un
+410 desde dentro de un artículo es un callejón.
+
+Tres de las cinco imágenes que referenciaba el artículo de Webflow vs Wix **no
+están en el backup**: se borraron de la biblioteca después de insertarlas, así
+que ya estaban rotas en el sitio vivo. Sus bloques se quitaron. Las dos que
+sobreviven están en `public/blog/` y llevan texto alternativo escrito a mano,
+porque el original las tenía con `alt` vacío.
+
+#### Reescrituras
+
+`content/rewrites/` guarda ocho artículos escritos **antes** de recuperar el
+backup, cuando se daba por perdido el original. No se publican. Son la primera
+tanda de reescritura: sustituir un original es cambiar su `body` sin tocar
+`slug`, `title` ni `published`.
+
+Uno corre prisa — `figma-vs-adobe-xd`. El original es de abril de 2025 y compara
+Figma con Adobe XD como si fueran dos rivales vivos; Adobe dejó XD en
+mantenimiento en 2023, tras caerse la compra de Figma. La versión de
+`content/rewrites/` lo cuenta bien.
+
+#### La ruta
+
+Viven en `content/posts/*.ts` como bloques tipados, no como MDX: así el cuerpo
+usa los mismos tokens tipográficos que el resto del sitio sin meter tres
+dependencias. `components/post-body.tsx` los pinta.
+
+**Están en la raíz, no bajo `/blog/`**, porque así los tenía WordPress. Eso
+obliga a una ruta dinámica en la raíz (`app/[slug]/page.tsx`), que da miedo con
+razón. No se traga el sitio por dos motivos que conviene no tocar: en el App
+Router un segmento estático gana siempre al dinámico, y `dynamicParams = false`
+hace que cualquier slug que no salga de `generateStaticParams` devuelva 404.
+Verificado en `prerender-manifest.json`: `fallback: false`.
+
+Efecto lateral de esa ruta: ESLint pasó a resolver rutas de un solo segmento
+como páginas reales, y destapó siete `<a>` internos que debían ser `<Link>`.
+Están convertidos.
+
+### Política de privacidad
+
+`app/privacy-policy/page.tsx`, en esa URL porque es la que WordPress dejó
+indexada. La enlazan siete sitios, incluido el texto de consentimiento del
+formulario de contacto, así que hasta ahora ese consentimiento apuntaba a un
+404.
+
+**No es una plantilla.** Cada afirmación sale de leer el código, y si el código
+cambia la página miente:
+
+| Lo que dice | De dónde sale |
+|---|---|
+| El formulario no guarda nada, manda un email | `app/actions/contact.ts` |
+| Las IPs viven 10 min en memoria, máx. 5 envíos | `lib/contact.ts` |
+| El sitio no pone cookies propias | No hay estado de sesión ni preferencias; las de terceros son de GTM y Calendly |
+| Las tipografías no llaman a Google | `next/font` las descarga en build |
+| Calendly ve tu IP sin que pulses nada | `components/calendly-button.tsx` carga su script solo |
+| Google recibe IP y navegador al cargar | El contenedor de GTM, en `app/layout.tsx` |
+| PostHog en la nube europea, sin transferencia | Pendiente de instalar; ver más abajo |
+
+Los datos del responsable ya están puestos. **Es una persona física, no una
+sociedad**: Emmvi es nombre comercial y quien responde es el titular, de ahí que
+el texto diga *"trading name of"* y no *"a company registered in"*.
+
+El mecanismo del hueco sigue montado por si vuelve a hacer falta: mientras
+`controller.legalName` o `controller.registeredAddress` estén a `null`, la
+página muestra un aviso visible de borrador en la cabecera. No se puede
+publicar en silencio con el dato a medias.
+
+**Falta el código postal** de la dirección. No se pone a ojo: un dato
+identificativo mal puesto es peor que uno incompleto.
+
+La página **describe GA4 y PostHog como si ya estuvieran corriendo**, y hoy solo
+está GTM. Es el sentido seguro del desfase —declara más de lo que pasa, no
+menos— pero si se decide no instalar alguno, hay que quitar su párrafo.
+
+#### Promesas, no descripciones
+
+Estos valores y ajustes son compromisos con el visitante. Si la configuración
+real no coincide, la página promete algo que no se cumple:
+
+| Promesa | Dónde se cumple |
+|---|---|
+| `ENQUIRY_RETENTION_MONTHS` = 12 | En la bandeja: hay que borrar de verdad |
+| `GA4_RETENTION_MONTHS` = 14 | GA4 → Administrar → Conservación de datos |
+| `SESSION_RECORDING_RETENTION_DAYS` = 30 | PostHog, según plan |
+| "lo que tecleas se enmascara antes de salir del navegador" | `maskAllInputs` de PostHog, activado por defecto. **Desactivarlo mete nombres, correos y mensajes en la grabación** |
+| "la analítica no sale de la UE" | Inicializar PostHog contra `eu.i.posthog.com`, no el host de EE. UU. |
+| "nada conectado a publicidad" | No activar Google Signals ni enlazar GA4 con Google Ads |
+| `LAST_UPDATED` | Subirla al publicar cambios de fondo |
+
+### Google Tag Manager
+
+Contenedor `GTM-M2BGFZRC`, en `app/layout.tsx`. Dos diferencias obligadas
+respecto al fragmento que da Google:
+
+- Va por `next/script` en vez de un `<script>` suelto en el `<head>`: el App
+  Router no deja escribir ahí a mano. La estrategia es `afterInteractive`, que
+  es la que Next recomienda para GTM — carga en cuanto la página es
+  interactiva, algo más tarde que en el `<head>`, y a cambio no bloquea el
+  primer pintado.
+- El `<iframe>` del `<noscript>` lleva `title`. El fragmento de Google no lo
+  trae y sin él es un elemento sin nombre para un lector de pantalla.
+
+**Configurando GA4 dentro del contenedor, el disparador tiene que incluir
+*History Change*.** Esto es una SPA: al navegar entre páginas no hay recarga,
+así que un disparador de solo *All Pages* registraría la primera página de cada
+visita y nada más. Comprobado en el navegador: una navegación cliente real
+mantiene `window` vivo, cambia la URL y emite `gtm.historyChange-v2`, así que
+con ese disparador la medición es correcta sin tocar código.
+
+Los despliegues de vista previa de Vercel cargan el mismo contenedor. Si eso
+ensucia los datos, se filtra por nombre de host dentro de GTM, no quitando el
+script.
+
+**GTM obliga a revisar la política de privacidad.** La primera versión decía
+"no analytics, no other measurement tool" y quedó falsa el día que se instaló.
+Cualquier script de terceros nuevo pasa por `app/privacy-policy/page.tsx`.
+
+Pendiente: consentimiento. Hoy el contenedor carga antes de que nadie acepte
+nada, que es lo que un gestor de cookies tiene que resolver — ver la nota sobre
+Calendly en *Política de privacidad*.
+
+### La miniatura
+
+`app/opengraph-image.tsx` dibuja en build la tarjeta de 1200x630 que sale al
+pegar un enlace en WhatsApp, LinkedIn, Slack o X. Es una sola para las siete
+páginas: el título y la descripción del enlace sí cambian por página, la imagen
+no. Si alguna llega a necesitar la suya, basta un `opengraph-image.tsx` en su
+carpeta llamando a `renderOgCard` con otro titular.
+
+Lleva `og:image` incluso con la espera activa. El `robots.txt` frena al
+buscador, pero no a WhatsApp ni a LinkedIn, que son justo por donde llega el
+enlace del outreach mientras tanto.
+
+DM Sans va dos veces en el repo, y no es un descuido: `next/font/google` deja
+woff2 en `.next/static` para el sitio, y satori —lo que dibuja la tarjeta— no
+lee woff2. Por eso `assets/fonts/` tiene los TTF de 400 y 800. Se usan solo al
+generar la imagen; no se sirven al navegador. Licencia en `assets/fonts/OFL.txt`.
+
+El wordmark sale de `WORDMARK_PATHS` (`components/wordmark.tsx`) y no de una
+copia: satori no resuelve `currentColor`, así que necesita los trazados sueltos,
+pero la geometría sigue siendo una sola. Ya se corrigió una vez el punto de la
+"i"; con dos copias, la segunda se habría quedado sin corregir.
+
+### Iconos
+
+`app/icon.svg` cubre la pestaña del navegador y el favicon que Google enseña en
+los resultados de móvil. `app/apple-icon.tsx` lo redibuja en PNG de 180x180
+para iOS, que no usa un SVG al guardar la página en la pantalla de inicio:
+sin él, Safari pone una captura de la página. Se genera a partir del propio
+`icon.svg`, así que corregir el icono los arregla los dos.
+
 ## Cabecera y pie
 
 **Todas las páginas montan `SiteHeader` y `SiteFooter`**, salvo la de espera,
@@ -119,6 +379,14 @@ Adriana usa `adriana-patania-1.png`, el retrato. El otro archivo,
 - `/privacy-policy`, `/legal-notice` y `/cookies` están enlazadas y no existen.
 - Calendly deja cookies de terceros al abrir el popup: para clientes en la UE
   hace falta la página de preferencias de cookies.
+- Dar de alta el dominio en Google Search Console y enviar el sitemap. No
+  sirve de nada hasta quitar `COMING_SOON`: hasta entonces el sitemap sale
+  vacío.
+- Decidir `indexLegacyPages` (ver *Buscador y enlaces compartidos*).
+- Las descripciones de las cinco páginas del Figma son las del posicionamiento
+  viejo —"Celebrate startup growth with our SEO expertise", "Unlock the
+  potential of your business"— y es el texto que Google enseña bajo el título.
+  Es justo el lenguaje de consultora que PRODUCT.md lista como anti-referencia.
 
 ## Pendiente en /contact
 
