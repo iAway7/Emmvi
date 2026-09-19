@@ -422,20 +422,37 @@ Adriana usa `adriana-patania-1.png`, el retrato. El otro archivo,
 
 ## Pendiente antes de publicar la home
 
-- Las dos capturas de la sección "Two things, done properly" son placeholders.
-- `/for/installers` está enlazada desde la home y el footer pero no existe. El
-  contenido está escrito en `emmvi-for-installers.html`.
-- `/privacy-policy`, `/legal-notice` y `/cookies` están enlazadas y no existen.
-- Calendly deja cookies de terceros al abrir el popup: para clientes en la UE
-  hace falta la página de preferencias de cookies.
-- Dar de alta el dominio en Google Search Console y enviar el sitemap. No
-  sirve de nada hasta quitar `COMING_SOON`: hasta entonces el sitemap sale
-  vacío.
-- Decidir `indexLegacyPages` (ver *Buscador y enlaces compartidos*).
+Quitar `COMING_SOON` publica la home. Antes:
+
+**Bloquea de verdad** — se vería roto:
+
+- Las dos capturas de la sección "Two things, done properly" son placeholders,
+  y el texto `[Screenshot of a site you built]` **se renderiza literalmente**
+  en la página. No es un comentario en el código: lo lee el visitante.
+- `/for/installers/` está enlazada desde la propia home y desde el pie, y
+  devuelve 404. El contenido está escrito en `emmvi-for-installers.html`.
+
+**Conviene, pero no bloquea:**
+
 - Las descripciones de las cinco páginas del Figma son las del posicionamiento
-  viejo —"Celebrate startup growth with our SEO expertise", "Unlock the
-  potential of your business"— y es el texto que Google enseña bajo el título.
-  Es justo el lenguaje de consultora que PRODUCT.md lista como anti-referencia.
+  viejo —"Celebrate startup growth with our SEO expertise"— y es el texto que
+  Google enseña bajo el título. Es el lenguaje de consultora que PRODUCT.md
+  lista como anti-referencia.
+- Los títulos de esas páginas son finos: `PPC · Emmvi` son 11 de los ~60
+  caracteres que Google muestra.
+- Decidir `indexLegacyPages` (ver *Buscador y enlaces compartidos*).
+- Dar de alta el dominio en Search Console y enviar el sitemap. **Esto ya se
+  puede hacer**: el robots está abierto y el sitemap lleva 28 URLs aunque la
+  espera siga puesta.
+
+**Decisión tomada, anotada aquí para que no se relea como pendiente:**
+
+- PostHog arranca y empieza a grabar antes de que el visitante toque el banner
+  de CookieYes. GA4 sí lo respeta, porque CookieYes le habla por Consent Mode;
+  PostHog no está en GTM y nunca se entera. Se deja así a propósito. Si algún
+  día se quiere gatear, es `opt_out_capturing_by_default` en
+  `instrumentation-client.ts` más un `opt_in_capturing()` cuando CookieYes
+  conceda la categoría de analítica.
 
 ## Pendiente en /contact
 
