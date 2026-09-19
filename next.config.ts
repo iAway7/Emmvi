@@ -23,14 +23,28 @@ import type { NextConfig } from "next";
  * que buscaba. Las que no tienen equivalente siguen pendientes, en el README.
  */
 const legacyRedirects = [
-  ["/website-design", "/services/website-design"],
-  ["/email-marketing", "/services/email-marketing"],
-  ["/seo", "/services/seo"],
-  ["/ppc", "/services/ppc"],
-  ["/contact-us", "/contact"],
+  ["/website-design", "/services/website-design/"],
+  ["/email-marketing", "/services/email-marketing/"],
+  ["/seo", "/services/seo/"],
+  ["/ppc", "/services/ppc/"],
+  ["/contact-us", "/contact/"],
 ];
 
 const nextConfig: NextConfig = {
+  /**
+   * Barra final en todas las URLs, como la tenia WordPress.
+   *
+   * El sitio viejo usaba `/%postname%/` y Google tiene indexadas las 31 URLs
+   * **con barra**. Next la quita por defecto, asi que sin esto cada una de
+   * ellas —incluidas /about-us/ y /privacy-policy/, que existen— respondia con
+   * un 308 antes de servir la pagina.
+   *
+   * Un salto no pierde autoridad, pero tampoco aporta nada: lo unico que hace
+   * es que la forma que Google conoce no sea la forma que servimos. Con esto
+   * coinciden.
+   */
+  trailingSlash: true,
+
   /**
    * Turbopack infiere la raiz del workspace buscando lockfiles hacia arriba, y
    * encontraba /Users/iaway/package-lock.json (un archivo huerfano, sin

@@ -123,12 +123,22 @@ hosting. Al reconstruirlo en Next cambiaron las rutas, así que **las URLs que
 Google tiene indexadas devolvían 404**: `/seo/`, `/ppc/`, `/website-design/`,
 `/email-marketing/`, `/contact-us/` y una docena más.
 
-`next.config.ts` redirige con 308 las cinco que tienen equivalente real. El
-regex que compila Next (`^/seo(?:/)?$`) captura también la forma con barra
-final, que es la que Google tiene guardada, así que no hay cadena de redirects.
+**El sitio sirve con barra final** (`trailingSlash: true`), porque WordPress
+usaba `/%postname%/` y las 31 URLs están indexadas con ella. Sin eso, Next la
+quitaba y *cada* URL indexada respondía con un 308 antes de servir la página
+—incluidas `/about-us/` y `/privacy-policy/`, que existen. Hoy 21 de las 31
+sirven directas, sin ningún salto.
 
-`/about-us/` no necesita regla: la ruta nueva se llama igual y Next normaliza
-la barra final.
+Dos cosas que hay que mantener en pie con la barra activada:
+
+- **El sitemap la escribe a mano** (`app/sitemap.ts`). Next añade la barra a
+  las canónicas por su cuenta, pero el sitemap lo generamos nosotros: si las
+  dos formas no coinciden, el mapa contradice a la canónica.
+- **Los destinos de los redirects la llevan.** Sin ella se encadena un segundo
+  308 detrás del primero y la cadena pasa a dos saltos.
+
+`next.config.ts` redirige con 308 las cinco páginas que se movieron de sitio.
+`/about-us/` no necesita regla: la ruta nueva se llama igual.
 
 Dos reglas que conviene no romper:
 

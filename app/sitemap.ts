@@ -18,11 +18,11 @@ import { SITE_URL, sitemapRoutes } from "@/lib/site";
  * Google los ignora desde hace años.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
-  // La raiz sale sin barra final, que es como la escribe `metadataBase` en la
-  // canonica de app/page.tsx. Las dos formas son la misma URL para un
-  // buscador, pero no hay motivo para que el mapa y la canonica no coincidan
-  // literalmente.
+  // Con barra final, porque `trailingSlash: true` es lo que sirve el sitio y
+  // lo que Next escribe en la canonica de cada pagina. Un sitemap que lista
+  // una forma distinta de la canonica se contradice solo, y el buscador tiene
+  // que decidir cual vale.
   return sitemapRoutes.map((route) => ({
-    url: route === "/" ? SITE_URL : `${SITE_URL}${route}`,
+    url: `${SITE_URL}${route.endsWith("/") ? route : route + "/"}`,
   }));
 }
