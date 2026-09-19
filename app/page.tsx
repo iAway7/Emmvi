@@ -1,33 +1,41 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 
 import { CalendlyButton } from "@/components/calendly-button";
 import { ComingSoon, comingSoonMetadata } from "@/components/coming-soon";
 import { ContactForm } from "@/components/contact-form";
 import { CtaLink } from "@/components/cta-link";
+import { OrganizationSchema } from "@/components/organization-schema";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { comingSoon, pageMetadata } from "@/lib/site";
 
 /**
  * COMING_SOON=1 sirve la pagina de espera en la raiz.
  *
- * Se resuelve aqui y no en middleware: Next 16 emite el middleware con sintaxis
- * ESM pero Vercel lo carga como CommonJS sin "type":"module" en package.json, y
- * revienta con MIDDLEWARE_INVOCATION_FAILED. Para un flag estatico el middleware
- * sobraba igualmente: esto se resuelve en build, sin invocacion serverless por
- * peticion.
+ * Se resuelve en build y no en middleware: Next 16 emite el middleware con
+ * sintaxis ESM pero Vercel lo carga como CommonJS sin "type":"module" en
+ * package.json, y revienta con MIDDLEWARE_INVOCATION_FAILED. Para un flag
+ * estatico el middleware sobraba igualmente: esto se resuelve en build, sin
+ * invocacion serverless por peticion.
  *
  * A cambio, cambiar la variable exige volver a desplegar.
+ *
+ * La lectura de la variable esta ahora en lib/site.ts, porque el robots.txt y
+ * el sitemap dependen de ella tanto como esta pagina.
  */
-const comingSoon = process.env.COMING_SOON === "1";
 
 export const metadata: Metadata = comingSoon
   ? comingSoonMetadata
-  : {
+  : pageMetadata({
+      path: "/",
+      // Absoluto porque ya dice "Emmvi": la plantilla lo dejaria repetido.
       title: "Emmvi · Get more customers without doing more work",
+      absoluteTitle: true,
       description:
         "We build the website and the systems behind it, so the work that happens after someone fills in a form does not depend on anyone remembering.",
-    };
+    });
 
 const familiar = [
   "I run a great business, but not enough people know about it.",
@@ -195,6 +203,7 @@ export default function Home() {
 
   return (
     <>
+      <OrganizationSchema />
       <SiteHeader />
 
       <main id="top">
@@ -402,12 +411,12 @@ export default function Home() {
                 <p className="text-body text-pretty text-ink-soft">
                   Solar, EV chargers, security, heating and cooling. This is the
                   one we have gone deepest on, and we have a page just for it.{" "}
-                  <a
+                  <Link
                     href="/for/installers"
                     className="text-ink underline underline-offset-[3px] transition-colors hover:text-violet focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
                   >
                     See what we build for installers
-                  </a>
+                  </Link>
                   .
                 </p>
               </div>

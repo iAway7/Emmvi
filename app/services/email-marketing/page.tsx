@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 
 import { CtaLink } from "@/components/cta-link";
 import { DarkTestimonials } from "@/components/services/dark-testimonials";
@@ -8,6 +9,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { CheckIcon } from "@/components/services/icons";
 import { SalesForm } from "@/components/services/sales-form";
+import { pageMetadata } from "@/lib/site";
 
 /**
  * Réplica del frame "Services - Email Marketing" del Figma
@@ -23,11 +25,13 @@ import { SalesForm } from "@/components/services/sales-form";
  * sustituyen por los tres reales.
  */
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/services/email-marketing",
   title: "Email Marketing",
   description:
     "Our team handles every aspect, ensuring your email campaigns are expertly crafted, timed, and fine-tuned for success.",
-};
+  legacy: true,
+});
 
 const wrap =
   "mx-auto w-full max-w-[var(--container-wrap)] px-6 lg:px-[var(--spacing-gut)]";
@@ -364,12 +368,12 @@ export default function EmailMarketingPage() {
                 <p className="mt-5 max-w-[34em] text-small text-ink-soft">
                   By submitting this form, I confirm that I have read and
                   understood the Emmvi{" "}
-                  <a
+                  <Link
                     href="/privacy-policy"
                     className="text-ink underline underline-offset-[3px] hover:text-violet"
                   >
                     Privacy Statement
-                  </a>
+                  </Link>
                   .
                 </p>
               </div>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 
 import { CtaLink } from "@/components/cta-link";
 import { FaqAccordion, type FaqItem } from "@/components/services/faq-accordion";
@@ -7,6 +8,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { CheckIcon } from "@/components/services/icons";
 import { SalesForm } from "@/components/services/sales-form";
+import { pageMetadata } from "@/lib/site";
 
 /**
  * Réplica del frame "Services - PPC" del Figma
@@ -32,11 +34,13 @@ import { SalesForm } from "@/components/services/sales-form";
  *    línea de texto.
  */
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/services/ppc",
   title: "PPC",
   description:
     "Unlock the potential of your business with our PPC expertise. Drive targeted traffic, maximize ROI, and experience growth like never before.",
-};
+  legacy: true,
+});
 
 const wrap =
   "mx-auto w-full max-w-[var(--container-wrap)] px-6 lg:px-[var(--spacing-gut)]";
@@ -600,12 +604,12 @@ export default function PpcPage() {
                 <p className="mt-5 max-w-[34em] text-small text-ink-soft">
                   By submitting this form, I confirm that I have read and
                   understood the Emmvi{" "}
-                  <a
+                  <Link
                     href="/privacy-policy"
                     className="text-ink underline underline-offset-[3px] hover:text-violet"
                   >
                     Privacy Statement
-                  </a>
+                  </Link>
                   .
                 </p>
               </div>

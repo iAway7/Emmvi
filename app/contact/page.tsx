@@ -4,6 +4,7 @@ import { CalendlyButton } from "@/components/calendly-button";
 import { ContactForm } from "@/components/contact-form";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { pageMetadata } from "@/lib/site";
 
 /**
  * Pagina de contacto del sitio vivo, no del Figma: el frame "Contact Us" del
@@ -19,11 +20,12 @@ import { SiteHeader } from "@/components/site-header";
  * como una promesa sobre la propia bandeja de Emmvi, que no esta automatizada.
  */
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/contact",
   title: "Contact",
   description:
-    "Tell us what you are trying to fix, or book a thirty-minute call."
-};
+    "Tell us what you are trying to fix, or book a thirty-minute call.",
+});
 
 /** Sin tiempos de respuesta: lo que se puede defender es que lo lee alguien,
  *  no en cuanto contesta. La reserva de Calendly es la via rapida de verdad. */

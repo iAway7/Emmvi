@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 
 import { CtaLink } from "@/components/cta-link";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { SalesForm } from "@/components/services/sales-form";
+import { pageMetadata } from "@/lib/site";
 
 /**
  * Réplica del frame "Services - About Us" del Figma
@@ -26,11 +28,13 @@ import { SalesForm } from "@/components/services/sales-form";
  *    empleo: lleva al formulario.
  */
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/about-us",
   title: "About Us",
   description:
     "At emmvi.com, our mission is clear: to provide affordable solutions for entrepreneurs and help them grow without the hassle of dealing with the technical complexities that often accompany business growth.",
-};
+  legacy: true,
+});
 
 const wrap =
   "mx-auto w-full max-w-[var(--container-wrap)] px-6 lg:px-[var(--spacing-gut)]";
@@ -300,12 +304,12 @@ export default function AboutUsPage() {
                 <p className="mt-5 max-w-[34em] text-small text-ink-soft">
                   By submitting this form, I confirm that I have read and
                   understood the Emmvi{" "}
-                  <a
+                  <Link
                     href="/privacy-policy"
                     className="text-ink underline underline-offset-[3px] hover:text-violet"
                   >
                     Privacy Statement
-                  </a>
+                  </Link>
                   .
                 </p>
               </div>

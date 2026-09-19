@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 
 import { CtaLink } from "@/components/cta-link";
 import { ClientMarquee } from "@/components/services/client-marquee";
@@ -8,6 +9,7 @@ import { SiteHeader } from "@/components/site-header";
 import { Journey } from "@/components/services/journey";
 import { SalesForm } from "@/components/services/sales-form";
 import { Testimonials } from "@/components/services/testimonials";
+import { pageMetadata } from "@/lib/site";
 
 /**
  * Réplica del frame "Services - Website Design" del Figma
@@ -24,11 +26,13 @@ import { Testimonials } from "@/components/services/testimonials";
  * portado de este mismo archivo de Figma.
  */
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/services/website-design",
   title: "Website Design",
   description:
     "Our web design expertise transforms your vision into captivating, user-centric digital experiences that leave a lasting impact.",
-};
+  legacy: true,
+});
 
 const wrap =
   "mx-auto w-full max-w-[var(--container-wrap)] px-6 lg:px-[var(--spacing-gut)]";
@@ -417,12 +421,12 @@ export default function WebsiteDesignPage() {
                 <p className="mt-5 max-w-[34em] text-small text-ink-soft">
                   By submitting this form, I confirm that I have read and
                   understood the Emmvi{" "}
-                  <a
+                  <Link
                     href="/privacy-policy"
                     className="text-ink underline underline-offset-[3px] hover:text-violet"
                   >
                     Privacy Statement
-                  </a>
+                  </Link>
                   .
                 </p>
               </div>

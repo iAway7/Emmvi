@@ -1,5 +1,6 @@
 import { CalendlyButton } from "@/components/calendly-button";
 import { Wordmark } from "@/components/wordmark";
+import { CONTACT_EMAIL, SITE_TAGLINE, pageMetadata } from "@/lib/site";
 
 /**
  * Pagina de espera mientras emmvi.com (WordPress) esta caido con 503.
@@ -21,13 +22,28 @@ import { Wordmark } from "@/components/wordmark";
  * contacto contradice el posicionamiento justo cuando alguien llega desde el
  * outreach.
  */
-export const comingSoonMetadata = {
-  title: { absolute: "Emmvi — websites and automation for installers" },
-  description:
-    "We build the website that takes the enquiry and the system that answers it in under a minute. Book a 30-minute call.",
-};
+export const COMING_SOON_TITLE =
+  "Emmvi — websites and automation for installers";
 
-const CONTACT_EMAIL = "sales@emmvi.com";
+/**
+ * La linea de marca mas la invitacion a reservar. Sale de `SITE_TAGLINE` en
+ * vez de estar escrita otra vez aqui: es la misma frase que preside la
+ * tarjeta de Open Graph, y dos copias se separan a la primera correccion.
+ */
+export const COMING_SOON_DESCRIPTION = `${SITE_TAGLINE} Book a 30-minute call.`;
+
+/**
+ * La usa la raiz cuando COMING_SOON=1. Lleva canonica y Open Graph como
+ * cualquier otra pagina: el robots.txt cerrado frena al buscador, pero no a
+ * WhatsApp ni a LinkedIn, que son justo por donde llega el enlace del outreach
+ * mientras dura la espera.
+ */
+export const comingSoonMetadata = pageMetadata({
+  path: "/",
+  title: COMING_SOON_TITLE,
+  absoluteTitle: true,
+  description: COMING_SOON_DESCRIPTION,
+});
 
 export function ComingSoon() {
   return (

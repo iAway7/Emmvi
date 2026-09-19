@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 
 import { CtaLink } from "@/components/cta-link";
 import { FaqAccordion, type FaqItem } from "@/components/services/faq-accordion";
@@ -7,6 +8,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { PackageTabs, type PackageTab } from "@/components/services/package-tabs";
 import { SalesForm } from "@/components/services/sales-form";
+import { pageMetadata } from "@/lib/site";
 
 /**
  * Réplica del frame "Services - SEO Services" del Figma
@@ -23,11 +25,13 @@ import { SalesForm } from "@/components/services/sales-form";
  *    escrita para el Figma. Va la que dijo de verdad, la misma que la home.
  */
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/services/seo",
   title: "SEO Services",
   description:
     "Celebrate startup growth with our SEO expertise. Discover how we can fuel your success and propel your brand to new heights.",
-};
+  legacy: true,
+});
 
 const wrap =
   "mx-auto w-full max-w-[var(--container-wrap)] px-6 lg:px-[var(--spacing-gut)]";
@@ -363,12 +367,12 @@ export default function SeoPage() {
                 <p className="mt-5 max-w-[34em] text-small text-ink-soft">
                   By submitting this form, I confirm that I have read and
                   understood the Emmvi{" "}
-                  <a
+                  <Link
                     href="/privacy-policy"
                     className="text-ink underline underline-offset-[3px] hover:text-violet"
                   >
                     Privacy Statement
-                  </a>
+                  </Link>
                   .
                 </p>
               </div>

@@ -23,15 +23,27 @@ const columns = [
     // este footer en lugar del de la replica del Figma.
     links: [
       { href: "/about-us", label: "About" },
+      { href: "/blog", label: "Blog" },
       { href: "/contact", label: "Contact" },
     ],
   },
+  /**
+   * "Cookie preferences" estaba aqui apuntando a /cookies, que no existe: un
+   * 404 en todas las paginas del sitio. Vuelve cuando se instale el gestor de
+   * consentimiento, y entonces no sera un enlace a una pagina sino el
+   * disparador que abre su panel.
+   *
+   * Ojo con la URL: el WordPress anterior tenia /cookie-preference/ y esa es
+   * la que sigue indexada. Si el gestor publica una pagina, conviene que sea
+   * esa y no una nueva.
+   *
+   * "Legal Notice" apunta a /legal-notice, que tampoco existe todavia.
+   */
   {
     title: "Legal",
     links: [
       { href: "/legal-notice", label: "Legal Notice" },
       { href: "/privacy-policy", label: "Privacy Policy" },
-      { href: "/cookies", label: "Cookie preferences" },
     ],
   },
 ];
