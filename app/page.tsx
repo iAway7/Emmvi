@@ -60,22 +60,30 @@ const services: Service[] = [
   },
   {
     /**
-     * Imagen de marca de GoHighLevel, la herramienta con la que se monta buena
-     * parte de esto y que el propio cuerpo de la tarjeta nombra.
+     * Un flujo real montado en GoHighLevel: cambia la oportunidad, sale un
+     * SMS, espera un dia, sale el segundo. Es el seguimiento de presupuesto
+     * que el propio cuerpo de la tarjeta nombra.
      *
-     * Es 1400x628 (2.23:1). El hueco de las tarjetas pasa de 16:9 a 7/3
-     * (2.33:1) por esto: a 16:9 el `object-cover` recortaba 283 px de ancho y
-     * partia el robot por la mitad, que parecia un error. A 7/3 el recorte cae
-     * en vertical —14 px arriba y abajo, fondo vacio— y la imagen entra
-     * entera. El fondo tiene degradado, de #221b44 a la izquierda a #00001e a
-     * la derecha, asi que `object-contain` sobre un color plano tampoco valia:
-     * se veria la costura.
+     * Sustituye a la imagen de marca de GoHighLevel que hubo antes aqui. La
+     * diferencia importa: aquella era arte promocional de un proveedor —no
+     * enseñaba nada construido, e implicaba un partnership que no existe—, y
+     * esta enseña el trabajo. El hueco pedia exactamente eso.
+     *
+     * Viene recortada a su contenido: el pantallazo original tenia 223 px de
+     * margen a la izquierda y 81 a la derecha, asi que el flujo salia
+     * descentrado. Recortada gana ademas un 14% de tamano en el mismo hueco.
+     *
+     * Es casi cuadrada (1398x1542), asi que el hueco de las tarjetas pasa de
+     * 7/3 a 4/3 y la imagen va con `object-contain`: recortarla partiria el
+     * flujo por la mitad. El fondo del pantallazo es un #f3f4f8 uniforme —los
+     * puntos del patron son de contraste minimo— asi que el mismo color en la
+     * caja hace que las bandas laterales no se noten.
      */
     image: {
-      src: "/home/gohighlevel.webp",
-      alt: "The GoHighLevel logo.",
-      width: 1400,
-      height: 628,
+      src: "/home/automation-flow.png",
+      alt: "A GoHighLevel workflow: an opportunity changes, a text message goes out, it waits a day, and a second text follows.",
+      width: 1398,
+      height: 1542,
     },
     title: "CRM and automation",
     body: "Lead routing, instant replies, quote follow-ups, review requests and reporting that builds itself. Put together with GoHighLevel, Kickserv, Airtable, Stripe and Zapier, connected so nobody retypes anything.",
@@ -295,11 +303,11 @@ export default function Home() {
                       alt={s.image.alt}
                       width={s.image.width}
                       height={s.image.height}
-                      className="aspect-[7/3] w-full rounded-sm object-cover"
+                      className="aspect-[4/3] w-full rounded-sm bg-[#f3f4f8] object-contain"
                       sizes="(min-width: 768px) 30rem, 90vw"
                     />
                   ) : (
-                    <div className="flex aspect-[7/3] items-center justify-center rounded-sm bg-paper-panel p-4 text-center text-small text-ink-soft">
+                    <div className="flex aspect-[4/3] items-center justify-center rounded-sm bg-paper-panel p-4 text-center text-small text-ink-soft">
                       {s.shot}
                     </div>
                   )}
