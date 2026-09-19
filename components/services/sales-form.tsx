@@ -1,5 +1,6 @@
 "use client";
 
+import posthog from "posthog-js";
 import { useActionState } from "react";
 
 import { submitContact, type ContactState } from "@/app/actions/contact";
@@ -67,6 +68,16 @@ export function SalesForm() {
     initialState,
   );
 
+  async function handleSubmit(formData: FormData) {
+    if (
+      process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN &&
+      process.env.NEXT_PUBLIC_POSTHOG_HOST
+    ) {
+      posthog.capture("contact_form_submitted", { form_type: "sales" });
+    }
+    return formAction(formData);
+  }
+
   if (state.status === "success") {
     return (
       <div role="status" className="rounded-md border border-line bg-paper p-8">
@@ -82,7 +93,7 @@ export function SalesForm() {
   const e = state.extras;
 
   return (
-    <form action={formAction} className="rounded-md border border-line bg-paper p-6 min-[900px]:p-8">
+    <form action={handleSubmit} className="rounded-md border border-line bg-paper p-6 min-[900px]:p-8">
       {/* Honeypot. Fuera de pantalla y fuera del orden de tabulacion. */}
       <div aria-hidden="true" className="absolute left-[-9999px] h-px w-px overflow-hidden">
         <label htmlFor="s-website">Leave this empty</label>

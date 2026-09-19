@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+import posthog from "posthog-js";
 import { useActionState } from "react";
 
 import { submitContact, type ContactState } from "@/app/actions/contact";
@@ -19,6 +21,16 @@ export function ContactForm() {
     initialState,
   );
 
+  async function handleSubmit(formData: FormData) {
+    if (
+      process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN &&
+      process.env.NEXT_PUBLIC_POSTHOG_HOST
+    ) {
+      posthog.capture("contact_form_submitted", { form_type: "contact" });
+    }
+    return formAction(formData);
+  }
+
   if (state.status === "success") {
     return (
       <div
@@ -36,7 +48,7 @@ export function ContactForm() {
   const v = state.values;
 
   return (
-    <form action={formAction} className="w-full">
+    <form action={handleSubmit} className="w-full">
       {/* Honeypot. Fuera de pantalla y fuera del orden de tabulacion. */}
       <div aria-hidden="true" className="absolute left-[-9999px] h-px w-px overflow-hidden">
         <label htmlFor="c-website">Leave this empty</label>
@@ -126,12 +138,12 @@ export function ContactForm() {
       <p className="mt-4 text-small text-ink-soft">
         By submitting this form, I confirm that I have read and understood the
         Emmvi{" "}
-        <a
+        <Link
           href="/privacy-policy"
           className="text-ink underline underline-offset-[3px] hover:text-violet"
         >
           Privacy Policy
-        </a>
+        </Link>
         .
       </p>
     </form>

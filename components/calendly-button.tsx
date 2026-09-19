@@ -1,6 +1,7 @@
 "use client";
 
 import Script from "next/script";
+import posthog from "posthog-js";
 
 const CALENDLY_URL = "https://calendly.com/emmvi/30min";
 
@@ -54,9 +55,18 @@ export function CalendlyButton({
         target="_blank"
         rel="noopener noreferrer"
         onClick={(e) => {
-          if (typeof window !== "undefined" && window.Calendly) {
+          const calendly = typeof window !== "undefined" ? window.Calendly : undefined;
+          if (
+            process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN &&
+            process.env.NEXT_PUBLIC_POSTHOG_HOST
+          ) {
+            posthog.capture("calendly_booking_started", {
+              booking_method: calendly ? "popup" : "new_tab",
+            });
+          }
+          if (calendly) {
             e.preventDefault();
-            window.Calendly.initPopupWidget({ url: CALENDLY_URL });
+            calendly.initPopupWidget({ url: CALENDLY_URL });
           }
         }}
         className={
