@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { CtaLink } from "@/components/cta-link";
+import { AfterYouSend } from "@/components/services/after-you-send";
 import { FaqAccordion, type FaqItem } from "@/components/services/faq-accordion";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -570,7 +571,7 @@ export default function PpcPage() {
           </p>
 
           <div className="mt-12 rounded-lg bg-paper-panel p-6 min-[900px]:p-16">
-            <div className="mx-auto max-w-[460px]">
+            <div className="grid items-center gap-12 min-[900px]:grid-cols-[minmax(0,460px)_minmax(0,1fr)] min-[900px]:gap-20">
               <div>
                 <SalesForm />
                 <p className="mt-5 max-w-[34em] text-small text-ink-soft">
@@ -586,6 +587,7 @@ export default function PpcPage() {
                 </p>
               </div>
 
+              <AfterYouSend />
             </div>
           </div>
         </section>

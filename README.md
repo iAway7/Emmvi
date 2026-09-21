@@ -438,9 +438,8 @@ Quitar `COMING_SOON` publica la home.
 - Las tres cajas de línea discontinua de `/services/website-design`,
   `/services/email-marketing` y `/services/ppc` **decían "Placeholder. The
   Figma signs this quote with a client logo we cannot verify"** a la vista del
-  visitante: el razonamiento interno, publicado. Fuera las tres. El formulario
-  de ventas se queda solo en la rejilla, así que la rejilla de dos columnas
-  pasa a una columna centrada de 460 px.
+  visitante: el razonamiento interno, publicado. Fuera las tres, y en su hueco
+  `components/services/after-you-send.tsx`.
 
 **Queda uno, y este sí rompe algo que no se ve:**
 
@@ -661,9 +660,10 @@ tamaños entran en el `srcset`.
 - **La banda de cifras ya no está.** Las cuatro del Figma (75+, 32.3M€, 6.7X,
   4.9/5) no están medidas. Las etiquetas quedan anotadas en el código para
   cuando haya números con respaldo.
-- La cita firmada del panel de contacto no era atribuible y **se ha retirado**:
-  la rejilla de dos columnas del panel pasa a una columna centrada con el
-  formulario. Los tres testimonios reales siguen más arriba.
+- La cita firmada del panel de contacto no era atribuible y **se ha retirado**.
+  En su hueco va `<AfterYouSend />`. No lleva el testimonio de Adriana, que es
+  el único que habla de correo, porque `DarkTestimonials` ya la muestra más
+  arriba en esta misma página: saldría dos veces.
 
 ## Pendiente en /services/seo
 
@@ -712,8 +712,11 @@ tamaños entran en el `srcset`.
   tocado — pero conviene confirmar que se puede defender en una llamada.
 - La cita del panel de contacto **se ha retirado**: el Figma repite la de Email
   Marketing y la firma con el logo de TC Tails, que sí es cliente real, así que
-  publicarla le pone en la boca palabras que no dijo. El panel queda con el
-  formulario centrado.
+  publicarla le pone en la boca palabras que no dijo. En su hueco va
+  `<AfterYouSend />`.
+- **Es la única de las cuatro sin prueba social**, y a propósito: ninguno de los
+  tres testimonios reales habla de anuncios de pago. Cuando haya uno que sí,
+  este es su sitio.
 
 ## Pendiente en /services/website-design
 
@@ -724,8 +727,9 @@ home, así que nada de esto bloquea publicarla. Ver DESIGN.md.
   `/about-us` ya sí. El único frame que falta del archivo de Figma es Contact
   Us, y su formulario ya vive en las cinco páginas.
 - La cita firmada con logo de cliente **se ha retirado**: la del Figma no es
-  atribuible. El trust band ya lleva los nueve clientes reales, y la sección
-  "Real-Life Experiences" de más arriba, los tres testimonios verificados.
+  atribuible. En su hueco va `<AfterYouSend />`. El trust band ya lleva los
+  nueve clientes reales, y la sección "Real-Life Experiences" de más arriba,
+  los tres testimonios verificados.
 - `public/clients/steady-content.svg` es un recoloreado local del logo que
   entregó el cliente, que venía para fondo oscuro. Si hay versión oficial para
   fondo claro, sustituir el archivo.
