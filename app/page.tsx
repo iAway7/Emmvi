@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 
 import { CalendlyButton } from "@/components/calendly-button";
 import { ComingSoon, comingSoonMetadata } from "@/components/coming-soon";
@@ -47,14 +46,32 @@ const familiar = [
 type Service = {
   title: string;
   body: string;
-  /** Marcador visible mientras no haya imagen. Se renderiza tal cual. */
-  shot?: string;
-  image?: { src: string; alt: string; width: number; height: number };
+  image: { src: string; alt: string; width: number; height: number };
 };
 
 const services: Service[] = [
   {
-    shot: "[Screenshot of a site you built]",
+    /**
+     * jbzbeats.com, un sitio nuestro en produccion. Es una captura de la web
+     * en vivo a 1280x960 con densidad x2, no un pantallazo pegado, asi que el
+     * texto de la pagina llega nitido en vez de recomprimido.
+     *
+     * Dos detalles de la captura no son casualidad. El ancho de 1280 hace que
+     * el hero entre entero en 4:3 sin recortar la barra de navegacion, que es
+     * justo lo que dice "esto es un sitio de verdad y no una maqueta". Y la
+     * insignia de reCAPTCHA se quita bloqueando www.google.com al capturar:
+     * si no, aparece fija abajo a la izquierda y lo unico que cuenta es que
+     * el sitio usa reCAPTCHA.
+     *
+     * Va en JPEG y no en PNG porque es una fotografia a sangre: en PNG pesaba
+     * 1,9 MB y en JPEG 187 kB sin diferencia visible.
+     */
+    image: {
+      src: "/home/jbz-beats.jpg",
+      alt: "The home page of jbzbeats.com: a performer on stage above a lit crowd, with the current offer and a Shop Now button over the photograph.",
+      width: 1440,
+      height: 1080,
+    },
     title: "Design and build",
     body: "Sites built to do one specific job: get the enquiry, book the call, sell the thing. Design, copy, build and hosting. Usually WordPress, sometimes not, depending on what the site has to do.",
   },
@@ -297,20 +314,14 @@ export default function Home() {
                   key={s.title}
                   className="flex flex-col gap-4 rounded-md border border-line bg-paper p-8"
                 >
-                  {s.image ? (
-                    <Image
-                      src={s.image.src}
-                      alt={s.image.alt}
-                      width={s.image.width}
-                      height={s.image.height}
-                      className="aspect-[4/3] w-full rounded-sm bg-[#f3f4f8] object-contain"
-                      sizes="(min-width: 768px) 30rem, 90vw"
-                    />
-                  ) : (
-                    <div className="flex aspect-[4/3] items-center justify-center rounded-sm bg-paper-panel p-4 text-center text-small text-ink-soft">
-                      {s.shot}
-                    </div>
-                  )}
+                  <Image
+                    src={s.image.src}
+                    alt={s.image.alt}
+                    width={s.image.width}
+                    height={s.image.height}
+                    className="aspect-[4/3] w-full rounded-sm bg-[#f3f4f8] object-contain"
+                    sizes="(min-width: 768px) 30rem, 90vw"
+                  />
                   <h3 className="text-h3 text-balance text-ink">{s.title}</h3>
                   <p className="text-[1rem] leading-[26px] tracking-[-0.2px] text-pretty text-ink-soft">
                     {s.body}
@@ -457,14 +468,7 @@ export default function Home() {
                 </h3>
                 <p className="text-body text-pretty text-ink-soft">
                   Solar, EV chargers, security, heating and cooling. This is the
-                  one we have gone deepest on, and we have a page just for it.{" "}
-                  <Link
-                    href="/for/installers/"
-                    className="text-ink underline underline-offset-[3px] transition-colors hover:text-violet focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
-                  >
-                    See what we build for installers
-                  </Link>
-                  .
+                  one we have gone deepest on.
                 </p>
               </div>
               <div className="grid gap-4 border-b border-line py-8 md:grid-cols-[0.95fr_1.05fr] md:gap-12">

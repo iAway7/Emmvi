@@ -118,8 +118,8 @@ const body: Post["body"] = [
     ".",
   ] },
   { kind: "p", text: [
-    "✅ Powered by",
-    { text: "GoHighLevel", bold: true },
+    "✅ Powered by ",
+    { text: "GoHighLevel", bold: true, href: "/services/gohighlevel-automation" },
     "✅ Done-for-you funnels, sites & automations✅ Support from real humans who care about your growth✅ No fluff. Just results.",
   ] },
   { kind: "h3", text: "Ready to Stop Chasing Leads and Start Closing Them?" },

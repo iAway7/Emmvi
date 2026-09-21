@@ -51,7 +51,11 @@ const body: Post["body"] = [
     { text: "Scale with Confidence:", bold: true },
     "Automation allows your business to grow without adding more overhead.",
   ] },
-  { kind: "p", text: "Let’s Build Smarter TogetherIf you’re serious about growing your business and want to leverage the power of Zapier and GoHighLevel, Emmvi.com is here to help. Our tailored solutions are designed to meet your specific needs, so you get the most out of your tools — without the technical headache." },
+  { kind: "p", text: [
+    "Let’s Build Smarter TogetherIf you’re serious about growing your business and want to leverage the power of Zapier and ",
+    { text: "GoHighLevel", href: "/services/gohighlevel-automation" },
+    ", Emmvi.com is here to help. Our tailored solutions are designed to meet your specific needs, so you get the most out of your tools — without the technical headache.",
+  ] },
   { kind: "p", text: [
     { text: "Contact us today", href: "/contact-us" },
     "and let’s start building systems that scale.",

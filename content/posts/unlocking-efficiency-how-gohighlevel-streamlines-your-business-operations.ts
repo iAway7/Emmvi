@@ -125,7 +125,9 @@ const body: Post["body"] = [
   { kind: "h2", text: "Conclusion" },
   { kind: "p", text: "GoHighLevel is more than just another marketing tool—it’s a comprehensive solution that helps businesses of all sizes improve efficiency, automate processes, and enhance customer relationships. By centralizing key business functions, streamlining workflows, and providing deep insights into your marketing and sales efforts, GoHighLevel empowers your company to grow, optimize performance, and deliver better experiences for customers. If you're looking to take your business to the next level, GoHighLevel could be the game-changing solution you need." },
   { kind: "p", text: [
-    "Want to streamline your business with GoHighLevel?",
+    "Want to streamline your business with ",
+    { text: "GoHighLevel", href: "/services/gohighlevel-automation" },
+    "? ",
     { text: "Contact us today", href: "/contact-us" },
     ", and we’ll set it up for you!",
   ] },

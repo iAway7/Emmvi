@@ -415,7 +415,7 @@ export default function WebsiteDesignPage() {
           </p>
 
           <div className="mt-12 rounded-lg bg-paper-panel p-6 min-[900px]:p-16">
-            <div className="grid items-center gap-12 min-[900px]:grid-cols-[minmax(0,460px)_minmax(0,1fr)] min-[900px]:gap-20">
+            <div className="mx-auto max-w-[460px]">
               <div>
                 <SalesForm />
                 <p className="mt-5 max-w-[34em] text-small text-ink-soft">
@@ -431,16 +431,6 @@ export default function WebsiteDesignPage() {
                 </p>
               </div>
 
-              {/* El Figma firma esta cita con el logo de un cliente que no está
-                  verificado. Va como placeholder hasta que haya uno atribuible. */}
-              <div className="rounded-md border border-dashed border-line p-8">
-                <p className="text-h3 text-ink-soft">&ldquo;</p>
-                <p className="mt-2 text-[1rem] leading-[26px] text-pretty text-ink-soft">
-                  Placeholder. The Figma signs this quote with a client logo we
-                  cannot verify, so neither the quote nor the logo is published.
-                  The three testimonials above are the real ones.
-                </p>
-              </div>
             </div>
           </div>
         </section>

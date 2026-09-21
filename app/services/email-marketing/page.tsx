@@ -83,14 +83,13 @@ const outcomes = [
   "Foster customer loyalty and maximize profits.",
 ];
 
-/** Las etiquetas son del Figma; los números no se publican. Ver el comentario
- *  de cabecera: son cifras inventadas y la regla del proyecto las prohíbe. */
-const stats = [
-  "Trusted Clients",
-  "Generated through emails",
-  "Average ROI",
-  "Customer Satisfaction",
-];
+/* La banda de cifras del Figma (75+, 32.3M€, 6.7X, 4.9/5) no está aquí:
+   ninguna de las cuatro está medida, y PRODUCT.md prohíbe publicar métricas sin
+   respaldo. Estuvo un tiempo con las etiquetas y un guion en lugar del número,
+   más una nota que decía "Placeholder. The figures in the Figma are not
+   measured" — es decir, una sección entera cuyo contenido era una disculpa.
+   Cuando haya cifras medidas, las etiquetas eran: Trusted Clients, Generated
+   through emails, Average ROI, Customer Satisfaction. */
 
 /** El Figma solo escribe la primera respuesta. Las otras siete son preguntas
  *  sin contenido en el archivo y se marcan como tal. */
@@ -246,32 +245,6 @@ export default function EmailMarketingPage() {
           </div>
         </section>
 
-        {/* --- Banda de cifras ----------------------------------------- */}
-        {/* Las cuatro cifras del Figma (75+, 32.3M€, 6.7X, 4.9/5) están
-            inventadas. PRODUCT.md prohíbe publicar métricas sin respaldo, así
-            que van las etiquetas y el hueco donde iría el número. */}
-        <section className={`${wrap} pb-16 lg:pb-24`}>
-          <div className="bg-dusk rounded-lg px-8 py-12 min-[900px]:px-16">
-            <ul className="grid list-none gap-10 text-center min-[640px]:grid-cols-2 min-[900px]:grid-cols-4">
-              {stats.map((s) => (
-                <li key={s}>
-                  <p
-                    aria-hidden="true"
-                    className="text-[2rem] leading-none font-extrabold text-white/30"
-                  >
-                    &mdash;
-                  </p>
-                  <p className="mt-3 text-small text-white/70">{s}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <p className="mt-4 text-small text-ink-soft">
-            Placeholder. The figures in the Figma are not measured, so they are
-            not published here.
-          </p>
-        </section>
-
         {/* --- Automate Processes and Scale Your Sales ----------------- */}
         <section className={`${wrap} pb-16 lg:pb-24`}>
           <div className="max-w-[601px]">
@@ -362,7 +335,7 @@ export default function EmailMarketingPage() {
           </p>
 
           <div className="mt-12 rounded-lg bg-paper-panel p-6 min-[900px]:p-16">
-            <div className="grid items-center gap-12 min-[900px]:grid-cols-[minmax(0,460px)_minmax(0,1fr)] min-[900px]:gap-20">
+            <div className="mx-auto max-w-[460px]">
               <div>
                 <SalesForm />
                 <p className="mt-5 max-w-[34em] text-small text-ink-soft">
@@ -378,15 +351,6 @@ export default function EmailMarketingPage() {
                 </p>
               </div>
 
-              {/* Misma cita sin atribuir que en la otra pantalla. */}
-              <div className="rounded-md border border-dashed border-line p-8">
-                <p className="text-h3 text-ink-soft">&ldquo;</p>
-                <p className="mt-2 text-[1rem] leading-[26px] text-pretty text-ink-soft">
-                  Placeholder. The Figma signs this quote with a client we cannot
-                  verify, so it is not published. The three testimonials above are
-                  the real ones.
-                </p>
-              </div>
             </div>
           </div>
         </section>

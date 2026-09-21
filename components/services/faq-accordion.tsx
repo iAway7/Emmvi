@@ -7,15 +7,26 @@
  * OJO con el contenido: el Figma solo trae **una** respuesta escrita, la de la
  * pregunta que dibuja abierta. Las otras siete son preguntas sin respuesta en
  * el archivo, y aquí no se inventan: escribir de qué se compone el servicio es
- * una afirmación de negocio, no una decisión de maquetación. Van marcadas.
+ * una afirmación de negocio, no una decisión de maquetación.
+ *
+ * **Las que no tienen respuesta no se pintan.** Durante un tiempo salieron con
+ * un "Answer pending. The Figma only writes out the first one." en cursiva, que
+ * es una nota de trabajo publicada: seis de las siete preguntas de /services/ppc
+ * se leían así. Ahora el componente las filtra, y la pregunta sigue en el array
+ * de cada página haciendo de lista de pendientes para quien escriba la
+ * respuesta. Un FAQ con dos preguntas contestadas es un FAQ; uno con una
+ * contestada y seis disculpas, no.
  */
 
 export type FaqItem = { q: string; a?: string };
 
 export function FaqAccordion({ items }: { items: FaqItem[] }) {
+  const answered = items.filter((item) => item.a);
+  if (answered.length === 0) return null;
+
   return (
     <div>
-      {items.map((item, i) => (
+      {answered.map((item, i) => (
         <details
           key={item.q}
           open={i === 0}
@@ -32,15 +43,9 @@ export function FaqAccordion({ items }: { items: FaqItem[] }) {
             </span>
           </summary>
 
-          {item.a ? (
-            <p className="px-8 pt-3 pb-6 text-[1rem] leading-[26px] text-pretty text-ink-soft">
-              {item.a}
-            </p>
-          ) : (
-            <p className="px-8 pt-3 pb-6 text-[1rem] leading-[26px] text-ink-soft italic">
-              Answer pending. The Figma only writes out the first one.
-            </p>
-          )}
+          <p className="px-8 pt-3 pb-6 text-[1rem] leading-[26px] text-pretty text-ink-soft">
+            {item.a}
+          </p>
         </details>
       ))}
     </div>

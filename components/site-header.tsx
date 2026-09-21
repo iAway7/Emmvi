@@ -21,6 +21,9 @@ import { Wordmark } from "./wordmark";
  *
  * "Full-Stack Development" no vive bajo /services/ como las otras cuatro: es
  * la URL que el WordPress tenia indexada y se conserva. Ver next.config.ts.
+ *
+ * /services/gohighlevel-automation no esta aqui: la pagina existe pero sale
+ * como borrador, sin enlazar y sin indexar. Ver su propio page.tsx.
  */
 const services = [
   { href: "/services/website-design/", label: "Web Design" },

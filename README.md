@@ -422,15 +422,35 @@ Adriana usa `adriana-patania-1.png`, el retrato. El otro archivo,
 
 ## Pendiente antes de publicar la home
 
-Quitar `COMING_SOON` publica la home. Antes:
+Quitar `COMING_SOON` publica la home.
 
-**Bloquea de verdad** — se vería roto:
+**Lo que bloqueaba ya no bloquea** (2026-09-21):
 
-- Las dos capturas de la sección "Two things, done properly" son placeholders,
-  y el texto `[Screenshot of a site you built]` **se renderiza literalmente**
-  en la página. No es un comentario en el código: lo lee el visitante.
-- `/for/installers/` está enlazada desde la propia home y desde el pie, y
-  devuelve 404. El contenido está escrito en `emmvi-for-installers.html`.
+- Las dos capturas de "Two things, done properly" ya son imágenes reales:
+  `public/home/jbz-beats.jpg` (jbzbeats.com, cliente nuestro y el mismo Jared
+  White que firma el primer testimonio de `/services/website-design`) y
+  `public/home/automation-flow.png`. El texto `[Screenshot of a site you
+  built]`, que se renderizaba literalmente, ya no existe.
+- `/for/installers/` **sigue sin existir**, pero ya no la enlaza nadie: fuera
+  el enlace de la home y fuera la entrada del pie. El contenido sigue escrito
+  en `emmvi-for-installers.html` para cuando se monte; mientras tanto, la
+  frase de la home termina en "This is the one we have gone deepest on."
+- Las tres cajas de línea discontinua de `/services/website-design`,
+  `/services/email-marketing` y `/services/ppc` **decían "Placeholder. The
+  Figma signs this quote with a client logo we cannot verify"** a la vista del
+  visitante: el razonamiento interno, publicado. Fuera las tres. El formulario
+  de ventas se queda solo en la rejilla, así que la rejilla de dos columnas
+  pasa a una columna centrada de 460 px.
+
+**Queda uno, y este sí rompe algo que no se ve:**
+
+- **El formulario no tiene a dónde enviar.** `app/actions/contact.ts` necesita
+  `RESEND_API_KEY`, `CONTACT_FROM_EMAIL` y `CONTACT_TO_EMAIL`. Sin las tres,
+  cada consulta muere en el `console.error` y el visitante lee "Something went
+  wrong sending that. Email us at sales@emmvi.com instead." En local no están
+  puestas; en Vercel no se ha podido comprobar desde aquí (el token no tiene
+  permiso para listar variables de entorno). **Comprobarlo antes de quitar
+  `COMING_SOON`**, y mandar una consulta de prueba desde la web publicada.
 
 **Conviene, pero no bloquea:**
 
@@ -453,6 +473,132 @@ Quitar `COMING_SOON` publica la home. Antes:
   día se quiere gatear, es `opt_out_capturing_by_default` en
   `instrumentation-client.ts` más un `opt_in_capturing()` cuando CookieYes
   conceda la categoría de analítica.
+
+## /services/gohighlevel-automation
+
+> **Sale como borrador** (2026-09-21, decisión del usuario: "quitemos del menú
+> GHL por el momento"). La página existe y se despliega, pero:
+>
+> - no está en el desplegable "Services" de la nav ni en la columna del pie,
+> - no está en `currentRoutes` de `lib/site.ts`, así que no entra en el sitemap,
+> - lleva `robots: { index: false, follow: false }` en su propio `metadata`.
+>
+> Se puede revisar en vivo entrando por la URL. Los tres artículos del blog que
+> la enlazan **mantienen el enlace**: el destino responde 200 y son las URLs con
+> historial, así que cuando se publique ya llegan enlazadas.
+>
+> Para publicarla: quitar `robots`, devolver la ruta a `currentRoutes` y volver
+> a ponerla en `services` de `site-header.tsx` y en el pie. Lo que falta está
+> en *Pendiente*, más abajo.
+
+Página del posicionamiento nuevo, no una réplica del Figma: monta el shell del
+sitio vivo y reusa los patrones de la home, no los de `/services/seo`.
+
+Existe para una búsqueda concreta —"GoHighLevel automation", "GHL workflows"— y
+para el outreach a quien ya paga la licencia y no la usa. El lector sigue
+siendo el de PRODUCT.md.
+
+**No rompe "una oferta, no un menú".** No vende la automatización como pieza
+suelta: es la misma oferta entrada por la puerta de quien ya tiene la
+herramienta, y por eso la sección "And what it is connected to" devuelve a la
+home en vez de dejarla como servicio independiente.
+
+Cuelga de `/services/` como las cuatro del Figma **pero no es legacy**: es del
+posicionamiento nuevo, así que cuando se publique entra en `currentRoutes` y no
+pasa por `indexLegacyPages`. Iba primera en el desplegable de la nav y en la
+columna del pie —el único sitio donde se nota que las otras cinco son el
+posicionamiento viejo— y ahí vuelve cuando deje de ser borrador.
+
+### Lo que la página no dice, y es deliberado
+
+- **Ninguna certificación.** HighLevel tiene programa propio y Emmvi no lo ha
+  hecho. El FAQ lo dice con todas las letras en vez de callarlo: es el
+  principio 3 de DESIGN.md, y en este término concreto es lo que más separa a
+  Emmvi del resto de resultados, que venden el sello.
+- **Ninguna cifra sin medir.** Nada de "entrega en 48 h" ni "60% menos de
+  admin", que es de lo que vive la competencia de esta búsqueda.
+- **Ningún porcentaje de facturación**, por la regla de PRODUCT.md.
+
+### El catálogo de GoHighLevel, y qué se hace con él
+
+La sección "In the box" lista las **52 funciones del catálogo de HighLevel**, en
+su propia taxonomía (Capture / Nurture / Close / Evangelize / Reactivate) y con
+sus nombres de producto, sobre fondo negro. De ellas, **15 van marcadas: las que
+Emmvi monta.** Debajo, en papel, las nueve cosas que hacemos, en verbos.
+
+El volumen es el argumento, no relleno: enseña de un vistazo la distancia entre
+lo que se paga y lo que está encendido. Por eso la lista no se comprime, no va
+detrás de un "ver más" y no se convierte en cinco tarjetas.
+
+**Las dos cifras se calculan, no se escriben.** `platformCount` y `oursCount`
+salen del array, así que "All 52" y "The 15 ticked" no pueden quedar desfasadas
+si alguien toca la lista. Escribir "over fifty" a mano era garantizar que la
+frase mintiera en la primera edición.
+
+El resaltado **no es solo color**: cada marcada lleva una marca de verificación
+delante y un texto solo para lectores de pantalla ("We build this: "). Sin eso,
+las 52 suenan iguales en un lector de pantalla y el argumento entero se pierde.
+Las apagadas van a `white/55`, que sobre `#171717` da 6.4:1 — apagadas, no
+inaccesibles. El fondo es `bg-ink` sólido y no `bg-night`: el gradiente aclara
+hasta `#7d7d7d` al final y aquí hay cincuenta líneas de texto llegando abajo.
+
+**El catálogo es una afirmación sobre el producto de otro, así que envejece
+solo.** Las pestañas Capture y Nurture se verificaron contra gohighlevel.com
+palabra por palabra —incluido su "CalendarsText Snippets", que son dos funciones
+que su maquetación junta y aquí van separadas—; las otras tres salen de capturas
+del mismo sitio. Si HighLevel cambia su catálogo, esto miente: conviene repasarlo
+al tocar la página.
+
+**"Websites, Funnels & Landing Pages" se queda sin marcar a propósito**, y el
+cierre de la sección explica por qué: GoHighLevel trae constructor de webs y
+Emmvi no lo usa para eso. Es la única de las 37 que merece explicación, porque
+es la que un lector podría esperar marcada.
+
+**Sin precio.** GoHighLevel cuesta hoy $97/mes el plan Starter y $297 el
+Unlimited, y no entra en la página: cambia, y este sitio no lleva precios
+propios. "You already pay for it every month" hace el trabajo sin caducar.
+
+### El aviso de marca
+
+El pie de la página dice que GoHighLevel es marca de GoHighLevel Inc. y que
+Emmvi no está afiliada ni certificada. No es un trámite: la página usa el
+nombre de un producto ajeno en el título, en la URL y en todo el cuerpo, y sin
+esa línea "GoHighLevel automation" en un `h1` se lee como acreditación.
+
+**La entidad es GoHighLevel Inc., no "HighLevel, Inc."**, que es lo que decía
+la primera versión. El pie de gohighlevel.com lo dice así: *"HighLevel LLC, a
+subsidiary of GoHighLevel Inc."* — la filial se llama HighLevel y la matriz
+GoHighLevel, al revés de lo que sugiere el nombre del producto. Verificado en su
+sitio, no deducido.
+
+Va **sin el símbolo ®**: que la empresa sea la titular es público, pero el
+estado exacto del registro no se ha comprobado en ninguna oficina de marcas. Si
+alguien lo verifica, el símbolo entra.
+
+### Enlaces desde el blog
+
+Tres de los diecisiete artículos llevan GoHighLevel en el slug y están
+indexados desde el WordPress. Los tres enlazan ahora a esta página desde la
+mención que ya tenían en el cierre: es la vía de llegada interna con más valor
+que hay, porque son URLs con historial.
+
+**No se ha cambiado una palabra del texto recuperado.** En `turn-leads` la
+mención ya estaba en negrita y solo se le añadió el destino; en
+`streamline-scale-succeed` el párrafo era una cadena suelta y se partió en
+fragmentos con el texto idéntico carácter a carácter, "TogetherIf" incluido.
+
+### Pendiente
+
+- **Solo hay una captura real**, `public/home/automation-flow.png`, y la
+  comparte con la tarjeta de la home. La sección "What we build inside it" son
+  seis bloques de texto donde encajarían capturas del pipeline, de la secuencia
+  de seguimiento y del panel de reporting. Es lo que más subiría la página: el
+  principio 1 de DESIGN.md es que lo que se promete se demuestre.
+- **El testimonio es el de Adriana Patania**, que es real y es de
+  automatización, pero no de GoHighLevel ni de un instalador. Se presenta como
+  lo que es, sin adornarlo.
+- Decidir si la página entra también en la home. Hoy se llega por la nav, el
+  pie y los tres artículos; la home no la enlaza.
 
 ## Pendiente en /contact
 
@@ -507,16 +653,25 @@ tamaños entran en el `srcset`.
 
 ## Pendiente en /services/email-marketing
 
-- **Faltan siete respuestas del FAQ.** El Figma solo escribe la primera; las
-  otras siete salen marcadas como pendientes en la página.
-- Las cuatro cifras de la banda oscura son placeholders: las del Figma no están
-  medidas.
-- La cita firmada del panel de contacto sigue sin ser atribuible.
+- **Faltan siete respuestas del FAQ.** El Figma solo escribe la primera. Las
+  siete preguntas siguen en el array `faqs` de la página, pero `FaqAccordion`
+  **ya no las pinta**: publicaba "Answer pending. The Figma only writes out the
+  first one." en cursiva, que es una nota de trabajo a la vista del visitante.
+  Escribir la respuesta y quitarla del pendiente es la misma acción.
+- **La banda de cifras ya no está.** Las cuatro del Figma (75+, 32.3M€, 6.7X,
+  4.9/5) no están medidas. Las etiquetas quedan anotadas en el código para
+  cuando haya números con respaldo.
+- La cita firmada del panel de contacto no era atribuible y **se ha retirado**:
+  la rejilla de dos columnas del panel pasa a una columna centrada con el
+  formulario. Los tres testimonios reales siguen más arriba.
 
 ## Pendiente en /services/seo
 
 - **Faltan tres cuerpos de pestaña** del paquete SEO y **cuatro respuestas** del
-  FAQ. El Figma solo desarrolla la primera de cada uno; salen marcadas.
+  FAQ. El Figma solo desarrolla la primera de cada uno. Ni las pestañas sin
+  cuerpo ni las preguntas sin respuesta se pintan ya: antes decían "Copy
+  pending" y "Answer pending" en la página publicada. La pestaña sigue
+  existiendo con su título; la pregunta, solo en el código.
 - La retícula del Figma repite dos tarjetas para llenar la fila. Aquí van las
   tres distintas: si hay dos servicios más que escribir, entran ahí.
 - **El logo de Google Business Profile es el viejo.** El archivo que hay es el de
@@ -528,10 +683,12 @@ tamaños entran en el `srcset`.
 
 ## Pendiente en /services/ppc
 
-- **Faltan seis respuestas del FAQ.** El Figma solo escribe la primera; las otras
-  seis salen marcadas como pendientes en la página.
-- Las cuatro cifras de la banda oscura son placeholders, y el "311% on average"
-  del hero se publica sin la cifra: ninguna de las dos está medida.
+- **Faltan seis respuestas del FAQ.** El Figma solo escribe la primera. Las
+  otras seis ya no se pintan, por lo mismo que en Email Marketing. El FAQ sale
+  con una sola pregunta, que es honesto: la entradilla ya dice "si tu pregunta
+  no está, reserva una llamada".
+- **La banda de cifras ya no está** (las cuatro del Figma están inventadas), y
+  el "311% on average" del hero se publica sin la cifra.
 - **La banda de logos no es la del Figma.** El archivo pone Google Premier
   Partner, Amazon Ads, Bing Ads y Meta Business Partners; los dos primeros son
   sellos de acreditación. Ahora van Google, Facebook, Instagram, TikTok y
@@ -553,8 +710,10 @@ tamaños entran en el `srcset`.
 - **"A team of certified paid advertising experts" sigue tal cual.** Es una
   afirmación sobre el propio equipo, no prueba social prestada, así que no se ha
   tocado — pero conviene confirmar que se puede defender en una llamada.
-- La cita del panel de contacto es un placeholder: el Figma repite la de Email
-  Marketing y la firma con el logo de TC Tails, que sí es cliente real.
+- La cita del panel de contacto **se ha retirado**: el Figma repite la de Email
+  Marketing y la firma con el logo de TC Tails, que sí es cliente real, así que
+  publicarla le pone en la boca palabras que no dijo. El panel queda con el
+  formulario centrado.
 
 ## Pendiente en /services/website-design
 
@@ -564,8 +723,9 @@ home, así que nada de esto bloquea publicarla. Ver DESIGN.md.
 - El shell enlaza a `/blog`, que no existe. Las cuatro páginas de servicio y
   `/about-us` ya sí. El único frame que falta del archivo de Figma es Contact
   Us, y su formulario ya vive en las cinco páginas.
-- La cita firmada con logo de cliente sigue siendo un placeholder visible: la
-  del Figma no es atribuible. El trust band ya lleva los nueve clientes reales.
+- La cita firmada con logo de cliente **se ha retirado**: la del Figma no es
+  atribuible. El trust band ya lleva los nueve clientes reales, y la sección
+  "Real-Life Experiences" de más arriba, los tres testimonios verificados.
 - `public/clients/steady-content.svg` es un recoloreado local del logo que
   entregó el cliente, que venía para fondo oscuro. Si hay versión oficial para
   fondo claro, sustituir el archivo.

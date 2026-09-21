@@ -108,13 +108,11 @@ const highlights = [
   "Omni-channel PPC management services",
 ];
 
-/** Solo las etiquetas: las cuatro cifras del Figma no están medidas. */
-const stats = [
-  "Decrease in Cost-Per-Lead",
-  "Increase in eCommerce Sales",
-  "Increase in Click Through Rate (CTR)",
-  "Reduction in Cost Per Click (CPC)",
-];
+/* Igual que en /services/email-marketing: la banda de cifras no se publica,
+   porque las cuatro del Figma (-28%, +30%, +40%, -35%) están inventadas. Las
+   etiquetas, para cuando haya números medidos: Decrease in Cost-Per-Lead,
+   Increase in eCommerce Sales, Increase in Click Through Rate (CTR), Reduction
+   in Cost Per Click (CPC). */
 
 const channels = [
   {
@@ -317,32 +315,6 @@ export default function PpcPage() {
               className="h-auto w-full max-w-[665px] justify-self-end"
             />
           </div>
-        </section>
-
-        {/* --- Cifras -------------------------------------------------- */}
-        {/* Las cuatro del Figma (-28%, +30%, +40%, -35%) están inventadas.
-            Mismo tratamiento que la banda de Email Marketing: van las
-            etiquetas y el hueco donde iría el número. */}
-        <section className={`${wrap} pb-16 lg:pb-24`}>
-          <div className="bg-dusk rounded-lg px-8 py-12 min-[900px]:px-16">
-            <ul className="grid list-none gap-10 text-center min-[640px]:grid-cols-2 min-[900px]:grid-cols-4">
-              {stats.map((s) => (
-                <li key={s}>
-                  <p
-                    aria-hidden="true"
-                    className="text-[2rem] leading-none font-extrabold text-white/30"
-                  >
-                    &mdash;
-                  </p>
-                  <p className="mt-3 text-small text-white/70">{s}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <p className="mt-4 text-small text-ink-soft">
-            Placeholder. The figures in the Figma are not measured, so they are
-            not published here.
-          </p>
         </section>
 
         {/* --- Skilled Paid Ads Control -------------------------------- */}
@@ -598,7 +570,7 @@ export default function PpcPage() {
           </p>
 
           <div className="mt-12 rounded-lg bg-paper-panel p-6 min-[900px]:p-16">
-            <div className="grid items-center gap-12 min-[900px]:grid-cols-[minmax(0,460px)_minmax(0,1fr)] min-[900px]:gap-20">
+            <div className="mx-auto max-w-[460px]">
               <div>
                 <SalesForm />
                 <p className="mt-5 max-w-[34em] text-small text-ink-soft">
@@ -614,17 +586,6 @@ export default function PpcPage() {
                 </p>
               </div>
 
-              {/* El Figma repite aquí la cita de Email Marketing y la firma con
-                  el logo de TC Tails, que sí es cliente real. Ponerle esas
-                  palabras en la boca es peor que inventarse un cliente, así que
-                  va el mismo placeholder que en las otras dos pantallas. */}
-              <div className="rounded-md border border-dashed border-line p-8">
-                <p className="text-h3 text-ink-soft">&ldquo;</p>
-                <p className="mt-2 text-[1rem] leading-[26px] text-pretty text-ink-soft">
-                  Placeholder. The Figma reuses the Email Marketing quote here and
-                  signs it with a client logo, so it is not published.
-                </p>
-              </div>
             </div>
           </div>
         </section>

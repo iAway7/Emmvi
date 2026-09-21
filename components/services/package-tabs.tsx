@@ -93,15 +93,14 @@ export function PackageTabs({ tabs }: { tabs: PackageTab[] }) {
         <h3 className="text-h2 text-balance text-ink">
           {current.heading ?? current.title}
         </h3>
+        {/* Sin cuerpo escrito no se pinta nada, en vez del "Copy pending" en
+            cursiva que salía antes: era una nota de trabajo a la vista del
+            visitante. La pestaña sigue existiendo con su título. */}
         {current.body ? (
           <p className="mt-6 max-w-[46em] text-[1rem] leading-[26px] text-pretty text-ink-soft">
             {current.body}
           </p>
-        ) : (
-          <p className="mt-6 text-[1rem] leading-[26px] text-ink-soft italic">
-            Copy pending. The Figma only writes out the first one.
-          </p>
-        )}
+        ) : null}
       </div>
     </div>
   );

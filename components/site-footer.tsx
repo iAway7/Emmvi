@@ -13,7 +13,6 @@ const columns = [
       { href: "/services/email-marketing/", label: "Email Marketing" },
       { href: "/services/seo/", label: "SEO Services" },
       { href: "/services/ppc/", label: "PPC" },
-      { href: "/for/installers/", label: "For installers" },
     ],
   },
   {
