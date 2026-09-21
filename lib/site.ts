@@ -17,7 +17,20 @@ export const SITE_URL = "https://emmvi.com";
 
 export const SITE_NAME = "Emmvi";
 
-/** El mismo que ofrece la pagina de espera. Lo usan esa pagina y el JSON-LD. */
+/**
+ * **La unica definicion de la direccion publica del sitio.** Sale en el aviso
+ * legal, en la politica de privacidad (dos veces), en el JSON-LD de
+ * Organization, en la pagina de espera, en /thank-you, en la pantalla de error
+ * de la aplicacion y en el mensaje de fallo del formulario. Cambiarla aqui las
+ * cambia todas; hasta 2026-09-21 estaba ademas escrita a mano en cuatro
+ * ficheros, que es como se acaba con la mitad del sitio dando una direccion y
+ * la otra mitad dando otra.
+ *
+ * **Tiene que ser una direccion que reciba de verdad.** No es una preferencia:
+ * la LSSI-CE obliga a que el aviso legal lleve un correo de contacto valido, y
+ * el RGPD, a que se pueda ejercer por ahi los derechos que la politica
+ * promete. Si el buzon no existe, las dos paginas mienten.
+ */
 export const CONTACT_EMAIL = "sales@emmvi.com";
 
 /**

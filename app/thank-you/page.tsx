@@ -3,6 +3,7 @@ import Image from "next/image";
 
 import { CalendlyButton } from "@/components/calendly-button";
 import { CtaLink } from "@/components/cta-link";
+import { CONTACT_EMAIL } from "@/lib/site";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 
@@ -83,10 +84,10 @@ export default function ThankYou() {
           <p className="mt-9 text-small text-ink-soft">
             Nothing else to do. If you would rather write again, the address is{" "}
             <a
-              href="mailto:sales@emmvi.com"
+              href={`mailto:${CONTACT_EMAIL}`}
               className="text-ink underline underline-offset-[3px] transition-colors hover:text-violet focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
             >
-              sales@emmvi.com
+              {CONTACT_EMAIL}
             </a>
             .
           </p>

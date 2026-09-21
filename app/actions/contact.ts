@@ -4,6 +4,7 @@ import { headers } from "next/headers";
 import { Resend } from "resend";
 
 import { escapeHtml, isRateLimited, normalizeText, validate } from "@/lib/contact";
+import { CONTACT_EMAIL } from "@/lib/site";
 
 /**
  * Campos extra del formulario de /services/website-design, que el Figma dibuja
@@ -30,11 +31,6 @@ const fromEmail = process.env.CONTACT_FROM_EMAIL ?? "";
 const toEmail = process.env.CONTACT_TO_EMAIL ?? "";
 
 const resend = resendApiKey ? new Resend(resendApiKey) : null;
-
-/** sales@emmvi.com sale de la propia configuracion de Calendly ("please forward
- *  any relevant information to sales@emmvi.com"). Confirmar que es la direccion
- *  correcta para este fallback. */
-const CONTACT_EMAIL = "sales@emmvi.com";
 
 const GENERIC_ERROR = `Something went wrong sending that. Email us at ${CONTACT_EMAIL} instead.`;
 

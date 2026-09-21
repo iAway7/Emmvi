@@ -5,6 +5,7 @@ import posthog from "posthog-js";
 import { useEffect, useRef } from "react";
 
 import "./globals.css";
+import { CONTACT_EMAIL } from "@/lib/site";
 
 /**
  * Pantalla de error cuando revienta el propio layout raiz. La escribio el
@@ -81,10 +82,10 @@ export default function GlobalError({
           <p className="mt-8 text-small text-ink-soft">
             If you were trying to reach us, email{" "}
             <a
-              href="mailto:sales@emmvi.com"
+              href={`mailto:${CONTACT_EMAIL}`}
               className="text-ink underline underline-offset-[3px] hover:text-violet"
             >
-              sales@emmvi.com
+              {CONTACT_EMAIL}
             </a>{" "}
             and we will pick it up there.
           </p>
