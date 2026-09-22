@@ -28,7 +28,7 @@ la página demuestra algo en vez de afirmarlo.
 | `--color-pink-ink` | `#d81b60` | su texto: el rosa de marca da 2.78:1 y falla AA |
 | `--color-pink-wash` | `#fff8fc` | relleno de ese badge |
 | `--dusk` | `linear-gradient(90deg,#242428,#16151e 50%,#080714)` | paneles oscuros de Email Marketing |
-| `--night` | `linear-gradient(180deg,#171717,#000 48%,#7d7d7d)` | paneles de demostración |
+| `--night` | `linear-gradient(180deg,#171717,#000 62%,#2e2e2e)` | paneles de demostración |
 
 Restricción medida, y ya no la hay en claro: el violeta rinde 6.68:1 sobre
 blanco, 6.29:1 sobre `#f8f8f8` y 6.40:1 sobre el panel — AA de texto chico en
@@ -76,6 +76,33 @@ Quedan cinco `text-[1rem]` sueltos y son correctos: interlineados únicos de 22,
 28 y 32px, y el glifo `+` del acordeón.
 
 `text-wrap: balance` en h1–h3, `pretty` en prosa larga. Cuerpo tope 65–75ch.
+
+### El gradiente `--night`
+
+Acababa en `#7d7d7d`. El blanco se quedaba en **4.12:1** al final del recorrido
+y el blanco al 80% fallaba desde el 92%, así que las secciones oscuras tenían
+que reservar el tramo claro como aire y dos sitios lo esquivaban a mano
+(`reply-proof.tsx` con su propio degradado, y la sección "In the box" de
+GoHighLevel con `bg-ink` sólido).
+
+Con el punto negro al 62% y la cola en `#2e2e2e`, el peor punto da **13.58:1**
+con blanco y **9.25:1** con blanco al 80%. Los dos rodeos siguen en pie porque
+ya funcionan, pero pasan a ser preferencia y no necesidad; sus comentarios lo
+dicen.
+
+### El mapa de "Meet Emmvi"
+
+`components/meet-map.tsx`. Mapa de puntos con Spain y Argentina marcadas en el
+violeta de marca: enseña de dónde trabaja Emmvi en vez de solo decirlo.
+
+Va **inline y no como `<img>`** porque los puntos cambian de grosor con el
+ancho — 2.6 → 6px, y las etiquetas 19 → 34px — para sobrevivir a la escala
+cuando el mapa se sirve de borde a borde en móvil. Desde fuera no se puede
+alcanzar el interior de una imagen. Las reglas viven en `globals.css`.
+
+Lleva `role="img"` con `aria-label`, así que un lector de pantalla lo anuncia
+como una sola imagen y no recita "Spain" y "Argentina" sueltos. Los colores
+salen de los tokens, no del `#635DFF` literal del borrador.
 
 ## Layout
 

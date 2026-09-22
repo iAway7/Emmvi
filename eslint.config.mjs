@@ -11,6 +11,9 @@ const eslintConfig = [
   ...(Array.isArray(typescript) ? typescript : [typescript]),
   {
     ignores: [
+      // Artefactos de build de un worktree de agente, no codigo fuente: metian
+      // 14 avisos por ejecucion sobre chunks generados por Turbopack.
+      ".seo-agent/**",
       "node_modules/**",
       ".next/**",
       "out/**",

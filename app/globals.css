@@ -113,7 +113,10 @@
 
 :root {
   /* Gradiente "night" del Figma: paneles oscuros (demo, mockup de teléfono). */
-  --night: linear-gradient(180deg, #171717 0%, #000000 48%, #7d7d7d 100%);
+  /* La cola clara llegaba a #7d7d7d: el blanco se quedaba en 4.12:1 al final
+     del recorrido y el blanco al 80% fallaba desde el 92%. Con el punto negro
+     al 62% y la cola en #2e2e2e, el peor punto da 13.58:1. */
+  --night: linear-gradient(180deg, #171717 0%, #000000 62%, #2e2e2e 100%);
   /* Paneles oscuros de Email Marketing: banda de cifras y testimonios. Es un
      degradado horizontal, distinto del --night vertical de la home. */
   --dusk: linear-gradient(90deg, #242428 0%, #16151e 50%, #080714 100%);
@@ -399,5 +402,45 @@ html:has(dialog[open]) {
     .journey__week {
       animation-name: journey-week;
     }
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Mapa de "Meet Emmvi". Los grosores van aqui y no en el marcado porque
+   cambian con el ancho: a 375px el mapa se sirve de borde a borde y los
+   puntos, dibujados para 1200, se pierden si no engordan.
+   -------------------------------------------------------------------------- */
+.meet-map__land {
+  stroke-width: 2.6px;
+}
+
+.meet-map__here {
+  stroke-width: 3.4px;
+}
+
+.meet-map__pin text {
+  font-family: inherit;
+  font-size: 19px;
+  font-weight: 500;
+  fill: #fff;
+  /* Halo oscuro por debajo del relleno: el texto cae sobre puntos blancos y
+     sobre el panel, y sin el se pierde en los tramos claros. */
+  paint-order: stroke;
+  stroke: #000;
+  stroke-width: 5px;
+  stroke-opacity: 0.5;
+  stroke-linejoin: round;
+}
+
+@media (max-width: 900px) {
+  .meet-map__land {
+    stroke-width: 6px;
+  }
+  .meet-map__here {
+    stroke-width: 7.5px;
+  }
+  .meet-map__pin text {
+    font-size: 34px;
+    stroke-width: 9px;
   }
 }

@@ -3,9 +3,11 @@
  * minuto". Este panel no la afirma: la deja ocurrir. La respuesta llega sola
  * unos segundos despues de cargar.
  *
- * Contraste: el gradiente se queda entre #171717 y #000 a proposito. El
- * gradiente --night completo termina en #7d7d7d, donde el blanco al 62% de las
- * etiquetas cae a 2.62:1. Acotado aqui, ese mismo 62% rinde 7.45:1 o mejor.
+ * Contraste: el gradiente se queda entre #171717 y #000 a proposito. Cuando se
+ * escribio esto, --night terminaba en #7d7d7d y el blanco al 62% de las
+ * etiquetas caia alli a 2.62:1. Hoy --night acaba en #2e2e2e y ya no haria
+ * falta acotarlo, pero se conserva: este panel es un movil y el degradado corto
+ * lee mejor a 420px que el de una seccion entera.
  */
 export function ReplyProof() {
   return (

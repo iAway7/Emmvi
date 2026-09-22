@@ -440,9 +440,11 @@ export default function GoHighLevelAutomation() {
             hacer—, y en el movil, donde dos columnas se apilarian igual, no se
             pierde nada.
 
-            Fondo `bg-ink` solido y no `bg-night`: el gradiente aclara hasta
-            #7d7d7d al final, y esta seccion lleva cincuenta lineas de texto
-            hasta abajo. Sobre #171717 el blanco al 70% rinde ~9.4:1. */}
+            Fondo `bg-ink` solido y no `bg-night`: cuando se escribio esto el
+            gradiente aclaraba hasta #7d7d7d al final y esta seccion lleva
+            cincuenta lineas de texto hasta abajo. Hoy --night acaba en #2e2e2e
+            y el blanco aguanta en todo el recorrido, asi que el solido ya es
+            preferencia, no necesidad. */}
         <section className={`bg-ink ${section}`}>
           <div className={wrap}>
             <p className="text-eyebrow text-violet-light">In the box</p>

@@ -3,6 +3,7 @@ import Image from "next/image";
 
 import { CalendlyButton } from "@/components/calendly-button";
 import { ComingSoon, comingSoonMetadata } from "@/components/coming-soon";
+import { MeetMap } from "@/components/meet-map";
 import { ContactForm } from "@/components/contact-form";
 import { CtaLink } from "@/components/cta-link";
 import { OrganizationSchema } from "@/components/organization-schema";
@@ -332,8 +333,9 @@ export default function Home() {
           </div>
         </section>
 
-        {/* El gradiente --night aclara hasta #7d7d7d al 100%. El texto se queda
-            en white/80 y la seccion reserva el tramo claro como aire. */}
+        {/* --night acaba en #2e2e2e, asi que el blanco al 80% aguanta hasta el
+            final del recorrido: 9.25:1 en el peor punto. Antes terminaba en
+            #7d7d7d y habia que reservar el tramo claro como aire. */}
         <section id="about" className={`bg-night scroll-mt-24 ${section}`}>
           <div className={wrap}>
             <h2 className="text-[2rem] font-bold tracking-[-1px] text-balance text-white lg:text-[3rem]">
@@ -348,15 +350,16 @@ export default function Home() {
               happen in house, so you talk to the people doing the work and
               nothing is handed to a supplier you have never met.
             </p>
-            <p className="mt-6 max-w-[38em] text-body text-pretty text-white/80">
+            {/* De borde a borde en movil: el mapa esta dibujado para 1200 de
+                ancho y dentro del canal se queda en nada. */}
+            <div className="mt-12 -mx-6 w-screen max-w-[100vw] lg:mx-0 lg:w-auto lg:max-w-none">
+              <MeetMap />
+            </div>
+
+            <p className="mt-10 max-w-[38em] text-body text-pretty text-white/80">
               Working across both time zones covers most of the working day for
               clients in Europe and the Americas.
             </p>
-            <div className="mt-9">
-              <CtaLink href="#contact" variant="light">
-                Schedule a call
-              </CtaLink>
-            </div>
           </div>
         </section>
 
