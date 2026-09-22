@@ -79,7 +79,7 @@ export function PackageTabs({ tabs }: { tabs: PackageTab[] }) {
               {String(i + 1).padStart(2, "0")}
             </span>
             <span
-              className={`text-[1rem] leading-6 font-bold ${
+              className={`text-ui font-bold ${
                 i === active ? "text-violet" : "text-ink"
               }`}
             >
@@ -97,7 +97,7 @@ export function PackageTabs({ tabs }: { tabs: PackageTab[] }) {
             cursiva que salía antes: era una nota de trabajo a la vista del
             visitante. La pestaña sigue existiendo con su título. */}
         {current.body ? (
-          <p className="mt-6 max-w-[46em] text-[1rem] leading-[26px] text-pretty text-ink-soft">
+          <p className="mt-6 max-w-[46em] text-copy text-pretty text-ink-soft">
             {current.body}
           </p>
         ) : null}

@@ -66,7 +66,7 @@ const wrap =
   "mx-auto w-full max-w-[var(--container-wrap)] px-6 lg:px-[var(--spacing-gut)]";
 const section = "py-16 lg:py-[104px]";
 const rowBody =
-  "text-[1rem] leading-[26px] tracking-[-0.2px] text-pretty text-ink-soft";
+  "text-copy tracking-[-0.2px] text-pretty text-ink-soft";
 
 export default function ContactPage() {
   return (

@@ -173,7 +173,7 @@ export default function AboutUsPage() {
                   className="size-14"
                 />
                 <h2 className="mt-4 text-h3 text-ink">{v.title}</h2>
-                <p className="mt-4 text-[1rem] leading-[26px] tracking-[-0.0125em] text-pretty text-ink-soft">
+                <p className="mt-4 text-copy tracking-[-0.0125em] text-pretty text-ink-soft">
                   {v.body}
                 </p>
               </li>

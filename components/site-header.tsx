@@ -67,7 +67,7 @@ export function SiteHeader() {
                 ) : (
                   <a
                     href={l.href}
-                    className="inline-flex min-h-[44px] items-center text-[1rem] leading-6 text-ink-soft transition-colors hover:text-ink-black focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
+                    className="inline-flex min-h-[44px] items-center text-ui text-ink-soft transition-colors hover:text-ink-black focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
                   >
                     {l.label}
                   </a>

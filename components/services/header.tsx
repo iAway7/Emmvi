@@ -22,7 +22,7 @@ const services = [
 ];
 
 const navLink =
-  "inline-flex min-h-[44px] items-center text-[1rem] leading-6 text-ink-soft " +
+  "inline-flex min-h-[44px] items-center text-ui text-ink-soft " +
   "transition-colors hover:text-ink-black focus-visible:outline-[3px] " +
   "focus-visible:outline-offset-[3px] focus-visible:outline-violet";
 
@@ -119,7 +119,7 @@ export function WebsiteDesignHeader({ current }: { current?: string }) {
                         <Link
                           href={s.href}
                           aria-current={s.href === current ? "page" : undefined}
-                          className="flex min-h-[44px] items-center px-4 text-[1rem] leading-6 text-ink-soft transition-colors hover:bg-paper-alt hover:text-ink-black aria-[current=page]:font-medium aria-[current=page]:text-ink-black focus-visible:outline-[3px] focus-visible:-outline-offset-2 focus-visible:outline-violet"
+                          className="flex min-h-[44px] items-center px-4 text-ui text-ink-soft transition-colors hover:bg-paper-alt hover:text-ink-black aria-[current=page]:font-medium aria-[current=page]:text-ink-black focus-visible:outline-[3px] focus-visible:-outline-offset-2 focus-visible:outline-violet"
                         >
                           {s.label}
                         </Link>

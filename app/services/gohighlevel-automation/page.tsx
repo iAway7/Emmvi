@@ -425,7 +425,7 @@ export default function GoHighLevelAutomation() {
                   className="flex flex-col gap-3 rounded-md border border-line bg-paper p-8"
                 >
                   <h3 className="text-h3 text-balance text-ink">{b.title}</h3>
-                  <p className="text-[1rem] leading-[26px] tracking-[-0.2px] text-pretty text-ink-soft">
+                  <p className="text-copy tracking-[-0.2px] text-pretty text-ink-soft">
                     {b.body}
                   </p>
                 </article>
@@ -640,7 +640,7 @@ export default function GoHighLevelAutomation() {
                   <h3 className="mt-4 text-h3 text-balance text-ink">
                     {s.title}
                   </h3>
-                  <p className="mt-2 flex-1 text-[1rem] leading-[26px] tracking-[-0.2px] text-pretty text-ink-soft">
+                  <p className="mt-2 flex-1 text-copy tracking-[-0.2px] text-pretty text-ink-soft">
                     {s.body}
                   </p>
                 </li>
@@ -729,7 +729,7 @@ export default function GoHighLevelAutomation() {
                   loading="lazy"
                   className="size-10 shrink-0 rounded-full object-cover"
                 />
-                <span className="text-left text-[1rem] leading-6 tracking-[-0.2px]">
+                <span className="text-left text-ui tracking-[-0.2px]">
                   <span className="block font-semibold text-ink">
                     Adriana Patania
                   </span>

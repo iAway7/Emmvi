@@ -76,7 +76,7 @@ export function ComingSoon() {
         </CalendlyButton>
         <a
           href={`mailto:${CONTACT_EMAIL}`}
-          className="inline-flex min-h-[44px] items-center text-[1rem] leading-6 text-white/70 underline underline-offset-[5px] transition-colors hover:text-white focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet-light"
+          className="inline-flex min-h-[44px] items-center text-ui text-white/70 underline underline-offset-[5px] transition-colors hover:text-white focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet-light"
         >
           {CONTACT_EMAIL}
         </a>

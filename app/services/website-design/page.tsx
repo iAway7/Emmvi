@@ -327,7 +327,7 @@ export default function WebsiteDesignPage() {
                 <h3 className="mt-4 text-[1.25rem] font-bold tracking-[-0.02em] text-ink">
                   {title}
                 </h3>
-                <p className="mt-3 max-w-[34em] text-[1rem] leading-[26px] text-pretty text-ink-soft">
+                <p className="mt-3 max-w-[34em] text-copy text-pretty text-ink-soft">
                   {body}
                 </p>
               </li>
@@ -356,7 +356,7 @@ export default function WebsiteDesignPage() {
                   <h3 className="mt-6 text-[1.25rem] font-bold tracking-[-0.02em] text-ink">
                     {title}
                   </h3>
-                  <p className="mt-3 text-[1rem] leading-[26px] text-pretty text-ink-soft">
+                  <p className="mt-3 text-copy text-pretty text-ink-soft">
                     {body}
                   </p>
                 </li>

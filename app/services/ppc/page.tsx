@@ -165,12 +165,26 @@ const adTypes = [
  * la misma curva a cualquier ancho. Por debajo de 900px no caben sobre el
  * texto y pasan a una fila centrada bajo la lista.
  */
+/**
+ * Las cinco chapas del panel, con la posicion del Figma y **el sentido de giro
+ * del WordPress**.
+ *
+ * En el sitio viejo giraban al hacer scroll: Elementor las llevaba con
+ * `motion_fx_rotateZ_effect` activo y `motion_fx_motion_fx_scrolling`, y tres
+ * de las cinco —Instagram, Google y Facebook— con
+ * `motion_fx_rotateZ_direction: "negative"`. Sacado del `_elementor_data` del
+ * backup, no reconstruido a ojo: los archivos alli se llaman
+ * `Social-Media-Ads-{Google,Facebook,Instagram,Linkedin,TikTok}.svg`.
+ *
+ * Que no giren todas en el mismo sentido es lo que evita que el grupo se lea
+ * como un engranaje. Se conserva.
+ */
 const chips = [
-  { src: "/figma/ppc/chip-google.svg", size: 86, left: "74.92%", top: "11.75%", w: "6.57%" },
+  { src: "/figma/ppc/chip-google.svg", size: 86, left: "74.92%", top: "11.75%", w: "6.57%", ccw: true },
   { src: "/figma/ppc/chip-tiktok.svg", size: 70, left: "83.18%", top: "18.36%", w: "5.40%" },
   { src: "/figma/ppc/chip-linkedin.svg", size: 96, left: "59.58%", top: "32.18%", w: "7.38%" },
-  { src: "/figma/ppc/chip-instagram.svg", size: 84, left: "67.51%", top: "39.43%", w: "6.45%" },
-  { src: "/figma/ppc/chip-facebook.svg", size: 92, left: "53.33%", top: "62.67%", w: "7.08%" },
+  { src: "/figma/ppc/chip-instagram.svg", size: 84, left: "67.51%", top: "39.43%", w: "6.45%", ccw: true },
+  { src: "/figma/ppc/chip-facebook.svg", size: 92, left: "53.33%", top: "62.67%", w: "7.08%", ccw: true },
 ];
 
 const benefits = [
@@ -201,8 +215,13 @@ const benefits = [
 ];
 
 /**
- * Como en Email Marketing y SEO: el Figma escribe las siete preguntas y
- * desarrolla solo la que dibuja abierta. Las otras seis van marcadas.
+ * Recuperado del backup del WordPress (`.wpress` de agosto de 2026, tabla
+ * `posts`, pagina `ppc`). El Figma escribe las siete preguntas y desarrolla
+ * solo la que dibuja abierta; las otras seis estuvieron marcadas como
+ * pendientes hasta que se abrio el backup, que las tenia escritas. Es el mismo
+ * copy: el archivo de Figma reutilizaba el texto del sitio vivo.
+ *
+ * **Texto intacto**, como con los articulos. No se ha reescrito nada.
  *
  * "How does PPC work?" va primera porque es la que el archivo dibuja abierta,
  * aunque en el orden de capas esté al final.
@@ -212,12 +231,30 @@ const faqs: FaqItem[] = [
     q: "How does PPC work?",
     a: "In a PPC campaign, advertisers bid on specific keywords, and their ads are displayed when users search for those keywords. Advertisers pay a fee only when their ad is clicked.",
   },
-  { q: "What platforms support PPC advertising?" },
-  { q: "How can PPC benefit my business?" },
-  { q: "Do I have control over my PPC budget?" },
-  { q: "How do I choose the right keywords for my PPC campaign?" },
-  { q: "How do you measure the success of a PPC campaign?" },
-  { q: "What ongoing management is required for a PPC campaign?" },
+  {
+    q: "What platforms support PPC advertising?",
+    a: "PPC advertising is widely supported on platforms such as Google Ads, Facebook Ads, Instagram Ads, LinkedIn Ads, and more.",
+  },
+  {
+    q: "How can PPC benefit my business?",
+    a: "PPC offers immediate visibility, precise audience targeting, and measurable results. It\u2019s an effective way to drive traffic, generate leads, and increase conversions.",
+  },
+  {
+    q: "Do I have control over my PPC budget?",
+    a: "Yes, advertisers have full control over their PPC budget. You can set a daily or monthly budget, and once it\u2019s reached, your ads will no longer appear until the next budget cycle.",
+  },
+  {
+    q: "How do I choose the right keywords for my PPC campaign?",
+    a: "Keyword selection involves identifying terms relevant to your business. Comprehensive keyword research, considering search volume and relevance, is crucial for a successful PPC campaign.",
+  },
+  {
+    q: "How do you measure the success of a PPC campaign?",
+    a: "Success is measured through key performance indicators (KPIs) like click-through rate (CTR), conversion rate, and return on investment (ROI). Detailed analytics provide insights into campaign performance.",
+  },
+  {
+    q: "What ongoing management is required for a PPC campaign?",
+    a: "Ongoing management includes monitoring campaign performance, adjusting bids, refining ad copy, and staying updated on industry trends. Regular optimization ensures sustained success.",
+  },
 ];
 
 export default function PpcPage() {
@@ -285,7 +322,7 @@ export default function PpcPage() {
           <div className="grid items-center gap-12 min-[900px]:grid-cols-[minmax(0,601px)_minmax(0,1fr)] min-[900px]:gap-8">
             <div>
               <h2 className={h2Big}>Need a Paid Ads Agency to Boost ROI?</h2>
-              <p className="mt-6 text-[1rem] leading-[26px] text-pretty text-ink-soft">
+              <p className="mt-6 text-copy text-pretty text-ink-soft">
                 Ready to reach new customers and supercharge your business? Paid
                 advertising is the way to go, but it&rsquo;s not just about
                 spending money. You need a friendly, results-driven agency that
@@ -297,7 +334,7 @@ export default function PpcPage() {
                 {highlights.map((h) => (
                   <li key={h} className="flex items-start gap-3">
                     <CheckIcon className="mt-1 size-4 shrink-0 text-violet" />
-                    <span className="text-[1rem] leading-6 text-ink">{h}</span>
+                    <span className="text-ui text-ink">{h}</span>
                   </li>
                 ))}
               </ul>
@@ -325,14 +362,14 @@ export default function PpcPage() {
               <h2 className={h2Big}>
                 Skilled Paid Ads Control Delivered by Online Advertising Pros
               </h2>
-              <p className="mt-8 max-w-[601px] text-[1rem] leading-[26px] text-pretty text-ink-soft">
+              <p className="mt-8 max-w-[601px] text-copy text-pretty text-ink-soft">
                 We believe in promoting your message across different channels
                 and optimizing for conversions. After all, we&rsquo;ve done it
                 time and time again.
               </p>
               {/* El Figma escribe "matters most- whether", con guion corto
                   pegado. Es puntuación rota, no decisión de diseño. */}
-              <p className="mt-6 max-w-[601px] text-[1rem] leading-[26px] text-pretty text-ink-soft">
+              <p className="mt-6 max-w-[601px] text-copy text-pretty text-ink-soft">
                 We help you get found when and where it matters most &mdash;
                 whether that&rsquo;s on Google, Facebook, TikTok, LinkedIn, or any
                 other channel. Our paid advertising agency offers a variety of
@@ -375,7 +412,7 @@ export default function PpcPage() {
                   className="h-12 w-auto self-start"
                 />
                 <h3 className="text-h3 text-ink">{c.title}</h3>
-                <p className="text-[1rem] leading-[26px] text-pretty text-ink-soft">
+                <p className="text-copy text-pretty text-ink-soft">
                   {c.body}
                 </p>
               </li>
@@ -390,20 +427,20 @@ export default function PpcPage() {
               <h2 className="text-display text-balance text-white">
                 What Is Paid Advertising and How Does It Work?
               </h2>
-              <p className="mt-10 text-[1rem] leading-[26px] text-pretty text-white/85">
+              <p className="mt-10 text-copy text-pretty text-white/85">
                 Paid advertising is when businesses pay to put their ads on
                 platforms like Google, Facebook, Instagram, and LinkedIn.
                 It&rsquo;s a powerful online marketing method. Using services like
                 PPC campaign management, businesses can place ads strategically to
                 find the right audience.
               </p>
-              <p className="mt-6 text-[1rem] leading-[26px] text-pretty text-white/85">
+              <p className="mt-6 text-copy text-pretty text-white/85">
                 When someone clicks on your ad, they go to your website or a
                 special page to learn more. Paid advertising lets you target your
                 ideal customer very precisely, making it more likely they&rsquo;ll
                 become a paying customer.
               </p>
-              <p className="mt-6 text-[1rem] leading-[26px] text-pretty text-white/85">
+              <p className="mt-6 text-copy text-pretty text-white/85">
                 While paid advertising helps get new customers, remember,
                 it&rsquo;s just part of the whole picture. A successful marketing
                 strategy also includes other things like SEO, content marketing,
@@ -439,12 +476,12 @@ export default function PpcPage() {
                 <span className="h-px flex-1 bg-violet/60" />
               </div>
 
-              <p className="mt-8 text-[1rem] leading-[26px] text-pretty text-ink-soft">
+              <p className="mt-8 text-copy text-pretty text-ink-soft">
                 We will help you decide which type of paid ads will be best for
                 your business, based on your goals, target audience, and budget,
                 but it doesn&rsquo;t hurt to know the basics.
               </p>
-              <p className="mt-6 text-[1rem] leading-[26px] text-ink-soft">
+              <p className="mt-6 text-copy text-ink-soft">
                 The most common types are:
               </p>
 
@@ -457,7 +494,7 @@ export default function PpcPage() {
                     >
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <span className="text-[1rem] leading-6 font-medium text-ink-soft">
+                    <span className="text-ui font-medium text-ink-soft">
                       {t}
                     </span>
                   </li>
@@ -493,7 +530,9 @@ export default function PpcPage() {
                     width={c.size}
                     height={c.size}
                     loading="lazy"
-                    className="h-auto w-14 min-[900px]:w-full"
+                    className={`ppc-chip h-auto w-14 min-[900px]:w-full${
+                      c.ccw ? " ppc-chip--ccw" : ""
+                    }`}
                   />
                 </li>
               ))}
@@ -538,7 +577,7 @@ export default function PpcPage() {
                   className="size-[133px]"
                 />
                 <h3 className="mt-4 text-h3 text-ink">{b.title}</h3>
-                <p className="mt-4 text-[1rem] leading-[26px] text-pretty text-ink-soft">
+                <p className="mt-4 text-copy text-pretty text-ink-soft">
                   {b.body}
                 </p>
               </li>
@@ -549,7 +588,7 @@ export default function PpcPage() {
         {/* --- FAQ ----------------------------------------------------- */}
         <section className={`${wrap} pb-16 lg:pb-24`}>
           <h2 className={`text-center ${h2Class}`}>Frequently Asked Questions</h2>
-          <p className="mx-auto mt-5 max-w-[40em] text-center text-[1rem] leading-6 text-pretty text-ink-soft">
+          <p className="mx-auto mt-5 max-w-[40em] text-center text-ui text-pretty text-ink-soft">
             If you have any questions that aren&rsquo;t listed below, feel free to
             schedule a call to speak with someone from our team.
           </p>

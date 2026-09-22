@@ -101,7 +101,7 @@ export function NavDropdown({
           if (e.detail === 0) setOpen((v) => !v);
           else if (!open) setOpen(true);
         }}
-        className="inline-flex min-h-[44px] items-center gap-1.5 text-[1rem] leading-6 text-ink-soft transition-colors hover:text-ink-black focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
+        className="inline-flex min-h-[44px] items-center gap-1.5 text-ui text-ink-soft transition-colors hover:text-ink-black focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
       >
         {label}
         <svg
@@ -132,7 +132,7 @@ export function NavDropdown({
               <Link
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="flex min-h-[44px] items-center rounded-sm px-3 text-[1rem] leading-6 text-ink-soft transition-colors hover:bg-paper-alt hover:text-ink-black focus-visible:outline-[3px] focus-visible:outline-offset-[-3px] focus-visible:outline-violet"
+                className="flex min-h-[44px] items-center rounded-sm px-3 text-ui text-ink-soft transition-colors hover:bg-paper-alt hover:text-ink-black focus-visible:outline-[3px] focus-visible:outline-offset-[-3px] focus-visible:outline-violet"
               >
                 {item.label}
               </Link>

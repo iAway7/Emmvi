@@ -74,7 +74,7 @@ function CookiePreferences() {
   return (
     <button
       type="button"
-      className="cky-banner-element inline-flex min-h-[44px] items-center text-left text-[1rem] text-ink-soft transition-colors hover:text-ink focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet lg:min-h-8"
+      className="cky-banner-element inline-flex min-h-[44px] items-center text-left text-ui text-ink-soft transition-colors hover:text-ink focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet lg:min-h-8"
     >
       Cookie preferences
     </button>
@@ -102,7 +102,7 @@ export function SiteFooter() {
 
           {columns.map((col) => (
             <nav key={col.title} aria-label={col.title}>
-              <h2 className="text-[1rem] font-semibold leading-6 text-ink">
+              <h2 className="text-ui font-semibold text-ink">
                 {col.title}
               </h2>
               <ul className="mt-2">
@@ -110,7 +110,7 @@ export function SiteFooter() {
                   <li key={l.label}>
                     <a
                       href={l.href}
-                      className="inline-flex min-h-[44px] items-center text-[1rem] text-ink-soft transition-colors hover:text-ink focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet lg:min-h-8"
+                      className="inline-flex min-h-[44px] items-center text-ui text-ink-soft transition-colors hover:text-ink focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet lg:min-h-8"
                     >
                       {l.label}
                     </a>

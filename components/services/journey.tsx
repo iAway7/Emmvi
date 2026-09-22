@@ -120,7 +120,7 @@ export function Journey() {
               </div>
             </div>
 
-            <p className="mt-6 max-w-[411px] text-[1rem] leading-[26px] text-pretty text-ink-soft min-[900px]:text-center">
+            <p className="mt-6 max-w-[411px] text-copy text-pretty text-ink-soft min-[900px]:text-center">
               {body}
             </p>
 

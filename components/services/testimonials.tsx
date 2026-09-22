@@ -100,7 +100,7 @@ export function Testimonials() {
             className="w-[86%] shrink-0 snap-center min-[900px]:w-auto"
           >
             <figure className="flex h-full flex-col rounded-md border border-line bg-paper-panel p-8">
-              <blockquote className="flex-1 text-[1rem] leading-[26px] text-pretty text-ink-soft">
+              <blockquote className="flex-1 text-copy text-pretty text-ink-soft">
                 {t.quote}
               </blockquote>
               <figcaption className="mt-6 flex items-center gap-3">

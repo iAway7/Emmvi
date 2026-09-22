@@ -87,16 +87,36 @@ const services = [
   },
 ];
 
-/** El Figma solo desarrolla la primera. Las otras tres se marcan. */
+/**
+ * Recuperado del backup del WordPress (`.wpress` de agosto de 2026, tabla
+ * `posts`, pagina `seo`). El Figma solo desarrollaba la primera; las demas
+ * estuvieron marcadas como pendientes hasta que se abrio el backup, que las
+ * tenia escritas enteras. Es el mismo copy: el archivo de Figma reutilizaba el
+ * texto del sitio vivo.
+ *
+ * **Texto intacto**, como con los articulos. No se ha reescrito nada.
+ */
 const packageTabs: PackageTab[] = [
   {
     title: "Website Audit",
     heading: "Website Audit Services",
     body: "At Emmvi, our first step in enhancing your online presence is to conduct a comprehensive website audit. This audit involves a meticulous evaluation of every vital aspect of your website to uncover potential issues that could impact its performance, user experience, and search engine ranking. Our goal is to help you identify and rectify issues like broken links, slow loading times, duplicate content, subpar design, low-quality backlinks, and more. We're here to provide you with expert recommendations and best practices that will elevate your website's SEO, user-friendliness, and conversion rates.",
   },
-  { title: "Keyword Research" },
-  { title: "On-page Optimization" },
-  { title: "Off-page Optimization" },
+  {
+    title: "Keyword Research",
+    heading: "Keyword Research Service",
+    body: "At Emmvi, our team of SEO experts is dedicated to elevating your online presence. We employ a range of advanced tools, including Google Ads Keyword Planner, Ahrefs Keyword Generator, and cutting-edge AI-driven keyword research instruments to unearth the perfect keywords for your website, content, or online marketing initiatives. Keywords are the building blocks of online searches\u2014words and phrases people use to discover information, products, or services on the internet. By strategically targeting the most relevant keywords, you can amplify your visibility, drive more traffic, and increase conversions on major search engines such as Google, Bing, YouTube, Amazon, and beyond. Unlock the potential of your digital presence with our comprehensive keyword research services.",
+  },
+  {
+    title: "On-page Optimization",
+    heading: "On-page Optimization Service",
+    body: "At Emmvi, our dedicated on-page SEO experts are here to elevate your web presence. We specialize in enhancing the quality and relevance of your web pages to ensure they cater to both users and search engines. On-page optimization is a meticulous process that involves fine-tuning various elements on your web pages, including content, HTML code, title tags, meta descriptions, headings, images, links, and more. By optimizing these elements, you can significantly improve your website\u2019s usability, performance, and search engine ranking. Our goal is to enhance your online visibility and provide users with a seamless experience while boosting your presence in search results.",
+  },
+  {
+    title: "Off-page Optimization",
+    heading: "Off-page Optimization Service",
+    body: "Emmvi\u2019s off-page optimization boosts your website\u2019s authority and trust by acquiring links, mentions, reviews, and signals from reputable sources. Actions include quality backlink building, brand awareness, audience-focused content, and maintaining NAP consistency.",
+  },
 ];
 
 const steps = [
@@ -112,17 +132,39 @@ const steps = [
   "Preparation of Essential Content of All Types",
 ];
 
-/** Igual que en Email Marketing: el Figma escribe las cinco preguntas y solo
- *  una respuesta. Las otras cuatro van marcadas. */
+/**
+ * Recuperado del backup del WordPress (`.wpress` de agosto de 2026, tabla
+ * `posts`, pagina `seo`). El Figma solo desarrollaba la primera; las demas
+ * estuvieron marcadas como pendientes hasta que se abrio el backup, que las
+ * tenia escritas enteras. Es el mismo copy: el archivo de Figma reutilizaba el
+ * texto del sitio vivo.
+ *
+ * **Texto intacto**, como con los articulos. No se ha reescrito nada.
+ */
+/** "Do you guarantee the #1 position?" responde que no, y esa la firma Emmvi
+ *  hoy igual que entonces: es de las pocas del posicionamiento viejo que pasa
+ *  el filtro de PRODUCT.md tal cual. */
 const faqs: FaqItem[] = [
   {
     q: "What is SEO, and why do I need it?",
     a: "SEO, or Search Engine Optimization, is the process of improving your website's visibility in search engine results. It's essential for driving organic traffic, increasing online presence, and ultimately boosting business success.",
   },
-  { q: "How long does it take to see SEO results?" },
-  { q: "What is link building, and why is it essential for SEO?" },
-  { q: "Do you guarantee the #1 position in search results?" },
-  { q: "What reporting and analytics do you provide for SEO?" },
+  {
+    q: "How long does it take to see SEO results?",
+    a: "SEO results vary, but improvements can be seen in a few months. However, a comprehensive SEO strategy is an ongoing effort, and long-term benefits are the focus.",
+  },
+  {
+    q: "What is link building, and why is it essential for SEO?",
+    a: "Link building is the process of acquiring quality backlinks from other websites. It\u2019s vital because search engines consider backlinks a vote of confidence, which can improve your website\u2019s authority and rankings.",
+  },
+  {
+    q: "Do you guarantee the #1 position in search results?",
+    a: "We cannot guarantee the #1 position, as SEO depends on various factors, including competition and algorithm changes. Our aim is to improve your rankings and visibility.",
+  },
+  {
+    q: "What reporting and analytics do you provide for SEO?",
+    a: "We provide detailed monthly reports that include keyword ranking, traffic analytics, backlink progress, and a summary of the work performed. This transparency helps you track your SEO performance.",
+  },
 ];
 
 export default function SeoPage() {
@@ -239,7 +281,7 @@ export default function SeoPage() {
             <h2 className={`mx-auto mt-6 max-w-[868px] ${h2Class}`}>
               What is included in our SEO package?
             </h2>
-            <p className="mx-auto mt-5 max-w-[868px] text-[1rem] leading-[26px] text-pretty text-ink-soft">
+            <p className="mx-auto mt-5 max-w-[868px] text-copy text-pretty text-ink-soft">
               When you join forces with Emmvi, we&rsquo;ll enhance your
               website&rsquo;s visibility, drive traffic, and supercharge
               conversions. Our services are crafted to optimize your website and
@@ -257,7 +299,7 @@ export default function SeoPage() {
           <h2 className={`mx-auto max-w-[12em] text-center ${h2Class}`}>
             Steps in Website Search Optimization
           </h2>
-          <p className="mt-5 text-center text-[1rem] leading-6 text-ink-soft">
+          <p className="mt-5 text-center text-ui text-ink-soft">
             Unlocking Search Optimization Success
           </p>
 
@@ -302,7 +344,7 @@ export default function SeoPage() {
               <p aria-hidden="true" className="text-[8rem] leading-[0.4] font-extrabold text-violet">
                 &ldquo;
               </p>
-              <blockquote className="mt-4 text-[1rem] leading-[26px] text-pretty text-ink-soft">
+              <blockquote className="mt-4 text-copy text-pretty text-ink-soft">
                 Gustavo and Nico do great work. I&rsquo;ve been really happy with
                 multiple websites they&rsquo;ve built for me. They have a great
                 eye for design and a strong focus on user experience, making sure
@@ -339,7 +381,7 @@ export default function SeoPage() {
         {/* --- FAQ ----------------------------------------------------- */}
         <section className={`${wrap} pb-16 lg:pb-24`}>
           <h2 className={`text-center ${h2Class}`}>Frequently Asked Questions</h2>
-          <p className="mx-auto mt-5 max-w-[40em] text-center text-[1rem] leading-6 text-pretty text-ink-soft">
+          <p className="mx-auto mt-5 max-w-[40em] text-center text-ui text-pretty text-ink-soft">
             If you have any questions that aren&rsquo;t listed below, feel free to
             schedule a call to speak with someone from our team.
           </p>

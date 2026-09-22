@@ -14,7 +14,7 @@ type Variant = "primary" | "ghost" | "outline" | "light";
  */
 const base =
   "inline-flex h-12 items-center justify-center gap-2.5 rounded-sm border px-6 " +
-  "text-[1rem] font-medium leading-6 transition-colors duration-150 " +
+  "text-ui font-medium transition-colors duration-150 " +
   "focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet";
 
 /**

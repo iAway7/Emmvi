@@ -323,7 +323,7 @@ export default function Home() {
                     sizes="(min-width: 768px) 30rem, 90vw"
                   />
                   <h3 className="text-h3 text-balance text-ink">{s.title}</h3>
-                  <p className="text-[1rem] leading-[26px] tracking-[-0.2px] text-pretty text-ink-soft">
+                  <p className="text-copy tracking-[-0.2px] text-pretty text-ink-soft">
                     {s.body}
                   </p>
                 </article>
@@ -379,7 +379,7 @@ export default function Home() {
                     />
                   </div>
                   <h3 className="text-h3 text-balance text-ink">{w.title}</h3>
-                  <p className="flex-1 text-[1rem] leading-[26px] tracking-[-0.2px] text-pretty text-ink-soft">
+                  <p className="flex-1 text-copy tracking-[-0.2px] text-pretty text-ink-soft">
                     {w.body}
                   </p>
                 </article>
@@ -424,7 +424,7 @@ export default function Home() {
                   <h3 className="mt-4 text-h3 text-balance text-ink">
                     {s.title}
                   </h3>
-                  <p className="mt-2 flex-1 text-[1rem] leading-[26px] tracking-[-0.2px] text-pretty text-ink-soft">
+                  <p className="mt-2 flex-1 text-copy tracking-[-0.2px] text-pretty text-ink-soft">
                     {s.body}
                   </p>
                   <ul className="mt-5 flex flex-wrap gap-2">
@@ -512,7 +512,7 @@ export default function Home() {
                   <h3 className="mb-3 text-[1.125rem] font-semibold leading-6 tracking-normal text-ink">
                     {t.title}
                   </h3>
-                  <p className="flex-1 text-[1rem] leading-[26px] tracking-[-0.2px] text-pretty text-ink-soft">
+                  <p className="flex-1 text-copy tracking-[-0.2px] text-pretty text-ink-soft">
                     {t.quote}
                   </p>
                   <cite className="mt-6 flex items-center gap-3 border-t border-line pt-5 not-italic">
@@ -533,7 +533,7 @@ export default function Home() {
                         {t.initials}
                       </span>
                     )}
-                    <span className="text-[1rem] leading-6 tracking-[-0.2px]">
+                    <span className="text-ui tracking-[-0.2px]">
                       <span className="block font-semibold text-ink">
                         {t.name}
                       </span>

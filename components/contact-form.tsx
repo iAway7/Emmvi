@@ -10,10 +10,10 @@ import { FIELD_LIMITS } from "@/lib/contact";
 const initialState: ContactState = { status: "idle", message: "" };
 
 const inputClass =
-  "h-12 w-full rounded-sm border border-line bg-paper px-4 text-[1rem] leading-6 text-ink " +
+  "h-12 w-full rounded-sm border border-line bg-paper px-4 text-ui text-ink " +
   "focus-visible:border-violet focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet";
 
-const labelClass = "mb-2 block text-[1rem] font-medium leading-6 text-ink";
+const labelClass = "mb-2 block text-ui font-medium text-ink";
 
 export function ContactForm() {
   const [state, formAction, isPending] = useActionState(
@@ -58,7 +58,7 @@ export function ContactForm() {
       {state.status === "error" ? (
         <p
           role="alert"
-          className="mb-5 rounded-sm border border-line bg-paper p-4 text-[1rem] leading-6 text-ink"
+          className="mb-5 rounded-sm border border-line bg-paper p-4 text-ui text-ink"
         >
           {state.message}
         </p>
@@ -123,14 +123,14 @@ export function ContactForm() {
           rows={5}
           maxLength={FIELD_LIMITS.message}
           defaultValue={v?.message}
-          className="min-h-[120px] w-full resize-y rounded-sm border border-line bg-paper px-4 py-3 text-[1rem] leading-6 text-ink focus-visible:border-violet focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
+          className="min-h-[120px] w-full resize-y rounded-sm border border-line bg-paper px-4 py-3 text-ui text-ink focus-visible:border-violet focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
         />
       </div>
 
       <button
         type="submit"
         disabled={isPending}
-        className="inline-flex h-12 w-full items-center justify-center rounded-sm bg-ink px-6 text-[1rem] font-medium leading-6 text-paper transition-colors duration-150 hover:bg-ink-black focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet disabled:opacity-70"
+        className="inline-flex h-12 w-full items-center justify-center rounded-sm bg-ink px-6 text-ui font-medium text-paper transition-colors duration-150 hover:bg-ink-black focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet disabled:opacity-70"
       >
         {isPending ? "Sending…" : "Send"}
       </button>

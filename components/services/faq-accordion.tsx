@@ -32,7 +32,7 @@ export function FaqAccordion({ items }: { items: FaqItem[] }) {
           open={i === 0}
           className="group border-b border-line open:mb-2 open:rounded-md open:border open:border-line open:bg-paper"
         >
-          <summary className="flex min-h-[72px] cursor-pointer list-none items-center justify-between gap-6 px-8 text-[1rem] leading-6 font-medium text-ink group-open:pt-6 group-open:text-violet-ink focus-visible:outline-[3px] focus-visible:-outline-offset-2 focus-visible:outline-violet [&::-webkit-details-marker]:hidden">
+          <summary className="flex min-h-[72px] cursor-pointer list-none items-center justify-between gap-6 px-8 text-ui font-medium text-ink group-open:pt-6 group-open:text-violet-ink focus-visible:outline-[3px] focus-visible:-outline-offset-2 focus-visible:outline-violet [&::-webkit-details-marker]:hidden">
             {item.q}
             <span
               aria-hidden="true"
@@ -43,7 +43,7 @@ export function FaqAccordion({ items }: { items: FaqItem[] }) {
             </span>
           </summary>
 
-          <p className="px-8 pt-3 pb-6 text-[1rem] leading-[26px] text-pretty text-ink-soft">
+          <p className="px-8 pt-3 pb-6 text-copy text-pretty text-ink-soft">
             {item.a}
           </p>
         </details>

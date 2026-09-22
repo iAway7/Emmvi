@@ -697,11 +697,31 @@ tamaños entran en el `srcset`.
 
 ## Pendiente en /services/email-marketing
 
-- **Faltan siete respuestas del FAQ.** El Figma solo escribe la primera. Las
-  siete preguntas siguen en el array `faqs` de la página, pero `FaqAccordion`
-  **ya no las pinta**: publicaba "Answer pending. The Figma only writes out the
-  first one." en cursiva, que es una nota de trabajo a la vista del visitante.
-  Escribir la respuesta y quitarla del pendiente es la misma acción.
+**El FAQ ya está completo.** El Figma solo escribía la primera respuesta y
+`FaqAccordion` filtra las que no tienen, así que la página publicaba un FAQ de
+una sola pregunta con el hueco debajo — que es como se veía en pantalla. Las
+siete que faltaban están escritas en el registro de PRODUCT.md, no en el del
+frame, porque son afirmaciones sobre el servicio y hay que poder defenderlas en
+una llamada. Tres decisiones que conviene no deshacer sin pensarlo:
+
+- **"What kind of results can I expect?" no lleva cifra**, y explica por qué no
+  la lleva. Es la pregunta donde la regla de no prometer porcentajes de
+  facturación se juega entera, y el Figma la dibuja esperando justo ese número.
+  Lo que sí se compromete es verificable: los flujos montados y probados, las
+  campañas saliendo, el informe mensual — y que si eso no se mueve a los pocos
+  meses, la conversación la empieza Emmvi.
+- **"Have you worked with brands in my niche?" nombra a los tres clientes
+  reales** —la tienda, el gimnasio y el productor musical— y admite que eso es
+  variedad, no especialidad. Es lo único verificable que hay, y estirar un caso
+  para que encaje se descubre en la primera llamada.
+- Cada respuesta larga cierra en el mecanismo o en el límite, no en el
+  beneficio.
+
+**La primera respuesta sigue siendo la del Figma**, y es la única del bloque en
+el registro viejo: promete *"the perfect solution for you"*, que es el lenguaje
+de consultora que PRODUCT.md lista como anti-referencia. Se dejó porque es
+contenido del archivo y no un hueco. Reescribirla es un cambio de tono
+deliberado, no una corrección — pendiente de decidir.
 - **La banda de cifras ya no está.** Las cuatro del Figma (75+, 32.3M€, 6.7X,
   4.9/5) no están medidas. Las etiquetas quedan anotadas en el código para
   cuando haya números con respaldo.

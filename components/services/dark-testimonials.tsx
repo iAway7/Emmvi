@@ -50,7 +50,7 @@ export function DarkTestimonials() {
             >
               &ldquo;
             </p>
-            <blockquote className="mt-4 flex-1 text-[1rem] leading-[26px] text-pretty text-white/80">
+            <blockquote className="mt-4 flex-1 text-copy text-pretty text-white/80">
               {t.quote}
             </blockquote>
             <figcaption className="mt-6 flex items-center gap-3">

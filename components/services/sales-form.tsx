@@ -37,7 +37,7 @@ const initialState: ContactState = { status: "idle", message: "" };
  * cual sea el largo de la etiqueta.
  */
 const fieldClass =
-  "mt-auto h-12 w-full rounded-sm border border-line bg-paper px-4 text-[1rem] leading-6 text-ink " +
+  "mt-auto h-12 w-full rounded-sm border border-line bg-paper px-4 text-ui text-ink " +
   "focus-visible:border-violet focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet";
 
 const labelClass = "mb-2 block text-small leading-5 text-ink-soft";
@@ -103,7 +103,7 @@ export function SalesForm() {
       {state.status === "error" ? (
         <p
           role="alert"
-          className="mb-5 rounded-sm border border-line bg-paper-alt p-4 text-[1rem] leading-6 text-ink"
+          className="mb-5 rounded-sm border border-line bg-paper-alt p-4 text-ui text-ink"
         >
           {state.message}
         </p>
@@ -246,7 +246,7 @@ export function SalesForm() {
             rows={4}
             maxLength={FIELD_LIMITS.message}
             defaultValue={v?.message}
-            className="min-h-[104px] w-full resize-y rounded-sm border border-line bg-paper px-4 py-3 text-[1rem] leading-6 text-ink focus-visible:border-violet focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
+            className="min-h-[104px] w-full resize-y rounded-sm border border-line bg-paper px-4 py-3 text-ui text-ink focus-visible:border-violet focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
           />
         </div>
       </div>
@@ -254,7 +254,7 @@ export function SalesForm() {
       <button
         type="submit"
         disabled={isPending}
-        className="mt-6 inline-flex h-12 items-center justify-center rounded-sm bg-ink px-6 text-[1rem] font-medium leading-6 text-paper transition-colors duration-150 hover:bg-ink-black focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet disabled:opacity-70"
+        className="mt-6 inline-flex h-12 items-center justify-center rounded-sm bg-ink px-6 text-ui font-medium text-paper transition-colors duration-150 hover:bg-ink-black focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet disabled:opacity-70"
       >
         {isPending ? "Sending…" : "Submit"}
       </button>

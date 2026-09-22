@@ -54,10 +54,10 @@ export function AfterYouSend() {
       <ul className="mt-7 flex list-none flex-col gap-6">
         {points.map((point) => (
           <li key={point.title}>
-            <p className="text-[1rem] leading-[26px] font-bold text-pretty text-ink">
+            <p className="text-copy font-bold text-pretty text-ink">
               {point.title}
             </p>
-            <p className="mt-1.5 text-[1rem] leading-[26px] text-pretty text-ink-soft">
+            <p className="mt-1.5 text-copy text-pretty text-ink-soft">
               {point.body}
             </p>
           </li>

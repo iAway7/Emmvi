@@ -25,7 +25,7 @@ export function ReplyProof() {
           <span className="mb-1 block text-small text-white/62">
             Quote request · your website
           </span>
-          <p className="text-[1rem] leading-6 tracking-[-0.2px] text-white">
+          <p className="text-ui tracking-[-0.2px] text-white">
             Hi, looking for a price on an EV charger for a semi-detached,
             driveway parking.
           </p>
@@ -37,7 +37,7 @@ export function ReplyProof() {
 
         <div className="reply-proof__reply ml-auto max-w-[88%] rounded-[18px] rounded-br-[6px] bg-violet px-4 py-3.5">
           <span className="mb-1 block text-small text-white">You</span>
-          <p className="text-[1rem] leading-6 tracking-[-0.2px] text-white">
+          <p className="text-ui tracking-[-0.2px] text-white">
             Thanks Mark, got your request. I&rsquo;ve booked you in for a survey
             call tomorrow at 9am. Reply CHANGE if that doesn&rsquo;t suit.
           </p>

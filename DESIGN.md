@@ -56,7 +56,24 @@ móvil — desbordaba. Los extremos de cada `clamp()` respetan el valor del Figm
 | `text-h3` | 24px | 1.3 | −0.021em | 700 |
 | `text-lede` | 20 → 24px | 1.417 | −0.008em | 400 |
 | `text-body` | 18px | 1.611 | — | 400 |
+| `text-copy` | 16px | 1.625 (26px) | — | — |
+| `text-ui` | 16px | 1.5 (24px) | — | — |
 | `text-small` | 14px | 1.43 | — | 400 |
+
+**Dos densidades del mismo cuerpo de 16px.** La escala tenía un solo
+interlineado por tamaño, y las páginas necesitaban los dos: se habían resuelto
+con **72 `text-[1rem]` sueltos repartidos en 29 archivos**, 38 con 26px de
+interlineado y 34 con 24px. No era un tamaño que faltara, eran dos densidades.
+
+- `text-copy` (16/26) — texto de lectura en tarjetas y párrafos cortos.
+- `text-ui` (16/24) — nav, botones, etiquetas, chips, enlaces del pie.
+
+Ninguno fija peso, para que compongan con `font-medium` / `font-semibold`.
+`text-eyebrow` tiene las mismas métricas que `text-ui` pero lleva el peso 500
+dentro; se conserva por semántica, pero para 16px normal va `text-ui`.
+
+Quedan cinco `text-[1rem]` sueltos y son correctos: interlineados únicos de 22,
+28 y 32px, y el glifo `+` del acordeón.
 
 `text-wrap: balance` en h1–h3, `pretty` en prosa larga. Cuerpo tope 65–75ch.
 

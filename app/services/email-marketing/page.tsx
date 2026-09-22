@@ -92,20 +92,62 @@ const outcomes = [
    Cuando haya cifras medidas, las etiquetas eran: Trusted Clients, Generated
    through emails, Average ROI, Customer Satisfaction. */
 
-/** El Figma solo escribe la primera respuesta. Las otras siete son preguntas
- *  sin contenido en el archivo y se marcan como tal. */
+/**
+ * El Figma solo escribe la primera respuesta; las otras siete estaban sin
+ * contenido y el acordeon las filtraba, asi que la pagina publicaba un FAQ de
+ * una sola pregunta con el hueco debajo.
+ *
+ * Las siete se escriben aqui en el registro de PRODUCT.md, no en el del frame:
+ * son afirmaciones sobre el servicio y tienen que poder defenderse en una
+ * llamada. De ahi tres decisiones que conviene no deshacer sin pensarlo:
+ *
+ * - **"What kind of results can I expect?" no lleva cifra**, y dice por que.
+ *   Es la pregunta donde la regla de no prometer porcentajes de facturacion se
+ *   juega entera; el Figma la dibuja esperando el numero que aqui no va.
+ * - **"Have you worked with brands in my niche?" nombra los tres clientes
+ *   reales** —la tienda, el gimnasio, el productor musical— y admite que eso
+ *   es variedad, no especialidad. Es lo unico verificable que hay.
+ * - Cada respuesta larga termina en el mecanismo o en el limite, no en el
+ *   beneficio.
+ *
+ * La primera sigue siendo la del Figma, que promete "the perfect solution for
+ * you" y es el lenguaje de consultora que PRODUCT.md lista como
+ * anti-referencia. Se deja porque es contenido del archivo y no un hueco; si
+ * se reescribe, es la unica del bloque que cambia de registro.
+ */
 const faqs: FaqItem[] = [
   {
     q: "Can my store benefit from email marketing?",
     a: "We focus on helping all types of online stores reach their full potential through email marketing. If you're looking for an effective way to engage your audience, increase conversion rates, and generate more sales, our service can be the perfect solution for you.",
   },
-  { q: "What are flows or automations?" },
-  { q: "What do your services include?" },
-  { q: "Will you consider the brand's branding?" },
-  { q: "Have you worked with brands in my niche?" },
-  { q: "What kind of results can I expect?" },
-  { q: "What are newsletters or email campaigns?" },
-  { q: "Is there any type of reporting or tracking?" },
+  {
+    q: "What are flows or automations?",
+    a: "An email that sends itself when something happens, instead of when someone remembers. A cart gets abandoned, a first order arrives, three months go by with no opens — each of those can start a sequence. You write it once and it keeps running, including on the days nobody is at a desk.",
+  },
+  {
+    q: "What do your services include?",
+    a: "Strategy, the writing, the design, the build inside your email platform, and the reporting afterwards. In practice that is the automated flows, the campaigns you send by hand, the templates they use, how the list is segmented, and a monthly read of what actually happened. If some of it already exists we work with what is there instead of starting again.",
+  },
+  {
+    q: "Will you consider the brand's branding?",
+    a: "Yes. If you have guidelines we follow them, and if you do not we work from what your site and your products already look like. An email that does not look like the shop it came from gets deleted by people, which is a worse problem than being caught by a spam filter.",
+  },
+  {
+    q: "Have you worked with brands in my niche?",
+    a: "Maybe, and we will tell you straight on the call rather than stretch a case to fit. So far this has been built for an online store, a local gym and a music producer, which is a range rather than a speciality. What carries across is the mechanism, not the subject matter — and where it does not carry across, you should hear that before you pay for anything.",
+  },
+  {
+    q: "What kind of results can I expect?",
+    a: "No number from us before we have seen your list, your product and your margins. Anyone who gives you one at this stage is guessing. What we will commit to is what gets built: the flows live and tested, the campaigns going out on a schedule, and a monthly report showing opens, clicks, revenue attributed to email and what changed. If those are not moving after a few months, that is a conversation we start, not one you have to.",
+  },
+  {
+    q: "What are newsletters or email campaigns?",
+    a: "The ones you decide to send: a launch, an offer, a seasonal message, something worth telling. They go out to a list, or a segment of it, on a date you pick. Flows run themselves off what a customer does; campaigns have a person deciding. Most stores want both, and it is usually the flows that earn quietly in the background.",
+  },
+  {
+    q: "Is there any type of reporting or tracking?",
+    a: "Yes, and it is the part that usually gets skipped. Every month you get what was sent, what was opened and clicked, what was bought as a result, and which flows are paying for themselves — written in plain language, not a platform export forwarded to you. You keep your own access to the platform too, so nothing we report is something you cannot go and check.",
+  },
 ];
 
 export default function EmailMarketingPage() {
@@ -170,7 +212,7 @@ export default function EmailMarketingPage() {
               <h2 className={`max-w-[601px] ${h2Class}`}>
                 Capture, sell, and retain customers.
               </h2>
-              <p className="max-w-[34em] text-[1rem] leading-[26px] text-pretty text-ink-soft min-[900px]:pt-3">
+              <p className="max-w-[34em] text-copy text-pretty text-ink-soft min-[900px]:pt-3">
                 Transform every website visit into loyal, repeat customers. With
                 our proven methodology, you can boost your store&rsquo;s sales and
                 achieve sustainable, long-term growth.
@@ -194,7 +236,7 @@ export default function EmailMarketingPage() {
                   <h3 className="mt-6 text-[1.25rem] font-bold tracking-[-0.02em] text-ink">
                     {p.title}
                   </h3>
-                  <p className="mt-3 text-[1rem] leading-[26px] text-pretty text-ink-soft">
+                  <p className="mt-3 text-copy text-pretty text-ink-soft">
                     {p.body}
                   </p>
                 </li>
@@ -210,13 +252,13 @@ export default function EmailMarketingPage() {
               <h2 className={`max-w-[601px] ${h2Class}`}>
                 Maximize Customer Engagement
               </h2>
-              <p className="mt-6 max-w-[34em] text-[1rem] leading-[26px] text-pretty text-ink-soft">
+              <p className="mt-6 max-w-[34em] text-copy text-pretty text-ink-soft">
                 Rising advertising costs make acquiring new customers increasingly
                 expensive. Relying solely on paid traffic leaves your business
                 vulnerable and less profitable, allowing better-funded competitors
                 to outperform you.
               </p>
-              <p className="mt-5 max-w-[34em] text-[1rem] leading-[26px] text-pretty text-ink-soft">
+              <p className="mt-5 max-w-[34em] text-copy text-pretty text-ink-soft">
                 You need a robust customer retention and customer lifetime value
                 (LTV) enhancement system.
               </p>
@@ -225,7 +267,7 @@ export default function EmailMarketingPage() {
                 {outcomes.map((o) => (
                   <li key={o} className="flex items-start gap-3">
                     <CheckIcon className="mt-0.5 size-5 shrink-0 text-violet" />
-                    <span className="text-[1rem] leading-6 text-ink">{o}</span>
+                    <span className="text-ui text-ink">{o}</span>
                   </li>
                 ))}
               </ul>
@@ -252,16 +294,16 @@ export default function EmailMarketingPage() {
             <h2 className={`max-w-[601px] ${h2Class}`}>
               Automate Processes and Scale Your Sales
             </h2>
-            <p className="mt-6 text-[1rem] leading-[26px] text-pretty text-ink-soft">
+            <p className="mt-6 text-copy text-pretty text-ink-soft">
               Imagine being able to send each customer the right message at the
               right moment, entirely personalized based on their relationship with
               your brand.
             </p>
-            <p className="mt-5 text-[1rem] leading-[26px] text-pretty text-ink-soft">
+            <p className="mt-5 text-copy text-pretty text-ink-soft">
               Now, picture being able to send that personalized email
               automatically. What would be the impact on your business?
             </p>
-            <p className="mt-5 text-[1rem] leading-[26px] text-pretty text-ink-soft">
+            <p className="mt-5 text-copy text-pretty text-ink-soft">
               Let the systems work for you, achieving higher productivity, more
               sales, and a solid, scalable growth.
             </p>
@@ -308,14 +350,14 @@ export default function EmailMarketingPage() {
               <h2 className={`mt-4 max-w-[601px] ${h2Class}`}>
                 Here, we address the most common questions:
               </h2>
-              <p className="mt-6 max-w-[34em] text-[1rem] leading-[26px] text-pretty text-ink-soft">
+              <p className="mt-6 max-w-[34em] text-copy text-pretty text-ink-soft">
                 Starting to work with an agency can be a significant improvement,
                 but it involves an important decision. That&rsquo;s why we want to
                 help you make an informed choice. Many of our clients had similar
                 doubts before working with us, which is why we created this
                 section.
               </p>
-              <p className="mt-5 max-w-[34em] text-[1rem] leading-[26px] text-pretty text-ink-soft">
+              <p className="mt-5 max-w-[34em] text-copy text-pretty text-ink-soft">
                 If you have any unanswered questions, don&rsquo;t hesitate to
                 contact us right here. We&rsquo;ll be happy to provide the answers.
               </p>
