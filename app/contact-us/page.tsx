@@ -24,7 +24,7 @@ export const metadata: Metadata = pageMetadata({
   path: "/contact-us",
   title: "Contact",
   description:
-    "Tell us what you are trying to fix, or book a thirty-minute call.",
+    "Tell us what you are trying to fix and get an honest read on it, or book a thirty-minute call. A person reads every enquiry and a person answers it.",
 });
 
 /** Sin tiempos de respuesta: lo que se puede defender es que lo lee alguien,

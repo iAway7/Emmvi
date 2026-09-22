@@ -28,9 +28,9 @@ import { pageMetadata } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
   path: "/services/email-marketing",
-  title: "Email Marketing",
+  title: "Email Marketing and Follow-Up Sequences",
   description:
-    "Our team handles every aspect, ensuring your email campaigns are expertly crafted, timed, and fine-tuned for success.",
+    "Campaigns, follow-up sequences and the automation behind them, set up so the message goes out whether or not anyone remembers to send it.",
   legacy: true,
 });
 

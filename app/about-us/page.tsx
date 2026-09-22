@@ -30,9 +30,11 @@ import { pageMetadata } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
   path: "/about-us",
-  title: "About Us",
+  // Absoluto: la plantilla "%s · Emmvi" dejaria "About Emmvi · Emmvi".
+  title: "About Emmvi — websites and the systems behind them",
+  absoluteTitle: true,
   description:
-    "At emmvi.com, our mission is clear: to provide affordable solutions for entrepreneurs and help them grow without the hassle of dealing with the technical complexities that often accompany business growth.",
+    "Emmvi builds websites and the systems that run behind them, from Valencia and from Argentina. How a project actually runs, and who we work with.",
   legacy: true,
 });
 

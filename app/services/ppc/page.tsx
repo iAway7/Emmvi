@@ -37,9 +37,9 @@ import { pageMetadata } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
   path: "/services/ppc",
-  title: "PPC",
+  title: "PPC Management for Google, Meta and TikTok Ads",
   description:
-    "Unlock the potential of your business with our PPC expertise. Drive targeted traffic, maximize ROI, and experience growth like never before.",
+    "Paid campaigns built, measured and adjusted across Google, Meta, TikTok and LinkedIn. The ad accounts and the data stay yours, whoever runs them.",
   legacy: true,
 });
 

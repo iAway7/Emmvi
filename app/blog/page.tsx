@@ -20,7 +20,7 @@ import { pageMetadata } from "@/lib/site";
  */
 export const metadata: Metadata = pageMetadata({
   path: "/blog",
-  title: "Blog",
+  title: "Notes on Websites, Follow-Up and Automation",
   description:
     "Notes on websites, follow-up and the tools behind them, for people who run the business rather than the marketing.",
 });

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { ArticleSchema } from "@/components/article-schema";
 import { CtaLink } from "@/components/cta-link";
 import { PostBody } from "@/components/post-body";
 import { SiteFooter } from "@/components/site-footer";
@@ -45,6 +46,7 @@ export async function generateMetadata({
     path: `/${slug}`,
     title: post.title,
     description: post.description,
+    article: { publishedTime: post.published },
   });
 }
 
@@ -67,6 +69,7 @@ export default async function PostPage({
       <SiteHeader />
 
       <main className={`${wrap} py-16 lg:py-24`}>
+        <ArticleSchema post={post} />
         <article>
           <Link
             href="/blog/"

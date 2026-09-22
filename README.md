@@ -453,12 +453,14 @@ Quitar `COMING_SOON` publica la home.
 
 **Conviene, pero no bloquea:**
 
-- Las descripciones de las cinco páginas del Figma son las del posicionamiento
-  viejo —"Celebrate startup growth with our SEO expertise"— y es el texto que
-  Google enseña bajo el título. Es el lenguaje de consultora que PRODUCT.md
-  lista como anti-referencia.
-- Los títulos de esas páginas son finos: `PPC · Emmvi` son 11 de los ~60
-  caracteres que Google muestra.
+- ~~Las descripciones de las cinco páginas del Figma~~ **Hecho el 2026-09-22.**
+  Ver *Títulos y descripciones* más abajo.
+- ~~Los títulos de esas páginas son finos~~ **Hecho el 2026-09-22.**
+- **Los `h1` siguen siendo los del posicionamiento viejo**, y pesan más que la
+  descripción: `/services/seo` abre con "Fueling Startup Growth with SEO" y
+  `/about-us` con "Streamlining Entrepreneurial Journeys". Ninguno contiene lo
+  que alguien teclea en el buscador. Cambiarlos toca texto visible de páginas
+  que son réplicas del Figma, así que no se ha hecho sin decidirlo.
 - Decidir `indexLegacyPages` (ver *Buscador y enlaces compartidos*).
 - Dar de alta el dominio en Search Console y enviar el sitemap. **Esto ya se
   puede hacer**: el robots está abierto y el sitemap lleva 28 URLs aunque la
@@ -598,6 +600,49 @@ fragmentos con el texto idéntico carácter a carácter, "TogetherIf" incluido.
   lo que es, sin adornarlo.
 - Decidir si la página entra también en la home. Hoy se llega por la nav, el
   pie y los tres artículos; la home no la enlaza.
+
+## Títulos y descripciones
+
+Repaso del 2026-09-22. Las cinco páginas del Figma llevaban las descripciones
+del posicionamiento viejo, que es **el texto que Google enseña debajo del
+título** en las URLs que conservan historial:
+
+> *"Celebrate startup growth with our SEO expertise. Discover how we can fuel
+> your success and propel your brand to new heights."*
+
+Ahora cada una dice lo que la página entrega, comprobado contra su propio
+contenido antes de escribirlo: la de PPC nombra Google, Meta, TikTok y LinkedIn
+porque son los cinco logos de su banda; la de SEO nombra Local SEO, auditorías y
+link building porque son sus tarjetas de servicio. Una descripción que promete
+algo que la página no cumple sube el rebote y acaba costando posiciones.
+
+Los títulos pasan de 11–23 caracteres a 46–57, dentro de los ~60 que Google
+muestra. `/about-us` va con `absoluteTitle` porque "About Emmvi" más la
+plantilla daría "About Emmvi · Emmvi".
+
+**El blog no se toca.** Las diecisiete descripciones son las del WordPress
+original, ya indexadas, y están en rango salvo tres que pasan de 160 y se
+truncan. Reescribirlas es tocar lo que ya funciona sin saber si mejora.
+
+**Lo que no se ha tocado y es el siguiente escalón: los `h1`.** Ver la lista de
+pendientes de arriba.
+
+## Marcado de artículo
+
+Los diecisiete posts no declaraban nada. Ahora llevan `BlogPosting`
+(`components/article-schema.tsx`) y su Open Graph es `article` con fecha, no
+`website`.
+
+`author` y `publisher` apuntan al `@id` de `OrganizationSchema` en vez de
+repetir sus datos: los dos marcados quedan en el mismo grafo y los artículos los
+firma Emmvi, que es lo que corresponde a textos recuperados sin autor
+atribuible.
+
+`dateModified` es igual a `datePublished` a propósito. La única fecha que se
+conoce es la de publicación de esta versión; inventar una modificación reciente
+para parecer fresco es la clase de afirmación sin respaldo que este sitio no
+hace. `image` solo sale en el artículo que de verdad tiene una —uno de los
+diecisiete—, porque Google comprueba que exista.
 
 ## Pendiente en /contact
 

@@ -27,9 +27,9 @@ import { pageMetadata } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
   path: "/services/seo",
-  title: "SEO Services",
+  title: "SEO Services: Local SEO, Audits and Link Building",
   description:
-    "Celebrate startup growth with our SEO expertise. Discover how we can fuel your success and propel your brand to new heights.",
+    "Local SEO, site audits, keyword research and link building. We tell you what is worth doing on your site and what is not worth paying for.",
   legacy: true,
 });
 

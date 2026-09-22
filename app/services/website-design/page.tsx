@@ -29,9 +29,9 @@ import { pageMetadata } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
   path: "/services/website-design",
-  title: "Website Design",
+  title: "Website Design That Turns Visitors Into Enquiries",
   description:
-    "Our web design expertise transforms your vision into captivating, user-centric digital experiences that leave a lasting impact.",
+    "Design, copy, build and hosting for sites with one job: getting the enquiry. Usually WordPress, sometimes not, depending on what the site has to do.",
   legacy: true,
 });
 

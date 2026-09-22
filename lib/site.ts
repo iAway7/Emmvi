@@ -166,6 +166,12 @@ type PageMeta = {
   description: string;
   /** Una de las cinco pantallas del Figma viejo. Ver `indexLegacyPages`. */
   legacy?: boolean;
+  /**
+   * Solo los articulos del blog. Cambia el tipo de Open Graph de `website` a
+   * `article` y añade la fecha, que es lo que hace que al compartir un enlace
+   * se vea como un articulo fechado y no como una pagina mas del sitio.
+   */
+  article?: { publishedTime: string };
 };
 
 /**
@@ -188,21 +194,25 @@ export function pageMetadata({
   absoluteTitle,
   description,
   legacy,
+  article,
 }: PageMeta): Metadata {
+  const openGraph = {
+    siteName: SITE_NAME,
+    locale: "en_US",
+    url: path,
+    // Al compartir no hay pestana que de contexto, asi que el nombre va
+    // dentro del titulo. Es la misma forma que produce la plantilla.
+    title: absoluteTitle ? title : `${title} · ${SITE_NAME}`,
+    description,
+  };
+
   return {
     title: absoluteTitle ? { absolute: title } : title,
     description,
     alternates: { canonical: path },
-    openGraph: {
-      type: "website",
-      siteName: SITE_NAME,
-      locale: "en_US",
-      url: path,
-      // Al compartir no hay pestana que de contexto, asi que el nombre va
-      // dentro del titulo. Es la misma forma que produce la plantilla.
-      title: absoluteTitle ? title : `${title} · ${SITE_NAME}`,
-      description,
-    },
+    openGraph: article
+      ? { ...openGraph, type: "article" as const, publishedTime: article.publishedTime }
+      : { ...openGraph, type: "website" as const },
     ...(legacy && !indexLegacyPages
       ? // `follow` sigue en true aunque no se indexen: los enlaces internos que
         // llevan a /contact tienen que seguir contando.
