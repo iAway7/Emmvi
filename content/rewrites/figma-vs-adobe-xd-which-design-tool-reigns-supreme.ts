@@ -15,6 +15,7 @@ export const figmaVsXd: Post = {
   description:
     "Adobe put XD into maintenance in 2023 and never came back. What happened, what it means if you still have files in it, and what to use now.",
   lede: "If you are choosing between them in 2026, you are not really choosing. Here is what happened, and what to do if your old files are stuck in XD.",
+  category: "UI Design",
   published: "2026-09-19",
   body: [
     {

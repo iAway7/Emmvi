@@ -159,7 +159,13 @@ Dos reglas que conviene no romper:
 
 El Wayback Machine solo archivó la home (mayo de 2024, título "Emmvi — Digital
 Marketing Agency"): 25 capturas del dominio y ninguna de una página interior.
-El contenido viejo no se recupera de ningún sitio.
+
+**Pero el backup sí las tiene.** Esta sección decía antes que el contenido viejo
+no se recuperaba de ningún sitio, y era falso: el `.wpress` lleva las diecinueve
+páginas del WordPress en la tabla `posts`, con el cuerpo entero —`seo` son 49 811
+caracteres, `ppc` 26 899— además de los diecisiete artículos. Se dio por perdido
+porque el Wayback no las tenía y nadie abrió esa tabla buscando páginas. Ver
+*Lo que salió del backup*, abajo.
 
 Sin destino todavía, y todas indexadas:
 
@@ -197,6 +203,56 @@ llegando gente desde el buscador.
 
 `/privacy-policy/` ya está hecha. Ver *Política de privacidad*, abajo.
 
+### Lo que salió del backup
+
+El `.wpress` (`emmvi-com-20260826-011835`, 557 MB, en *Downloads/Backup SG*) no
+solo trae los artículos: trae **las diecinueve páginas del WordPress con su
+contenido**. El texto vive en `posts.post_content` como HTML ya renderizado por
+Elementor, y el marcado de origen en `postmeta._elementor_data` como JSON.
+
+Esto importa porque **el Figma reutilizaba el copy del sitio vivo**. Los textos
+que las réplicas tenían marcados como pendientes —el Figma solo desarrolla el
+primer elemento de cada bloque— estaban escritos enteros en el backup, palabra
+por palabra. De ahí salieron:
+
+| Dónde faltaba | Qué se recuperó |
+|---|---|
+| `/services/seo` | Los tres cuerpos de pestaña (Keyword Research, On-page, Off-page) y las cuatro respuestas del FAQ |
+| `/services/ppc` | Las seis respuestas del FAQ |
+| `/services/ppc` | El giro de las chapas al hacer scroll (ver abajo) |
+
+Texto intacto, mismo criterio que con los artículos: no se ha reescrito nada.
+
+En `/services/seo`, *"Do you guarantee the #1 position in search results?"*
+responde que **no** se puede garantizar. Es de las pocas líneas del
+posicionamiento viejo que pasa el filtro de PRODUCT.md tal cual, y por eso entra
+sin tocarla.
+
+**El `_elementor_data` guarda también los efectos de movimiento**, que es como se
+recuperó el giro de las chapas de PPC. Las cinco llevaban
+`motion_fx_rotateZ_effect` atado al scroll, y tres de ellas —Google, Instagram y
+Facebook— con `motion_fx_rotateZ_direction: "negative"`. Está reconstruido con
+`animation-timeline: view()`, el mismo mecanismo sin JavaScript que el timeline
+de website-design, con una amplitud corta (±11°).
+
+Hay dos cosas más en el backup que no se han tocado y conviene saber que están:
+una página **Pricing** en borrador (92 KB) y una **get-more-customers** en la
+papelera (86 KB). Si alguna vez hace falta saber qué se cobraba o cómo se
+vendía, están ahí.
+
+#### El scroll y `overflow: hidden`
+
+Las chapas no giraban al principio, y la causa no se parecía al síntoma: el
+panel que las contiene llevaba `overflow-hidden`, y **eso lo convierte en
+contenedor de scroll**. El `view()` de cada chapa se anclaba a ese panel en vez
+de a la página; como el panel no se desplaza, su rango de scroll es cero, el
+ViewTimeline no resolvía (`currentTime` a `null`) y el `transform` se quedaba en
+`none` — sin ningún error en consola.
+
+Se arregla con `overflow-clip`, que recorta igual, radio incluido, sin crear
+contenedor de scroll. **Si alguna animación de scroll deja de funcionar, esto es
+lo primero que hay que mirar**, porque falla en silencio.
+
 ### El blog
 
 **Diecisiete artículos, recuperados del backup del WordPress**, no reescritos.
@@ -211,29 +267,239 @@ publicación originales y las meta descriptions que había escrito RankMath.
 base de datos. Es el motivo de trabajar del backup y no del panel: el panel
 enseña lo que tuvo tráfico, no lo que existe.
 
-Del marcado Gutenberg a los bloques hay un paso de conversión que conserva el
-≥95% del texto en los diecisiete. Lo único reescrito son los enlaces internos:
+Del marcado Gutenberg a los bloques hay un paso de conversión. **Está
+verificado contra el backup, frase a frase: no falta ni una.** El ≥95% que
+decía antes esta línea era una estimación; la medición real da el 100% de las
+791 frases de los diecisiete, y las entradillas salen de las
+`rank_math_description` que había en `postmeta` (16 de 17 las tienen).
+
+#### Lo que sí se perdió: la separación
+
+El conversor se comió **los espacios alrededor de los 345 `<strong>` y los 44
+enlaces, y los 27 `<br>`**. El texto llegó entero, pero se leía pegado:
+
+> usingWordPress · Tools likeFigma,InVision, andMarvelare commonly used · Start
+> a Blog:Regularly publish · Let's Build Smarter TogetherIf you're serious
+
+**Ciento veintiséis uniones así**, repartidas por los diecisiete. Hoy son cero.
+
+Se arregla en `components/post-body.tsx` y no en los datos, porque los
+artículos son contenido restaurado que no se toca y el defecto es del paso de
+conversión, no del texto. La regla mira los dos lados: el fragmento siguiente
+tiene que empezar por letra o cifra —así `$5.45` seguido de `/month` no se
+parte— y el anterior puede acabar en letra, cifra o en un signo de cierre,
+porque el caso más repetido del blog es `<strong>Start a Blog:</strong>` pegado
+a su frase. Una primera versión solo aceptaba letra o cifra a la izquierda y
+dejaba 73 de las 126 sin tocar.
+
+**Dos `<br>` no los ve el renderizador**, porque se perdieron *dentro* de un
+fragmento y para él son una sola cadena. Esos dos se arreglaron en los datos:
+el precio de Bluehost, que quedaba "monthBluehost", y el "Let's Build Smarter
+Together" de Zapier, que era un titulillo con `<br>` detrás y ahora vuelve a
+ser su propio bloque.
+
+La comprobación completa es de tres direcciones y conviene repetirla si alguien
+reconvierte: que no queden uniones pegadas, que ninguna frase del original falte
+en la página, y que ninguna frase de la página falte en el original. Lo único reescrito son los enlaces internos:
 apuntaban a rutas viejas y van al destino actual —`/seo` → `/services/seo`— en vez de encadenar una redirección. Los que
 llevaban a una página retirada se quedan en texto llano, porque un enlace a un
 410 desde dentro de un artículo es un callejón.
 
-Tres de las cinco imágenes que referenciaba el artículo de Webflow vs Wix **no
-están en el backup**: se borraron de la biblioteca después de insertarlas, así
-que ya estaban rotas en el sitio vivo. Sus bloques se quitaron. Las dos que
-sobreviven están en `public/blog/` y llevan texto alternativo escrito a mano,
-porque el original las tenía con `alt` vacío.
+#### La página de artículo
 
-#### Reescrituras
+Reconstruida desde "Single Post" del backup (`elementor_library` ID 2652, la que
+llevaba la condición `include/singular/post`; las otras dos plantillas con
+nombre parecido son contenedores sueltos, no la activa).
+
+Del original vuelven cuatro piezas que no estaban:
+
+- **La portada centrada.** Titular a 4rem con peso 800 sobre 970px, que es
+  exactamente el token `text-display`, con la entradilla y la fecha debajo.
+- **La imagen destacada**, recortada a 16/9.
+- **El índice de contenidos** en columna, pegajoso en escritorio.
+- **"Share the post"** con X y LinkedIn, y **dos artículos relacionados**.
+
+**El índice se calcula en build, no en el navegador.** El widget de Elementor
+leía el DOM ya pintado; aquí los encabezados son datos, así que `lib/toc.ts`
+saca los h2 y `PostBody` escribe los `id` a partir de la *misma* función. Vive
+en un solo sitio a propósito: si las dos reglas divergen, el índice apunta a
+anclas que no existen y falla en silencio. Solo entran los h2 — con h3 el
+artículo de hosting sacaba un índice más largo que la sección que resume — y los
+encabezados repetidos (varios artículos abren cada apartado con "Fix:") se
+desempatan con un sufijo que se calcula igual en las dos direcciones.
+
+**Los botones de compartir son enlaces, no el widget de nadie.** El original
+usaba el `share-buttons` de Elementor, que carga el SDK de cada red y por tanto
+ve a todo el que abre el artículo, lo pulse o no, y habría que declararlo en la
+política de privacidad. Con un `<a>` a la URL de compartir no se conecta nada
+hasta que alguien pulsa. Los iconos van inline por lo mismo.
+
+**Los relacionados son tres**, elegidos por categoría y rellenando con los más
+recientes. El original mostraba dos, pero a dos cada tarjeta ocupa media
+pantalla y la imagen crece con ella: el bloque acababa pesando más que el final
+del artículo que lo precede. Tres llenan la fila sin dejar huecos.
+
+**La llamada va debajo de "Share the post", no al final de la página.** Ese es
+el momento en que alguien acaba de leer; después de una fila de "sigue leyendo"
+ya se ha ido a otro sitio. Vive dentro de la columna del texto, así que hereda
+su ancho en vez de cruzar la página por debajo del índice.
+
+Misma retícula de tres columnas que el índice del blog.
+
+Tres cosas del original no vuelven: el **bloque de suscripción** (no hay lista),
+el **autor** en la cabecera —firmar diecisiete piezas con un nombre propio
+empieza a decir cuánta gente hay, ver PRODUCT.md— y el **"Load More"** de los
+relacionados.
+
+#### Palabras partidas en los enlaces
+
+El conversor no solo se comió espacios: **partió palabras**. "Bluehost" llegó
+como tres fragmentos —`Blue`, `h`, `ost`— los tres con el mismo `href`,
+seguramente por un `<span>` suelto dentro del enlace en el editor.
+
+Eso no se notaba hasta que se añadió la separación automática, que entonces lo
+leía como tres palabras pegadas y publicaba **"Blue h ost"**. `PostBody` une
+ahora los fragmentos contiguos que comparten formato antes de pintarlos, que es
+lo correcto por sí solo: tres enlaces seguidos al mismo destino son un enlace, y
+como tres son tres paradas del teclado para una palabra.
+
+#### Las imágenes
+
+**Los diecisiete tienen imagen destacada, y están recuperadas.** Se dieron por
+inexistentes durante un tiempo —`app/blog/page.tsx` llegó a decir "no hay
+ninguna que sea de Emmvi"— porque nadie buscó `_thumbnail_id` en `postmeta`.
+Están las diecisiete, en `public/blog/<slug>.<ext>`, y cada artículo la declara
+en su propio archivo.
+
+**No son trabajo de Emmvi**, y conviene tenerlo claro antes de defenderlas: son
+ilustraciones de banco, plantillas de Canva y arte generado con IA, que es lo
+que el WordPress publicaba. No son prueba social prestada —no afirman nada
+sobre Emmvi ni sobre sus clientes, que es lo que PRODUCT.md prohíbe— pero
+tampoco son una señal de calidad. Vienen en cinco proporciones distintas, de
+750×401 a 1066×1600, ninguna comparte paleta con el sitio y alguna lleva su
+propio titular quemado dentro, que en una tarjeta queda dicho dos veces.
+
+Van con `alt=""` a propósito: la imagen vive dentro del enlace, pegada al
+titular que ya dice lo mismo, y describir una ilustración genérica ahí solo
+añade ruido a un lector de pantalla.
+
+Dos pesaban 2,5 MB y 1,6 MB en PNG. Reescaladas a 1600px y pasadas a JPEG, las
+diecisiete ocupan 1,9 MB.
+
+**Las de dentro de los artículos son otra historia.** El de Webflow vs Wix
+referenciaba cinco, y **cuatro no están en el backup**: se borraron de la
+biblioteca después de insertarlas, así que ya estaban rotas en el sitio vivo.
+Sus bloques se quitaron. Las que hoy usa el artículo están en `public/blog/` y
+llevan texto alternativo escrito a mano, porque el original las tenía con `alt`
+vacío. Ningún otro artículo lleva imágenes en el cuerpo.
+
+##### La retícula del índice
+
+`/blog` reconstruye la plantilla "Blog" del WordPress (`elementor_library`
+ID 2632, skin `archive_cards`): tarjeta con borde, imagen arriba, titular,
+extracto y enlace de lectura. Del archivo salen también las medidas —titular a
+24px sobre 36 de línea, extracto a 16 sobre 24, 32px entre tarjetas, 16 bajo el
+titular—, expresadas aquí con los tokens del sitio en vez de a pelo.
+
+El hueco de la imagen es fijo y recorta (`aspect-[16/9]` con `object-cover`)
+porque las destacadas vienen en cinco proporciones: sin eso la retícula se
+descuadra sola.
+
+**El badge de categoría también es del original** (el skin traía
+`archive_cards_badge_typography_font_weight`), y las categorías salen del
+WordPress: `terms` más `term_relationships`. Las trece existían de verdad;
+ninguna se ha inventado.
+
+Va **una sola por artículo**, aunque varios llevaban dos o tres: un badge con
+tres etiquetas deja de ser una señal y pasa a ser una lista. Donde había varias
+se eligió la que más le dice a quien lee —`streamline-scale-succeed` tenía
+GoHighLevel, Automation y Zapier, y se queda en Automation, que es de lo que
+va— y "Uncategorized" se descarta, que es el relleno de WordPress.
+
+**Va sobre el titular, no encima de la imagen.** El skin del WordPress lo ponía
+flotando sobre la foto, y ahí tapa lo que haya debajo: las destacadas llevan su
+propia composición y un badge en la esquina se come justo un trozo de ella.
+Sobre papel no molesta a nada y además deja de depender del contraste de cada
+imagen.
+
+**La retícula se queda en tres columnas.** Hubo una versión a cuatro y se
+revirtió: con títulos de nueve palabras como el de GoHighLevel, a cuatro la
+tarjeta se estrecha tanto que el titular ocupa seis líneas y empuja el resto
+fuera de la vista.
+
+Si alguna vez se vuelve a intentar, el breakpoint tiene truco:
+`min-[1200px]:grid-cols-4` **no funciona**. Tailwind emite las variantes con
+nombre en su orden canónico y las arbitrarias antes, así que `lg:grid-cols-3`
+cae después en la hoja y gana desde 1024px. Hay que usar `xl:`. Es el mismo
+fallo de orden que ya documentan `site-header.tsx` y `cta-link.tsx`.
+
+**No es un enlace**, porque no hay página de categoría. Inventar una para que
+liste dos artículos es maquinaria sin lector; si algún día el blog crece, el
+dato ya está en cada artículo.
+
+Tres cosas del original no se reconstruyen, y no es por falta de datos:
+
+- **El radio de 20px.** DESIGN.md tiene 8, 12 y 32; una cuarta medida suelta
+  solo para esta página es deuda. Va con 12.
+- **El formulario de suscripción** ("Get Updates every Week!", un campo y un
+  botón Submit al 35% de ancho). No hay lista de correo ni nada que recoja esas
+  direcciones: sería pedir un email para no mandar nada.
+- **"Load More" con scroll infinito.** Diecisiete artículos caben de una vez.
+
+El h1 del WordPress era *"Mastering the Digital Sphere: Our Blog's Knowledge
+Repository"*, que es el lenguaje de consultora que PRODUCT.md lista como
+anti-referencia. Se queda el titular corto.
+
+### Sin guiones largos
+
+**No hay ni un em dash ni un en dash en el texto que ve el visitante.** Eran
+123, la mayoría en los artículos recuperados. Se quitaron porque hoy ese guión
+lee como escritura de máquina, que es justo lo contrario de lo que este sitio
+quiere parecer.
+
+No hay una sustitución mecánica que valga: un guión largo puede abrir una
+aposición, contraponer dos frases, introducir una lista o marcar un rango, y
+cada uso pide un signo distinto. Se clasificaron los 123 por función y se
+sustituyeron en consecuencia:
+
+| Lo que hacía | Pasa a ser | Ejemplo |
+|---|---|---|
+| Etiqueta y su glosa | dos puntos | *Smart Scheduling: AI-driven appointment scheduling…* |
+| Contraponer dos frases | punto y mayúscula | *…another marketing tool. It's a comprehensive solution…* |
+| Conector detrás (*and*, *but*, *or*) | coma | *…not the subject matter, and where it does not…* |
+| Inciso cerrado entre dos guiones | paréntesis | *…in 2025 (performance, uptime, pricing and features) to choose…* |
+| Rango numérico | *to* | *(2 to 3 main colors)* |
+| Resto | coma | |
+
+**Los comentarios del código se quedan como están**: ahí el guión no lo lee
+ningún visitante.
+
+Dos cosas que hubo que repasar a mano después, y que conviene mirar si alguien
+vuelve a pasar una sustitución masiva: los incisos cerrados dejaban **dos** dos
+puntos en la misma frase, y una coma detrás de un `</a>` en JSX sale con espacio
+delante (*"Resend , delivers"*), porque el salto de línea del código cuenta.
+
+### Reescrituras
 
 `content/rewrites/` guarda ocho artículos escritos **antes** de recuperar el
 backup, cuando se daba por perdido el original. No se publican. Son la primera
 tanda de reescritura: sustituir un original es cambiar su `body` sin tocar
 `slug`, `title` ni `published`.
 
-Uno corre prisa — `figma-vs-adobe-xd`. El original es de abril de 2025 y compara
-Figma con Adobe XD como si fueran dos rivales vivos; Adobe dejó XD en
-mantenimiento en 2023, tras caerse la compra de Figma. La versión de
-`content/rewrites/` lo cuenta bien.
+**`figma-vs-adobe-xd` ya no está publicado.** El original era de abril de 2025 y
+comparaba Figma con Adobe XD como si fueran dos rivales vivos; Adobe dejó XD en
+mantenimiento en 2023, tras caerse la compra de Figma, así que el artículo
+recomendaba elegir entre dos herramientas de las que uno ya no se desarrolla.
+
+Se retira con **410**, como `/web-hosting/` y `/ux-ui-audits/`, no con un borrado
+a secas: la URL lleva indexada desde 2025, un 404 la deja en el índice meses
+mientras Google reintenta, y un redirect a la home sería un *soft 404* que
+además deja al visitante donde no quería ir. El explicativo es propio y dice
+por qué se cayó.
+
+**La reescritura de `content/rewrites/` sigue ahí y cuenta bien lo de XD.** Si
+se publica, la ruta `app/figma-vs-adobe-xd-…/route.ts` desaparece y el artículo
+vuelve con la URL intacta, que es lo único que esa URL tenía de valor.
 
 #### La ruta
 
@@ -722,6 +988,21 @@ el registro viejo: promete *"the perfect solution for you"*, que es el lenguaje
 de consultora que PRODUCT.md lista como anti-referencia. Se dejó porque es
 contenido del archivo y no un hueco. Reescribirla es un cambio de tono
 deliberado, no una corrección — pendiente de decidir.
+
+**El backup tenía las ocho respuestas originales, y aquí no se usan.** Se
+descubrió después de escribir las siete, al abrir el `.wpress` para SEO y PPC —
+donde sí se usan, porque allí no había nada. La diferencia es que estas chocan
+de frente con PRODUCT.md: la original de *"What kind of results can I expect?"*
+dice *"we typically achieve around 30% of revenue being generated through email
+marketing"*, que es exactamente el porcentaje de facturación que la regla de
+escritura prohíbe, y la de *"Have you worked with brands in my niche?"* contesta
+*"numerous brands across various niches"*, que no es verificable.
+
+Una cosa sí merece rescatarse de las originales: decían que los informes se
+entregan **por Slack cada mes, con el histórico en un Drive compartido**. Es
+concreto y comprobable, que es justo lo que pide la regla. Si se sigue
+trabajando así, ese detalle debería entrar en la respuesta de reporting. El
+texto completo del original está en el backup, no en el repo.
 - **La banda de cifras ya no está.** Las cuatro del Figma (75+, 32.3M€, 6.7X,
   4.9/5) no están medidas. Las etiquetas quedan anotadas en el código para
   cuando haya números con respaldo.

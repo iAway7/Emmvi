@@ -9,11 +9,11 @@ import type { Post } from "@/lib/posts";
  * los que llevaban a una pagina retirada se quedan en texto llano.
  */
 const body: Post["body"] = [
-  { kind: "p", text: "In today’s competitive digital landscape, automation is no longer a luxury — it's a necessity. At Emmvi.com, we specialize in helping small businesses and entrepreneurs scale efficiently by integrating two powerful platforms: Zapier and GoHighLevel. These tools, when used strategically, can drastically streamline operations, improve customer experience, and increase overall productivity." },
+  { kind: "p", text: "In today’s competitive digital landscape, automation is no longer a luxury. It's a necessity. At Emmvi.com, we specialize in helping small businesses and entrepreneurs scale efficiently by integrating two powerful platforms: Zapier and GoHighLevel. These tools, when used strategically, can drastically streamline operations, improve customer experience, and increase overall productivity." },
   { kind: "h2", text: "What Is Zapier?" },
-  { kind: "p", text: "Zapier is an automation platform that connects your favorite apps to work together without writing any code. It allows you to create “Zaps” — automated workflows that trigger actions based on certain events. For example, when someone fills out a form on your website, Zapier can instantly send the information to your CRM, alert your sales team via Slack, and add the lead to your email marketing list." },
+  { kind: "p", text: "Zapier is an automation platform that connects your favorite apps to work together without writing any code. It allows you to create “Zaps”: automated workflows that trigger actions based on certain events. For example, when someone fills out a form on your website, Zapier can instantly send the information to your CRM, alert your sales team via Slack, and add the lead to your email marketing list." },
   { kind: "h2", text: "What Is GoHighLevel?" },
-  { kind: "p", text: "GoHighLevel is an all-in-one sales and marketing platform built for agencies and small businesses. It combines CRM, email and SMS marketing, funnel builders, reputation management, appointment scheduling, and more under one roof. With GoHighLevel, you can centralize client communication, automate follow-ups, and track lead performance — all from a single dashboard." },
+  { kind: "p", text: "GoHighLevel is an all-in-one sales and marketing platform built for agencies and small businesses. It combines CRM, email and SMS marketing, funnel builders, reputation management, appointment scheduling, and more under one roof. With GoHighLevel, you can centralize client communication, automate follow-ups, and track lead performance: all from a single dashboard." },
   { kind: "h2", text: "How Emmvi Brings It All Together" },
   { kind: "p", text: "At Emmvi.com, we don't just plug tools in and hope they work. We take a strategic, customized approach to automation that aligns with your business goals. Here’s how we help:" },
   { kind: "list", items: [
@@ -27,11 +27,11 @@ const body: Post["body"] = [
     ],
     [
       { text: "Integration Between Zapier and GoHighLevel", bold: true },
-      "This is where the magic happens. Using Zapier, we can connect GoHighLevel to thousands of other apps — like Google Sheets, Facebook Ads, Shopify, Calendly, and more. That means data flows in real-time, and your business runs like a well-oiled machine.",
+      "This is where the magic happens. Using Zapier, we can connect GoHighLevel to thousands of other apps: like Google Sheets, Facebook Ads, Shopify, Calendly, and more. That means data flows in real-time, and your business runs like a well-oiled machine.",
     ],
     [
       { text: "Analytics and Optimization", bold: true },
-      "We don’t stop at setup. We monitor your automations and funnel performance to ensure they’re delivering results. If a Zap breaks or a campaign needs tweaking, we’re there to fix and improve it — fast.",
+      "We don’t stop at setup. We monitor your automations and funnel performance to ensure they’re delivering results. If a Zap breaks or a campaign needs tweaking, we’re there to fix and improve it, fast.",
     ],
   ], ordered: true },
   { kind: "h2", text: "Real Business Impact" },
@@ -51,10 +51,14 @@ const body: Post["body"] = [
     { text: "Scale with Confidence:", bold: true },
     "Automation allows your business to grow without adding more overhead.",
   ] },
+  // El original es un solo <p> con un <br> detras de "Together": un titulillo
+  // y su parrafo. La conversion se comio el <br> y quedaba "TogetherIf". Se
+  // recupera como dos bloques, que es lo que el <br> dibujaba.
+  { kind: "p", text: "Let’s Build Smarter Together" },
   { kind: "p", text: [
-    "Let’s Build Smarter TogetherIf you’re serious about growing your business and want to leverage the power of Zapier and ",
+    "If you’re serious about growing your business and want to leverage the power of Zapier and ",
     { text: "GoHighLevel", href: "/services/gohighlevel-automation" },
-    ", Emmvi.com is here to help. Our tailored solutions are designed to meet your specific needs, so you get the most out of your tools — without the technical headache.",
+    ", Emmvi.com is here to help. Our tailored solutions are designed to meet your specific needs, so you get the most out of your tools, without the technical headache.",
   ] },
   { kind: "p", text: [
     { text: "Contact us today", href: "/contact-us" },
@@ -66,8 +70,18 @@ export const streamlineScaleSucceedUsing: Post = {
   slug: "streamline-scale-succeed-using-zapier-and-gohighlevel-to-grow-your-business",
   title: "Streamline, Scale, Succeed: Using Zapier and GoHighLevel to Grow Your Business",
   description: "Streamline, scale, and succeed: discover how integrating Zapier with GoHighLevel automates workflows, saves time, and fuels business growth.",
-  lede: "Streamline, scale, and succeed: discover how integrating Zapier with GoHighLevel automates workflows, saves time, and fuels business growth.",
+  lede: "What Zapier and GoHighLevel do together that neither of them does alone.",
+  category: "Automation",
   // Fecha original de publicacion. No se toca: es parte de lo que se restaura.
   published: "2025-05-06",
+  /** Destacada del WordPress. `alt` vacio a proposito: la imagen va dentro
+   *  del enlace, pegada al titular que ya dice lo mismo, y describir una
+   *  ilustracion generica ahi solo anade ruido a un lector de pantalla. */
+  image: {
+    src: "/blog/streamline-scale-succeed-using-zapier-and-gohighlevel-to-grow-your-business.webp",
+    width: 2400,
+    height: 1260,
+    alt: "",
+  },
   body,
 };

@@ -38,6 +38,13 @@
   --color-pink-ink: #d81b60;
   --color-pink-wash: #fff8fc;
 
+  /* Relleno suave del violeta, para la chapa de categoria del blog. Es el
+     mismo #f0edff que la home usa detras de las iniciales de los testimonios:
+     un lavado nuevo para lo mismo seria una segunda fuente de verdad. El
+     violeta rinde 5.81:1 encima, asi que pasa AA de texto chico y no hace
+     falta oscurecerlo. El par ya estaba medido en la tabla de DESIGN.md. */
+  --color-violet-wash: #f0edff;
+
   /* Badge "SEO Package" de /services/seo. El teal del Figma ya pasa AA de
      sobra sobre su propio relleno (7.23:1), asi que no hace falta variante oscurecida. */
   --color-teal-ink: #006158;

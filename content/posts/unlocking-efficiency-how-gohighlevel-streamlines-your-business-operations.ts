@@ -123,7 +123,7 @@ const body: Post["body"] = [
   ] },
   { kind: "p", text: "This scalability ensures that as your business expands, GoHighLevel continues to provide the tools necessary to support your growth." },
   { kind: "h2", text: "Conclusion" },
-  { kind: "p", text: "GoHighLevel is more than just another marketing tool—it’s a comprehensive solution that helps businesses of all sizes improve efficiency, automate processes, and enhance customer relationships. By centralizing key business functions, streamlining workflows, and providing deep insights into your marketing and sales efforts, GoHighLevel empowers your company to grow, optimize performance, and deliver better experiences for customers. If you're looking to take your business to the next level, GoHighLevel could be the game-changing solution you need." },
+  { kind: "p", text: "GoHighLevel is more than just another marketing tool. It’s a comprehensive solution that helps businesses of all sizes improve efficiency, automate processes, and enhance customer relationships. By centralizing key business functions, streamlining workflows, and providing deep insights into your marketing and sales efforts, GoHighLevel empowers your company to grow, optimize performance, and deliver better experiences for customers. If you're looking to take your business to the next level, GoHighLevel could be the game-changing solution you need." },
   { kind: "p", text: [
     "Want to streamline your business with ",
     { text: "GoHighLevel", href: "/services/gohighlevel-automation" },
@@ -136,9 +136,19 @@ const body: Post["body"] = [
 export const unlockingEfficiencyHowGohighlevel: Post = {
   slug: "unlocking-efficiency-how-gohighlevel-streamlines-your-business-operations",
   title: "Unlocking Efficiency: How GoHighLevel Streamlines Your Business Operations",
-  description: "Unlock operational efficiency with GoHighLevel—automate workflows, centralize client funnels, CRM, and reporting to streamline your business with ease.",
-  lede: "Unlock operational efficiency with GoHighLevel—automate workflows, centralize client funnels, CRM, and reporting to streamline your business with ease.",
+  description: "Unlock operational efficiency with GoHighLevel: automate workflows, centralize client funnels, CRM, and reporting to streamline your business with ease.",
+  lede: "What GoHighLevel replaces, and which parts are worth setting up first.",
+  category: "GoHighLevel",
   // Fecha original de publicacion. No se toca: es parte de lo que se restaura.
   published: "2025-03-27",
+  /** Destacada del WordPress. `alt` vacio a proposito: la imagen va dentro
+   *  del enlace, pegada al titular que ya dice lo mismo, y describir una
+   *  ilustracion generica ahi solo anade ruido a un lector de pantalla. */
+  image: {
+    src: "/blog/unlocking-efficiency-how-gohighlevel-streamlines-your-business-operations.jpg",
+    width: 1280,
+    height: 720,
+    alt: "",
+  },
   body,
 };

@@ -12,6 +12,7 @@ export const emailRoi: Post = {
   description:
     "The difference between broadcasts and series, the four sequences worth building, and how to work out the return without borrowing anyone else's numbers.",
   lede: "Email is the only channel where you own the list. That is the whole argument, and it is a better one than any open-rate benchmark.",
+  category: "Email Marketing",
   published: "2026-09-19",
   body: [
     {

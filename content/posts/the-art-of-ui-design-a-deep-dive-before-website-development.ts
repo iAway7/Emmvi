@@ -16,7 +16,7 @@ const body: Post["body"] = [
     { text: "UI (User Interface) design", bold: true },
     "comes into play.",
   ] },
-  { kind: "p", text: "UI design isn’t just about creating aesthetically pleasing layouts and choosing pretty colors—it’s about creating a system that anticipates users’ needs, solves problems, and enhances their interactions. But before developers start coding, there’s a meticulous and strategic design process that sets the stage for a website’s success. This process not only requires creativity but a deep understanding of user psychology, business goals, and technology." },
+  { kind: "p", text: "UI design isn’t just about creating aesthetically pleasing layouts and choosing pretty colors. It’s about creating a system that anticipates users’ needs, solves problems, and enhances their interactions. But before developers start coding, there’s a meticulous and strategic design process that sets the stage for a website’s success. This process not only requires creativity but a deep understanding of user psychology, business goals, and technology." },
   { kind: "p", text: "In this article, we’ll explore the intricate UI design process that takes place before the development of any website, uncovering the essential steps and considerations that shape the final product." },
   { kind: "h2", text: "1. Understanding the Users and Business Goals" },
   { kind: "p", text: [
@@ -76,12 +76,12 @@ const body: Post["body"] = [
   { kind: "p", text: "Understanding both the user’s needs and the business objectives allows UI designers to create a website that offers value to users while driving measurable results for the business." },
   { kind: "h2", text: "2. Wireframing and Prototyping" },
   { kind: "p", text: [
-    "Once the research phase is complete, the next step is to create a blueprint for the website—",
+    "Once the research phase is complete, the next step is to create a blueprint for the website, ",
     { text: "wireframing", bold: true },
     ". This is a critical stage in the UI design process that focuses on layout, content organization, and the structure of the website.",
   ] },
   { kind: "h3", text: "a. Wireframing: The Blueprint" },
-  { kind: "p", text: "Wireframes are low-fidelity visual representations of a website’s layout. They act as a skeleton, showing where each element of the website—such as navigation, buttons, images, and text—will be placed. Wireframing is done in black-and-white, without detailed graphics or branding, as it is meant to emphasize functionality and user flow." },
+  { kind: "p", text: "Wireframes are low-fidelity visual representations of a website’s layout. They act as a skeleton, showing where each element of the website: (navigation, buttons, images and text) will be placed. Wireframing is done in black-and-white, without detailed graphics or branding, as it is meant to emphasize functionality and user flow." },
   { kind: "p", text: [
     "Wireframes can be created using design tools like",
     { text: "Sketch", bold: true },
@@ -105,7 +105,7 @@ const body: Post["body"] = [
       "that guide users to take the next step (e.g., \"Contact Us,\" \"Sign Up,\" \"Shop Now\").",
     ],
   ] },
-  { kind: "p", text: "Wireframing doesn’t just show where elements are placed—it also helps designers determine the flow of interactions. For example, how users will move from one page to another, or what will happen when they click on a particular element." },
+  { kind: "p", text: "Wireframing doesn’t just show where elements are placed. It also helps designers determine the flow of interactions. For example, how users will move from one page to another, or what will happen when they click on a particular element." },
   { kind: "h3", text: "b. Prototyping: Bringing Wireframes to Life" },
   { kind: "p", text: [
     "While wireframes help establish the structure,",
@@ -170,7 +170,7 @@ const body: Post["body"] = [
   { kind: "p", text: "The design handoff isn’t a one-way process; it requires ongoing collaboration. Designers work closely with developers to ensure that the website functions exactly as envisioned. This often involves several rounds of testing and revisions to ensure the design is properly implemented." },
   { kind: "h2", text: "Final Thoughts" },
   { kind: "p", text: "The UI design process is a foundational part of creating a successful website. By understanding the users and business goals, wireframing and prototyping the structure, refining the visual design, and collaborating closely with developers, designers lay the groundwork for an intuitive, engaging, and functional website." },
-  { kind: "p", text: "A strong UI design isn’t just about looking good—it’s about creating an experience that’s seamless, efficient, and tailored to the needs of the user. Whether you’re building a new website or redesigning an existing one, focusing on a thoughtful and thorough UI design process will set your project up for success." },
+  { kind: "p", text: "A strong UI design isn’t just about looking good. It’s about creating an experience that’s seamless, efficient, and tailored to the needs of the user. Whether you’re building a new website or redesigning an existing one, focusing on a thoughtful and thorough UI design process will set your project up for success." },
   { kind: "p", text: [
     "Ready to start designing a website that prioritizes user experience and business goals?",
     { text: "Let’s connect", href: "/contact-us" },
@@ -181,9 +181,19 @@ const body: Post["body"] = [
 export const theArtOfUi: Post = {
   slug: "the-art-of-ui-design-a-deep-dive-before-website-development",
   title: "The Art of UI Design: A Deep Dive Before Website Development",
-  description: "Master the art of UI design before development—learn key principles, user-focused layouts, visual hierarchy, and best practices to build intuitive, high-converting websites.",
-  lede: "Master the art of UI design before development—learn key principles, user-focused layouts, visual hierarchy, and best practices to build intuitive, high-converting websites.",
+  description: "Master the art of UI design before development: learn key principles, user-focused layouts, visual hierarchy, and best practices to build intuitive, high-converting websites.",
+  lede: "The research, wireframes and prototypes that come before anyone writes code.",
+  category: "UI Design",
   // Fecha original de publicacion. No se toca: es parte de lo que se restaura.
   published: "2025-04-02",
+  /** Destacada del WordPress. `alt` vacio a proposito: la imagen va dentro
+   *  del enlace, pegada al titular que ya dice lo mismo, y describir una
+   *  ilustracion generica ahi solo anade ruido a un lector de pantalla. */
+  image: {
+    src: "/blog/the-art-of-ui-design-a-deep-dive-before-website-development.png",
+    width: 1280,
+    height: 641,
+    alt: "",
+  },
   body,
 };

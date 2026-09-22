@@ -12,7 +12,7 @@ const body: Post["body"] = [
   { kind: "p", text: [
     "In today’s fast-paced business environment, efficiency is key. Companies are constantly looking for ways to automate repetitive tasks, streamline processes, and integrate their favorite tools effortlessly. This is where",
     { text: "Zapier", bold: true },
-    "comes in—a powerful automation platform that connects apps and automates workflows without the need for coding. Whether you're a solo entrepreneur, a small business, or a large enterprise, Zapier can help you save time and focus on what truly matters.",
+    "comes in, a powerful automation platform that connects apps and automates workflows without the need for coding. Whether you're a solo entrepreneur, a small business, or a large enterprise, Zapier can help you save time and focus on what truly matters.",
   ] },
   { kind: "h2", text: "1. Automate Repetitive Tasks with Ease" },
   { kind: "p", text: [
@@ -53,7 +53,7 @@ const body: Post["body"] = [
       ": Keep teams aligned by automating task assignments, status updates, and deadline reminders.",
     ],
   ] },
-  { kind: "h2", text: "3. No Coding Required – Anyone Can Use It" },
+  { kind: "h2", text: "3. No Coding Required, Anyone Can Use It" },
   { kind: "p", text: [
     "Unlike traditional automation solutions that require coding skills, Zapier is built for",
     { text: "non-technical users", bold: true },
@@ -130,9 +130,19 @@ const body: Post["body"] = [
 export const zapierTheNoCode: Post = {
   slug: "zapier-the-no-code-automation-revolution-for-businesses",
   title: "Zapier: The No-Code Automation Revolution for Businesses.",
-  description: "Zapier’s no-code automation revolutionizes business workflows—connect apps, reduce manual tasks, boost efficiency and focus on growth without writing any code.",
-  lede: "Zapier’s no-code automation revolutionizes business workflows—connect apps, reduce manual tasks, boost efficiency and focus on growth without writing any code.",
+  description: "Zapier’s no-code automation revolutionizes business workflows: connect apps, reduce manual tasks, boost efficiency and focus on growth without writing any code.",
+  lede: "What Zapier connects, what a Zap is, and the tasks worth automating first.",
+  category: "Automation",
   // Fecha original de publicacion. No se toca: es parte de lo que se restaura.
   published: "2025-03-28",
+  /** Destacada del WordPress. `alt` vacio a proposito: la imagen va dentro
+   *  del enlace, pegada al titular que ya dice lo mismo, y describir una
+   *  ilustracion generica ahi solo anade ruido a un lector de pantalla. */
+  image: {
+    src: "/blog/zapier-the-no-code-automation-revolution-for-businesses.png",
+    width: 1920,
+    height: 1080,
+    alt: "",
+  },
   body,
 };

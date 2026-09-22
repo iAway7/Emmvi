@@ -89,9 +89,19 @@ const body: Post["body"] = [
 export const top5BestAi: Post = {
   slug: "top-5-best-ai-tools-for-images",
   title: "Top 5 Best AI Tools for Images",
-  description: "Discover the top 5 AI image tools for 2025—including Midjourney, Fotor, Luminar Neo, Pixlr & Artbreeder—to enhance, generate, and edit visuals like a pro.",
-  lede: "Discover the top 5 AI image tools for 2025—including Midjourney, Fotor, Luminar Neo, Pixlr & Artbreeder—to enhance, generate, and edit visuals like a pro.",
+  description: "Discover the top 5 AI image tools for 2025 (Midjourney, Fotor, Luminar Neo, Pixlr and Artbreeder) to enhance, generate, and edit visuals like a pro.",
+  lede: "Five AI image tools, what each is good at, and where they fall short.",
+  category: "AI",
   // Fecha original de publicacion. No se toca: es parte de lo que se restaura.
   published: "2025-04-03",
+  /** Destacada del WordPress. `alt` vacio a proposito: la imagen va dentro
+   *  del enlace, pegada al titular que ya dice lo mismo, y describir una
+   *  ilustracion generica ahi solo anade ruido a un lector de pantalla. */
+  image: {
+    src: "/blog/top-5-best-ai-tools-for-images.jpg",
+    width: 1520,
+    height: 760,
+    alt: "",
+  },
   body,
 };

@@ -13,6 +13,7 @@ export const moreLeads: Post = {
   description:
     "Before spending on ads, five changes to the site you already own — and the honest limit of each one.",
   lede: "Most sites do not have a traffic problem. They have a conversion problem, and buying more traffic makes it more expensive rather than fixing it.",
+  category: "Lead Generation",
   published: "2026-09-19",
   body: [
     {

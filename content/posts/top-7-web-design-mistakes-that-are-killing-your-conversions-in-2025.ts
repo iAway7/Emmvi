@@ -15,7 +15,7 @@ const body: Post["body"] = [
     "converting visitors into leads or customers?",
   ] },
   { kind: "p", text: [
-    "In 2025, successful web design is no longer just about aesthetics — it’s about strategy, usability, and performance. At",
+    "In 2025, successful web design is no longer just about aesthetics. It’s about strategy, usability, and performance. At",
     { text: "Emmvi", bold: true },
     ", we see it all the time: beautiful websites that underperform because of simple, avoidable mistakes.",
   ] },
@@ -26,7 +26,7 @@ const body: Post["body"] = [
   ] },
   { kind: "h2", text: "1. Slow Load Times" },
   { kind: "h3", text: "🚫 Problem:" },
-  { kind: "p", text: "Visitors won’t wait. If your website takes more than 3 seconds to load, you’re losing traffic and trust — fast." },
+  { kind: "p", text: "Visitors won’t wait. If your website takes more than 3 seconds to load, you’re losing traffic and trust, fast." },
   { kind: "h3", text: "✅ Fix:" },
   { kind: "list", items: [
     "Compress images (use next-gen formats like WebP).",
@@ -43,7 +43,7 @@ const body: Post["body"] = [
     "Use clear CTAs (call-to-actions) above the fold.",
     "Maintain consistent structure across pages.",
   ] },
-  { kind: "p", text: "📱 Mobile Tip: Ensure your mobile nav is just as clean — no more hidden or overcrowded hamburger menus." },
+  { kind: "p", text: "📱 Mobile Tip: Ensure your mobile nav is just as clean, no more hidden or overcrowded hamburger menus." },
   { kind: "h2", text: "3. Weak or Vague CTAs" },
   { kind: "h3", text: "🚫 Problem:" },
   { kind: "p", text: "A generic “Submit” button just doesn’t cut it anymore. CTAs need to be specific, action-driven, and benefit-oriented." },
@@ -55,7 +55,7 @@ const body: Post["body"] = [
   ] },
   { kind: "h2", text: "4. Not Mobile-Optimized" },
   { kind: "h3", text: "🚫 Problem:" },
-  { kind: "p", text: "Over 60% of traffic comes from mobile in 2025 — if your site’s not responsive, you're hemorrhaging conversions." },
+  { kind: "p", text: "Over 60% of traffic comes from mobile in 2025, if your site’s not responsive, you're hemorrhaging conversions." },
   { kind: "h3", text: "✅ Fix:" },
   { kind: "list", items: [
     "Use mobile-first design practices.",
@@ -69,12 +69,12 @@ const body: Post["body"] = [
   { kind: "h3", text: "✅ Fix:" },
   { kind: "list", items: [
     "Embrace whitespace.",
-    "Stick to a cohesive color palette (2–3 main colors).",
+    "Stick to a cohesive color palette (2 to 3 main colors).",
     "Use consistent typography and visual hierarchy.",
   ] },
   { kind: "h2", text: "6. Lack of Trust Signals" },
   { kind: "h3", text: "🚫 Problem:" },
-  { kind: "p", text: "If users don't trust you, they won’t convert — even if everything else is perfect." },
+  { kind: "p", text: "If users don't trust you, they won’t convert, even if everything else is perfect." },
   { kind: "h3", text: "✅ Fix:" },
   { kind: "list", items: [
     "Add client testimonials, case studies, or Google reviews.",
@@ -96,7 +96,7 @@ const body: Post["body"] = [
   { kind: "p", text: [
     "At",
     { text: "Emmvi", bold: true },
-    ", we specialize in conversion-focused web design that doesn’t just look great — it works. Want a free audit of your current site?",
+    ", we specialize in conversion-focused web design that doesn’t just look great. It works. Want a free audit of your current site?",
     { text: "Let’s talk", bold: true, href: "/contact-us" },
     ".",
   ] },
@@ -105,9 +105,19 @@ const body: Post["body"] = [
 export const top7WebDesign: Post = {
   slug: "top-7-web-design-mistakes-that-are-killing-your-conversions-in-2025",
   title: "Top 7 Web Design Mistakes That Are Killing Your Conversions in 2025",
-  description: "Discover the top 7 web design mistakes killing your conversions in 2025—and how to fix them to boost UX, speed, mobile performance, and sales.",
-  lede: "Discover the top 7 web design mistakes killing your conversions in 2025—and how to fix them to boost UX, speed, mobile performance, and sales.",
+  description: "Discover the top 7 web design mistakes killing your conversions in 2025, and how to fix them to boost UX, speed, mobile performance, and sales.",
+  lede: "Seven design mistakes that lose you enquiries, and the fix for each one.",
+  category: "Website Design",
   // Fecha original de publicacion. No se toca: es parte de lo que se restaura.
   published: "2025-04-06",
+  /** Destacada del WordPress. `alt` vacio a proposito: la imagen va dentro
+   *  del enlace, pegada al titular que ya dice lo mismo, y describir una
+   *  ilustracion generica ahi solo anade ruido a un lector de pantalla. */
+  image: {
+    src: "/blog/top-7-web-design-mistakes-that-are-killing-your-conversions-in-2025.webp",
+    width: 1024,
+    height: 1024,
+    alt: "",
+  },
   body,
 };

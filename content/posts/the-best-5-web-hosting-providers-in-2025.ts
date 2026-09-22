@@ -64,7 +64,10 @@ const body: Post["body"] = [
     ],
     [
       { text: "Choice Plus Plan", bold: true },
-      ": Starts at $5.45/monthBluehost often offers significant discounts for the first term, making it affordable to get started.",
+      // El original trae un <br> entre el precio y la nota; la conversion lo
+      // perdio y quedaba "monthBluehost". Va un espacio en su lugar: dentro de
+      // un <li> no cabe otro bloque.
+      ": Starts at $5.45/month Bluehost often offers significant discounts for the first term, making it affordable to get started.",
     ],
   ] },
   { kind: "p", text: [
@@ -384,7 +387,7 @@ const body: Post["body"] = [
       "provides great value for long-term users, with affordable pricing, robust features, and excellent performance.",
     ],
   ], ordered: true },
-  { kind: "p", text: "Ultimately, the best web hosting provider for you will depend on your specific needs—whether it's ease of use, speed, scalability, or customer support. All five of these providers offer a combination of great features and affordable pricing, ensuring that your website will have the performance, reliability, and support you need to thrive online." },
+  { kind: "p", text: "Ultimately, the best web hosting provider for you will depend on your specific needs, whether it's ease of use, speed, scalability, or customer support. All five of these providers offer a combination of great features and affordable pricing, ensuring that your website will have the performance, reliability, and support you need to thrive online." },
   { kind: "p", text: [
     "Ready to",
     "get started with your web hosting",
@@ -395,9 +398,19 @@ const body: Post["body"] = [
 export const theBest5Web: Post = {
   slug: "the-best-5-web-hosting-providers-in-2025",
   title: "The Best 5 Web Hosting Providers in 2025",
-  description: "Compare the top 5 web hosting providers in 2025—performance, uptime, pricing, and features—to choose the best platform for your website needs.",
-  lede: "Compare the top 5 web hosting providers in 2025—performance, uptime, pricing, and features—to choose the best platform for your website needs.",
+  description: "Compare the top 5 web hosting providers in 2025 (performance, uptime, pricing and features) to choose the best platform for your website needs.",
+  lede: "Five hosts compared on speed, price and support, and who each one suits.",
+  category: "Web Hosting",
   // Fecha original de publicacion. No se toca: es parte de lo que se restaura.
   published: "2025-04-02",
+  /** Destacada del WordPress. `alt` vacio a proposito: la imagen va dentro
+   *  del enlace, pegada al titular que ya dice lo mismo, y describir una
+   *  ilustracion generica ahi solo anade ruido a un lector de pantalla. */
+  image: {
+    src: "/blog/the-best-5-web-hosting-providers-in-2025.jpg",
+    width: 750,
+    height: 401,
+    alt: "",
+  },
   body,
 };

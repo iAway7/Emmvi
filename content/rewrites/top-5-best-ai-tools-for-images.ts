@@ -15,6 +15,7 @@ export const aiImageTools: Post = {
   description:
     "What each tool is genuinely good at, what the licence lets you do commercially, and why an AI image can still be the wrong choice.",
   lede: "The interesting question is no longer whether these work. It is which job you are handing them, and whether you are allowed to sell what comes out.",
+  category: "AI",
   published: "2026-09-19",
   body: [
     {

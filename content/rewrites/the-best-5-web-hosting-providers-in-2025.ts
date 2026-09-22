@@ -18,6 +18,7 @@ export const hostingProviders: Post = {
   description:
     "Five options for a small business site, plus the four questions that matter more than the monthly price.",
   lede: "Hosting is the part of a website nobody thinks about until the week it goes wrong, and then it is the only thing anybody thinks about.",
+  category: "Web Hosting",
   published: "2026-09-19",
   body: [
     {

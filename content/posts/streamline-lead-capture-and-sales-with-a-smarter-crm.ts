@@ -93,8 +93,18 @@ export const streamlineLeadCaptureAnd: Post = {
   slug: "streamline-lead-capture-and-sales-with-a-smarter-crm",
   title: "Streamline Lead Capture and Sales With a Smarter CRM",
   description: "Capturing leads is only the first step. The real growth happens when every new inquiry moves smoothly from first contact to follow-up, appointment, prop…",
-  lede: "Capturing leads is only the first step. The real growth happens when every new inquiry moves smoothly from first contact to follow-up, appointment, proposal, and sale. For many businesses, that journey is messy: leads arrive through forms, ads, calls, chats, and emails, then get scattered across spreadsheets, inboxes, and disconnected tools.",
+  lede: "Where enquiries get lost between the form and the sale, and how a CRM closes it.",
+  category: "CRM",
   // Fecha original de publicacion. No se toca: es parte de lo que se restaura.
   published: "2026-06-02",
+  /** Destacada del WordPress. `alt` vacio a proposito: la imagen va dentro
+   *  del enlace, pegada al titular que ya dice lo mismo, y describir una
+   *  ilustracion generica ahi solo anade ruido a un lector de pantalla. */
+  image: {
+    src: "/blog/streamline-lead-capture-and-sales-with-a-smarter-crm.jpg",
+    width: 1600,
+    height: 878,
+    alt: "",
+  },
   body,
 };

@@ -52,9 +52,9 @@ const body: Post["body"] = [
   { kind: "p", text: "Both platforms prioritize accessibility, but Webflow caters well to design and development pros, while Wix is more approachable for beginners, with some limitations for advanced users." },
   { kind: "h2", text: "Comparing Webflow and Wix: Exploring Feature Sets" },
   { kind: "h3", text: "Webflow:" },
-  { kind: "p", text: "Step into the world of Webflow—a powerhouse of features designed to empower users and streamline design experiences. Focus on your business and marketing, confident in Webflow's commitment to clean, semantic code." },
-  { kind: "p", text: "Noteworthy for its dedication, Webflow produces code seamlessly—HTML, CSS, and images neatly packaged into a ZIP file for versatile use. Customize with ease through Webflow's support for custom code integration, offering unparalleled design flexibility." },
-  { kind: "p", text: "Webflow doesn't just stop at code; it excels in motion design too. Dive into effortless creation of design interactions, 3D transforms, and animations—no coding expertise required. Witness your projects undergo cutting-edge transformations with visually stunning results." },
+  { kind: "p", text: "Step into the world of Webflow, a powerhouse of features designed to empower users and streamline design experiences. Focus on your business and marketing, confident in Webflow's commitment to clean, semantic code." },
+  { kind: "p", text: "Noteworthy for its dedication, Webflow produces code seamlessly, HTML, CSS, and images neatly packaged into a ZIP file for versatile use. Customize with ease through Webflow's support for custom code integration, offering unparalleled design flexibility." },
+  { kind: "p", text: "Webflow doesn't just stop at code; it excels in motion design too. Dive into effortless creation of design interactions, 3D transforms, and animations, no coding expertise required. Witness your projects undergo cutting-edge transformations with visually stunning results." },
   { kind: "p", text: "Beyond design, Webflow boasts a dedicated content management system (CMS), powerful e-commerce functionalities, and interactive features. Hosting, marketing tools, and SEO enhancements round out the offerings." },
   { kind: "p", text: "Webflow's optimization prowess stands out. With clean code, a robust CMS, and a range of features, Webflow is your ticket to next-generation websites. Experience seamless animations that perform flawlessly across devices, reducing development time compared to traditional methods." },
   { kind: "h3", text: "Wix:" },
@@ -110,8 +110,18 @@ export const webflowVsWixThe: Post = {
   slug: "webflow-vs-wix-the-ultimate-website-builder-showdown",
   title: "Webflow vs. Wix: The Ultimate Website Builder Showdown!",
   description: "Webflow vs Wix: compare features, ease of use, customization, performance, SEO & pricing to decide the best website builder for your project in 2025.",
-  lede: "Webflow vs Wix: compare features, ease of use, customization, performance, SEO & pricing to decide the best website builder for your project in 2025.",
+  lede: "Webflow and Wix on design freedom, SEO and price, and who each one is for.",
+  category: "Versus",
   // Fecha original de publicacion. No se toca: es parte de lo que se restaura.
   published: "2024-11-12",
+  /** Destacada del WordPress. `alt` vacio a proposito: la imagen va dentro
+   *  del enlace, pegada al titular que ya dice lo mismo, y describir una
+   *  ilustracion generica ahi solo anade ruido a un lector de pantalla. */
+  image: {
+    src: "/blog/webflow-vs-wix-the-ultimate-website-builder-showdown.jpg",
+    width: 1600,
+    height: 900,
+    alt: "",
+  },
   body,
 };

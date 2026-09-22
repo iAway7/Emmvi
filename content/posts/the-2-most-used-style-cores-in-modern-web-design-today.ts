@@ -9,9 +9,9 @@ import type { Post } from "@/lib/posts";
  * los que llevaban a una pagina retirada se quedan en texto llano.
  */
 const body: Post["body"] = [
-  { kind: "p", text: "Web design trends are always shifting, but right now, two dominant styles are shaping how modern websites look and feel. Whether you're designing for a SaaS product, a creative portfolio, or an eCommerce brand, chances are you're either seeing—or using—one of these two approaches." },
+  { kind: "p", text: "Web design trends are always shifting, but right now, two dominant styles are shaping how modern websites look and feel. Whether you're designing for a SaaS product, a creative portfolio, or an eCommerce brand, chances are you're either seeing, or using, one of these two approaches." },
   { kind: "p", text: [
-    "These styles don’t just look good—they’re backed by solid UX principles and real-world performance. Here’s a breakdown of the two most commonly used \"core\" styles in",
+    "These styles don’t just look good. They’re backed by solid UX principles and real-world performance. Here’s a breakdown of the two most commonly used \"core\" styles in",
     { text: "web design", href: "/services/website-design" },
     "today:",
     { text: "Clean Minimalism", bold: true },
@@ -20,7 +20,7 @@ const body: Post["body"] = [
     ".",
   ] },
   { kind: "h2", text: "1. Clean Minimalism: Timeless, Polished, and User-Friendly" },
-  { kind: "p", text: "Clean Minimalism has been a go-to for years, but in 2025, it’s more refined than ever. This style is all about simplicity with purpose—stripping away distractions to focus on clarity, readability, and functionality." },
+  { kind: "p", text: "Clean Minimalism has been a go-to for years, but in 2025, it’s more refined than ever. This style is all about simplicity with purpose, stripping away distractions to focus on clarity, readability, and functionality." },
   { kind: "h3", text: "Core Features:" },
   { kind: "list", items: [
     "Light or neutral backgrounds with generous whitespace",
@@ -31,7 +31,7 @@ const body: Post["body"] = [
     "Smooth animations and subtle hover effects",
   ] },
   { kind: "h3", text: "Why It Works:" },
-  { kind: "p", text: "Clean Minimalism creates an effortless browsing experience. It’s easy to navigate, looks professional across all industries, and feels modern without trying too hard. It also loads quickly and adapts well to mobile—making it a strong choice for performance and SEO." },
+  { kind: "p", text: "Clean Minimalism creates an effortless browsing experience. It’s easy to navigate, looks professional across all industries, and feels modern without trying too hard. It also loads quickly and adapts well to mobile, making it a strong choice for performance and SEO." },
   { kind: "p", text: "This style is especially popular with startups, tech companies, agencies, and any brand that wants to come across as trustworthy, efficient, and sharp." },
   { kind: "h2", text: "2. Neo-Brutalism: Bold, Raw, and Unapologetically Digital" },
   { kind: "p", text: "Neo-Brutalism is the loud, experimental cousin of minimalism. It takes inspiration from classic Brutalist design but gives it a modern, web-first twist. Expect bold fonts, clashing colors, grid-breaking layouts, and a deliberate “unfinished” aesthetic." },
@@ -41,15 +41,15 @@ const body: Post["body"] = [
     "Thick borders and visible layout grids",
     "Raw HTML elements (like native buttons and links)",
     "Oversized typography with little concern for traditional spacing",
-    "Minimal effects or polished animations—if any",
+    "Minimal effects or polished animations, if any",
     "Purposefully unrefined, sometimes glitchy or anti-aesthetic",
   ] },
   { kind: "h3", text: "Why It Works:" },
-  { kind: "p", text: "Neo-Brutalism captures attention immediately. It’s ideal for creative studios, tech disruptors, or brands that want to stand out and say, “We don’t play by the rules.” It feels authentic, bold, and distinctly digital—like the internet grew up but didn’t lose its edge." },
+  { kind: "p", text: "Neo-Brutalism captures attention immediately. It’s ideal for creative studios, tech disruptors, or brands that want to stand out and say, “We don’t play by the rules.” It feels authentic, bold, and distinctly digital: like the internet grew up but didn’t lose its edge." },
   { kind: "p", text: "It’s not for everyone, but when executed well, it can create a striking, memorable experience that cuts through the noise." },
   { kind: "h2", text: "Final Thoughts" },
   { kind: "p", text: [
-    "These two styles represent opposite ends of the design spectrum—",
+    "These two styles represent opposite ends of the design spectrum, ",
     { text: "Clean Minimalism", bold: true },
     "is about restraint and polish, while",
     { text: "Neo-Brutalism", bold: true },
@@ -67,9 +67,19 @@ const body: Post["body"] = [
 export const the2MostUsed: Post = {
   slug: "the-2-most-used-style-cores-in-modern-web-design-today",
   title: "The 2 Most Used Style Cores in Modern Web Design Today (And Why They Work)",
-  description: "Explore the 2 most popular style cores in modern web design—minimalism and brutalism—their impact on UX, branding, and how to implement them effectively.",
-  lede: "Explore the 2 most popular style cores in modern web design—minimalism and brutalism—their impact on UX, branding, and how to implement them effectively.",
+  description: "Explore the 2 most popular style cores in modern web design (minimalism and brutalism) and their impact on UX, branding, and how to implement them effectively.",
+  lede: "Clean minimalism and neo-brutalism: what each one is for, and how to choose.",
+  category: "Website Design",
   // Fecha original de publicacion. No se toca: es parte de lo que se restaura.
   published: "2025-03-26",
+  /** Destacada del WordPress. `alt` vacio a proposito: la imagen va dentro
+   *  del enlace, pegada al titular que ya dice lo mismo, y describir una
+   *  ilustracion generica ahi solo anade ruido a un lector de pantalla. */
+  image: {
+    src: "/blog/the-2-most-used-style-cores-in-modern-web-design-today.png",
+    width: 1024,
+    height: 1024,
+    alt: "",
+  },
   body,
 };

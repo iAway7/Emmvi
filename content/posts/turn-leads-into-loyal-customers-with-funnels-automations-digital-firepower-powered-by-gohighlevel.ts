@@ -10,7 +10,7 @@ import type { Post } from "@/lib/posts";
  */
 const body: Post["body"] = [
   { kind: "p", text: [
-    "Getting leads is easy. Turning them into paying customers? That’s where the real magic happens—and",
+    "Getting leads is easy. Turning them into paying customers? That’s where the real magic happens, and",
     { text: "emmvi.com", bold: true },
     "is here to make that magic automatic.",
   ] },
@@ -33,7 +33,7 @@ const body: Post["body"] = [
     { text: "high-performing landing pages", bold: true },
     ", and a",
     { text: "slick, professional website", bold: true },
-    "—all working together to grow your business on autopilot.",
+    ": all working together to grow your business on autopilot.",
   ] },
   { kind: "h2", text: "🔁 Funnel Systems That Sell (Even While You Sleep)" },
   { kind: "p", text: [
@@ -41,7 +41,7 @@ const body: Post["body"] = [
     { text: "GoHighLevel", bold: true },
     ", we build custom",
     { text: "sales funnels", bold: true },
-    "that guide your leads through a journey—from the moment they discover you to the moment they hit “buy.”",
+    "that guide your leads through a journey: from the moment they discover you to the moment they hit “buy.”",
   ] },
   { kind: "p", text: "These funnels:" },
   { kind: "list", items: [
@@ -59,14 +59,14 @@ const body: Post["body"] = [
     "Re-engage cold leads",
     "Upsell or cross-sell based on user behavior",
   ] },
-  { kind: "p", text: "You stay focused on running your business—we handle the back-end hustle." },
+  { kind: "p", text: "You stay focused on running your business. We handle the back-end hustle." },
   { kind: "h2", text: "📧 Email & SMS Marketing That Actually Gets Responses" },
   { kind: "p", text: [
     "Generic blasts don’t work anymore. We craft personalized",
     { text: "email", bold: true },
     "and",
     { text: "SMS", bold: true },
-    "campaigns that feel human, not robotic—because relationships sell.",
+    "campaigns that feel human, not robotic, because relationships sell.",
   ] },
   { kind: "p", text: [
     "With GoHighLevel’s automation engine, we segment your audience and deliver the",
@@ -77,7 +77,7 @@ const body: Post["body"] = [
   { kind: "p", text: [
     "Yes,",
     { text: "we build beautiful websites", bold: true, href: "/services/website-design" },
-    "—but more importantly, they",
+    ", but more importantly, they",
     { text: "convert", bold: true },
     ". Every page we design is optimized to capture leads, drive action, and guide users through your funnel with zero friction.",
   ] },
@@ -138,9 +138,19 @@ const body: Post["body"] = [
 export const turnLeadsIntoLoyal: Post = {
   slug: "turn-leads-into-loyal-customers-with-funnels-automations-digital-firepower-powered-by-gohighlevel",
   title: "Turn Leads Into Loyal Customers with: Funnels, Automations & Digital Firepower Powered by GoHighLevel",
-  description: "Convert leads into loyal customers with powerful GoHighLevel funnels and smart automations—integrating email, SEO, landing pages, and workflows for scalable business growth.",
-  lede: "Convert leads into loyal customers with powerful GoHighLevel funnels and smart automations—integrating email, SEO, landing pages, and workflows for scalable business growth.",
+  description: "Convert leads into loyal customers with powerful GoHighLevel funnels and smart automations, integrating email, SEO, landing pages, and workflows for scalable business growth.",
+  lede: "How funnels and automations turn a first enquiry into a repeat customer.",
+  category: "Automation",
   // Fecha original de publicacion. No se toca: es parte de lo que se restaura.
   published: "2025-04-23",
+  /** Destacada del WordPress. `alt` vacio a proposito: la imagen va dentro
+   *  del enlace, pegada al titular que ya dice lo mismo, y describir una
+   *  ilustracion generica ahi solo anade ruido a un lector de pantalla. */
+  image: {
+    src: "/blog/turn-leads-into-loyal-customers-with-funnels-automations-digital-firepower-powered-by-gohighlevel.png",
+    width: 1400,
+    height: 628,
+    alt: "",
+  },
   body,
 };

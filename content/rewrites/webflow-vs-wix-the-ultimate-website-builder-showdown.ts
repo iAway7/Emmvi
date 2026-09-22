@@ -18,6 +18,7 @@ export const webflowVsWix: Post = {
   description:
     "An honest comparison of the two builders, who each is genuinely for, and the question that matters more than either.",
   lede: "They are aimed at different people, which is why the comparison is usually unsatisfying. The useful question is not which is better but which one matches who will be looking after the site.",
+  category: "Versus",
   body: [
     {
       kind: "p",

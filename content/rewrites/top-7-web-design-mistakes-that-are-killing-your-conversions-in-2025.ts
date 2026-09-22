@@ -11,6 +11,7 @@ export const webDesignMistakes: Post = {
   description:
     "Seven specific things that make visitors leave a service business website, and what to do about each one.",
   lede: "None of these are about taste. They are about a person on a phone, with one hand free, deciding in a few seconds whether to bother.",
+  category: "Website Design",
   published: "2026-09-19",
   body: [
     {

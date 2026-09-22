@@ -14,6 +14,7 @@ export const zapierGohighlevel: Post = {
   description:
     "What each tool actually does, when you need both, and the four connections worth building first. Plumbing, not magic.",
   lede: "Most small businesses do not have a tools problem. They have a tools-that-do-not-talk-to-each-other problem, and a person in the middle retyping things.",
+  category: "Automation",
   published: "2026-09-19",
   body: [
     {

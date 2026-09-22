@@ -1,6 +1,5 @@
 import { a5ProvenWaysTo } from "@/content/posts/5-proven-ways-to-get-more-leads-for-your-online-business";
 import { emailAutomationAndFunnel } from "@/content/posts/email-automation-and-funnel-building-the-secret-to-driving-more-sales";
-import { figmaVsAdobeXd } from "@/content/posts/figma-vs-adobe-xd-which-design-tool-reigns-supreme";
 import { harnessingAiWithoutCode } from "@/content/posts/harnessing-ai-without-code-how-crms-and-automation-tools-empower-online-businesses";
 import { howEmailMarketingAnd } from "@/content/posts/how-email-marketing-and-automated-series-can-increase-roi";
 import { howEmailMarketingHelps } from "@/content/posts/how-email-marketing-helps-maximize-customer-engagement";
@@ -68,8 +67,47 @@ export type Post = {
    */
   title: string;
   description: string;
-  /** Entradilla. Va bajo el h1 y no se repite dentro del cuerpo. */
+  /**
+   * Entradilla. Va bajo el h1 del articulo y no se repite dentro del cuerpo.
+   *
+   * **Ya no es la `rank_math_description` del WordPress**, que es lo que era
+   * al recuperarla: aquella esta escrita para el resultado de busqueda —168
+   * caracteres de media, una de 343— y bajo el titular ocupaba cuatro lineas
+   * repitiendolo en otras palabras. Estan reescritas a menos de 90, que a 44
+   * de medida son dos lineas justas, sin recortes ni puntos suspensivos.
+   *
+   * El texto original sigue vivo en `description`, que es de donde salen la
+   * meta description y el extracto de las tarjetas. Ahi hace su trabajo.
+   */
   lede: string;
+  /**
+   * Categoria, recuperada del WordPress (`terms` + `term_relationships`). La
+   * pinta el badge de las tarjetas de /blog, que es lo que hacia el skin
+   * `archive_cards` del original.
+   *
+   * **Una sola, aunque varios articulos tenian dos o tres.** Un badge con tres
+   * etiquetas deja de ser una senal y pasa a ser una lista. Donde habia varias
+   * se eligio la que mas le dice a quien lee: `streamline-scale-succeed`
+   * llevaba GoHighLevel, Automation y Zapier, y se queda en Automation, que es
+   * de lo que va. "Uncategorized" se descarta: es el relleno de WordPress.
+   *
+   * No es un enlace. No hay pagina de categoria y no se va a inventar una para
+   * que liste dos articulos.
+   */
+  category: string;
+  /**
+   * Imagen destacada, recuperada del backup del WordPress: los diecisiete la
+   * tenian, y se dieron por inexistentes hasta que se abrio la tabla
+   * `postmeta` buscando `_thumbnail_id`.
+   *
+   * **No son trabajo de Emmvi.** Son ilustraciones de banco, plantillas de
+   * Canva y arte generado con IA, que es lo que el WordPress publicaba. No es
+   * prueba social prestada —no afirman nada sobre Emmvi ni sobre sus
+   * clientes, que es lo que PRODUCT.md prohibe— pero tampoco son una senal de
+   * calidad: varias llevan su propio titulo quemado dentro y ninguna comparte
+   * paleta con el sitio. Ver el README.
+   */
+  image?: { src: string; width: number; height: number; alt: string };
   /**
    * Fecha de publicacion de *esta* version, no de la original, que se
    * desconoce. Al publicar conviene ponerla al dia.
@@ -99,7 +137,6 @@ export const posts: readonly Post[] = [
   a5ProvenWaysTo,
   howEmailMarketingAnd,
   top7WebDesign,
-  figmaVsAdobeXd,
   top5BestAi,
   theBest5Web,
   theArtOfUi,
@@ -118,3 +155,55 @@ export function findPost(slug: string) {
 
 /** Para el sitemap y para `generateStaticParams`. */
 export const postSlugs = posts.map((p) => p.slug);
+
+/**
+ * Minutos de lectura del articulo.
+ *
+ * Cuenta las palabras de verdad —recorre los bloques y saca el texto de los
+ * fragmentos, no del JSON— y divide por 220 palabras por minuto, que es la
+ * media habitual de lectura en pantalla en ingles. Medium usa 265 y le sale
+ * siempre menos; 220 se queda del lado de no prometer que se lee mas rapido de
+ * lo que se lee.
+ *
+ * Se redondea hacia arriba y nunca baja de 1: "0 min read" no dice nada.
+ */
+function textoDe(r: Rich): string {
+  if (typeof r === "string") return r;
+  return r.map((f) => (typeof f === "string" ? f : f.text)).join(" ");
+}
+
+export function readingTime(blocks: readonly Block[]): number {
+  let palabras = 0;
+
+  for (const block of blocks) {
+    if (block.kind === "image") continue;
+    const texto =
+      block.kind === "list"
+        ? block.items.map(textoDe).join(" ")
+        : textoDe(block.text);
+    palabras += texto.split(/\s+/).filter(Boolean).length;
+  }
+
+  return Math.max(1, Math.ceil(palabras / 220));
+}
+
+/**
+ * Los tres articulos que se ofrecen al final de uno.
+ *
+ * Reconstruye el bloque "Related Posts" de la plantilla del WordPress. Alli los
+ * elegia Elementor por taxonomia; aqui se hace igual, primero por categoria y
+ * rellenando con los mas recientes si no hay bastantes.
+ *
+ * **El original mostraba dos, en dos columnas anchas.** Son tres: a dos, cada
+ * tarjeta ocupa media pantalla y la imagen crece con ella, y el bloque acaba
+ * pesando mas que el final del articulo que lo precede. Tres llenan la fila sin
+ * dejar huecos y se leen como lo que son, una salida y no otra seccion.
+ */
+export function relatedPosts(post: Post, cuantos = 3): Post[] {
+  const resto = posts.filter((p) => p.slug !== post.slug);
+  const mismos = resto.filter((p) => p.category === post.category);
+  const otros = resto
+    .filter((p) => p.category !== post.category)
+    .sort((a, b) => b.published.localeCompare(a.published));
+  return [...mismos, ...otros].slice(0, cuantos);
+}

@@ -14,7 +14,7 @@ const body: Post["body"] = [
   { kind: "p", text: [
     "One of the most obvious benefits of email marketing automation is its ability to save time. Rather than manually sending emails to individual leads,",
     { text: "automated email series", href: "/zapier-the-no-code-automation-revolution-for-businesses" },
-    "can be triggered based on user behavior, such as signing up for your newsletter, making a purchase, or abandoning their cart. This means that you can engage with your audience at the right time with the right message—without having to be involved in every step of the process.",
+    "can be triggered based on user behavior, such as signing up for your newsletter, making a purchase, or abandoning their cart. This means that you can engage with your audience at the right time with the right message, without having to be involved in every step of the process.",
   ] },
   { kind: "h3", text: "How It Impacts ROI:" },
   { kind: "p", text: "Automated email series allow you to nurture leads through the sales funnel at scale. By ensuring that the right emails reach the right people at the right time, you maximize your chances of conversion, leading to a higher ROI. Automated workflows also reduce the need for manual intervention, freeing up your team to focus on other high-priority tasks." },
@@ -45,7 +45,7 @@ const body: Post["body"] = [
   { kind: "p", text: "Sending targeted offers at the right moment increases the chances of conversions. When combined with automation, this strategy works at scale without requiring constant manual effort. By capitalizing on the right moment, you can boost your sales while also improving the customer experience, which drives higher lifetime value and ROI." },
   { kind: "h2", text: "Conclusion: Email Marketing Automation is a Game Changer for ROI" },
   { kind: "p", text: "Incorporating automated email series into your marketing strategy offers numerous benefits, from improving efficiency to providing personalized experiences that increase customer engagement. By automating your email workflows, segmenting your audience, and using data to refine your approach, you can create highly targeted campaigns that lead to higher conversions and improved ROI." },
-  { kind: "p", text: "The power of email marketing lies not just in sending messages but in delivering the right message at the right time. Automated series allow you to engage with your audience consistently, nurture leads, and drive conversions—all while maximizing your resources. If you’re looking to increase your ROI, investing in email marketing automation should be a top priority." },
+  { kind: "p", text: "The power of email marketing lies not just in sending messages but in delivering the right message at the right time. Automated series allow you to engage with your audience consistently, nurture leads, and drive conversions, all while maximizing your resources. If you’re looking to increase your ROI, investing in email marketing automation should be a top priority." },
   { kind: "p", text: [
     { text: "Are you ready to take your email marketing to the next level?", href: "/contact-us" },
     "The possibilities are endless, and the results speak for themselves!",
@@ -55,9 +55,19 @@ const body: Post["body"] = [
 export const howEmailMarketingAnd: Post = {
   slug: "how-email-marketing-and-automated-series-can-increase-roi",
   title: "How Email Marketing and Automated Series Can Increase ROI",
-  description: "Boost your ROI with email marketing and automated series—learn how strategic workflows, segmentation, and testing can turn emails into real revenue drivers.",
-  lede: "Boost your ROI with email marketing and automated series—learn how strategic workflows, segmentation, and testing can turn emails into real revenue drivers.",
+  description: "Boost your ROI with email marketing and automated series: learn how strategic workflows, segmentation, and testing can turn emails into real revenue drivers.",
+  lede: "Why automated series earn more than one-off campaigns, and how to set them up.",
+  category: "Email Marketing",
   // Fecha original de publicacion. No se toca: es parte de lo que se restaura.
   published: "2025-04-15",
+  /** Destacada del WordPress. `alt` vacio a proposito: la imagen va dentro
+   *  del enlace, pegada al titular que ya dice lo mismo, y describir una
+   *  ilustracion generica ahi solo anade ruido a un lector de pantalla. */
+  image: {
+    src: "/blog/how-email-marketing-and-automated-series-can-increase-roi.png",
+    width: 1200,
+    height: 676,
+    alt: "",
+  },
   body,
 };

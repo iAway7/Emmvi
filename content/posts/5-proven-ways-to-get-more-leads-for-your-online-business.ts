@@ -12,7 +12,7 @@ const body: Post["body"] = [
   { kind: "p", text: [
     "In the ever-growing world of online businesses, generating high-quality leads is essential for long-term success. Whether you are a startup or an established brand, attracting potential customers who are genuinely interested in your products or services is crucial. But with so many strategies available, it can be hard to know where to focus your efforts. In this article, we'll explore",
     { text: "five proven avenues", bold: true },
-    "to help you generate more leads for your online business—each offering unique advantages and measurable results.",
+    "to help you generate more leads for your online business: each offering unique advantages and measurable results.",
   ] },
   { kind: "h2", text: "1. Content Marketing and Blogging" },
   { kind: "p", text: "Content marketing remains one of the most powerful ways to attract leads. By creating valuable, informative, and engaging content, you can draw potential customers who are searching for solutions to their problems. When done correctly, content marketing positions your business as an authority in your niche, builds trust, and provides ongoing value to your audience." },
@@ -102,7 +102,7 @@ const body: Post["body"] = [
   { kind: "h2", text: "4. Social Media Marketing" },
   { kind: "p", text: [
     { text: "Social media", href: "/services/ppc" },
-    "is more than just a platform for entertainment—it's a powerful tool for lead generation. By building a presence on the right platforms, engaging with your audience, and sharing valuable content, you can convert followers into leads and eventually customers.",
+    "is more than just a platform for entertainment. It's a powerful tool for lead generation. By building a presence on the right platforms, engaging with your audience, and sharing valuable content, you can convert followers into leads and eventually customers.",
   ] },
   { kind: "p", text: [
     { text: "How to Get More Leads with Social Media:", bold: true },
@@ -170,9 +170,19 @@ const body: Post["body"] = [
 export const a5ProvenWaysTo: Post = {
   slug: "5-proven-ways-to-get-more-leads-for-your-online-business",
   title: "5 Proven Ways to Get More Leads for Your Online Business",
-  description: "Discover 5 proven strategies—content marketing, SEO, email, social media & automation—to attract more leads, boost conversions and grow your online business in 2025.",
-  lede: "Discover 5 proven strategies—content marketing, SEO, email, social media & automation—to attract more leads, boost conversions and grow your online business in 2025.",
+  description: "Discover 5 proven strategies (content marketing, SEO, email, social media and automation) to attract more leads, boost conversions and grow your online business in 2025.",
+  lede: "Five ways to bring in more enquiries, and what each one actually takes.",
+  category: "Lead Generation",
   // Fecha original de publicacion. No se toca: es parte de lo que se restaura.
   published: "2025-04-15",
+  /** Destacada del WordPress. `alt` vacio a proposito: la imagen va dentro
+   *  del enlace, pegada al titular que ya dice lo mismo, y describir una
+   *  ilustracion generica ahi solo anade ruido a un lector de pantalla. */
+  image: {
+    src: "/blog/5-proven-ways-to-get-more-leads-for-your-online-business.png",
+    width: 1024,
+    height: 683,
+    alt: "",
+  },
   body,
 };

@@ -51,19 +51,19 @@ const body: Post["body"] = [
   { kind: "list", items: [
     [
       { text: "Automate Lead Nurturing", bold: true },
-      "– AI chatbots and automated follow-up sequences ensure that potential customers receive timely engagement without manual intervention.",
+      ": AI chatbots and automated follow-up sequences ensure that potential customers receive timely engagement without manual intervention.",
     ],
     [
       { text: "AI-Powered Messaging", bold: true },
-      "– Leverage AI to personalize messages based on customer interactions, increasing engagement and conversions.",
+      ": Leverage AI to personalize messages based on customer interactions, increasing engagement and conversions.",
     ],
     [
       { text: "Smart Scheduling", bold: true },
-      "– AI-driven appointment scheduling reduces back-and-forth emails by allowing customers to book available slots directly.",
+      ": AI-driven appointment scheduling reduces back-and-forth emails by allowing customers to book available slots directly.",
     ],
     [
       { text: "Customer Sentiment Analysis", bold: true },
-      "– AI analyzes customer interactions to determine satisfaction levels, enabling proactive service improvements.",
+      ": AI analyzes customer interactions to determine satisfaction levels, enabling proactive service improvements.",
     ],
   ] },
   { kind: "p", text: "By integrating AI-powered automation in GoHighLevel, businesses can optimize customer interactions and close more deals efficiently." },
@@ -72,19 +72,19 @@ const body: Post["body"] = [
   { kind: "list", items: [
     [
       { text: "Sync Data Across Platforms", bold: true },
-      "– Automatically update CRM records when a lead submits a form, ensuring no data loss.",
+      ": Automatically update CRM records when a lead submits a form, ensuring no data loss.",
     ],
     [
       { text: "Automate Marketing Campaigns", bold: true },
-      "– Trigger AI-based email or SMS sequences based on customer actions.",
+      ": Trigger AI-based email or SMS sequences based on customer actions.",
     ],
     [
       { text: "AI-Powered Chatbots", bold: true },
-      "– Connect chatbot interactions with CRM tools to personalize responses and follow-ups.",
+      ": Connect chatbot interactions with CRM tools to personalize responses and follow-ups.",
     ],
     [
       { text: "Automate Social Media Posting", bold: true },
-      "– AI analyzes engagement trends and schedules optimal posting times for increased reach.",
+      ": AI analyzes engagement trends and schedules optimal posting times for increased reach.",
     ],
   ] },
   { kind: "p", text: "By using Zapier to integrate AI functionalities across different business tools, companies can enhance efficiency and maintain a seamless workflow." },
@@ -93,20 +93,20 @@ const body: Post["body"] = [
   { kind: "list", items: [
     [
       { text: "Lack of Human Touch", bold: true },
-      "– Over-reliance on AI may make customer interactions feel robotic. Solution: Use AI to handle repetitive queries while keeping complex interactions human-led.",
+      ": Over-reliance on AI may make customer interactions feel robotic. Solution: Use AI to handle repetitive queries while keeping complex interactions human-led.",
     ],
     [
       { text: "Data Privacy Concerns", bold: true },
-      "– AI systems require large amounts of data, raising security concerns. Solution: Ensure compliance with data protection laws and use secure CRM platforms like GoHighLevel.",
+      ": AI systems require large amounts of data, raising security concerns. Solution: Ensure compliance with data protection laws and use secure CRM platforms like GoHighLevel.",
     ],
     [
       { text: "Implementation Complexity", bold: true },
-      "– Some businesses struggle with integrating AI. Solution: Start with simple automations using Zapier and gradually scale up AI-powered solutions.",
+      ": Some businesses struggle with integrating AI. Solution: Start with simple automations using Zapier and gradually scale up AI-powered solutions.",
     ],
   ], ordered: true },
   { kind: "h2", text: "Final Thoughts" },
   { kind: "p", text: [
-    "AI is not a threat to online businesses—it’s a powerful tool that, when used correctly, can transform operations, enhance customer experiences, and drive growth. By integrating AI into",
+    "AI is not a threat to online businesses. It’s a powerful tool that, when used correctly, can transform operations, enhance customer experiences, and drive growth. By integrating AI into",
     { text: "GoHighLevel", bold: true },
     "for CRM management and",
     { text: "Zapier", bold: true },
@@ -121,8 +121,18 @@ export const harnessingAiWithoutCode: Post = {
   slug: "harnessing-ai-without-code-how-crms-and-automation-tools-empower-online-businesses",
   title: "Harnessing AI Without Code: CRMs and Automation Tools Empower Online Businesses",
   description: "Harness AI without code: learn how CRMs and automation tools empower 2025 online businesses by boosting productivity, lead management, and customer journeys.",
-  lede: "Harness AI without code: learn how CRMs and automation tools empower 2025 online businesses by boosting productivity, lead management, and customer journeys.",
+  lede: "What AI inside a CRM really does for a small business, without writing code.",
+  category: "AI",
   // Fecha original de publicacion. No se toca: es parte de lo que se restaura.
   published: "2025-04-01",
+  /** Destacada del WordPress. `alt` vacio a proposito: la imagen va dentro
+   *  del enlace, pegada al titular que ya dice lo mismo, y describir una
+   *  ilustracion generica ahi solo anade ruido a un lector de pantalla. */
+  image: {
+    src: "/blog/harnessing-ai-without-code-how-crms-and-automation-tools-empower-online-businesses.jpg",
+    width: 1000,
+    height: 600,
+    alt: "",
+  },
   body,
 };
