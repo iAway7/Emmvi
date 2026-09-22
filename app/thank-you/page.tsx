@@ -62,7 +62,7 @@ export default function ThankYou() {
           </h1>
 
           <p className="mt-6 text-lede text-pretty text-ink-soft">
-            Your message is in. A person reads every one of these — not a queue
+            Your message is in. A person reads every one of these, not a queue
             and not a bot.
           </p>
 

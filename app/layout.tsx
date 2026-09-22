@@ -44,7 +44,7 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Emmvi — websites and automation that answer every enquiry",
+    default: "Emmvi: websites and automation that answer every enquiry",
     template: "%s · Emmvi",
   },
   description:

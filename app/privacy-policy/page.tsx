@@ -255,7 +255,7 @@ export default function PrivacyPolicy() {
           <ul className={ul}>
             <li>
               Server logs. Our host, Vercel, records the usual request
-              information — IP address, browser, the page requested and when.
+              information, IP address, browser, the page requested and when.
               This is standard for any web server and is used to keep the site
               running and secure.
             </li>
@@ -349,8 +349,7 @@ export default function PrivacyPolicy() {
                 rel="noopener noreferrer"
               >
                 Resend
-              </a>{" "}
-              — delivers the enquiry email to our inbox.
+              </a>{" "}delivers the enquiry email to our inbox.
             </li>
             <li>
               <a
@@ -360,8 +359,7 @@ export default function PrivacyPolicy() {
                 rel="noopener noreferrer"
               >
                 Calendly
-              </a>{" "}
-              — handles call bookings.
+              </a>{" "}handles call bookings.
             </li>
             <li>
               <a
@@ -371,8 +369,7 @@ export default function PrivacyPolicy() {
                 rel="noopener noreferrer"
               >
                 Vercel
-              </a>{" "}
-              — hosts and serves the site.
+              </a>{" "}hosts and serves the site.
             </li>
             <li>
               <a
@@ -382,8 +379,7 @@ export default function PrivacyPolicy() {
                 rel="noopener noreferrer"
               >
                 Google
-              </a>{" "}
-              — delivers the Tag Manager container and runs Analytics.
+              </a>{" "}delivers the Tag Manager container and runs Analytics.
             </li>
             <li>
               <a
@@ -393,8 +389,7 @@ export default function PrivacyPolicy() {
                 rel="noopener noreferrer"
               >
                 PostHog
-              </a>{" "}
-              — product analytics and session recording, on their European
+              </a>{" "}product analytics and session recording, on their European
               cloud.
             </li>
           </ul>

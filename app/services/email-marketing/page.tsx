@@ -122,7 +122,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: "What are flows or automations?",
-    a: "An email that sends itself when something happens, instead of when someone remembers. A cart gets abandoned, a first order arrives, three months go by with no opens — each of those can start a sequence. You write it once and it keeps running, including on the days nobody is at a desk.",
+    a: "An email that sends itself when something happens, instead of when someone remembers. A cart gets abandoned, a first order arrives, three months go by with no opens: each of those can start a sequence. You write it once and it keeps running, including on the days nobody is at a desk.",
   },
   {
     q: "What do your services include?",
@@ -134,7 +134,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: "Have you worked with brands in my niche?",
-    a: "Maybe, and we will tell you straight on the call rather than stretch a case to fit. So far this has been built for an online store, a local gym and a music producer, which is a range rather than a speciality. What carries across is the mechanism, not the subject matter — and where it does not carry across, you should hear that before you pay for anything.",
+    a: "Maybe, and we will tell you straight on the call rather than stretch a case to fit. So far this has been built for an online store, a local gym and a music producer, which is a range rather than a speciality. What carries across is the mechanism, not the subject matter, and where it does not carry across, you should hear that before you pay for anything.",
   },
   {
     q: "What kind of results can I expect?",
@@ -146,7 +146,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: "Is there any type of reporting or tracking?",
-    a: "Yes, and it is the part that usually gets skipped. Every month you get what was sent, what was opened and clicked, what was bought as a result, and which flows are paying for themselves — written in plain language, not a platform export forwarded to you. You keep your own access to the platform too, so nothing we report is something you cannot go and check.",
+    a: "Yes, and it is the part that usually gets skipped. Every month you get what was sent, what was opened and clicked, what was bought as a result, and which flows are paying for themselves, written in plain language, not a platform export forwarded to you. You keep your own access to the platform too, so nothing we report is something you cannot go and check.",
   },
 ];
 

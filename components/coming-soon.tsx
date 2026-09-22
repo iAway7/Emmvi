@@ -23,7 +23,7 @@ import { CONTACT_EMAIL, SITE_TAGLINE, pageMetadata } from "@/lib/site";
  * outreach.
  */
 export const COMING_SOON_TITLE =
-  "Emmvi — websites and automation for installers";
+  "Emmvi: websites and automation for installers";
 
 /**
  * La linea de marca mas la invitacion a reservar. Sale de `SITE_TAGLINE` en

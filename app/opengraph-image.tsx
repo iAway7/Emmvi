@@ -16,7 +16,7 @@ import { OG_CONTENT_TYPE, OG_SIZE, renderOgCard } from "@/lib/og-card";
  * `og:image`. El `summary_large_image` que decide el formato esta en
  * app/layout.tsx.
  */
-export const alt = "Emmvi — websites and automation for installers";
+export const alt = "Emmvi: websites and automation for installers";
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 

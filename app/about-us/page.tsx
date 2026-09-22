@@ -31,7 +31,7 @@ import { pageMetadata } from "@/lib/site";
 export const metadata: Metadata = pageMetadata({
   path: "/about-us",
   // Absoluto: la plantilla "%s · Emmvi" dejaria "About Emmvi · Emmvi".
-  title: "About Emmvi — websites and the systems behind them",
+  title: "About Emmvi: websites and the systems behind them",
   absoluteTitle: true,
   description:
     "Emmvi builds websites and the systems that run behind them, from Valencia and from Argentina. How a project actually runs, and who we work with.",
