@@ -461,7 +461,14 @@ export default function PpcPage() {
 
         {/* --- Types of Paid Ads --------------------------------------- */}
         <section className={`${wrap} pb-16 lg:pb-24`}>
-          <div className="relative overflow-hidden rounded-lg border border-line bg-paper px-8 py-12 min-[900px]:px-16 min-[900px]:py-16">
+          {/* `overflow-clip` y no `overflow-hidden`, y la diferencia no es de
+              estilo: `hidden` convierte al panel en contenedor de scroll, y
+              entonces el `view()` de las chapas se ancla **a el** en vez de a
+              la pagina. Como el panel no se desplaza, su rango de scroll es
+              cero, el ViewTimeline no resuelve (`currentTime` a null) y las
+              chapas no giraban. `clip` recorta igual —radio incluido— sin
+              crear contenedor de scroll. */}
+          <div className="relative overflow-clip rounded-lg border border-line bg-paper px-8 py-12 min-[900px]:px-16 min-[900px]:py-16">
             <div className="max-w-[705px]">
               <h2 className={h2Big}>Types of Paid Ads</h2>
               {/* La regla del original son dos tramos: 3px de violeta de marca
