@@ -190,7 +190,7 @@ const chips = [
 const benefits = [
   {
     title: "Diversified Service",
-    body: "Emmvi goes beyond mere paid advertising; we provide a diverse array of customizable digital marketing services tailored to suit your specific requirements.",
+    body: "emmvi goes beyond mere paid advertising; we provide a diverse array of customizable digital marketing services tailored to suit your specific requirements.",
     icon: "/figma/ppc/benefit-diversified.svg",
     alt: "An isometric gear linked to three cubes.",
   },
@@ -208,7 +208,7 @@ const benefits = [
   },
   {
     title: "Transparency and Communication",
-    body: "At Emmvi, we prioritize transparency and open communication. You’ll stay informed about your campaign’s progress and budget allocation. Regular reports and analyses ensure you witness the tangible results of our dedicated efforts.",
+    body: "At emmvi, we prioritize transparency and open communication. You’ll stay informed about your campaign’s progress and budget allocation. Regular reports and analyses ensure you witness the tangible results of our dedicated efforts.",
     icon: "/figma/ppc/benefit-transparency.svg",
     alt: "An isometric envelope with a bar chart rising out of it.",
   },
@@ -558,7 +558,7 @@ export default function PpcPage() {
               1192, así que en píxeles se pasaban y salían las dos iguales. */}
           <div className="grid gap-8 min-[900px]:grid-cols-[minmax(0,562px)_minmax(0,518px)] min-[900px]:items-start min-[900px]:justify-between min-[900px]:gap-8">
             {/* El Figma escribe "The Benefits of Paid Online Advertising With
-                Emmvi", que a 64px son cuatro líneas en esta columna. Acortado
+                emmvi", que a 64px son cuatro líneas en esta columna. Acortado
                 a dos, en la misma forma de pregunta que los otros dos
                 titulares de la pantalla. */}
             <h2 className={h2Big}>Why Run Your Ads With Us</h2>
@@ -622,7 +622,7 @@ export default function PpcPage() {
                 <SalesForm />
                 <p className="mt-5 max-w-[34em] text-small text-ink-soft">
                   By submitting this form, I confirm that I have read and
-                  understood the Emmvi{" "}
+                  understood the emmvi{" "}
                   <Link
                     href="/privacy-policy/"
                     className="text-ink underline underline-offset-[3px] hover:text-violet"

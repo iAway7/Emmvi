@@ -1,5 +1,32 @@
 # Design
 
+## El nombre
+
+**Siempre `emmvi`, nunca `Emmvi`.** Va en minúscula incluso al empezar una
+frase, un título de pestaña o una etiqueta accesible. No es un descuido de
+capitalización: es el logotipo, que es un wordmark en caja baja.
+
+Alcanza a todo lo que ve alguien, incluidos los sitios donde es fácil
+olvidarlo: `<title>` y su plantilla (`%s · emmvi`), `SITE_NAME` en
+`lib/site.ts`, los `aria-label` del header, el pie y el mapa, el `alt` de la
+tarjeta de Open Graph, el JSON-LD de organización, el aviso de marca del pie y
+el `<title>` del SVG de BIMI.
+
+Los comentarios del código también lo escriben en minúscula. No es cosmética:
+varios citan literalmente la plantilla del título, y si ahí pone `Emmvi`
+describen algo que el código ya no hace.
+
+Para comprobarlo de una vez:
+
+```
+grep -rn "Emmvi" --include="*.tsx" --include="*.ts" --include="*.css" \
+  --include="*.svg" app components lib content public
+```
+
+Sin resultados es lo correcto. La única excepción viva está fuera del
+repositorio: la OEPM registró el distintivo escrito `Emmvi`, así que un
+documento legal que cite el registro puede llevarlo en alta.
+
 ## Theme
 
 Claro. El lector abre esto en el móvil, a plena luz, entre trabajos o al final

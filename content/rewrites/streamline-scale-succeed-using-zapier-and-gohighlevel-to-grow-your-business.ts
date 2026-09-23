@@ -1,7 +1,7 @@
 import type { Post } from "@/lib/posts";
 
 /**
- * De los ocho articulos heredados, el que mas cerca esta de lo que Emmvi vende
+ * De los ocho articulos heredados, el que mas cerca esta de lo que emmvi vende
  * hoy: GoHighLevel y Zapier son dos de las herramientas que la home nombra.
  *
  * Por eso mismo es el que mas facil seria estropear. No lleva ni una cifra de

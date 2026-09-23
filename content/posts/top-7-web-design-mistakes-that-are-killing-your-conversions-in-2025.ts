@@ -16,7 +16,7 @@ const body: Post["body"] = [
   ] },
   { kind: "p", text: [
     "In 2025, successful web design is no longer just about aesthetics. It’s about strategy, usability, and performance. At",
-    { text: "Emmvi", bold: true },
+    { text: "emmvi", bold: true },
     ", we see it all the time: beautiful websites that underperform because of simple, avoidable mistakes.",
   ] },
   { kind: "p", text: [
@@ -95,7 +95,7 @@ const body: Post["body"] = [
   { kind: "p", text: "Your website is often your first (and most powerful) sales tool. If it’s not converting, it’s costing you." },
   { kind: "p", text: [
     "At",
-    { text: "Emmvi", bold: true },
+    { text: "emmvi", bold: true },
     ", we specialize in conversion-focused web design that doesn’t just look great. It works. Want a free audit of your current site?",
     { text: "Let’s talk", bold: true, href: "/contact-us" },
     ".",

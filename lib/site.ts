@@ -15,7 +15,7 @@ import { postSlugs } from "@/lib/posts";
 /** Sin barra final: se concatena con rutas que ya empiezan por "/". */
 export const SITE_URL = "https://emmvi.com";
 
-export const SITE_NAME = "Emmvi";
+export const SITE_NAME = "emmvi";
 
 /**
  * **La unica definicion de la direccion publica del sitio.** Sale en el aviso
@@ -47,7 +47,7 @@ export const comingSoon = process.env.COMING_SOON === "1";
  * La linea de marca. Es la de la pagina de espera, que es la que pasa el filtro
  * de PRODUCT.md: promete respuesta en menos de un minuto, que es verificable, y
  * no promete porcentajes de facturacion. Ademas deja claro que el minuto es lo
- * que contesta *el sistema que se construye*, no la bandeja de Emmvi.
+ * que contesta *el sistema que se construye*, no la bandeja de emmvi.
  *
  * El salto de linea esta escrito donde la frase se parte de verdad —la web y el
  * sistema, que es la oferta unica— y solo lo lee la tarjeta de Open Graph. Las
@@ -71,7 +71,7 @@ export const SITE_TAGLINE = SITE_TAGLINE_LINES.replace("\n", " ");
  * necesitan, y una identidad legal que diverge entre dos paginas del mismo
  * sitio es un problema mayor que la duplicacion.
  *
- * **Es una persona fisica, no una sociedad**: Emmvi es nombre comercial y
+ * **Es una persona fisica, no una sociedad**: emmvi es nombre comercial y
  * quien responde legalmente es el titular. De ahi que el texto diga "trading
  * name of" y no "a company registered in", y que no haya datos registrales de
  * sociedad que dar.
@@ -157,11 +157,11 @@ type PageMeta = {
   /** Ruta canonica, con barra inicial. `metadataBase` le pone el dominio. */
   path: string;
   /**
-   * Titulo de la pestana. Le cae encima la plantilla "%s · Emmvi" de
+   * Titulo de la pestana. Le cae encima la plantilla "%s · emmvi" de
    * app/layout.tsx, salvo con `absoluteTitle`.
    */
   title: string;
-  /** Para titulos que ya dicen "Emmvi" y no deben repetirlo. */
+  /** Para titulos que ya dicen "emmvi" y no deben repetirlo. */
   absoluteTitle?: boolean;
   description: string;
   /** Una de las cinco pantallas del Figma viejo. Ver `indexLegacyPages`. */

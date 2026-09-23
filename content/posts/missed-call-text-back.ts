@@ -105,7 +105,7 @@ const body: Post["body"] = [
   { kind: "p", text: "They get the same text. Most systems let you exclude known numbers, such as suppliers or staff, and a spam caller simply won't reply. It's a small cost next to a missed enquiry." },
   { kind: "p", text: [
     "If you'd rather have the text back, the CRM and the follow-up set up and tested for you, you can ",
-    { text: "talk to Emmvi", href: "/contact-us/" },
+    { text: "talk to emmvi", href: "/contact-us/" },
     ".",
   ] },
 ];

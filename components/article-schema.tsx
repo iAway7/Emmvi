@@ -10,7 +10,7 @@ import { SITE_URL } from "@/lib/site";
  *
  * **`author` y `publisher` apuntan al `@id` de la organizacion** en vez de
  * repetir sus datos. Asi los dos marcados se unen en el mismo grafo, y ademas
- * evita la pregunta de quien firma cada articulo: los firma Emmvi. Los textos
+ * evita la pregunta de quien firma cada articulo: los firma emmvi. Los textos
  * vienen del WordPress anterior y no tienen autor atribuible, y PRODUCT.md
  * pide no repartir nombres propios por el sitio.
  *

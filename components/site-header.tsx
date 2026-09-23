@@ -41,7 +41,7 @@ const services = [
 const links = [
   { href: "/#services", label: "Services", children: services },
   { href: "/#who", label: "Who we work with" },
-  // Pagina propia, no el ancla de la seccion "Meet Emmvi" de la home.
+  // Pagina propia, no el ancla de la seccion "Meet emmvi" de la home.
   { href: "/about-us/", label: "About" },
   { href: "/#faq", label: "FAQ" },
 ];
@@ -52,7 +52,7 @@ export function SiteHeader() {
       <div className="mx-auto flex h-[88px] max-w-[var(--container-wrap)] items-center justify-between gap-8 px-6 lg:px-[var(--spacing-gut)]">
         <Link
           href="/"
-          aria-label="Emmvi, home"
+          aria-label="emmvi, home"
           className="inline-flex min-h-[44px] items-center rounded-sm text-ink focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
         >
           <Wordmark className="h-8 w-auto" />

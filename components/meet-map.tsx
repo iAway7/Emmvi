@@ -1,5 +1,5 @@
 /**
- * Mapa de puntos del borrador emmvi-home.html: enseña de donde trabaja Emmvi
+ * Mapa de puntos del borrador emmvi-home.html: enseña de donde trabaja emmvi
  * en vez de solo decirlo. Spain y Argentina marcadas en el violeta de marca.
  *
  * Va inline y no como <img> porque los puntos **cambian de grosor en movil**
@@ -19,7 +19,7 @@ export function MeetMap() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       role="img"
-      aria-label="Emmvi works from Spain and Argentina, for clients across Europe and the Americas"
+      aria-label="emmvi works from Spain and Argentina, for clients across Europe and the Americas"
       className="meet-map block h-auto w-full"
     >
       <path

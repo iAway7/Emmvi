@@ -406,7 +406,7 @@ html:has(dialog[open]) {
 }
 
 /* --------------------------------------------------------------------------
-   Mapa de "Meet Emmvi". Los grosores van aqui y no en el marcado porque
+   Mapa de "Meet emmvi". Los grosores van aqui y no en el marcado porque
    cambian con el ancho: a 375px el mapa se sirve de borde a borde y los
    puntos, dibujados para 1200, se pierden si no engordan.
    -------------------------------------------------------------------------- */

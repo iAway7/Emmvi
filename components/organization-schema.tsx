@@ -1,7 +1,7 @@
 import { CONTACT_EMAIL, SITE_NAME, SITE_TAGLINE, SITE_URL } from "@/lib/site";
 
 /**
- * JSON-LD de organizacion, para que el buscador sepa que "Emmvi" es una
+ * JSON-LD de organizacion, para que el buscador sepa que "emmvi" es una
  * empresa y no una palabra suelta, y con que logo y correo asociarla.
  *
  * Solo en la home: Google pide que el marcado de organizacion viva en una

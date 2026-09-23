@@ -102,9 +102,9 @@ export type Post = {
    * tenian, y se dieron por inexistentes hasta que se abrio la tabla
    * `postmeta` buscando `_thumbnail_id`.
    *
-   * **No son trabajo de Emmvi.** Son ilustraciones de banco, plantillas de
+   * **No son trabajo de emmvi.** Son ilustraciones de banco, plantillas de
    * Canva y arte generado con IA, que es lo que el WordPress publicaba. No es
-   * prueba social prestada —no afirman nada sobre Emmvi ni sobre sus
+   * prueba social prestada —no afirman nada sobre emmvi ni sobre sus
    * clientes, que es lo que PRODUCT.md prohibe— pero tampoco son una senal de
    * calidad: varias llevan su propio titulo quemado dentro y ninguna comparte
    * paleta con el sitio. Ver el README.

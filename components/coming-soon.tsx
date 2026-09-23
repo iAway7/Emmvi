@@ -17,13 +17,13 @@ import { CONTACT_EMAIL, SITE_TAGLINE, pageMetadata } from "@/lib/site";
  *     oscuro hay un solo violeta en vez de dos.
  *   - blanco al 70%: 7.93:1 o mejor.
  *
- * Mantiene reserva de llamada y correo: la promesa de Emmvi es que toda
+ * Mantiene reserva de llamada y correo: la promesa de emmvi es que toda
  * consulta se contesta en menos de un minuto, asi que una pagina que corta el
  * contacto contradice el posicionamiento justo cuando alguien llega desde el
  * outreach.
  */
 export const COMING_SOON_TITLE =
-  "Emmvi: websites and automation for installers";
+  "emmvi: websites and automation for installers";
 
 /**
  * La linea de marca mas la invitacion a reservar. Sale de `SITE_TAGLINE` en

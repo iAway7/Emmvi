@@ -383,7 +383,7 @@ export default function EmailMarketingPage() {
                 <SalesForm />
                 <p className="mt-5 max-w-[34em] text-small text-ink-soft">
                   By submitting this form, I confirm that I have read and
-                  understood the Emmvi{" "}
+                  understood the emmvi{" "}
                   <Link
                     href="/privacy-policy/"
                     className="text-ink underline underline-offset-[3px] hover:text-violet"

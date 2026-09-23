@@ -83,9 +83,9 @@ const body: Post["body"] = [
   ] },
   { kind: "p", text: "When your lead capture and sales journey are connected, your business can move with more clarity and confidence." },
   { kind: "h2", text: "Ready to Streamline Your Lead Capture and Sales Process?" },
-  { kind: "p", text: "Emmvi helps businesses simplify their lead management, automate follow-up, and create a smoother path from first inquiry to closed sale." },
+  { kind: "p", text: "emmvi helps businesses simplify their lead management, automate follow-up, and create a smoother path from first inquiry to closed sale." },
   { kind: "p", text: [
-    { text: "Ready to turn more leads into customers? Contact Emmvi today to learn how our CRM solutions can help your business streamline sales, save time, and grow with confidence.", bold: true },
+    { text: "Ready to turn more leads into customers? Contact emmvi today to learn how our CRM solutions can help your business streamline sales, save time, and grow with confidence.", bold: true },
   ] },
 ];
 

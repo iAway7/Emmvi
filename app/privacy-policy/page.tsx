@@ -122,7 +122,7 @@ export default function PrivacyPolicy() {
               {controller.legalName}
               {controller.taxId ? `, NIF ${controller.taxId}` : ""}, of{" "}
               {controller.registeredAddress}, who is the data controller for
-              this website, <span className="font-mono">emmvi.com</span>. Emmvi
+              this website, <span className="font-mono">emmvi.com</span>. emmvi
               is a registered trademark in Spain.
             </p>
           ) : (

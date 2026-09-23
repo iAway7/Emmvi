@@ -14,8 +14,8 @@ import {
  * COMING_SOON=1 son la misma pantalla, y una copia indexada compitiendo con la
  * raiz es exactamente lo que no interesa. El robots.txt tambien la excluye.
  *
- * El titulo va absoluto para que la plantilla "%s · Emmvi" no lo deje en
- * "Emmvi — ... · Emmvi".
+ * El titulo va absoluto para que la plantilla "%s · emmvi" no lo deje en
+ * "emmvi — ... · emmvi".
  */
 export const metadata: Metadata = {
   title: { absolute: COMING_SOON_TITLE },

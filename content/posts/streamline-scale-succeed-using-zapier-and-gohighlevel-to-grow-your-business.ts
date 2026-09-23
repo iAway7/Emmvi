@@ -9,13 +9,13 @@ import type { Post } from "@/lib/posts";
  * los que llevaban a una pagina retirada se quedan en texto llano.
  */
 const body: Post["body"] = [
-  { kind: "p", text: "In today’s competitive digital landscape, automation is no longer a luxury. It's a necessity. At Emmvi.com, we specialize in helping small businesses and entrepreneurs scale efficiently by integrating two powerful platforms: Zapier and GoHighLevel. These tools, when used strategically, can drastically streamline operations, improve customer experience, and increase overall productivity." },
+  { kind: "p", text: "In today’s competitive digital landscape, automation is no longer a luxury. It's a necessity. At emmvi.com, we specialize in helping small businesses and entrepreneurs scale efficiently by integrating two powerful platforms: Zapier and GoHighLevel. These tools, when used strategically, can drastically streamline operations, improve customer experience, and increase overall productivity." },
   { kind: "h2", text: "What Is Zapier?" },
   { kind: "p", text: "Zapier is an automation platform that connects your favorite apps to work together without writing any code. It allows you to create “Zaps”: automated workflows that trigger actions based on certain events. For example, when someone fills out a form on your website, Zapier can instantly send the information to your CRM, alert your sales team via Slack, and add the lead to your email marketing list." },
   { kind: "h2", text: "What Is GoHighLevel?" },
   { kind: "p", text: "GoHighLevel is an all-in-one sales and marketing platform built for agencies and small businesses. It combines CRM, email and SMS marketing, funnel builders, reputation management, appointment scheduling, and more under one roof. With GoHighLevel, you can centralize client communication, automate follow-ups, and track lead performance: all from a single dashboard." },
-  { kind: "h2", text: "How Emmvi Brings It All Together" },
-  { kind: "p", text: "At Emmvi.com, we don't just plug tools in and hope they work. We take a strategic, customized approach to automation that aligns with your business goals. Here’s how we help:" },
+  { kind: "h2", text: "How emmvi Brings It All Together" },
+  { kind: "p", text: "At emmvi.com, we don't just plug tools in and hope they work. We take a strategic, customized approach to automation that aligns with your business goals. Here’s how we help:" },
   { kind: "list", items: [
     [
       { text: "Custom Workflows Using Zapier", bold: true },
@@ -58,7 +58,7 @@ const body: Post["body"] = [
   { kind: "p", text: [
     "If you’re serious about growing your business and want to leverage the power of Zapier and ",
     { text: "GoHighLevel", href: "/services/gohighlevel-automation" },
-    ", Emmvi.com is here to help. Our tailored solutions are designed to meet your specific needs, so you get the most out of your tools, without the technical headache.",
+    ", emmvi.com is here to help. Our tailored solutions are designed to meet your specific needs, so you get the most out of your tools, without the technical headache.",
   ] },
   { kind: "p", text: [
     { text: "Contact us today", href: "/contact-us" },

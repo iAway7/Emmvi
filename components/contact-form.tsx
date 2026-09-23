@@ -137,7 +137,7 @@ export function ContactForm() {
 
       <p className="mt-4 text-small text-ink-soft">
         By submitting this form, I confirm that I have read and understood the
-        Emmvi{" "}
+        emmvi{" "}
         <Link
           href="/privacy-policy/"
           className="text-ink underline underline-offset-[3px] hover:text-violet"

@@ -30,11 +30,11 @@ import { pageMetadata } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
   path: "/about-us",
-  // Absoluto: la plantilla "%s · Emmvi" dejaria "About Emmvi · Emmvi".
-  title: "About Emmvi: websites and the systems behind them",
+  // Absoluto: la plantilla "%s · emmvi" dejaria "About emmvi · emmvi".
+  title: "About emmvi: websites and the systems behind them",
   absoluteTitle: true,
   description:
-    "Emmvi builds websites and the systems that run behind them, from Valencia and from Argentina. How a project actually runs, and who we work with.",
+    "emmvi builds websites and the systems that run behind them, from Valencia and from Argentina. How a project actually runs, and who we work with.",
   legacy: true,
 });
 
@@ -112,7 +112,7 @@ const values = [
   {
     icon: "/figma/about-us/transparency-and-integrity.svg",
     title: "Transparency and Integrity",
-    body: "At Emmvi, honesty is our guiding principle. We make realistic promises and work closely with you to achieve your goals effectively.",
+    body: "At emmvi, honesty is our guiding principle. We make realistic promises and work closely with you to achieve your goals effectively.",
   },
 ];
 
@@ -190,7 +190,7 @@ export default function AboutUsPage() {
               <Divider tone="violet-light" />
             </div>
             <p className={`mt-6 ${lead30} text-paper`}>
-              At Emmvi, we believe in simplicity and honesty. Founded in{" "}
+              At emmvi, we believe in simplicity and honesty. Founded in{" "}
               {FOUNDED} by a team of professionals with over {yearsSinceFounding}{" "}
               years of experience in digital marketing, design, and development,
               our company was born out of a passion for helping entrepreneurs
@@ -230,7 +230,7 @@ export default function AboutUsPage() {
           </div>
           <p className={`mt-6 ${lead30} text-ink-soft`}>
             Our story began when a group of experts decided to combine their
-            knowledge and experience in the digital world to establish Emmvi.
+            knowledge and experience in the digital world to establish emmvi.
             After years of collaboration in the industry, we knew we could make a
             difference by providing high-quality services with a focus on honesty
             and transparency.
@@ -241,7 +241,7 @@ export default function AboutUsPage() {
         <section className={`${wrap} py-16 lg:py-24`}>
           <h2 className={`text-center ${h2Class}`}>Our Team</h2>
           <p className="mx-auto mt-6 max-w-[658px] text-center text-[1.125rem] leading-8 text-pretty text-ink-soft">
-            Emmvi started with helping people build awesome projects. Each day
+            emmvi started with helping people build awesome projects. Each day
             our team continues to grow and empower more creators in the world to
             do that.
           </p>
@@ -320,7 +320,7 @@ export default function AboutUsPage() {
                 <SalesForm />
                 <p className="mt-5 max-w-[34em] text-small text-ink-soft">
                   By submitting this form, I confirm that I have read and
-                  understood the Emmvi{" "}
+                  understood the emmvi{" "}
                   <Link
                     href="/privacy-policy/"
                     className="text-ink underline underline-offset-[3px] hover:text-violet"

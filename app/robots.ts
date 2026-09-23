@@ -18,7 +18,7 @@ import { SITE_URL } from "@/lib/site";
  * vieja a la ruta nueva. Sin rastreo no hay traslado.
  *
  * El coste de tenerlo abierto es que, hasta que se publique la home nueva, lo
- * que Google enseña para "Emmvi" es la pantalla de espera. Es mejor trato que
+ * que Google enseña para "emmvi" es la pantalla de espera. Es mejor trato que
  * perder el dominio entero del indice y volver a ganarlo desde cero.
  */
 export default function robots(): MetadataRoute.Robots {

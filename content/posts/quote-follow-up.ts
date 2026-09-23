@@ -82,7 +82,7 @@ const body: Post["body"] = [
   { kind: "p", text: "When a quote moves to Lost, add one word for the reason: price, timing, went with someone else, no reply. After a few months, that column tells you more than a gut feeling. If most losses say \"no reply\", your follow-up needs work. If most say \"price\", the follow-up is doing its job and the conversation is somewhere else." },
   { kind: "p", text: [
     "In GoHighLevel, the pipeline, the stage change and the follow-up sequence can all sit in the same place, which is how ",
-    { text: "Emmvi sets it up for installers", href: "/services/gohighlevel-automation/" },
+    { text: "emmvi sets it up for installers", href: "/services/gohighlevel-automation/" },
     ". The same structure works in other CRMs; what matters is that the stage change starts and stops the messages.",
   ] },
 
@@ -97,7 +97,7 @@ const body: Post["body"] = [
   { kind: "p", text: "Only if they read like a template. Use the customer's first name, mention the actual job, sign with your business name, and write the way you would speak on site. Most customers can't tell, and don't mind, whether you pressed send yourself." },
   { kind: "p", text: [
     "If you'd rather have the pipeline and the follow-up sequence set up and tested for you, you can ",
-    { text: "talk to Emmvi", href: "/contact-us/" },
+    { text: "talk to emmvi", href: "/contact-us/" },
     ".",
   ] },
 ];

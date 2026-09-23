@@ -16,8 +16,8 @@ import { pageMetadata } from "@/lib/site";
  * apuntan a "#contact", y asi siguen funcionando tambien aqui.
  *
  * No usa ReplyProof. Ese panel demuestra la respuesta en menos de un minuto
- * que Emmvi *construye para el cliente*; junto a este formulario se leeria
- * como una promesa sobre la propia bandeja de Emmvi, que no esta automatizada.
+ * que emmvi *construye para el cliente*; junto a este formulario se leeria
+ * como una promesa sobre la propia bandeja de emmvi, que no esta automatizada.
  */
 
 export const metadata: Metadata = pageMetadata({

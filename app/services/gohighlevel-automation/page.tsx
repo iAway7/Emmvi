@@ -24,7 +24,7 @@ import { pageMetadata } from "@/lib/site";
  * home en vez de dejar la automatizacion como servicio independiente.
  *
  * Tres cosas que no se afirman aqui, y es deliberado:
- * - **Ninguna certificacion.** HighLevel tiene programa propio y Emmvi no lo
+ * - **Ninguna certificacion.** HighLevel tiene programa propio y emmvi no lo
  *   ha hecho. El FAQ lo dice con todas las letras en vez de callarlo.
  * - **Ningun numero sin medir.** Nada de "48h de entrega" ni "60% menos de
  *   admin", que es de lo que vive la competencia de este termino.
@@ -111,12 +111,12 @@ const built = [
  * sola: si HighLevel cambia su catalogo, esto miente. Conviene repasarla cuando
  * se toque la pagina.
  *
- * **No es una lista de lo que Emmvi monta.** Es justo lo contrario: el volumen
+ * **No es una lista de lo que emmvi monta.** Es justo lo contrario: el volumen
  * es el argumento. Ver el puente que va debajo.
  */
 type Stage = {
   stage: string;
-  /** `ours` marca las que Emmvi monta. Ver el render y el conteo de abajo. */
+  /** `ours` marca las que emmvi monta. Ver el render y el conteo de abajo. */
   items: { name: string; ours?: boolean }[];
 };
 
@@ -213,7 +213,7 @@ const platformCount = new Set(allItems.map((i) => i.name)).size;
 const oursCount = allItems.filter((i) => i.ours).length;
 
 /**
- * Lo que hace Emmvi. Es deliberadamente mas corta que la de arriba y esta
+ * Lo que hace emmvi. Es deliberadamente mas corta que la de arriba y esta
  * escrita en verbos: aquella son cosas que existen, estas son cosas que alguien
  * hace.
  *
@@ -655,7 +655,7 @@ export default function GoHighLevelAutomation() {
         </section>
 
         {/* Decir lo que no se hace, que es el principio 3 de DESIGN.md — y en
-            este termino en concreto es lo que mas separa a Emmvi del resto de
+            este termino en concreto es lo que mas separa a emmvi del resto de
             resultados, que venden horas de VA y sellos de certificacion. */}
         <section className={section}>
           <div className={wrap}>
@@ -806,7 +806,7 @@ export default function GoHighLevelAutomation() {
             marcas. Se afirma lo que consta. */}
         <aside className={`${wrap} pb-16 lg:pb-24`}>
           <p className="border-t border-line pt-8 text-small text-pretty text-ink-soft">
-            GoHighLevel is a trademark of GoHighLevel Inc. Emmvi is an
+            GoHighLevel is a trademark of GoHighLevel Inc. emmvi is an
             independent service provider and is not affiliated with, endorsed by
             or certified by GoHighLevel Inc.
           </p>

@@ -89,7 +89,7 @@ export function SiteFooter() {
           <div>
             <Link
               href="/"
-              aria-label="Emmvi, home"
+              aria-label="emmvi, home"
               className="inline-flex rounded-sm text-ink focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
             >
               <Wordmark className="h-8 w-auto" />
@@ -127,8 +127,8 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-14 flex flex-wrap justify-between gap-6 border-t border-line pt-8 text-small text-ink-soft">
-          <p>&copy; 2026 Emmvi. All rights reserved.</p>
-          <p>Emmvi&reg; is a registered trademark in Spain.</p>
+          <p>&copy; 2026 emmvi. All rights reserved.</p>
+          <p>emmvi&reg; is a registered trademark in Spain.</p>
         </div>
       </div>
     </footer>

@@ -5,7 +5,7 @@ import type { Post } from "@/lib/posts";
  * del posicionamiento viejo —atrae a quien se lo quiere hacer solo— pero el
  * trafico es real, asi que se recrea con su tema.
  *
- * Emmvi construye sobre todo en WordPress, y el articulo lo dice. Ocultarlo
+ * emmvi construye sobre todo en WordPress, y el articulo lo dice. Ocultarlo
  * para parecer neutral seria justo lo contrario del principio de PRODUCT.md:
  * decir lo que no se hace vende mas que decir lo que si.
  *

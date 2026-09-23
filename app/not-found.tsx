@@ -9,7 +9,7 @@ import { SiteHeader } from "@/components/site-header";
  * 404 del sitio. En el App Router este archivo captura cualquier ruta que no
  * exista, y sustituye a la pantalla por defecto de Next.
  *
- * No es un callejon sin salida: la promesa de Emmvi es que toda consulta se
+ * No es un callejon sin salida: la promesa de emmvi es que toda consulta se
  * contesta, asi que ademas de devolver a la home ofrece contacto. Es el mismo
  * criterio que la pagina de espera.
  *

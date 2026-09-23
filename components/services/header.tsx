@@ -85,7 +85,7 @@ export function WebsiteDesignHeader({ current }: { current?: string }) {
         <div className="mx-auto flex h-16 max-w-[var(--container-wrap)] items-center justify-between gap-8 px-6 lg:px-[var(--spacing-gut)]">
           <Link
             href="/"
-            aria-label="Emmvi, home"
+            aria-label="emmvi, home"
             className="inline-flex min-h-[44px] items-center rounded-sm text-ink focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
           >
             <Wordmark className="h-8 w-auto" />

@@ -39,9 +39,9 @@ const columns = [
 ];
 
 const social = [
-  { href: "https://www.linkedin.com/company/emmvi", label: "Emmvi on LinkedIn", Icon: LinkedInIcon },
-  { href: "https://x.com/emmvi", label: "Emmvi on X", Icon: XIcon },
-  { href: "https://www.instagram.com/emmvi", label: "Emmvi on Instagram", Icon: InstagramIcon },
+  { href: "https://www.linkedin.com/company/emmvi", label: "emmvi on LinkedIn", Icon: LinkedInIcon },
+  { href: "https://x.com/emmvi", label: "emmvi on X", Icon: XIcon },
+  { href: "https://www.instagram.com/emmvi", label: "emmvi on Instagram", Icon: InstagramIcon },
 ];
 
 export function WebsiteDesignFooter() {
@@ -51,7 +51,7 @@ export function WebsiteDesignFooter() {
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] lg:gap-12">
           <Link
             href="/"
-            aria-label="Emmvi, home"
+            aria-label="emmvi, home"
             className="inline-flex h-9 w-fit items-center rounded-sm text-ink focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
           >
             <Wordmark className="h-9 w-auto" />

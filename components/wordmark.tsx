@@ -1,5 +1,5 @@
 /**
- * Wordmark de Emmvi.
+ * Wordmark de emmvi.
  *
  * La muesca del punto de la "i" es parte del logo, no un defecto. Una version
  * anterior de este archivo la trataba como un error de trazado y la cerraba
@@ -31,7 +31,7 @@ export function Wordmark({ className = "" }: { className?: string }) {
     <svg
       viewBox={WORDMARK_VIEWBOX}
       role="img"
-      aria-label="Emmvi"
+      aria-label="emmvi"
       fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
       className={className}

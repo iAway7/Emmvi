@@ -30,8 +30,8 @@ export const metadata: Metadata = comingSoon
   ? comingSoonMetadata
   : pageMetadata({
       path: "/",
-      // Absoluto porque ya dice "Emmvi": la plantilla lo dejaria repetido.
-      title: "Emmvi · Get more customers without doing more work",
+      // Absoluto porque ya dice "emmvi": la plantilla lo dejaria repetido.
+      title: "emmvi · Get more customers without doing more work",
       absoluteTitle: true,
       description:
         "We build the website and the systems behind it, so the work that happens after someone fills in a form does not depend on anyone remembering.",
@@ -339,13 +339,13 @@ export default function Home() {
         <section id="about" className={`bg-night scroll-mt-24 ${section}`}>
           <div className={wrap}>
             <h2 className="text-[2rem] font-bold tracking-[-1px] text-balance text-white lg:text-[3rem]">
-              Meet Emmvi
+              Meet emmvi
             </h2>
             {/* Sin nombres propios y sin repartir roles entre personas: las
                 dos cosas dicen cuanta gente hay. Ciudades si — eso es donde se
                 trabaja, no cuantos. Ver PRODUCT.md. */}
             <p className="mt-6 max-w-[38em] text-body text-pretty text-white/80">
-              Emmvi builds websites and the systems that run behind them, from
+              emmvi builds websites and the systems that run behind them, from
               Valencia and from Argentina. Design, build and automation all
               happen in house, so you talk to the people doing the work and
               nothing is handed to a supplier you have never met.

@@ -16,7 +16,7 @@ import { pageMetadata } from "@/lib/site";
  * Réplica del frame "Services - Website Design" del Figma
  * (0niWGidrfk5rCNfWgb3L3z, nodo 165:831, 1400x13516).
  *
- * Es el posicionamiento viejo de Emmvi: la agencia de menú de servicios que
+ * Es el posicionamiento viejo de emmvi: la agencia de menú de servicios que
  * PRODUCT.md lista como anti-referencia. Se reconstruye tal cual a propósito,
  * por decisión explícita. Dos cosas NO se portan, porque son prueba social
  * prestada y la regla del proyecto lo prohíbe: el trust band de logos ajenos y
@@ -385,7 +385,7 @@ export default function WebsiteDesignPage() {
               <li key={slug}>
                 <Image
                   src={`/figma/website-design/work/${slug}.jpg`}
-                  alt={`The ${name} website, built by Emmvi.`}
+                  alt={`The ${name} website, built by emmvi.`}
                   width={836}
                   height={670}
                   loading="lazy"
@@ -421,7 +421,7 @@ export default function WebsiteDesignPage() {
                 <SalesForm />
                 <p className="mt-5 max-w-[34em] text-small text-ink-soft">
                   By submitting this form, I confirm that I have read and
-                  understood the Emmvi{" "}
+                  understood the emmvi{" "}
                   <Link
                     href="/privacy-policy/"
                     className="text-ink underline underline-offset-[3px] hover:text-violet"
