@@ -30,7 +30,19 @@ export type ContactState = {
 
 const resendApiKey = process.env.RESEND_API_KEY;
 const fromEmail = process.env.CONTACT_FROM_EMAIL ?? "";
-const toEmail = process.env.CONTACT_TO_EMAIL ?? "";
+/**
+ * Varios destinatarios, separados por comas: `sales@emmvi.com, nico@emmvi.com`.
+ * Resend admite hasta cincuenta en `to`, pero como cadena suelta trata la coma
+ * como parte de la direccion y la rechaza entera, asi que se parte aqui.
+ *
+ * Van todos en `to` y no en `bcc` a proposito: es correo interno del equipo, y
+ * asi un "responder a todos" mantiene la conversacion junta. Al cliente se le
+ * responde igual con un "responder" normal, que `replyTo` apunta a el.
+ */
+const toEmails = (process.env.CONTACT_TO_EMAIL ?? "")
+  .split(",")
+  .map((address) => address.trim())
+  .filter(Boolean);
 
 const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
@@ -117,7 +129,7 @@ export async function submitContact(
       }),
     );
 
-  if (!resend || !fromEmail || !toEmail) {
+  if (!resend || !fromEmail || toEmails.length === 0) {
     console.error(
       "[contact] Falta configuracion. Requiere RESEND_API_KEY, CONTACT_FROM_EMAIL y CONTACT_TO_EMAIL.",
     );
@@ -133,7 +145,7 @@ export async function submitContact(
   try {
     const { error } = await resend.emails.send({
       from: fromEmail,
-      to: toEmail,
+      to: toEmails,
       replyTo: email,
       subject: `New enquiry from ${name}${company ? ` (${company})` : ""}`,
       html: [

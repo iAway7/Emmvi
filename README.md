@@ -27,12 +27,30 @@ el sitio arranque.
 |---|---|
 | `RESEND_API_KEY` | Envío del formulario de contacto |
 | `CONTACT_FROM_EMAIL` | Remitente verificado en Resend |
-| `CONTACT_TO_EMAIL` | Destinatario interno de las consultas |
+| `CONTACT_TO_EMAIL` | Destinatarios internos. Varios, separados por comas |
 | `COMING_SOON` | `1` sirve la página de espera en la raíz |
 | `SLACK_WEBHOOK_URL` | Avisa a un canal de Slack de cada consulta (opcional) |
 
 Sin las tres de Resend, el formulario valida y responde igual: devuelve un error
 legible, conserva lo escrito y registra la causa en el log del servidor.
+
+## Quien recibe las consultas
+
+`CONTACT_TO_EMAIL` admite varios, separados por comas. Se parten en
+`app/actions/contact.ts`: como cadena suelta Resend trata la coma como parte de
+la direccion y rechaza el envio entero.
+
+```
+CONTACT_TO_EMAIL=sales@emmvi.com, nico@emmvi.com
+```
+
+Van todos en `to` y no en `bcc`: es correo interno, y asi un "responder a todos"
+mantiene la conversacion junta. Al cliente se le responde con un "responder"
+normal, que `replyTo` apunta a el.
+
+Para un equipo que cambia, sale mejor **un alias o grupo en el proveedor de
+correo** y una sola direccion aqui: dar de alta o de baja a alguien no obliga a
+volver a desplegar. Cambiar la variable si, porque se lee en build.
 
 ## Aviso a Slack
 
