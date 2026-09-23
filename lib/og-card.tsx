@@ -81,7 +81,7 @@ export async function renderOgCard(headline: string) {
       >
         <svg
           width={195}
-          height={56}
+          height={55}
           viewBox={WORDMARK_VIEWBOX}
           fill="#ffffff"
           xmlns="http://www.w3.org/2000/svg"
