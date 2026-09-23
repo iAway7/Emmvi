@@ -4,6 +4,7 @@ import { harnessingAiWithoutCode } from "@/content/posts/harnessing-ai-without-c
 import { howEmailMarketingAnd } from "@/content/posts/how-email-marketing-and-automated-series-can-increase-roi";
 import { howEmailMarketingHelps } from "@/content/posts/how-email-marketing-helps-maximize-customer-engagement";
 import { missedCallTextBack } from "@/content/posts/missed-call-text-back";
+import { quoteFollowUp } from "@/content/posts/quote-follow-up";
 import { streamlineLeadCaptureAnd } from "@/content/posts/streamline-lead-capture-and-sales-with-a-smarter-crm";
 import { streamlineScaleSucceedUsing } from "@/content/posts/streamline-scale-succeed-using-zapier-and-gohighlevel-to-grow-your-business";
 import { the2MostUsed } from "@/content/posts/the-2-most-used-style-cores-in-modern-web-design-today";
@@ -132,6 +133,7 @@ export type Post = {
  * content/rewrites/, sin publicar. Ver el README de esa carpeta.
  */
 export const posts: readonly Post[] = [
+  quoteFollowUp,
   missedCallTextBack,
   streamlineLeadCaptureAnd,
   streamlineScaleSucceedUsing,
