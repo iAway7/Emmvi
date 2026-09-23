@@ -50,6 +50,12 @@ Tres reglas que gobiernan ese archivo, y conviene no romperlas:
   responde, ese mensaje es el único registro que queda de la consulta. El aviso
   lo dice con un bloque de advertencia.
 
+El aviso va envuelto en un `attachment` de uno solo. No es por el formato
+antiguo de `fields` —el contenido sigue siendo Block Kit—, sino porque la barra
+de color lateral solo existe dentro de un adjunto: **violeta de marca cuando la
+consulta siguió su curso, rojo cuando el correo no salió**. En un canal con
+ruido, el color separa las dos sin abrir el mensaje.
+
 Comprobado de punta a punta contra un servidor de captura, con Resend sin
 configurar a propósito: el formulario devolvió su error y Slack recibió igual
 el aviso, con la advertencia puesta.

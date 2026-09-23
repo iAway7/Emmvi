@@ -18,6 +18,20 @@
 
 const webhookUrl = process.env.SLACK_WEBHOOK_URL;
 
+/**
+ * La barra de color lateral solo existe dentro de `attachments`; los `blocks`
+ * sueltos no la tienen. Por eso el mensaje va envuelto en un adjunto de uno:
+ * el contenido sigue siendo Block Kit (el formato actual) y el adjunto aporta
+ * solo el color. Los `fields` de tipo `{title, value, short}` que salen en la
+ * documentacion de adjuntos son el formato antiguo y no se usan aqui.
+ */
+const COLORS = {
+  /** Violeta de marca. Consulta que siguio su curso normal. */
+  ok: "#423af4",
+  /** El correo no salio: hay que actuar desde el canal. */
+  alert: "#d00000",
+} as const;
+
 export type SlackEnquiry = {
   name: string;
   email: string;
@@ -59,15 +73,17 @@ export async function notifySlack(enquiry: SlackEnquiry): Promise<void> {
   ].filter(Boolean) as string[];
 
   const blocks: unknown[] = [
-    {
-      type: "header",
-      text: { type: "plain_text", text: "New enquiry", emoji: false },
-    },
     // Slack solo admite diez campos por bloque de seccion.
-    { type: "section", fields: campos.slice(0, 10).map((text) => ({ type: "mrkdwn", text })) },
     {
       type: "section",
-      text: { type: "mrkdwn", text: `>${clamp(esc(message)).replace(/\n/g, "\n>")}` },
+      fields: campos.slice(0, 10).map((text) => ({ type: "mrkdwn", text })),
+    },
+    {
+      type: "section",
+      text: {
+        type: "mrkdwn",
+        text: `>${clamp(esc(message)).replace(/\n/g, "\n>")}`,
+      },
     },
   ];
 
@@ -83,14 +99,24 @@ export async function notifySlack(enquiry: SlackEnquiry): Promise<void> {
     });
   }
 
+  // Encabeza el mensaje y es lo que se lee en la notificacion del movil, donde
+  // ni los bloques ni el adjunto se muestran.
+  const resumen = `New enquiry from ${name}${company ? ` (${company})` : ""}`;
+
   try {
     const res = await fetch(webhookUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      // Sin el texto plano, una notificacion de movil llega vacia.
       body: JSON.stringify({
-        text: `New enquiry from ${name}${company ? ` (${company})` : ""}`,
-        blocks,
+        text: resumen,
+        attachments: [
+          {
+            color: emailDelivered ? COLORS.ok : COLORS.alert,
+            // Para clientes viejos que no saben pintar bloques.
+            fallback: `${resumen} — ${email}`,
+            blocks,
+          },
+        ],
       }),
     });
     if (!res.ok) {
