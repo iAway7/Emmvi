@@ -1,9 +1,11 @@
 "use server";
 
 import { headers } from "next/headers";
+import { after } from "next/server";
 import { Resend } from "resend";
 
 import { escapeHtml, isRateLimited, normalizeText, validate } from "@/lib/contact";
+import { notifySlack } from "@/lib/slack";
 import { CONTACT_EMAIL } from "@/lib/site";
 
 /**
@@ -86,10 +88,40 @@ export async function submitContact(
     };
   }
 
+  const { name, email, company, message } = result.values;
+  const qualifiers: [string, string][] = [
+    ["Pages", extras.pages],
+    ["Hosting with us", extras.hosting],
+    ["Budget", extras.budget],
+  ];
+
+  const source = headerList.get("referer") ?? "unknown";
+
+  /**
+   * Avisa a Slack pase lo que pase con el correo, y despues de responder.
+   *
+   * `after()` lo saca del camino critico: el visitante no espera a Slack. Y se
+   * manda tambien cuando Resend falla, que es justo cuando mas hace falta —
+   * ahi este aviso es el unico registro que queda de la consulta.
+   */
+  const avisar = (emailDelivered: boolean) =>
+    after(() =>
+      notifySlack({
+        name,
+        email,
+        company,
+        message,
+        qualifiers: qualifiers.filter(([, v]) => v),
+        emailDelivered,
+        source,
+      }),
+    );
+
   if (!resend || !fromEmail || !toEmail) {
     console.error(
       "[contact] Falta configuracion. Requiere RESEND_API_KEY, CONTACT_FROM_EMAIL y CONTACT_TO_EMAIL.",
     );
+    avisar(false);
     return {
       status: "error",
       message: GENERIC_ERROR,
@@ -97,13 +129,6 @@ export async function submitContact(
       extras,
     };
   }
-
-  const { name, email, company, message } = result.values;
-  const qualifiers: [string, string][] = [
-    ["Pages", extras.pages],
-    ["Hosting with us", extras.hosting],
-    ["Budget", extras.budget],
-  ];
 
   try {
     const { error } = await resend.emails.send({
@@ -125,6 +150,7 @@ export async function submitContact(
 
     if (error) {
       console.error("[contact] Resend devolvio un error:", error);
+      avisar(false);
       return {
         status: "error",
         message: GENERIC_ERROR,
@@ -134,6 +160,7 @@ export async function submitContact(
     }
   } catch (err) {
     console.error("[contact] Fallo el envio:", err);
+    avisar(false);
     return {
       status: "error",
       message: GENERIC_ERROR,
@@ -141,6 +168,8 @@ export async function submitContact(
       extras,
     };
   }
+
+  avisar(true);
 
   return {
     status: "success",

@@ -29,9 +29,30 @@ el sitio arranque.
 | `CONTACT_FROM_EMAIL` | Remitente verificado en Resend |
 | `CONTACT_TO_EMAIL` | Destinatario interno de las consultas |
 | `COMING_SOON` | `1` sirve la página de espera en la raíz |
+| `SLACK_WEBHOOK_URL` | Avisa a un canal de Slack de cada consulta (opcional) |
 
 Sin las tres de Resend, el formulario valida y responde igual: devuelve un error
 legible, conserva lo escrito y registra la causa en el log del servidor.
+
+## Aviso a Slack
+
+Cada consulta se reenvía a un canal de Slack por Incoming Webhook
+(`lib/slack.ts`). Sin `SLACK_WEBHOOK_URL` no hace nada, en silencio: es un
+canal opcional, no una pieza que falte.
+
+Tres reglas que gobiernan ese archivo, y conviene no romperlas:
+
+- **Nunca rompe el envío.** Todo va en try/catch y la función no lanza. Si
+  Slack está caído, el visitante no se entera.
+- **Nunca hace esperar al visitante.** Se invoca desde `after()`, así que corre
+  cuando la respuesta ya salió.
+- **Se manda aunque el correo falle.** Es cuando más hace falta: si Resend no
+  responde, ese mensaje es el único registro que queda de la consulta. El aviso
+  lo dice con un bloque de advertencia.
+
+Comprobado de punta a punta contra un servidor de captura, con Resend sin
+configurar a propósito: el formulario devolvió su error y Slack recibió igual
+el aviso, con la advertencia puesta.
 
 ## Página de espera
 
