@@ -67,22 +67,44 @@
      nunca como decoracion "tecnica". */
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
 
-  --text-display: clamp(2.25rem, 1.15rem + 4.4vw, 4rem);          /* h1 → 64px */
+  /* Los clamp() se quedan en su minimo hasta 480px y crecen en linea recta
+     hasta el maximo del Figma en 1280px. Asi en un telefono la escala es fija
+     y ordenada —36 / 28 / 22 / 18 / 18 / 16 / 14— y no depende del ancho
+     exacto del aparato. Antes cada token arrancaba a crecer desde 0px con su
+     propia pendiente, y a 430px el h2 (34px) ya pasaba al h1 (forzado a 32 en
+     la home) y el lede se iba a 21px. */
+  --text-display: clamp(2.25rem, 1.2rem + 3.5vw, 4rem);           /* 36 → 64px */
   --text-display--line-height: 1.06;
   --text-display--letter-spacing: -0.025em;
   --text-display--font-weight: 800;
 
-  --text-h2: clamp(2rem, 1.35rem + 2.6vw, 3.1875rem);             /* → 51px */
+  --text-h2: clamp(1.75rem, 0.8875rem + 2.875vw, 3.1875rem);      /* 28 → 51px */
   --text-h2--line-height: 1.1;
   --text-h2--letter-spacing: -0.02em;
   --text-h2--font-weight: 800;
 
-  --text-h3: 1.5rem;                                              /* 24px */
+  --text-h3: clamp(1.375rem, 1.3rem + 0.25vw, 1.5rem);            /* 22 → 24px */
   --text-h3--line-height: 1.3;
   --text-h3--letter-spacing: -0.021em;
   --text-h3--font-weight: 700;
 
-  --text-lede: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);            /* → 24px */
+  /* Titulo de tarjeta, pregunta del FAQ, nombre de persona, subtitulo del
+     blog. Fijo: es el escalon entre el h3 y el cuerpo, y en movil sigue por
+     encima del cuerpo de 18. Antes eran 18, 19 y 20px repartidos a mano. */
+  --text-h4: 1.25rem;                                             /* 20px */
+  --text-h4--line-height: 1.3;
+  --text-h4--letter-spacing: -0.02em;
+  --text-h4--font-weight: 700;
+
+  /* Cifras: numeros de paso, contadores, la comilla de apertura de una
+     tarjeta. Interlineado 1 porque van solas en su linea. */
+  --text-stat: 2rem;                                              /* 32px */
+  --text-stat--line-height: 1;
+  --text-stat--letter-spacing: -0.03em;
+  --text-stat--font-weight: 800;
+
+  /* Tope de 18px en movil: es cuerpo, aunque sea el grande. */
+  --text-lede: clamp(1.125rem, 0.9rem + 0.75vw, 1.5rem);          /* 18 → 24px */
   --text-lede--line-height: 1.417;
   --text-lede--letter-spacing: -0.008em;
 

@@ -55,7 +55,7 @@ export const comingSoon = process.env.COMING_SOON === "1";
  * texto, dos formas.
  */
 export const SITE_TAGLINE_LINES =
-  "We build the website that takes the enquiry\nand the system that answers it in under a minute.";
+  "We build the website that takes the request\nand the system that answers it in under a minute.";
 
 export const SITE_TAGLINE = SITE_TAGLINE_LINES.replace("\n", " ");
 
