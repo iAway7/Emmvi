@@ -454,7 +454,14 @@ html:has(dialog[open]) {
   stroke-linejoin: round;
 }
 
-@media (max-width: 900px) {
+/* Consulta el ancho del propio mapa, no el de la ventana: en la tarjeta de
+   media columna el mapa mide 500px aunque la ventana tenga 1440, y ahi el
+   trazo fino desaparece igual que en movil. */
+.meet-map-wrap {
+  container-type: inline-size;
+}
+
+@container (max-width: 900px) {
   .meet-map__land {
     stroke-width: 6px;
   }

@@ -7,6 +7,7 @@ import { JourneySteps } from "@/components/journey-steps";
 import { ComingSoon, comingSoonMetadata } from "@/components/coming-soon";
 import { MeetMap } from "@/components/meet-map";
 import { ContactForm } from "@/components/contact-form";
+import { ClientMarquee } from "@/components/services/client-marquee";
 import { OrganizationSchema } from "@/components/organization-schema";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -196,6 +197,15 @@ export default function Home() {
           />
         </section>
 
+        {/* Cinta de clientes, la misma de /services/website-design. Va aqui,
+            entre el hero y el relato: los logos contestan a "¿y a quien se lo
+            habeis hecho?", y mas abajo partirian en dos la historia de la
+            solicitud. Son todos clientes reales; el trust band del Figma usaba
+            ShapeShift, Cameo y Bounce, que no son clientes. */}
+        <section className={`${wrap} pb-16 lg:pb-20`}>
+          <ClientMarquee />
+        </section>
+
         <StorySection
           alt
           flip
@@ -255,28 +265,27 @@ export default function Home() {
             #7d7d7d y habia que reservar el tramo claro como aire. */}
         <section id="about" className={`bg-night scroll-mt-24 ${section}`}>
           <div className={wrap}>
-            <h2 className="text-h2 text-balance text-white">
-              Meet emmvi
-            </h2>
-            {/* Sin nombres propios y sin repartir roles entre personas: las
-                dos cosas dicen cuanta gente hay. Ciudades si — eso es donde se
-                trabaja, no cuantos. Ver PRODUCT.md. */}
-            <p className="mt-6 max-w-[38em] text-body text-pretty text-white/80">
-              emmvi builds websites and the systems that run behind them, from
-              Valencia and from Argentina. Design, build and automation all
-              happen in house, so you talk to the people doing the work and
-              nothing is handed to a supplier you have never met.
-            </p>
-            {/* De borde a borde en movil: el mapa esta dibujado para 1200 de
-                ancho y dentro del canal se queda en nada. */}
-            <div className="mt-12 -mx-6 w-screen max-w-[100vw] lg:mx-0 lg:w-auto lg:max-w-none">
-              <MeetMap />
-            </div>
+            <div className="grid gap-10 min-[900px]:grid-cols-2 min-[900px]:items-center min-[900px]:gap-16">
+              <div>
+                <h2 className="text-h2 text-balance text-white">
+                  Talk to the people doing the work
+                </h2>
+                {/* Sin nombres propios y sin repartir roles entre personas: las
+                    dos cosas dicen cuanta gente hay. Ciudades si — eso es donde
+                    se trabaja, no cuantos. Ver PRODUCT.md. */}
+                <p className="mt-6 max-w-[34em] text-body text-pretty text-white/80">
+                  From Valencia and from Argentina, covering the working day in
+                  Europe and the Americas.
+                </p>
+              </div>
 
-            <p className="mt-10 max-w-[38em] text-body text-pretty text-white/80">
-              Working across both time zones covers most of the working day for
-              clients in Europe and the Americas.
-            </p>
+              {/* El mapa en tarjeta, un punto mas claro que el panel. Ya no va
+                  de borde a borde en movil: dentro de la tarjeta manda el
+                  ancho de la columna. */}
+              <div className="rounded-lg bg-white/[0.04] p-6 min-[900px]:p-8">
+                <MeetMap />
+              </div>
+            </div>
           </div>
         </section>
 

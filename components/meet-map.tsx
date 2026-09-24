@@ -14,6 +14,10 @@
  */
 export function MeetMap() {
   return (
+    // Envoltorio para poder consultar el ancho DEL MAPA, no el de la ventana:
+    // el mapa esta dibujado para 1200 de ancho y en media columna se queda en
+    // 500, donde su trazo de 2.6px aparece a 1.08px. Ver globals.css.
+    <div className="meet-map-wrap">
     <svg
       viewBox="0 0 1200 447"
       fill="none"
@@ -50,5 +54,6 @@ export function MeetMap() {
         </text>
       </g>
     </svg>
+    </div>
   );
 }

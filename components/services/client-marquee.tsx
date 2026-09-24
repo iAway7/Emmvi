@@ -23,6 +23,7 @@ const clients = [
   { src: "/clients/steady-content.svg", name: "SteadyContent", h: "h-8", w: 300, ih: 57 },
   { src: "/clients/afax.png", name: "aFax", h: "h-9", w: 308, ih: 144 },
   { src: "/clients/kurokink.svg", name: "KuroKink", h: "h-7", w: 1659, ih: 438 },
+  { src: "/clients/fenekoi.png", name: "Fenekoi", h: "h-10", w: 331, ih: 240 },
   { src: "/clients/jbz-beats.png", name: "JBZ Beats", h: "h-12", w: 81, ih: 80 },
   { src: "/clients/tc-tails.png", name: "TC Tails Dog Grooming", h: "h-12", w: 80, ih: 80 },
 ];
