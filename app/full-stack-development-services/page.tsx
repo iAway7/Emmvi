@@ -4,9 +4,10 @@ import Image from "next/image";
 import { CalendlyButton } from "@/components/calendly-button";
 import { ContactForm } from "@/components/contact-form";
 import { CtaLink } from "@/components/cta-link";
-import { FaqAccordion, type FaqItem } from "@/components/services/faq-accordion";
+import { FaqAccordion, type FaqItem } from "@/components/faq-accordion";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { FullStackIllustration } from "@/components/services/full-stack-illustrations";
 import { pageMetadata } from "@/lib/site";
 
 /**
@@ -38,9 +39,9 @@ import { pageMetadata } from "@/lib/site";
  * plazo de entrega del propio trabajo, no un porcentaje de facturacion
  * inventado. Si deja de ser cierto, hay que quitarlo.
  *
- * La ilustracion del hero es la del original (Web-Dev.svg) remapeada a la
- * paleta: traia azul marino, naranja y rosa salmon. Los 105 rellenos van ahora
- * a tinta, violeta de marca y los dos rosas del sitio.
+ * El hero y la seccion del patchwork llevan escenas propias: ver
+ * components/services/full-stack-illustrations.tsx. La del original
+ * (Web-Dev.svg, remapeada a la paleta) queda en public/illustrations sin uso.
  */
 export const metadata: Metadata = pageMetadata({
   path: "/full-stack-development-services",
@@ -152,13 +153,10 @@ export default function FullStackDevelopment() {
               </div>
             </div>
 
-            <Image
-              src="/illustrations/full-stack.svg"
-              alt=""
-              width={965}
-              height={751}
-              priority
-              className="h-auto w-full"
+            <FullStackIllustration
+              name="hero"
+              label="A custom client portal for an example business, listing this week's jobs with their payment status, connected to Stripe, Airtable and HubSpot, with the code behind it and a note that it is deployed and yours to keep."
+              className="w-full max-md:mx-auto max-md:max-w-[420px]"
             />
           </div>
         </section>
@@ -185,6 +183,11 @@ export default function FullStackDevelopment() {
             <h2 className={h2Class}>
               Replace the patchwork with one system
             </h2>
+            <FullStackIllustration
+              name="patchwork"
+              label="Now: a spreadsheet, email, forms, invoices and a CRM held together with tape. After: one system holding all five, in one place with one owner."
+              className="mx-auto mt-10 w-full max-w-[960px]"
+            />
             <div className="mt-12 grid gap-8 lg:grid-cols-2 lg:gap-12">
               <div className="rounded-lg border border-line bg-paper p-8 lg:p-10">
                 <h3 className="text-h3 text-ink">Now</h3>
@@ -235,12 +238,12 @@ export default function FullStackDevelopment() {
         </section>
 
         <section className={`${wrap} ${section}`}>
-          <h2 className={h2Class}>Frequently asked questions</h2>
-          <p className="mt-5 max-w-[46ch] text-body text-pretty text-ink-soft">
+          <h2 className={`text-center ${h2Class}`}>Frequently asked questions</h2>
+          <p className="mx-auto mt-5 max-w-[46ch] text-center text-body text-pretty text-ink-soft">
             Anything not answered here is worth a call. Thirty minutes, and
             nothing to decide on the call itself.
           </p>
-          <div className="mt-10">
+          <div className="mx-auto mt-10 max-w-[636px]">
             <FaqAccordion items={faqs} />
           </div>
         </section>
@@ -248,7 +251,7 @@ export default function FullStackDevelopment() {
         <section id="build" className={`${wrap} scroll-mt-24 ${section}`}>
           <div className="grid items-start gap-10 rounded-lg bg-paper-panel p-9 min-[900px]:grid-cols-2 min-[900px]:gap-16 min-[900px]:p-16">
             <div>
-              <h2 className="text-[2rem] font-bold tracking-[-1px] text-balance text-ink min-[900px]:text-[3rem]">
+              <h2 className="text-h2 text-balance text-ink">
                 Ready to build something real?
               </h2>
               <p className="mt-5 max-w-[34em] text-lede text-pretty text-ink-soft">

@@ -394,7 +394,7 @@ export default function GoHighLevelAutomation() {
               {symptoms.map((line) => (
                 <li
                   key={line}
-                  className="rounded-md bg-paper p-8 text-[1.5rem] font-medium leading-[34px] tracking-[-0.3px] text-pretty text-ink max-md:text-[1.25rem] max-md:leading-[30px]"
+                  className="rounded-md bg-paper p-8 text-lede font-medium text-pretty text-ink"
                 >
                   <span aria-hidden="true" className="font-bold text-violet">
                     &ldquo;
@@ -476,7 +476,7 @@ export default function GoHighLevelAutomation() {
                     {group.items.map((item) => (
                       <li
                         key={item.name}
-                        className={`flex gap-2 text-[0.9375rem] leading-[22px] text-pretty ${
+                        className={`flex gap-2 text-small text-pretty ${
                           item.ours
                             ? "font-medium text-white"
                             : "text-white/55"
@@ -631,7 +631,7 @@ export default function GoHighLevelAutomation() {
                 >
                   <span
                     aria-hidden="true"
-                    className="text-[2rem] font-extrabold leading-none tracking-[-0.03em] text-violet"
+                    className="text-stat text-violet"
                   >
                     {s.n}
                   </span>
@@ -710,7 +710,7 @@ export default function GoHighLevelAutomation() {
         <section className={`bg-paper-alt ${section}`}>
           <div className={wrap}>
             <blockquote className="m-0 mx-auto max-w-[52em] text-center">
-              <p className="text-[1.5rem] font-medium leading-[38px] tracking-[-0.3px] text-pretty text-ink max-md:text-[1.25rem] max-md:leading-[32px]">
+              <p className="text-lede font-medium text-pretty text-ink">
                 <span aria-hidden="true" className="font-bold text-violet">
                   &ldquo;
                 </span>
@@ -754,17 +754,17 @@ export default function GoHighLevelAutomation() {
                   open={f.open}
                   className="group border-b border-line py-6"
                 >
-                  <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-6 text-[1.125rem] font-semibold leading-6 text-ink group-open:text-violet focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet [&::-webkit-details-marker]:hidden">
+                  <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-6 text-h4 font-semibold text-ink group-open:text-violet focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet [&::-webkit-details-marker]:hidden">
                     {f.q}
                     <span
                       aria-hidden="true"
-                      className="shrink-0 text-[1rem] font-normal text-ink-black group-open:text-violet"
+                      className="shrink-0 text-ui font-normal text-ink-black group-open:text-violet"
                     >
                       <span className="group-open:hidden">+</span>
                       <span className="hidden group-open:inline">&ndash;</span>
                     </span>
                   </summary>
-                  <p className="mt-4 text-[1.125rem] leading-[27px] text-pretty text-ink-soft">
+                  <p className="mt-4 text-body text-pretty text-ink-soft">
                     {f.a}
                   </p>
                 </details>
@@ -776,7 +776,7 @@ export default function GoHighLevelAutomation() {
         <section id="contact" className={`${wrap} scroll-mt-24 ${section}`}>
           <div className="grid items-start gap-10 rounded-lg bg-paper-panel p-9 min-[900px]:grid-cols-2 min-[900px]:gap-16 min-[900px]:p-16">
             <div>
-              <h2 className="text-[2rem] font-bold tracking-[-1px] text-balance text-ink min-[900px]:text-[3rem]">
+              <h2 className="text-h2 text-balance text-ink">
                 Show us the account
               </h2>
               <p className="mt-5 max-w-[34em] text-lede text-pretty text-ink-soft">

@@ -36,7 +36,7 @@ export function FaqAccordion({ items }: { items: FaqItem[] }) {
             {item.q}
             <span
               aria-hidden="true"
-              className="shrink-0 text-[1.25rem] leading-none font-normal text-ink-soft group-open:text-violet-ink"
+              className="shrink-0 text-h4 leading-none font-normal text-ink-soft group-open:text-violet-ink"
             >
               <span className="group-open:hidden">+</span>
               <span className="hidden group-open:inline">&minus;</span>

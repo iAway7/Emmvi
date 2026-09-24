@@ -4,11 +4,12 @@ import Link from "next/link";
 
 import { CtaLink } from "@/components/cta-link";
 import { AfterYouSend } from "@/components/services/after-you-send";
-import { FaqAccordion, type FaqItem } from "@/components/services/faq-accordion";
+import { FaqAccordion, type FaqItem } from "@/components/faq-accordion";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { CheckIcon } from "@/components/services/icons";
 import { SalesForm } from "@/components/services/sales-form";
+import { PpcIllustration } from "@/components/services/ppc-illustrations";
 import { pageMetadata } from "@/lib/site";
 
 /**
@@ -283,13 +284,10 @@ export default function PpcPage() {
               </div>
             </div>
 
-            <Image
-              src="/figma/ppc/hero.svg"
-              alt="Someone holding a phone beside a dartboard struck in the bullseye, ringed by customer avatars."
-              width={642}
-              height={483}
-              priority
-              className="h-auto w-full max-w-[642px] justify-self-end"
+            <PpcIllustration
+              name="hero"
+              label="A sponsored search result for an example EV charger installer in Leeds is tapped on a phone, opens the business's quote page, and arrives as a new enquiry from the Google ad, while the campaign shows as running."
+              className="w-full max-w-[642px] justify-self-end max-md:mx-auto max-md:max-w-[320px]"
             />
           </div>
         </section>
@@ -344,13 +342,10 @@ export default function PpcPage() {
               </div>
             </div>
 
-            <Image
-              src="/figma/ppc/boost-roi.svg"
-              alt="Someone holding a magnet that pulls in customer avatars, shopping bags and a discount tag."
-              width={665}
-              height={484}
-              loading="lazy"
-              className="h-auto w-full max-w-[665px] justify-self-end"
+            <PpcIllustration
+              name="roi"
+              label="Every step tracked, from seeing the ad to clicking to asking for a quote, and a weekly report sent every Monday covering spend, clicks, enquiries and cost per enquiry."
+              className="w-full max-w-[665px] justify-self-end max-md:mx-auto max-md:max-w-[360px]"
             />
           </div>
         </section>
@@ -378,13 +373,10 @@ export default function PpcPage() {
               </p>
             </div>
 
-            <Image
-              src="/figma/ppc/money-making.svg"
-              alt="An isometric stack of coins sitting inside a gear."
-              width={409}
-              height={409}
-              loading="lazy"
-              className="h-auto w-full max-w-[409px] justify-self-center"
+            <PpcIllustration
+              name="control"
+              label="A channel panel with Google, Meta, TikTok and LinkedIn, all switched on."
+              className="w-full max-w-[409px] justify-self-center"
             />
           </div>
         </section>
@@ -423,37 +415,46 @@ export default function PpcPage() {
         {/* --- What Is Paid Advertising and How Does It Work? ---------- */}
         <section className={`${wrap} pb-16 lg:pb-24`}>
           <div className="bg-dusk rounded-lg px-8 py-12 min-[900px]:px-18 min-[900px]:py-24">
-            <div className="max-w-[723px]">
+            {/* Dos columnas, como la seccion "Capture, sell, and retain
+                customers." de /services/email-marketing: titulo a la izquierda,
+                cuerpo a la derecha. En una sola columna el texto salia a 90
+                caracteres por linea —el rango comodo es 45-75— y dejaba 309px
+                muertos a la derecha del panel. El `max-w-[34em]` de los
+                parrafos es lo que fija la medida en unos 68. */}
+            <div className="grid gap-8 min-[900px]:grid-cols-2 min-[900px]:items-start min-[900px]:gap-16">
               <h2 className="text-display text-balance text-white">
                 What Is Paid Advertising and How Does It Work?
               </h2>
-              <p className="mt-10 text-copy text-pretty text-white/85">
-                Paid advertising is when businesses pay to put their ads on
-                platforms like Google, Facebook, Instagram, and LinkedIn.
-                It&rsquo;s a powerful online marketing method. Using services like
-                PPC campaign management, businesses can place ads strategically to
-                find the right audience.
-              </p>
-              <p className="mt-6 text-copy text-pretty text-white/85">
-                When someone clicks on your ad, they go to your website or a
-                special page to learn more. Paid advertising lets you target your
-                ideal customer very precisely, making it more likely they&rsquo;ll
-                become a paying customer.
-              </p>
-              <p className="mt-6 text-copy text-pretty text-white/85">
-                While paid advertising helps get new customers, remember,
-                it&rsquo;s just part of the whole picture. A successful marketing
-                strategy also includes other things like SEO, content marketing,
-                and social media.
-              </p>
-              {/* El Figma pone aquí el botón negro sobre el panel oscuro: el
-                  borde del botón contra el panel da 1.3:1 y se lo come el
-                  fondo (WCAG 2.2 SC 1.4.11 pide 3:1). Va la variante clara,
-                  la misma que el panel `--night` de la home. */}
-              <div className="mt-10">
-                <CtaLink href="#contact" variant="light">
-                  Get Started
-                </CtaLink>
+
+              <div className="min-[900px]:pt-3">
+                <p className="max-w-[34em] text-copy text-pretty text-white/85">
+                  Paid advertising is when businesses pay to put their ads on
+                  platforms like Google, Facebook, Instagram, and LinkedIn.
+                  It&rsquo;s a powerful online marketing method. Using services
+                  like PPC campaign management, businesses can place ads
+                  strategically to find the right audience.
+                </p>
+                <p className="mt-6 max-w-[34em] text-copy text-pretty text-white/85">
+                  When someone clicks on your ad, they go to your website or a
+                  special page to learn more. Paid advertising lets you target
+                  your ideal customer very precisely, making it more likely
+                  they&rsquo;ll become a paying customer.
+                </p>
+                <p className="mt-6 max-w-[34em] text-copy text-pretty text-white/85">
+                  While paid advertising helps get new customers, remember,
+                  it&rsquo;s just part of the whole picture. A successful
+                  marketing strategy also includes other things like SEO,
+                  content marketing, and social media.
+                </p>
+                {/* El Figma pone aqui el boton negro sobre el panel oscuro: el
+                    borde del boton contra el panel da 1.3:1 y se lo come el
+                    fondo (WCAG 2.2 SC 1.4.11 pide 3:1). Va la variante clara,
+                    la misma que el panel `--night` de la home. */}
+                <div className="mt-10">
+                  <CtaLink href="#contact" variant="light">
+                    Get Started
+                  </CtaLink>
+                </div>
               </div>
             </div>
           </div>
@@ -497,7 +498,7 @@ export default function PpcPage() {
                   <li key={t} className="flex items-baseline gap-4">
                     <span
                       aria-hidden="true"
-                      className="w-7 shrink-0 text-[1.125rem] leading-6 font-extrabold text-ink"
+                      className="w-7 shrink-0 text-body leading-6 font-extrabold text-ink"
                     >
                       {String(i + 1).padStart(2, "0")}
                     </span>
@@ -562,7 +563,7 @@ export default function PpcPage() {
                 a dos, en la misma forma de pregunta que los otros dos
                 titulares de la pantalla. */}
             <h2 className={h2Big}>Why Run Your Ads With Us</h2>
-            <p className="text-[1rem] leading-8 text-pretty text-ink-soft min-[900px]:mt-16">
+            <p className="text-copy text-pretty text-ink-soft min-[900px]:mt-16">
               Having gained insights into the fundamentals of paid online
               advertising and its mechanics, let&rsquo;s explore the advantages of
               leveraging our PPC management services:

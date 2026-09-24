@@ -113,7 +113,7 @@ export default function BlogIndex() {
                       llenaba cinco lineas desiguales. `lede` esta reescrito a
                       menos de 80 y da dos. `description` sigue intacta donde
                       hace falta, que es en la metadata. */}
-                  <p className="mt-4 flex-1 text-[1rem] leading-[26px] text-pretty text-ink-soft">
+                  <p className="mt-4 flex-1 text-copy text-pretty text-ink-soft">
                     {post.lede}
                   </p>
                   {/* El "Read More »" del original. No es un enlace propio: la
@@ -121,7 +121,7 @@ export default function BlogIndex() {
                       segundo destino para el teclado sin nada nuevo detras. */}
                   <span
                     aria-hidden="true"
-                    className="mt-5 text-[1rem] font-medium text-violet"
+                    className="mt-5 text-ui font-medium text-violet"
                   >
                     Read more &raquo;
                   </span>

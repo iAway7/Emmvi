@@ -5,11 +5,12 @@ import Link from "next/link";
 import { CtaLink } from "@/components/cta-link";
 import { AfterYouSend } from "@/components/services/after-you-send";
 import { DarkTestimonials } from "@/components/services/dark-testimonials";
-import { FaqAccordion, type FaqItem } from "@/components/services/faq-accordion";
+import { FaqAccordion, type FaqItem } from "@/components/faq-accordion";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { CheckIcon } from "@/components/services/icons";
 import { SalesForm } from "@/components/services/sales-form";
+import { EmailIllustration } from "@/components/services/email-illustrations";
 import { pageMetadata } from "@/lib/site";
 
 /**
@@ -55,26 +56,26 @@ const pillars = [
   {
     title: "Customized Strategies",
     body: "We dive deep into your brand to define, design, and implement tailored strategies that align with both your brand identity and your specific business needs.",
-    illo: "/figma/email-marketing/card-strategies.svg",
-    alt: "An envelope being stamped.",
+    scene: "strategy" as const,
+    alt: "A plan with its steps ticked off and a target.",
   },
   {
     title: "Newsletters and Automation",
     body: "Send the emails your customers genuinely want to read and engage with, fostering a close relationship and a sense of belonging that retains and fosters your community..",
-    illo: "/figma/email-marketing/card-newsletters.svg",
-    alt: "An envelope with a discount tag.",
+    scene: "automation" as const,
+    alt: "An email with a repeat sign: it sends itself.",
   },
   {
     title: "Impactful Texts and Designs",
     body: "Your emails won't be 'just another one.' Each email is crafted to make an impact and hold the customer's attention until the end. Stand out from your competition and position yourself in your customers' 'top of mind.",
-    illo: "/figma/email-marketing/card-texts.svg",
-    alt: "A person beside an email message.",
+    scene: "design" as const,
+    alt: "An email layout with type, an image and a button, and a pen.",
   },
   {
     title: "Analysis and Continuous Optimization",
     body: "Without analysis, there's no improvement. That's why we closely track your metrics and adjust the strategy to maximize results, ensuring your sales continually improve.",
-    illo: "/figma/email-marketing/card-analytics.svg",
-    alt: "An envelope with a rising bar chart.",
+    scene: "analysis" as const,
+    alt: "A chart that rises month on month, under a magnifying glass.",
   },
 ];
 
@@ -175,13 +176,10 @@ export default function EmailMarketingPage() {
               </div>
             </div>
 
-            <Image
-              src="/figma/email-marketing/hero.svg"
-              alt="Someone at a desk sending email from a laptop, with a cloud and a paper plane above."
-              width={642}
-              height={431}
-              priority
-              className="h-auto w-full max-w-[642px] justify-self-end"
+            <EmailIllustration
+              name="hero"
+              label="A welcome email from an example shop being written for new subscribers, and the same email arriving at the top of a customer's inbox."
+              className="w-full max-w-[642px] justify-self-end max-md:mx-auto max-md:max-w-[340px]"
             />
           </div>
         </section>
@@ -225,15 +223,12 @@ export default function EmailMarketingPage() {
                   key={p.title}
                   className="rounded-md border border-line bg-paper p-8 min-[900px]:p-10"
                 >
-                  <Image
-                    src={p.illo}
-                    alt={p.alt}
-                    width={133}
-                    height={133}
-                    loading="lazy"
-                    className="h-[100px] w-auto min-[900px]:h-[133px]"
+                  <EmailIllustration
+                    name={p.scene}
+                    label={p.alt}
+                    className="size-[100px] min-[900px]:size-[133px]"
                   />
-                  <h3 className="mt-6 text-[1.25rem] font-bold tracking-[-0.02em] text-ink">
+                  <h3 className="mt-6 text-h4 text-ink">
                     {p.title}
                   </h3>
                   <p className="mt-3 text-copy text-pretty text-ink-soft">
@@ -277,13 +272,10 @@ export default function EmailMarketingPage() {
               </div>
             </div>
 
-            <Image
-              src="/figma/email-marketing/retention.png"
-              alt="Someone drawing customers in with a magnet, next to gifts and a discount tag."
-              width={665}
-              height={484}
-              loading="lazy"
-              className="h-auto w-full max-w-[665px] justify-self-end"
+            <EmailIllustration
+              name="retention"
+              label="An example customer, Lucy, with three orders since March, surrounded by the emails that brought her back: welcome, saved cart, thank-you and something new in."
+              className="w-full max-w-[665px] justify-self-end max-md:mx-auto max-md:max-w-[360px]"
             />
           </div>
         </section>
@@ -317,13 +309,10 @@ export default function EmailMarketingPage() {
               Por debajo de 900px se desplaza en horizontal con un ancho minimo
               que las deja a ~11px, en vez de encoger hasta no servir. */}
           <div className="-mx-6 mt-12 overflow-x-auto px-6 min-[900px]:mx-0 min-[900px]:overflow-visible min-[900px]:px-0">
-            <Image
-              src="/figma/email-marketing/flow.png"
-              alt="The lifecycle of email flows around a loyal customer: welcome series, browse abandonment, abandoned cart, sell, post-purchase, upsell and cross-sell, windback and sunset flow."
-              width={2220}
-              height={2204}
-              loading="lazy"
-              className="h-auto w-[860px] max-w-none min-[900px]:w-full min-[900px]:max-w-[1110px]"
+            <EmailIllustration
+              name="flow"
+              label="The lifecycle of email flows around a loyal customer: welcome series, browse abandonment, abandoned cart, first sale, post-purchase, upsell and cross-sell, win-back and sunset flow."
+              className="w-[640px] max-w-none min-[900px]:mx-auto min-[900px]:w-full min-[900px]:max-w-[900px]"
             />
           </div>
         </section>
@@ -342,31 +331,18 @@ export default function EmailMarketingPage() {
 
         {/* --- FAQ ----------------------------------------------------- */}
         <section className={`${wrap} ${section}`}>
-          <div className="grid gap-12 min-[900px]:grid-cols-[minmax(0,601px)_minmax(0,1fr)] min-[900px]:items-start min-[900px]:gap-16">
-            <div>
-              <p className="text-small font-medium text-violet-ink">
-                Have you made it this far and you&rsquo;re still not sure?
-              </p>
-              <h2 className={`mt-4 max-w-[601px] ${h2Class}`}>
-                Here, we address the most common questions:
-              </h2>
-              <p className="mt-6 max-w-[34em] text-copy text-pretty text-ink-soft">
-                Starting to work with an agency can be a significant improvement,
-                but it involves an important decision. That&rsquo;s why we want to
-                help you make an informed choice. Many of our clients had similar
-                doubts before working with us, which is why we created this
-                section.
-              </p>
-              <p className="mt-5 max-w-[34em] text-copy text-pretty text-ink-soft">
-                If you have any unanswered questions, don&rsquo;t hesitate to
-                contact us right here. We&rsquo;ll be happy to provide the answers.
-              </p>
-              <div className="mt-8">
-                <CtaLink href="#contact">Get Started</CtaLink>
-              </div>
-            </div>
+          <h2 className={`text-center ${h2Class}`}>Frequently Asked Questions</h2>
+          <p className="mx-auto mt-5 max-w-[40em] text-center text-ui text-pretty text-ink-soft">
+            If you have any questions that aren&rsquo;t listed below, feel free to
+            schedule a call to speak with someone from our team.
+          </p>
 
+          <div className="mx-auto mt-12 max-w-[636px]">
             <FaqAccordion items={faqs} />
+          </div>
+
+          <div className="mt-10 flex justify-center">
+            <CtaLink href="#contact">Get Started</CtaLink>
           </div>
         </section>
 

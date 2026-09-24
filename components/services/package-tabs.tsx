@@ -75,7 +75,7 @@ export function PackageTabs({ tabs }: { tabs: PackageTab[] }) {
                 : "border-line hover:border-ink-soft"
             }`}
           >
-            <span className="text-[1.5rem] leading-none font-extrabold text-ink">
+            <span className="text-h3 leading-none font-extrabold text-ink">
               {String(i + 1).padStart(2, "0")}
             </span>
             <span

@@ -76,16 +76,48 @@ usa Roboto; DM Sans lo reemplazó y se conserva.
 Escala fluida con `clamp()`. El borrador tenía `h1` clavado en 64px sin override
 móvil — desbordaba. Los extremos de cada `clamp()` respetan el valor del Figma.
 
-| Token | Tamaño | Alto de línea | Tracking | Peso |
-|---|---|---|---|---|
-| `text-display` | 36 → 64px | 1.06 | −0.025em | 800 |
-| `text-h2` | 32 → 51px | 1.1 | −0.02em | 800 |
-| `text-h3` | 24px | 1.3 | −0.021em | 700 |
-| `text-lede` | 20 → 24px | 1.417 | −0.008em | 400 |
-| `text-body` | 18px | 1.611 | — | 400 |
-| `text-copy` | 16px | 1.625 (26px) | — | — |
-| `text-ui` | 16px | 1.5 (24px) | — | — |
-| `text-small` | 14px | 1.43 | — | 400 |
+**Los `clamp()` se quedan en su mínimo hasta 480px** y crecen en línea recta
+hasta el máximo en 1280px. En un teléfono la escala es fija y ordenada —36 /
+28 / 22 / 18 / 18 / 16 / 14— y no depende del ancho exacto del aparato. Antes
+cada token arrancaba a crecer desde 0px con su propia pendiente: a 430px el
+`h2` (34px) ya pasaba al `h1`, que la home había bajado a 32px con un override,
+y el lede se iba a 21px. **El cuerpo en móvil no pasa de 18px**, tampoco el
+grande: los párrafos de 20–24px de About us, SEO y los testimonios llevan su
+`max-md:` a 18.
+
+| Token | Tamaño | Alto de línea | Tracking | Peso | Papel |
+|---|---|---|---|---|---|
+| `text-display` | 36 → 64px | 1.06 | −0.025em | 800 | h1 de página |
+| `text-h2` | 28 → 51px | 1.1 | −0.02em | 800 | título de sección |
+| `text-h3` | 22 → 24px | 1.3 | −0.021em | 700 | título de tarjeta grande |
+| `text-h4` | 20px | 1.3 | −0.02em | 700 | título de tarjeta chica, pregunta del FAQ, nombre de persona, subtítulo del blog |
+| `text-lede` | 18 → 24px | 1.417 | −0.008em | 400 | párrafo bajo un título, y **toda cita** (con `font-medium` si va en tarjeta) |
+| `text-body` | 18px | 1.611 | — | 400 | cuerpo de sección, respuesta del FAQ, prosa del blog |
+| `text-copy` | 16px | 1.625 (26px) | — | — | texto de lectura en tarjetas |
+| `text-ui` | 16px | 1.5 (24px) | — | — | nav, botones, etiquetas, chips |
+| `text-small` | 14px | 1.43 | — | 400 | legal, pie, listas densas |
+| `text-stat` | 32px | 1 | −0.03em | 800 | cifras, números de paso, la comilla de una tarjeta |
+
+**No hay tamaños fuera de la tabla.** Una regla de ESLint (`no-restricted-syntax`
+en `eslint.config.mjs`) falla ante cualquier `text-[18px]` o `text-[1.25rem]` en
+`app/` y `components/`. Si hace falta un tamaño nuevo se añade aquí y en
+`globals.css`, no en la página. La única excepción viva es la comilla
+decorativa de 128px de `/services/seo`, desactivada en su línea con el motivo.
+
+Es la lección del sitio anterior. El backup del WordPress (agosto de 2026)
+tenía un kit global de Elementor y encima **46 tamaños puestos a mano** widget
+por widget: el h1 medía 64px en escritorio en todas partes pero en móvil 51px
+en las páginas de servicio y 40px en la home; el h2 de sección en móvil, 40px,
+igualaba al h1 de la home; el kit tenía el h3 a 40px, más grande que su h2 a
+36; y 57 párrafos de 18px no tenían variante móvil porque nadie se acordó. El
+sistema de ahora resuelve eso con diez tokens y una regla que impide volver.
+
+Cómo se mapeó lo que había: las citas de 24/34 y 20/32 van a `text-lede`; los
+títulos de 18, 19 y 20px van a `text-h4`; las cifras de 32px a `text-stat`; los
+párrafos de 16 con interlineado suelto a `text-copy` o `text-ui`; los 15px a
+`text-small`. El párrafo de 30px de About us baja a `text-lede` (24 en
+escritorio) y su antetítulo de 18 a `text-eyebrow` (16): eran dos excepciones
+sin más motivo que el Figma.
 
 **Dos densidades del mismo cuerpo de 16px.** La escala tenía un solo
 interlineado por tamaño, y las páginas necesitaban los dos: se habían resuelto
@@ -98,9 +130,6 @@ interlineado y 34 con 24px. No era un tamaño que faltara, eran dos densidades.
 Ninguno fija peso, para que compongan con `font-medium` / `font-semibold`.
 `text-eyebrow` tiene las mismas métricas que `text-ui` pero lleva el peso 500
 dentro; se conserva por semántica, pero para 16px normal va `text-ui`.
-
-Quedan cinco `text-[1rem]` sueltos y son correctos: interlineados únicos de 22,
-28 y 32px, y el glifo `+` del acordeón.
 
 `text-wrap: balance` en h1–h3, `pretty` en prosa larga. Cuerpo tope 65–75ch.
 

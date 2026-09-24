@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { CalendlyButton } from "@/components/calendly-button";
+import { BookCallIllustration } from "@/components/book-call-illustration";
 import { ContactForm } from "@/components/contact-form";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -91,6 +92,7 @@ export default function ContactPage() {
         >
           <div className="grid gap-8 rounded-lg bg-paper-panel p-9 min-[900px]:grid-cols-[1fr_auto_1fr] min-[900px]:items-stretch min-[900px]:gap-10 min-[900px]:p-16">
             <div className="min-[900px]:self-center">
+              <BookCallIllustration className="mb-6 w-full max-w-[300px]" />
               <h2 className="text-h3 text-balance text-ink">Book the call</h2>
               <p className={`mt-3 max-w-[34em] ${rowBody}`}>
                 Thirty minutes. We look at what happens to an enquiry on your
@@ -139,7 +141,7 @@ export default function ContactPage() {
                 >
                   <span
                     aria-hidden="true"
-                    className="text-[2rem] font-extrabold leading-none tracking-[-0.03em] text-violet"
+                    className="text-stat text-violet"
                   >
                     {s.n}
                   </span>

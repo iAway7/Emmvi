@@ -202,7 +202,7 @@ export function PostBody({ blocks }: { blocks: readonly Block[] }) {
             return (
               <h3
                 key={i}
-                className="mt-9 text-[1.1875rem] leading-snug font-semibold text-balance text-ink"
+                className="mt-9 text-h4 font-semibold text-balance text-ink"
               >
                 {block.text}
               </h3>

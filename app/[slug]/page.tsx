@@ -184,7 +184,7 @@ export default async function PostPage({
                     <li key={t.id}>
                       <a
                         href={`#${t.id}`}
-                        className="text-[0.9375rem] leading-snug text-ink-soft underline decoration-line underline-offset-[3px] transition-colors hover:text-violet hover:decoration-violet focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
+                        className="text-small text-ink-soft underline decoration-line underline-offset-[3px] transition-colors hover:text-violet hover:decoration-violet focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
                       >
                         {t.text}
                       </a>
@@ -201,7 +201,7 @@ export default async function PostPage({
               <PostBody blocks={post.body} />
 
               <div className="mt-12 flex flex-wrap items-center gap-4 border-t border-line pt-6">
-                <p className="text-[1rem] font-medium text-ink">
+                <p className="text-ui font-medium text-ink">
                   Share the post:
                 </p>
                 <ShareLinks
@@ -266,12 +266,12 @@ export default async function PostPage({
                       <h3 className="mt-2 text-h3 text-balance text-ink group-hover:text-violet">
                         {r.title}
                       </h3>
-                      <p className="mt-3 flex-1 text-[1rem] leading-[26px] text-pretty text-ink-soft">
+                      <p className="mt-3 flex-1 text-copy text-pretty text-ink-soft">
                         {r.lede}
                       </p>
                       <span
                         aria-hidden="true"
-                        className="mt-5 text-[1rem] font-medium text-violet"
+                        className="mt-5 text-ui font-medium text-violet"
                       >
                         Read more &raquo;
                       </span>

@@ -3,11 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { CtaLink } from "@/components/cta-link";
-import { FaqAccordion, type FaqItem } from "@/components/services/faq-accordion";
+import { FaqAccordion, type FaqItem } from "@/components/faq-accordion";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { PackageTabs, type PackageTab } from "@/components/services/package-tabs";
 import { SalesForm } from "@/components/services/sales-form";
+import { SeoIllustration } from "@/components/services/seo-illustrations";
 import { pageMetadata } from "@/lib/site";
 
 /**
@@ -192,13 +193,10 @@ export default function SeoPage() {
               </div>
             </div>
 
-            <Image
-              src="/figma/seo/hero.svg"
-              alt="Someone inspecting a phone screen with a magnifier, beside charts and a lightbulb."
-              width={642}
-              height={470}
-              priority
-              className="h-auto w-full max-w-[642px] justify-self-end"
+            <SeoIllustration
+              name="hero"
+              label="A local search for an EV charger installer in Leeds: the map pins the example business, it tops the list of results, and a chart shows its clicks from Google rising from January to June."
+              className="w-full max-w-[642px] justify-self-end max-md:mx-auto max-md:max-w-[360px]"
             />
           </div>
         </section>
@@ -249,7 +247,7 @@ export default function SeoPage() {
                   loading="lazy"
                   className="mx-auto h-auto w-full max-w-[256px]"
                 />
-                <h3 className="mt-6 text-[1.25rem] font-bold tracking-[-0.02em] text-ink">
+                <h3 className="mt-6 text-h4 text-ink">
                   {s.title}
                 </h3>
                 <p className="mt-3 flex-1 text-small leading-[22px] text-pretty text-ink-soft">
@@ -265,7 +263,7 @@ export default function SeoPage() {
           </ul>
 
           <div className="mt-4 flex flex-col items-center gap-5 rounded-md border border-line bg-paper px-8 py-10 text-center">
-            <p className="text-[1.25rem] font-bold tracking-[-0.02em] text-ink">
+            <p className="text-h4 text-ink">
               Can&rsquo;t find what you need?
             </p>
             <CtaLink href="#contact">Contact Us</CtaLink>
@@ -304,7 +302,12 @@ export default function SeoPage() {
           </p>
 
           <div className="bg-dusk mt-12 rounded-lg px-8 py-12 min-[900px]:px-16">
-            <ol className="grid list-none gap-x-16 min-[900px]:grid-cols-2">
+            {/* Se lee hacia abajo: 01-05 a la izquierda, 06-10 a la derecha.
+                Con `grid-cols-2` rellenaba por filas (01,02 / 03,04) y bajando por
+                la izquierda se leia 1,3,5,7,9. `grid-flow-col` + `grid-rows-5` lo
+                invierte, y de paso deja correcta la regla de abajo que quita el
+                borde a los items 5 y 10: son los ultimos de cada columna. */}
+            <ol className="grid list-none gap-x-16 min-[900px]:grid-flow-col min-[900px]:grid-rows-5 min-[900px]:auto-cols-fr">
               {steps.map((s, i) => (
                 <li
                   key={s}
@@ -312,7 +315,10 @@ export default function SeoPage() {
                 >
                   <span
                     aria-hidden="true"
-                    className="text-[1.125rem] leading-6 font-extrabold text-white"
+                    /* Ancho fijo, como en /services/ppc. `tabular-nums` no sirve aqui:
+                       DM Sans no trae cifras tabulares, asi que el "1" es mas
+                       estrecho y cada fila arrancaba en una x distinta. */
+                    className="w-7 shrink-0 text-body leading-6 font-extrabold text-white"
                   >
                     {String(i + 1).padStart(2, "0")}
                   </span>
@@ -341,6 +347,7 @@ export default function SeoPage() {
                   de las tarjetas de Email Marketing: aquí el testimonio ocupa
                   un panel entero y a 32 px se pierde. A 128 px el glifo de DM
                   Sans mide 33 px de alto, que es la medida del original. */}
+              {/* eslint-disable-next-line no-restricted-syntax -- glifo decorativo, no texto: el tamano es el del icono del Figma */}
               <p aria-hidden="true" className="text-[8rem] leading-[0.4] font-extrabold text-violet">
                 &ldquo;
               </p>
@@ -367,13 +374,10 @@ export default function SeoPage() {
               </figcaption>
             </div>
 
-            <Image
-              src="/figma/seo/testimonial.png"
-              alt="People assembling a five-star review on a large screen."
-              width={412}
-              height={412}
-              loading="lazy"
-              className="h-auto w-full max-w-[412px] justify-self-center"
+            <SeoIllustration
+              name="review"
+              label="A five-star review card, posted on Google."
+              className="w-full max-w-[412px] justify-self-center"
             />
           </figure>
         </section>
@@ -421,7 +425,7 @@ export default function SeoPage() {
 
               <blockquote className="text-ink-soft">
                 <p aria-hidden="true" className="text-h3">&ldquo;</p>
-                <p className="mt-2 text-[1.25rem] leading-[32px] text-pretty">
+                <p className="mt-2 text-lede text-pretty">
                   Gus helped me redesign my website and honestly, it turned out
                   way better than I imagined. It looks clean, it loads fast, and
                   it works great on phones too.

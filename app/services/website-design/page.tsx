@@ -10,6 +10,7 @@ import { SiteHeader } from "@/components/site-header";
 import { Journey } from "@/components/services/journey";
 import { SalesForm } from "@/components/services/sales-form";
 import { Testimonials } from "@/components/services/testimonials";
+import { WebDesignIllustration } from "@/components/services/web-design-illustrations";
 import { pageMetadata } from "@/lib/site";
 
 /**
@@ -55,8 +56,10 @@ const benefits = [
   },
 ];
 
-/** Las tres ilustraciones son las del propio Figma, ya en public/illustrations
- *  desde la home: navegador, portátil con código y cohete, en ese orden.
+/** Una escena por paso, dibujada para lo que dice el paso: el diseño en
+ *  Figma, el paso del diseño al sitio vivo y la lista de comprobaciones antes
+ *  de publicar. Sustituyen al navegador, el portátil y el cohete isométricos
+ *  del Figma. Ver components/services/web-design-illustrations.tsx.
  *
  *  El Figma dibuja la segunda tarjeta con borde negro. No es que esa tarjeta
  *  sea especial: es el estado hover, capturado en el archivo. Aquí va como
@@ -66,22 +69,22 @@ const kickoff = [
     n: "01",
     title: "Design Phase in Figma",
     body: "In this phase, we bring your vision to life within the Figma design platform. We focus on crafting the visual elements and layout that will define your website's aesthetic.",
-    illo: "/illustrations/design.svg",
-    alt: "A browser window showing a finished page.",
+    scene: "design" as const,
+    alt: "A page being designed in Figma: a layers panel, a selected block with its handles, and the brand colours.",
   },
   {
     n: "02",
     title: "Figma-to-WordPress Transformation",
     body: "Next, we take the meticulously crafted Figma design and replicate it in WordPress. This step is all about turning the static design into a dynamic, functional website.",
-    illo: "/illustrations/coding.svg",
-    alt: "A laptop with a connection running out to a separate node.",
+    scene: "build" as const,
+    alt: "The approved design turned into the live site, page for page.",
   },
   {
     n: "03",
     title: "Integrations, Quality Checks, and Delivery",
     body: "Finally, we seamlessly integrate your website with the necessary tools and perform thorough testing to ensure it functions flawlessly. Once it's perfect, we deliver your fully functional website.",
-    illo: "/illustrations/launch.svg",
-    alt: "A rocket in flight.",
+    scene: "launch" as const,
+    alt: "A pre-launch checklist: forms connected, works on mobile, speed tested, SSL on. Then the site goes live.",
   },
 ];
 
@@ -204,13 +207,10 @@ export default function WebsiteDesignPage() {
               </div>
             </div>
 
-            <Image
-              src="/figma/website-design/hero.svg"
-              alt="A designer building a web page next to a browser window and a code panel."
-              width={642}
-              height={537}
-              priority
-              className="h-auto w-full max-w-[642px] justify-self-end"
+            <WebDesignIllustration
+              name="hero"
+              label="An example installer's website, with a Get a quote button, shown on a desktop browser and on a phone, next to a card with the brand's colours and type."
+              className="w-full max-w-[642px] justify-self-end max-md:mx-auto max-md:max-w-[320px]"
             />
           </div>
         </section>
@@ -231,7 +231,7 @@ export default function WebsiteDesignPage() {
                   key={b.title}
                   className="rounded-md border border-line bg-paper p-8"
                 >
-                  <h2 className="text-[1.25rem] font-bold tracking-[-0.02em] text-ink">
+                  <h2 className="text-h4 text-ink">
                     {b.title}
                   </h2>
                   <p className="mt-3 text-small leading-[22px] text-pretty text-ink-soft">
@@ -241,15 +241,16 @@ export default function WebsiteDesignPage() {
               ))}
             </ul>
 
-            {/* En el Figma esta captura se sale por la derecha del frame y se
-                recorta. Aquí igual: el canal derecho la corta. */}
+            {/* Antes, una captura de una plantilla ajena de CRO (con su "LOGO"
+                y sus "Brands we work with"). Ahora la escena cuenta los tres
+                beneficios de la izquierda como un recorrido. Como en el Figma,
+                se sale por la derecha y el canal la corta: lo que importa de
+                la escena queda lejos de ese borde. */}
             <div className="min-[900px]:-mr-[var(--spacing-gut)] min-[900px]:overflow-hidden">
-              <Image
-                src="/figma/website-design/preview.jpg"
-                alt="Preview of a landing page about conversion rate optimization."
-                width={870}
-                height={730}
-                className="h-auto w-full rounded-md border border-line min-[900px]:w-[870px] min-[900px]:max-w-none min-[900px]:rounded-none min-[900px]:border-0"
+              <WebDesignIllustration
+                name="benefits"
+                label="A search for solar installer leeds finds an example installer's site, the visitor fills in its quote form, and the phone confirms: request sent, we'll reply in under a minute."
+                className="w-full min-[900px]:w-[870px] min-[900px]:max-w-none"
               />
             </div>
           </div>
@@ -287,21 +288,18 @@ export default function WebsiteDesignPage() {
                 key={k.n}
                 className="flex flex-col rounded-md border border-line bg-paper p-8 transition-colors duration-150 hover:border-ink-black"
               >
-                <Image
-                  src={k.illo}
-                  alt={k.alt}
-                  width={252}
-                  height={252}
-                  loading="lazy"
-                  className="mx-auto h-auto w-full max-w-[252px]"
+                <WebDesignIllustration
+                  name={k.scene}
+                  label={k.alt}
+                  className="mx-auto w-full max-w-[252px]"
                 />
                 <p
                   aria-hidden="true"
-                  className="mt-8 text-[2rem] leading-none font-extrabold text-[#8f8f8f]"
+                  className="mt-8 text-stat text-[#8f8f8f]"
                 >
                   {k.n}
                 </p>
-                <h3 className="mt-4 text-[1.125rem] leading-6 font-bold tracking-[-0.02em] text-balance text-ink">
+                <h3 className="mt-4 text-h4 text-balance text-ink">
                   {k.title}
                 </h3>
                 <p className="mt-3 text-small leading-[22px] text-pretty text-ink-soft">
@@ -324,7 +322,7 @@ export default function WebsiteDesignPage() {
             {included.map(({ title, body, icon }) => (
               <li key={title}>
                 <Image src={icon} alt="" width={56} height={56} loading="lazy" />
-                <h3 className="mt-4 text-[1.25rem] font-bold tracking-[-0.02em] text-ink">
+                <h3 className="mt-4 text-h4 text-ink">
                   {title}
                 </h3>
                 <p className="mt-3 max-w-[34em] text-copy text-pretty text-ink-soft">
@@ -353,7 +351,7 @@ export default function WebsiteDesignPage() {
                   className="rounded-md border border-line bg-paper p-6 min-[900px]:p-10"
                 >
                   <Image src={icon} alt="" width={56} height={56} loading="lazy" />
-                  <h3 className="mt-6 text-[1.25rem] font-bold tracking-[-0.02em] text-ink">
+                  <h3 className="mt-6 text-h4 text-ink">
                     {title}
                   </h3>
                   <p className="mt-3 text-copy text-pretty text-ink-soft">

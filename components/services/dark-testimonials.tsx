@@ -46,7 +46,7 @@ export function DarkTestimonials() {
           <figure className="flex h-full flex-col rounded-md border border-[#2c2c33] bg-[#222226] p-8">
             <p
               aria-hidden="true"
-              className="text-[2rem] leading-none font-extrabold text-violet-light"
+              className="text-stat text-violet-light"
             >
               &ldquo;
             </p>

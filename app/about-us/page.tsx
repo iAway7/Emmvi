@@ -64,12 +64,14 @@ const h2Class = "text-h2 text-balance text-ink";
  */
 const band = "py-20 lg:py-[200px]";
 
-/** Párrafo grande de las tres bandas: 30 px con tracking -1px y línea de 45. */
-const lead30 =
-  "text-[1.5rem] leading-[36px] tracking-[-0.033em] text-pretty lg:text-[1.875rem] lg:leading-[45px]";
+/** Párrafo grande de las tres bandas. El Figma lo tenía a 30px con línea de
+ *  45; va al lede de la escala (18 → 24px) porque es el mismo papel que el
+ *  lede de cualquier otra página y un tamaño propio era una excepción más. */
+const lead30 = "text-lede text-pretty";
 
-/** Antetítulo de banda: 18 px medium en versalitas, tracking -0.4px. */
-const eyebrow = "text-[1.125rem] leading-normal font-medium tracking-[-0.022em] uppercase";
+/** Antetítulo de banda en versalitas. El Figma lo tenía a 18px; va al
+ *  eyebrow de la escala (16px medium), el mismo de la home. */
+const eyebrow = "text-eyebrow uppercase";
 
 /**
  * "Divider 3" del Figma: 83 px de ancho, un filete de 1 px de punta a punta y
@@ -145,7 +147,7 @@ export default function AboutUsPage() {
         {/* El frame no tiene hero aparte: esta sección lo es, y su titular va a
             64px, el tamaño del h1, no a los 51 del text-h2. */}
         <section className={`${wrap} pt-14 pb-16 lg:pt-24 lg:pb-24`}>
-          <p className="mx-auto w-fit rounded-sm bg-[#f8f8ff] px-2 py-1.5 text-[1rem] leading-[22px] font-medium text-violet-ink">
+          <p className="mx-auto w-fit rounded-sm bg-[#f8f8ff] px-2 py-1.5 text-ui font-medium text-violet-ink">
             Our Mission
           </p>
           <h1 className="mt-4 text-center text-display text-balance text-ink">
@@ -240,7 +242,7 @@ export default function AboutUsPage() {
         {/* --- Our Team ------------------------------------------------ */}
         <section className={`${wrap} py-16 lg:py-24`}>
           <h2 className={`text-center ${h2Class}`}>Our Team</h2>
-          <p className="mx-auto mt-6 max-w-[658px] text-center text-[1.125rem] leading-8 text-pretty text-ink-soft">
+          <p className="mx-auto mt-6 max-w-[658px] text-center text-body text-pretty text-ink-soft">
             emmvi started with helping people build awesome projects. Each day
             our team continues to grow and empower more creators in the world to
             do that.
@@ -283,10 +285,10 @@ export default function AboutUsPage() {
                   loading="lazy"
                   className="aspect-square w-full max-w-[191px] rounded-sm object-cover"
                 />
-                <p className="mt-4 text-[1.25rem] leading-7 font-medium tracking-[-0.02em] text-ink">
+                <p className="mt-4 text-h4 font-medium text-ink">
                   {p.name}
                 </p>
-                <p className="text-[1rem] leading-7 tracking-[-0.025em] text-ink-soft">
+                <p className="text-copy text-ink-soft">
                   {p.role}
                 </p>
               </li>
@@ -339,7 +341,7 @@ export default function AboutUsPage() {
                   quien va esta página. */}
               <blockquote className="text-ink-soft">
                 <p aria-hidden="true" className="text-h3">&ldquo;</p>
-                <p className="mt-2 text-[1.25rem] leading-[32px] text-pretty">
+                <p className="mt-2 text-lede text-pretty">
                   I was drowning in manual work and reached out to Nico for help
                   with automations. He set up email flows, follow-ups, and little
                   systems I didn&rsquo;t even know I needed. Everything feels more
