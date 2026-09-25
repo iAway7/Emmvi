@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { DataNotice } from "@/components/data-notice";
 import posthog from "posthog-js";
 import { useActionState } from "react";
 
@@ -134,18 +134,7 @@ export function ContactForm() {
       >
         {isPending ? "Sending…" : "Send"}
       </button>
-
-      <p className="mt-4 text-small text-ink-soft">
-        By submitting this form, I confirm that I have read and understood the
-        emmvi{" "}
-        <Link
-          href="/privacy-policy/"
-          className="text-ink underline underline-offset-[3px] hover:text-violet"
-        >
-          Privacy Policy
-        </Link>
-        .
-      </p>
+      <DataNotice />
     </form>
   );
 }

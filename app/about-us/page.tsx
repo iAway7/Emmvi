@@ -186,7 +186,7 @@ export default function AboutUsPage() {
         {/* --- About Us ------------------------------------------------ */}
         {/* Banda a sangre en --color-ink, la única de esta pantalla. */}
         <section className="bg-ink">
-          <div className={`${wrap} ${band}`}>
+          <div className={`reveal ${wrap} ${band}`}>
             <h2 className={`${eyebrow} text-paper`}>About Us</h2>
             <div className="mt-4">
               <Divider tone="violet-light" />
@@ -205,7 +205,7 @@ export default function AboutUsPage() {
         {/* El archivo repite el rótulo del hero: allí es la chapa violeta y aquí
             el antetítulo de banda. Se conservan los dos. */}
         <section className="border-b border-line">
-          <div className={`${wrap} ${band}`}>
+          <div className={`reveal ${wrap} ${band}`}>
             <h2 className={`${eyebrow} text-ink`}>Our mission</h2>
             <div className="mt-4">
               <Divider tone="violet" />
@@ -222,7 +222,7 @@ export default function AboutUsPage() {
         </section>
 
         {/* --- The team behind ----------------------------------------- */}
-        <section className={`${wrap} ${band}`}>
+        <section className={`reveal ${wrap} ${band}`}>
           <p className={`${eyebrow} text-ink`}>The team behind</p>
           <h2 className={`mt-6 ${h2Class}`}>
             Worldwide Digital Marketing Professionals.
@@ -240,7 +240,7 @@ export default function AboutUsPage() {
         </section>
 
         {/* --- Our Team ------------------------------------------------ */}
-        <section className={`${wrap} py-16 lg:py-24`}>
+        <section className={`reveal ${wrap} py-16 lg:py-24`}>
           <h2 className={`text-center ${h2Class}`}>Our Team</h2>
           <p className="mx-auto mt-6 max-w-[658px] text-center text-body text-pretty text-ink-soft">
             emmvi started with helping people build awesome projects. Each day
@@ -297,7 +297,7 @@ export default function AboutUsPage() {
         </section>
 
         {/* --- Join Our Passionate Crew -------------------------------- */}
-        <section className={`${wrap} pb-16 lg:pb-24`}>
+        <section className={`reveal ${wrap} pb-16 lg:pb-24`}>
           <div className="flex flex-col items-center gap-6 rounded-lg bg-paper-panel px-6 py-16 text-center lg:py-[90px]">
             <h2 className={h2Class}>Join Our Passionate Crew</h2>
             <p className={`${lead30} text-ink-soft`}>
@@ -310,7 +310,7 @@ export default function AboutUsPage() {
         </section>
 
         {/* --- Talk to our Sales team ---------------------------------- */}
-        <section id="contact" className={`${wrap} scroll-mt-24 pb-16 lg:pb-[104px]`}>
+        <section id="contact" className={`reveal ${wrap} scroll-mt-24 pb-16 lg:pb-[104px]`}>
           <h2 className={`text-center ${h2Class}`}>Talk to our Sales team</h2>
           <p className="mx-auto mt-5 max-w-[40em] text-center text-body text-pretty text-ink-soft">
             We&rsquo;ll help you find the right plan and pricing for your business.

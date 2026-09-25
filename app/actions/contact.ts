@@ -14,9 +14,7 @@ import { CONTACT_EMAIL } from "@/lib/site";
  * llegan vacios y no cambian nada de su comportamiento.
  */
 export type SalesExtras = {
-  lastName: string;
   pages: string;
-  hosting: string;
   budget: string;
 };
 
@@ -59,16 +57,13 @@ export async function submitContact(
 
   const field = (key: string) => normalizeText(String(formData.get(key) ?? ""));
   const extras: SalesExtras = {
-    lastName: field("lastName"),
     pages: field("pages"),
-    hosting: field("hosting"),
     budget: field("budget"),
   };
 
-  // El nombre viaja partido en dos cuando lo manda el formulario de ventas.
   const firstName = String(formData.get("name") ?? "");
   const raw = {
-    name: extras.lastName ? `${firstName} ${extras.lastName}` : firstName,
+    name: firstName,
     email: formData.get("email"),
     company: formData.get("company"),
     message: formData.get("message"),
@@ -103,7 +98,6 @@ export async function submitContact(
   const { name, email, company, message } = result.values;
   const qualifiers: [string, string][] = [
     ["Pages", extras.pages],
-    ["Hosting with us", extras.hosting],
     ["Budget", extras.budget],
   ];
 

@@ -202,7 +202,7 @@ export default function Home() {
             habeis hecho?", y mas abajo partirian en dos la historia de la
             solicitud. Son todos clientes reales; el trust band del Figma usaba
             ShapeShift, Cameo y Bounce, que no son clientes. */}
-        <section className={`${wrap} pb-16 lg:pb-20`}>
+        <section className={`reveal ${wrap} pb-16 lg:pb-20`}>
           <ClientMarquee />
         </section>
 
@@ -221,7 +221,7 @@ export default function Home() {
         {/* El centro de la pagina: lo que le pasa a una solicitud. En
             escritorio es la escena ancha; en movil las cuatro tarjetas en
             columna, porque en fila no se leen a 390px. */}
-        <section id="services" className={`scroll-mt-24 ${section}`}>
+        <section id="services" className={`reveal scroll-mt-24 ${section}`}>
           <div className={wrap}>
             <h2 className="text-h2 text-balance text-ink md:text-center">
               What happens to a request
@@ -264,32 +264,33 @@ export default function Home() {
             final del recorrido: 9.25:1 en el peor punto. Antes terminaba en
             #7d7d7d y habia que reservar el tramo claro como aire. */}
         <section id="about" className={`bg-night scroll-mt-24 ${section}`}>
-          <div className={wrap}>
-            <div className="grid gap-10 min-[900px]:grid-cols-2 min-[900px]:items-center min-[900px]:gap-16">
-              <div>
-                <h2 className="text-h2 text-balance text-white">
-                  Talk to the people doing the work
-                </h2>
-                {/* Sin nombres propios y sin repartir roles entre personas: las
-                    dos cosas dicen cuanta gente hay. Ciudades si — eso es donde
-                    se trabaja, no cuantos. Ver PRODUCT.md. */}
-                <p className="mt-6 max-w-[34em] text-body text-pretty text-white/80">
-                  From Valencia and from Argentina, covering the working day in
-                  Europe and the Americas.
-                </p>
-              </div>
-
-              {/* El mapa en tarjeta, un punto mas claro que el panel. Ya no va
-                  de borde a borde en movil: dentro de la tarjeta manda el
-                  ancho de la columna. */}
-              <div className="rounded-lg bg-white/[0.04] p-6 min-[900px]:p-8">
-                <MeetMap />
-              </div>
+          <div className={`reveal ${wrap}`}>
+            <h2 className="text-h2 text-balance text-white">
+              Meet emmvi
+            </h2>
+            {/* Sin nombres propios y sin repartir roles entre personas: las
+                dos cosas dicen cuanta gente hay. Ciudades si — eso es donde se
+                trabaja, no cuantos. Ver PRODUCT.md. */}
+            <p className="mt-6 max-w-[38em] text-body text-pretty text-white/80">
+              emmvi builds websites and the systems that run behind them, from
+              Valencia and from Argentina. Design, build and automation all
+              happen in house, so you talk to the people doing the work and
+              nothing is handed to a supplier you have never met.
+            </p>
+            {/* De borde a borde en movil: el mapa esta dibujado para 1200 de
+                ancho y dentro del canal se queda en nada. */}
+            <div className="mt-12 -mx-6 w-screen max-w-[100vw] lg:mx-0 lg:w-auto lg:max-w-none">
+              <MeetMap />
             </div>
+
+            <p className="mt-10 max-w-[38em] text-body text-pretty text-white/80">
+              Working across both time zones covers most of the working day for
+              clients in Europe and the Americas.
+            </p>
           </div>
         </section>
 
-        <section id="who" className={`scroll-mt-24 ${section}`}>
+        <section id="who" className={`reveal scroll-mt-24 ${section}`}>
           <div className={wrap}>
             <h2 className="text-h2 text-balance text-ink">Who we work with</h2>
             <div className="mt-14 border-t border-line">
@@ -328,7 +329,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className={section}>
+        <section className={`reveal ${section}`}>
           <div className={wrap}>
             <p className="text-eyebrow text-ink">Testimonials</p>
             <h2 className="mt-2 text-h2 text-balance text-ink">
@@ -379,7 +380,7 @@ export default function Home() {
 
         <section id="call" className={`bg-paper-alt scroll-mt-24 ${section}`}>
           <div
-            className={`${wrap} grid items-center gap-8 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-16`}
+            className={`reveal ${wrap} grid items-center gap-8 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-16`}
           >
             <div>
               <h2 className="text-h2 text-balance text-ink">
@@ -410,7 +411,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="faq" className={`scroll-mt-24 ${section}`}>
+        <section id="faq" className={`reveal scroll-mt-24 ${section}`}>
           <div className={wrap}>
             <h2 className="text-h2 text-balance text-ink">
               Frequently asked questions
@@ -441,7 +442,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="contact" className={`${wrap} scroll-mt-24 ${section}`}>
+        <section id="contact" className={`reveal ${wrap} scroll-mt-24 ${section}`}>
           <div className="grid items-start gap-10 rounded-lg bg-paper-panel p-9 min-[900px]:grid-cols-2 min-[900px]:gap-16 min-[900px]:p-16">
             <div>
               <h2 className="text-h2 text-balance text-ink">

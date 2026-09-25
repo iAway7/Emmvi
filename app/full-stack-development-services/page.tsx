@@ -161,7 +161,7 @@ export default function FullStackDevelopment() {
           </div>
         </section>
 
-        <section className={`${wrap} ${section}`}>
+        <section className={`reveal ${wrap} ${section}`}>
           <h2 className={h2Class}>Sound familiar?</h2>
           <ul className="mt-10 grid gap-5 sm:grid-cols-2">
             {familiar.map((quote) => (
@@ -179,7 +179,7 @@ export default function FullStackDevelopment() {
         </section>
 
         <section className="bg-paper-alt">
-          <div className={`${wrap} ${section}`}>
+          <div className={`reveal ${wrap} ${section}`}>
             <h2 className={h2Class}>
               Replace the patchwork with one system
             </h2>
@@ -213,7 +213,7 @@ export default function FullStackDevelopment() {
           </div>
         </section>
 
-        <section className={`${wrap} ${section}`}>
+        <section className={`reveal ${wrap} ${section}`}>
           <h2 className={h2Class}>Why work with us</h2>
           <div className="mt-12 grid gap-10 md:grid-cols-3">
             {pillars.map((p) => (
@@ -237,7 +237,7 @@ export default function FullStackDevelopment() {
           </div>
         </section>
 
-        <section className={`${wrap} ${section}`}>
+        <section className={`reveal ${wrap} ${section}`}>
           <h2 className={`text-center ${h2Class}`}>Frequently asked questions</h2>
           <p className="mx-auto mt-5 max-w-[46ch] text-center text-body text-pretty text-ink-soft">
             Anything not answered here is worth a call. Thirty minutes, and
@@ -248,7 +248,7 @@ export default function FullStackDevelopment() {
           </div>
         </section>
 
-        <section id="build" className={`${wrap} scroll-mt-24 ${section}`}>
+        <section id="build" className={`reveal ${wrap} scroll-mt-24 ${section}`}>
           <div className="grid items-start gap-10 rounded-lg bg-paper-panel p-9 min-[900px]:grid-cols-2 min-[900px]:gap-16 min-[900px]:p-16">
             <div>
               <h2 className="text-h2 text-balance text-ink">

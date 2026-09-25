@@ -294,7 +294,7 @@ export default function PpcPage() {
 
         {/* --- Banda de plataformas ------------------------------------ */}
         {/* No es la del Figma: ver el comentario de `platforms`. */}
-        <section>
+        <section className="reveal">
           <div className={wrap}>
             <p className="text-center text-small text-ink-soft">
               Platforms we run ads on
@@ -316,7 +316,7 @@ export default function PpcPage() {
         </section>
 
         {/* --- Need a Paid Ads Agency to Boost ROI? -------------------- */}
-        <section className={`${wrap} pt-16 pb-16 lg:pt-24 lg:pb-24`}>
+        <section className={`reveal ${wrap} pt-16 pb-16 lg:pt-24 lg:pb-24`}>
           <div className="grid items-center gap-12 min-[900px]:grid-cols-[minmax(0,601px)_minmax(0,1fr)] min-[900px]:gap-8">
             <div>
               <h2 className={h2Big}>Need a Paid Ads Agency to Boost ROI?</h2>
@@ -351,7 +351,7 @@ export default function PpcPage() {
         </section>
 
         {/* --- Skilled Paid Ads Control -------------------------------- */}
-        <section className={`${wrap} pb-16 lg:pb-24`}>
+        <section className={`reveal ${wrap} pb-16 lg:pb-24`}>
           <div className="grid items-center gap-12 min-[900px]:grid-cols-[minmax(0,715px)_minmax(0,1fr)] min-[900px]:gap-8">
             <div>
               <h2 className={h2Big}>
@@ -382,7 +382,7 @@ export default function PpcPage() {
         </section>
 
         {/* --- Los cuatro canales -------------------------------------- */}
-        <section className={`${wrap} pb-16 lg:pb-24`}>
+        <section className={`reveal ${wrap} pb-16 lg:pb-24`}>
           <ul className="grid list-none gap-6 rounded-lg bg-paper-panel p-8 min-[900px]:grid-cols-2">
             {channels.map((c) => (
               <li
@@ -413,7 +413,7 @@ export default function PpcPage() {
         </section>
 
         {/* --- What Is Paid Advertising and How Does It Work? ---------- */}
-        <section className={`${wrap} pb-16 lg:pb-24`}>
+        <section className={`reveal ${wrap} pb-16 lg:pb-24`}>
           <div className="bg-dusk rounded-lg px-8 py-12 min-[900px]:px-18 min-[900px]:py-24">
             {/* Dos columnas, como la seccion "Capture, sell, and retain
                 customers." de /services/email-marketing: titulo a la izquierda,
@@ -461,7 +461,7 @@ export default function PpcPage() {
         </section>
 
         {/* --- Types of Paid Ads --------------------------------------- */}
-        <section className={`${wrap} pb-16 lg:pb-24`}>
+        <section className={`reveal ${wrap} pb-16 lg:pb-24`}>
           {/* `overflow-clip` y no `overflow-hidden`, y la diferencia no es de
               estilo: `hidden` convierte al panel en contenedor de scroll, y
               entonces el `view()` de las chapas se ancla **a el** en vez de a
@@ -553,7 +553,7 @@ export default function PpcPage() {
         </section>
 
         {/* --- The Benefits of Paid Online Advertising ----------------- */}
-        <section className={`${wrap} pb-16 lg:pb-24`}>
+        <section className={`reveal ${wrap} pb-16 lg:pb-24`}>
           {/* Las dos columnas van a la proporción del Figma (611 / 122 / 563
               sobre 1296), no a 611 y 563 en píxeles: el contenido aquí mide
               1192, así que en píxeles se pasaban y salían las dos iguales. */}
@@ -594,7 +594,7 @@ export default function PpcPage() {
         </section>
 
         {/* --- FAQ ----------------------------------------------------- */}
-        <section className={`${wrap} pb-16 lg:pb-24`}>
+        <section className={`reveal ${wrap} pb-16 lg:pb-24`}>
           <h2 className={`text-center ${h2Class}`}>Frequently Asked Questions</h2>
           <p className="mx-auto mt-5 max-w-[40em] text-center text-ui text-pretty text-ink-soft">
             If you have any questions that aren&rsquo;t listed below, feel free to
@@ -611,7 +611,7 @@ export default function PpcPage() {
         </section>
 
         {/* --- Talk to our Sales team ---------------------------------- */}
-        <section id="contact" className={`${wrap} scroll-mt-24 py-16 lg:py-[104px]`}>
+        <section id="contact" className={`reveal ${wrap} scroll-mt-24 py-16 lg:py-[104px]`}>
           <h2 className={`text-center ${h2Class}`}>Talk to our Sales team</h2>
           <p className="mx-auto mt-5 max-w-[40em] text-center text-body text-pretty text-ink-soft">
             We&rsquo;ll help you find the right plan and pricing for your business.

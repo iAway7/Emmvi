@@ -246,7 +246,7 @@ export default async function PostPage({
                 <li key={r.slug}>
                   <Link
                     href={`/${r.slug}`}
-                    className="group flex h-full flex-col overflow-hidden rounded-md border border-line bg-paper transition-colors hover:border-ink focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
+                    className="lift group flex h-full flex-col overflow-hidden rounded-md border border-line bg-paper transition-colors hover:border-ink focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
                   >
                     {r.image ? (
                       <Image

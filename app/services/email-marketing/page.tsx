@@ -186,7 +186,7 @@ export default function EmailMarketingPage() {
 
         {/* --- Plataformas + "Capture, sell, and retain customers." ----- */}
         <div className="bg-paper-panel">
-          <section className={`${wrap} py-10`}>
+          <section className={`reveal ${wrap} py-10`}>
             <p className="text-center text-small text-ink-soft">
               Platforms we work with
             </p>
@@ -205,7 +205,7 @@ export default function EmailMarketingPage() {
             </ul>
           </section>
 
-          <section className={`${wrap} pt-8 pb-16 lg:pt-12 lg:pb-24`}>
+          <section className={`reveal ${wrap} pt-8 pb-16 lg:pt-12 lg:pb-24`}>
             <div className="grid gap-8 min-[900px]:grid-cols-2 min-[900px]:items-start min-[900px]:gap-16">
               <h2 className={`max-w-[601px] ${h2Class}`}>
                 Capture, sell, and retain customers.
@@ -241,7 +241,7 @@ export default function EmailMarketingPage() {
         </div>
 
         {/* --- Maximize Customer Engagement ---------------------------- */}
-        <section className={`${wrap} ${section}`}>
+        <section className={`reveal ${wrap} ${section}`}>
           <div className="grid items-center gap-12 min-[900px]:grid-cols-[minmax(0,601px)_minmax(0,1fr)] min-[900px]:gap-8">
             <div>
               <h2 className={`max-w-[601px] ${h2Class}`}>
@@ -281,7 +281,7 @@ export default function EmailMarketingPage() {
         </section>
 
         {/* --- Automate Processes and Scale Your Sales ----------------- */}
-        <section className={`${wrap} pb-16 lg:pb-24`}>
+        <section className={`reveal ${wrap} pb-16 lg:pb-24`}>
           <div className="max-w-[601px]">
             <h2 className={`max-w-[601px] ${h2Class}`}>
               Automate Processes and Scale Your Sales
@@ -319,7 +319,7 @@ export default function EmailMarketingPage() {
 
         {/* --- What Our Clients Say ------------------------------------ */}
         <section className="bg-dusk">
-          <div className={`${wrap} ${section}`}>
+          <div className={`reveal ${wrap} ${section}`}>
             <h2 className="text-center text-h2 text-balance text-white">
               What Our Clients Say
             </h2>
@@ -330,7 +330,7 @@ export default function EmailMarketingPage() {
         </section>
 
         {/* --- FAQ ----------------------------------------------------- */}
-        <section className={`${wrap} ${section}`}>
+        <section className={`reveal ${wrap} ${section}`}>
           <h2 className={`text-center ${h2Class}`}>Frequently Asked Questions</h2>
           <p className="mx-auto mt-5 max-w-[40em] text-center text-ui text-pretty text-ink-soft">
             If you have any questions that aren&rsquo;t listed below, feel free to
@@ -347,7 +347,7 @@ export default function EmailMarketingPage() {
         </section>
 
         {/* --- Talk to our Sales team ---------------------------------- */}
-        <section id="contact" className={`${wrap} scroll-mt-24 ${section}`}>
+        <section id="contact" className={`reveal ${wrap} scroll-mt-24 ${section}`}>
           <h2 className={`text-center ${h2Class}`}>Talk to our Sales team</h2>
           <p className="mx-auto mt-5 max-w-[40em] text-center text-body text-pretty text-ink-soft">
             We&rsquo;ll help you find the right plan and pricing for your business.

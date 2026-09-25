@@ -277,6 +277,85 @@ html:has(dialog[open]) {
    El hueco entre logos va como padding-right de cada lista y NO como gap del
    carril: con gap en el carril el -50% cae a mitad de hueco y la costura salta.
    -------------------------------------------------------------------------- */
+/* Aparicion al entrar en pantalla, para paginas largas de secciones apiladas.
+   CSS puro, sin libreria: la animacion la lleva el compositor, no hay JS que
+   hidratar ni observer que registrar.
+
+   El estado inicial vive DENTRO del @supports a proposito. Es la propiedad que
+   importa: donde no hay soporte —hoy Firefox, que lo tiene tras un flag— no se
+   oculta nada nunca, asi que no existe el fallo clasico de "contenido
+   invisible para siempre" si la animacion no llega a arrancar.
+
+   El easing es el mismo de `reply-arrive`, para que el sitio se mueva igual en
+   todas partes. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal-in 600ms cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation-timeline: view();
+      /* Arranca poco despues de asomar y termina antes de llegar al centro:
+         si acaba demasiado tarde, se lee el texto mientras aun se mueve. */
+      animation-range: entry 10% cover 28%;
+    }
+  }
+}
+
+/* Respuesta al puntero.
+   Todo el hover del sitio cambiaba solo de color —31 `transition-colors`
+   contra 2 `transition-transform`— y por eso se sentia inerte: la interaccion
+   mas frecuente que existe no movia nada.
+
+   `.lift` va SOLO en lo que de verdad lleva a algun sitio. Levantar una
+   tarjeta informativa promete un clic que no existe, y eso es peor que no
+   animar: el resto de tarjetas se quedan con su cambio de borde. */
+@media (prefers-reduced-motion: no-preference) {
+  .lift {
+    transition:
+      translate 200ms cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .lift:hover {
+    translate: 0 -3px;
+    box-shadow: 0 14px 30px -14px rgb(0 0 0 / 0.22);
+  }
+
+  /* El boton se hunde al pulsar. Confirma el clic en el momento en que ocurre,
+     antes de que la navegacion responda. */
+  .press {
+    transition: translate 120ms ease-out;
+  }
+
+  .press:active {
+    translate: 0 1px;
+  }
+}
+
+/* Flecha propia para los <select>.
+   Con la nativa el desplegable no se parecia al resto de campos: cada sistema
+   dibuja la suya, con su tamano y su color, y al lado de un input con borde
+   redondeado de 1px cantaba. `appearance: none` la quita y aqui va una que si
+   usa el gris del sitio. El padding derecho deja sitio para que el texto
+   largo no se meta debajo. */
+.select-field {
+  appearance: none;
+  padding-right: 2.5rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5 6 6.5l5-5' stroke='%23666666' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    translate: 0 20px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
 @keyframes marquee-left {
   from {
     transform: translateX(0);

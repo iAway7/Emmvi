@@ -218,12 +218,12 @@ export default function WebsiteDesignPage() {
         {/* --- Trust band --------------------------------------------- */}
         {/* El Figma pone aquí ShapeShift, Cameo y Bounce, que no son clientes.
             Aquí van los nueve reales, en una cinta que corre sola. */}
-        <section className={`${wrap} pb-16 lg:pb-20`}>
+        <section className={`reveal ${wrap} pb-16 lg:pb-20`}>
           <ClientMarquee />
         </section>
 
         {/* --- Beneficios + preview ----------------------------------- */}
-        <section className={`${wrap} pb-16 lg:pb-24`}>
+        <section className={`reveal ${wrap} pb-16 lg:pb-24`}>
           <div className="grid gap-10 min-[900px]:grid-cols-[460px_minmax(0,1fr)] min-[900px]:items-start min-[900px]:gap-8">
             <ul className="grid list-none gap-4">
               {benefits.map((b) => (
@@ -266,7 +266,7 @@ export default function WebsiteDesignPage() {
         </section>
 
         {/* --- Navigating the Web Design Journey ---------------------- */}
-        <section className={`${wrap} ${section}`}>
+        <section className={`reveal ${wrap} ${section}`}>
           <h2 className={`mx-auto max-w-[11em] text-center ${h2Class}`}>
             Navigating the Web Design Journey
           </h2>
@@ -274,7 +274,7 @@ export default function WebsiteDesignPage() {
         </section>
 
         {/* --- Project Kickoff and Planning --------------------------- */}
-        <section className={`${wrap} ${section}`}>
+        <section className={`reveal ${wrap} ${section}`}>
           <h2 className={`max-w-[9em] ${h2Class}`}>
             Project Kickoff and Planning
           </h2>
@@ -315,7 +315,7 @@ export default function WebsiteDesignPage() {
         </section>
 
         {/* --- Here's What's Included --------------------------------- */}
-        <section className={`${wrap} ${section}`}>
+        <section className={`reveal ${wrap} ${section}`}>
           <h2 className={`text-center ${h2Class}`}>Here&rsquo;s What&rsquo;s Included</h2>
 
           <ul className="mt-12 grid list-none gap-x-8 gap-y-12 min-[640px]:grid-cols-2 min-[900px]:grid-cols-3">
@@ -334,7 +334,7 @@ export default function WebsiteDesignPage() {
         </section>
 
         {/* --- No hosting? -------------------------------------------- */}
-        <section className={`${wrap} ${section}`}>
+        <section className={`reveal ${wrap} ${section}`}>
           <h2 className={`text-center ${h2Class}`}>
             No hosting? Get it all with us!
           </h2>
@@ -371,7 +371,7 @@ export default function WebsiteDesignPage() {
         </section>
 
         {/* --- Our Work Showcase -------------------------------------- */}
-        <section className={`${wrap} ${section}`}>
+        <section className={`reveal ${wrap} ${section}`}>
           <h2 className={`text-center ${h2Class}`}>Our Work Showcase</h2>
           <p className="mx-auto mt-5 max-w-[46em] text-center text-body text-pretty text-ink-soft">
             Celebrating Our Creative Excellence: Take a Closer Look at Our Diverse
@@ -399,7 +399,7 @@ export default function WebsiteDesignPage() {
         </section>
 
         {/* --- Real-Life Experiences ---------------------------------- */}
-        <section className={`${wrap} ${section}`}>
+        <section className={`reveal ${wrap} ${section}`}>
           <h2 className={`text-center ${h2Class}`}>Real-Life Experiences</h2>
           <div className="mt-12">
             <Testimonials />
@@ -407,7 +407,7 @@ export default function WebsiteDesignPage() {
         </section>
 
         {/* --- Talk to our Sales team --------------------------------- */}
-        <section id="contact" className={`${wrap} scroll-mt-24 ${section}`}>
+        <section id="contact" className={`reveal ${wrap} scroll-mt-24 ${section}`}>
           <h2 className={`text-center ${h2Class}`}>Talk to our Sales team</h2>
           <p className="mx-auto mt-5 max-w-[40em] text-center text-body text-pretty text-ink-soft">
             We&rsquo;ll help you find the right plan and pricing for your business.

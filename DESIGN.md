@@ -182,6 +182,41 @@ transiciones de color en hover (150ms) y el acordeón nativo del FAQ.
 `components/` sin usar en la home, reservado para `/for/installers`. Con
 `prefers-reduced-motion: reduce` aparece ya entregado.
 
+**`/about-us` sí lleva aparición al entrar**, y es la única por ahora. Son 7,5
+pantallas de secciones apiladas: ahí el reveal le da ritmo al scroll. La home,
+que cuenta una historia con ilustraciones, no lo necesita.
+
+Se hace con `.reveal` en globals.css, **sin librería**: `animation-timeline:
+view()`, que corre en el compositor. Tres decisiones que conviene no deshacer:
+
+- **El estado inicial vive dentro del `@supports`.** Donde no hay soporte —hoy
+  Firefox, que lo tiene tras un flag— no se oculta nada nunca. Sacarlo fuera
+  reintroduce el fallo clásico: contenido invisible para siempre si la
+  animación no arranca.
+- **En las bandas con fondo propio la clase va al hijo**, no a la `<section>`.
+  Animar la banda desplazaría también su fondo y su borde.
+- **La primera sección no se anima.** Está sobre el pliegue y moverla al cargar
+  es justo lo que molesta.
+
+El easing es el de `reply-arrive`, para que el sitio se mueva igual en todas
+partes.
+
+### Respuesta al puntero
+
+El sitio se sentía inerte y el diagnóstico estaba en los números: **31
+`transition-colors` contra 2 `transition-transform`**. Todo el hover cambiaba
+solo de color, y el hover es la interacción más frecuente que hay.
+
+- **`.lift`** — sube 3px y saca sombra. Va **solo en lo que es enlace de
+  verdad**, hoy las dos tarjetas del blog. Levantar una tarjeta informativa
+  promete un clic que no existe, y eso es peor que no animar: el resto se
+  quedan con su cambio de borde.
+- **`.press`** — el botón se hunde 1px al pulsar. Está en la cadena base de
+  `CtaLink`, así que alcanza a todos los CTA del sitio. Confirma el clic en el
+  momento en que ocurre, antes de que responda la navegación.
+
+Las dos viven dentro de `prefers-reduced-motion: no-preference`.
+
 ## Components
 
 - `Wordmark` — logotipo inline con `currentColor`. Usa la versión de

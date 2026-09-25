@@ -129,7 +129,7 @@ export default function ContactPage() {
         </section>
 
         <section className={`bg-paper-alt ${section}`}>
-          <div className={wrap}>
+          <div className={`reveal ${wrap}`}>
             <h2 className="text-h2 text-balance text-ink">
               What happens after you send it
             </h2>
@@ -159,7 +159,7 @@ export default function ContactPage() {
           </div>
         </section>
 
-        <section className={section}>
+        <section className={`reveal ${section}`}>
           <div className={wrap}>
             <h2 className="text-h2 text-balance text-ink">
               Worth knowing before we talk

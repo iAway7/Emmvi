@@ -205,7 +205,7 @@ export default function SeoPage() {
         {/* La etiqueta no está en el Figma y hace falta: una fila de logos justo
             debajo del hero se lee como clientes, no como herramientas. Es la
             misma corrección que lleva la banda de /services/email-marketing. */}
-        <section>
+        <section className="reveal">
           <div className={wrap}>
             <p className="text-center text-small text-ink-soft">
               Tools we work with
@@ -230,7 +230,7 @@ export default function SeoPage() {
         {/* El Figma dibuja seis tarjetas, pero dos van repetidas para llenar la
             fila. Aquí van las tres distintas y el CTA cierra a ancho completo,
             como "You own everything" en la home. */}
-        <section className={`${wrap} ${section}`}>
+        <section className={`reveal ${wrap} ${section}`}>
           <h2 className={h2Class}>Services</h2>
 
           <ul className="mt-12 grid list-none gap-4 min-[900px]:grid-cols-3">
@@ -271,7 +271,7 @@ export default function SeoPage() {
         </section>
 
         {/* --- What is included in our SEO package? -------------------- */}
-        <section className={`${wrap} pb-16 lg:pb-24`}>
+        <section className={`reveal ${wrap} pb-16 lg:pb-24`}>
           <div className="text-center">
             <p className="inline-flex rounded-sm border border-teal-line bg-teal-wash px-3 py-1.5 text-small leading-5 text-teal-ink">
               SEO Package
@@ -293,7 +293,7 @@ export default function SeoPage() {
         </section>
 
         {/* --- Steps in Website Search Optimization -------------------- */}
-        <section className={`${wrap} pb-16 lg:pb-24`}>
+        <section className={`reveal ${wrap} pb-16 lg:pb-24`}>
           <h2 className={`mx-auto max-w-[12em] text-center ${h2Class}`}>
             Steps in Website Search Optimization
           </h2>
@@ -338,7 +338,7 @@ export default function SeoPage() {
         {/* --- What Our Clients Say ------------------------------------ */}
         {/* Jared White es cliente real; la cita del Figma no es suya. Va la que
             dijo de verdad, la misma que la home y las otras dos pantallas. */}
-        <section className={`${wrap} pb-16 lg:pb-24`}>
+        <section className={`reveal ${wrap} pb-16 lg:pb-24`}>
           <h2 className={`text-center ${h2Class}`}>What Our Clients Say</h2>
 
           <figure className="mt-12 grid items-center gap-10 rounded-lg bg-paper-panel p-8 min-[900px]:grid-cols-[minmax(0,630px)_minmax(0,1fr)] min-[900px]:gap-16 min-[900px]:p-16">
@@ -383,7 +383,7 @@ export default function SeoPage() {
         </section>
 
         {/* --- FAQ ----------------------------------------------------- */}
-        <section className={`${wrap} pb-16 lg:pb-24`}>
+        <section className={`reveal ${wrap} pb-16 lg:pb-24`}>
           <h2 className={`text-center ${h2Class}`}>Frequently Asked Questions</h2>
           <p className="mx-auto mt-5 max-w-[40em] text-center text-ui text-pretty text-ink-soft">
             If you have any questions that aren&rsquo;t listed below, feel free to
@@ -400,7 +400,7 @@ export default function SeoPage() {
         </section>
 
         {/* --- Talk to our Sales team ---------------------------------- */}
-        <section id="contact" className={`${wrap} scroll-mt-24 ${section}`}>
+        <section id="contact" className={`reveal ${wrap} scroll-mt-24 ${section}`}>
           <h2 className={`text-center ${h2Class}`}>Talk to our Sales team</h2>
           <p className="mx-auto mt-5 max-w-[40em] text-center text-body text-pretty text-ink-soft">
             We&rsquo;ll help you find the right plan and pricing for your business.
