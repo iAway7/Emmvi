@@ -5,7 +5,9 @@ import posthog from "posthog-js";
 import { useActionState } from "react";
 
 import { submitContact, type ContactState } from "@/app/actions/contact";
+import { chrome } from "@/lib/chrome-copy";
 import { FIELD_LIMITS } from "@/lib/contact";
+import type { Locale } from "@/lib/i18n";
 
 const initialState: ContactState = { status: "idle", message: "" };
 
@@ -15,7 +17,16 @@ const inputClass =
 
 const labelClass = "mb-2 block text-ui font-medium text-ink";
 
-export function ContactForm() {
+/**
+ * El formulario de contacto de la home y de /contact-us, en los dos idiomas.
+ *
+ * Las etiquetas salen de lib/chrome-copy.ts. Los mensajes de exito y error
+ * los escribe la Server Action, y para que salgan en el idioma correcto el
+ * formulario manda `locale` en un campo oculto: la accion no tiene otra forma
+ * de saber desde que version del sitio le escriben.
+ */
+export function ContactForm({ locale = "en" }: { locale?: Locale }) {
+  const copy = chrome[locale].form;
   const [state, formAction, isPending] = useActionState(
     submitContact,
     initialState,
@@ -26,7 +37,10 @@ export function ContactForm() {
       process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN &&
       process.env.NEXT_PUBLIC_POSTHOG_HOST
     ) {
-      posthog.capture("contact_form_submitted", { form_type: "contact" });
+      posthog.capture("contact_form_submitted", {
+        form_type: "contact",
+        locale,
+      });
     }
     return formAction(formData);
   }
@@ -37,7 +51,7 @@ export function ContactForm() {
         role="status"
         className="rounded-md border border-line bg-paper p-8"
       >
-        <p className="text-h3 text-balance text-ink">Message sent</p>
+        <p className="text-h3 text-balance text-ink">{copy.sent}</p>
         <p className="mt-3 text-body text-pretty text-ink-soft">
           {state.message}
         </p>
@@ -49,9 +63,11 @@ export function ContactForm() {
 
   return (
     <form action={handleSubmit} className="w-full">
+      <input type="hidden" name="locale" value={locale} />
+
       {/* Honeypot. Fuera de pantalla y fuera del orden de tabulacion. */}
       <div aria-hidden="true" className="absolute left-[-9999px] h-px w-px overflow-hidden">
-        <label htmlFor="c-website">Leave this empty</label>
+        <label htmlFor="c-website">{copy.honeypot}</label>
         <input id="c-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
       </div>
 
@@ -66,7 +82,7 @@ export function ContactForm() {
 
       <div className="mb-5">
         <label htmlFor="c-name" className={labelClass}>
-          Full name<span aria-hidden="true"> *</span>
+          {copy.name}<span aria-hidden="true"> *</span>
         </label>
         <input
           id="c-name"
@@ -82,7 +98,7 @@ export function ContactForm() {
 
       <div className="mb-5">
         <label htmlFor="c-email" className={labelClass}>
-          Email address<span aria-hidden="true"> *</span>
+          {copy.email}<span aria-hidden="true"> *</span>
         </label>
         <input
           id="c-email"
@@ -99,7 +115,7 @@ export function ContactForm() {
 
       <div className="mb-5">
         <label htmlFor="c-company" className={labelClass}>
-          Company name<span className="text-ink-soft"> (optional)</span>
+          {copy.company}<span className="text-ink-soft"> {copy.optional}</span>
         </label>
         <input
           id="c-company"
@@ -114,7 +130,7 @@ export function ContactForm() {
 
       <div className="mb-5">
         <label htmlFor="c-help" className={labelClass}>
-          How can we help you?<span aria-hidden="true"> *</span>
+          {copy.message}<span aria-hidden="true"> *</span>
         </label>
         <textarea
           id="c-help"
@@ -132,9 +148,9 @@ export function ContactForm() {
         disabled={isPending}
         className="inline-flex h-12 w-full items-center justify-center rounded-sm bg-ink px-6 text-ui font-medium text-paper transition-colors duration-150 hover:bg-ink-black focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet disabled:opacity-70"
       >
-        {isPending ? "Sending…" : "Send"}
+        {isPending ? copy.sending : copy.send}
       </button>
-      <DataNotice />
+      <DataNotice locale={locale} />
     </form>
   );
 }

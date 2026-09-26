@@ -179,7 +179,7 @@ export function PostBody({ blocks }: { blocks: readonly Block[] }) {
   let visto = 0;
 
   return (
-    <div className="max-w-[68ch]">
+    <div className="doc max-w-[68ch]">
       {blocks.map((block, i) => {
         switch (block.kind) {
           case "h2": {
@@ -191,7 +191,7 @@ export function PostBody({ blocks }: { blocks: readonly Block[] }) {
                 key={i}
                 id={ancla?.id}
                 // Primer bloque sin margen superior: ya lo pone la entradilla.
-                className={`scroll-mt-28 text-h3 text-balance text-ink ${i === 0 ? "" : "mt-12"}`}
+                className={`scroll-mt-28 text-ink ${i === 0 ? "" : "mt-12"}`}
               >
                 {block.text}
               </h2>
@@ -202,7 +202,7 @@ export function PostBody({ blocks }: { blocks: readonly Block[] }) {
             return (
               <h3
                 key={i}
-                className="mt-9 text-h4 font-semibold text-balance text-ink"
+                className="mt-9 text-ink"
               >
                 {block.text}
               </h3>

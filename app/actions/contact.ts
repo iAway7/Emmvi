@@ -4,9 +4,15 @@ import { headers } from "next/headers";
 import { after } from "next/server";
 import { Resend } from "resend";
 
-import { escapeHtml, isRateLimited, normalizeText, validate } from "@/lib/contact";
+import {
+  escapeHtml,
+  formMessages,
+  isRateLimited,
+  normalizeText,
+  toLocale,
+  validate,
+} from "@/lib/contact";
 import { notifySlack } from "@/lib/slack";
-import { CONTACT_EMAIL } from "@/lib/site";
 
 /**
  * Campos extra del formulario de /services/website-design, que el Figma dibuja
@@ -44,15 +50,21 @@ const toEmails = (process.env.CONTACT_TO_EMAIL ?? "")
 
 const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
-const GENERIC_ERROR = `Something went wrong sending that. Email us at ${CONTACT_EMAIL} instead.`;
-
 export async function submitContact(
   _prev: ContactState,
   formData: FormData,
 ): Promise<ContactState> {
+  /**
+   * Idioma del formulario que envia, para contestar en el mismo. Llega en un
+   * campo oculto (components/contact-form.tsx); si falta o trae otra cosa,
+   * ingles.
+   */
+  const locale = toLocale(formData.get("locale"));
+  const t = formMessages[locale];
+
   // Honeypot: campo oculto que un humano nunca rellena.
   if (formData.get("website")) {
-    return { status: "success", message: "Thanks. We will be in touch." };
+    return { status: "success", message: t.honeypot };
   }
 
   const field = (key: string) => normalizeText(String(formData.get(key) ?? ""));
@@ -69,7 +81,7 @@ export async function submitContact(
     message: formData.get("message"),
   };
 
-  const result = validate(raw);
+  const result = validate(raw, locale);
   if (!result.ok) {
     return {
       status: "error",
@@ -89,7 +101,7 @@ export async function submitContact(
   if (isRateLimited(ip)) {
     return {
       status: "error",
-      message: "Too many messages from this connection. Try again in a few minutes.",
+      message: t.rateLimited,
       values: { ...result.values, name: firstName },
       extras,
     };
@@ -130,7 +142,7 @@ export async function submitContact(
     avisar(false);
     return {
       status: "error",
-      message: GENERIC_ERROR,
+      message: t.generic,
       values: { ...result.values, name: firstName },
       extras,
     };
@@ -159,7 +171,7 @@ export async function submitContact(
       avisar(false);
       return {
         status: "error",
-        message: GENERIC_ERROR,
+        message: t.generic,
         values: { ...result.values, name: firstName },
         extras,
       };
@@ -169,7 +181,7 @@ export async function submitContact(
     avisar(false);
     return {
       status: "error",
-      message: GENERIC_ERROR,
+      message: t.generic,
       values: { ...result.values, name: firstName },
       extras,
     };
@@ -179,6 +191,6 @@ export async function submitContact(
 
   return {
     status: "success",
-    message: "Thanks. We read every one of these and will reply shortly.",
+    message: t.success,
   };
 }

@@ -1,5 +1,12 @@
 import type { Metadata } from "next";
 
+import {
+  languageAlternates,
+  localizePath,
+  ogLocale,
+  translatedPaths,
+  type Locale,
+} from "@/lib/i18n";
 import { postSlugs } from "@/lib/posts";
 
 /**
@@ -7,7 +14,7 @@ import { postSlugs } from "@/lib/posts";
  * Graph, mas el constructor de metadata que usan todas las paginas.
  *
  * Esta junto aqui porque hasta ahora cada pagina declaraba titulo y descripcion
- * por su cuenta, el dominio vivia suelto en app/layout.tsx y no habia canonica
+ * por su cuenta, el dominio vivia suelto en el layout raiz y no habia canonica
  * ni Open Graph en ninguna. Con dieciseis paginas eso son dieciseis sitios
  * donde olvidarse de uno.
  */
@@ -34,7 +41,7 @@ export const SITE_NAME = "emmvi";
 export const CONTACT_EMAIL = "sales@emmvi.com";
 
 /**
- * Misma lectura que hacia app/page.tsx, y por el mismo motivo: la variable se
+ * Misma lectura que hacia app/(en)/page.tsx, y por el mismo motivo: la variable se
  * resuelve en build, no por peticion. Cambiarla exige volver a desplegar.
  *
  * **No toca el buscador.** Una version anterior la uso tambien para cerrar el
@@ -149,16 +156,34 @@ export const sitemapRoutes: readonly string[] = [
   ...(indexLegacyPages ? legacyRoutes : []),
 ];
 
+/**
+ * Las paginas en español que entran en el sitemap: las de `translatedPaths`
+ * (lib/i18n.ts) que ademas estan en la lista inglesa. /thank-you esta
+ * traducida pero lleva `noindex`, asi que se queda fuera igual que su
+ * version inglesa.
+ */
+export const spanishSitemapRoutes: readonly string[] = translatedPaths
+  .filter((route) => sitemapRoutes.includes(route))
+  .map((route) => localizePath(route, "es"));
+
 /* --------------------------------------------------------------------------
    Metadata por pagina
    -------------------------------------------------------------------------- */
 
 type PageMeta = {
-  /** Ruta canonica, con barra inicial. `metadataBase` le pone el dominio. */
+  /**
+   * Ruta canonica **en ingles**, con barra inicial y sin prefijo de idioma:
+   * "/contact-us" tambien para la version española. El idioma lo pone
+   * `locale`, y de ahi salen la canonica real (/es/contact-us/) y el bloque
+   * `hreflang`. Asi una pagina traducida no tiene que saber como se forman
+   * las URLs del otro idioma.
+   */
   path: string;
+  /** Idioma de la pagina. Por defecto ingles, que es el de la raiz. */
+  locale?: Locale;
   /**
    * Titulo de la pestana. Le cae encima la plantilla "%s · emmvi" de
-   * app/layout.tsx, salvo con `absoluteTitle`.
+   * los dos layouts raiz (app/(en) y app/(es)), salvo con `absoluteTitle`.
    */
   title: string;
   /** Para titulos que ya dicen "emmvi" y no deben repetirlo. */
@@ -190,16 +215,25 @@ type PageMeta = {
  */
 export function pageMetadata({
   path,
+  locale = "en",
   title,
   absoluteTitle,
   description,
   legacy,
   article,
 }: PageMeta): Metadata {
+  /**
+   * La canonica lleva el idioma y la barra final, que es lo que sirve el
+   * sitio. Con dos idiomas la canonica de cada version se apunta a si misma:
+   * son paginas distintas, no duplicados, y `hreflang` es lo que las une.
+   */
+  const canonical = localizePath(path, locale);
+  const languages = languageAlternates(path);
+
   const openGraph = {
     siteName: SITE_NAME,
-    locale: "en_US",
-    url: path,
+    locale: ogLocale[locale],
+    url: canonical,
     // Al compartir no hay pestana que de contexto, asi que el nombre va
     // dentro del titulo. Es la misma forma que produce la plantilla.
     title: absoluteTitle ? title : `${title} · ${SITE_NAME}`,
@@ -209,7 +243,7 @@ export function pageMetadata({
   return {
     title: absoluteTitle ? { absolute: title } : title,
     description,
-    alternates: { canonical: path },
+    alternates: { canonical, ...(languages ? { languages } : {}) },
     openGraph: article
       ? { ...openGraph, type: "article" as const, publishedTime: article.publishedTime }
       : { ...openGraph, type: "website" as const },

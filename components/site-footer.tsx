@@ -1,48 +1,14 @@
 import Link from "next/link";
 
+import { chrome } from "@/lib/chrome-copy";
+import { localizePath, type Locale } from "@/lib/i18n";
 import { Wordmark } from "./wordmark";
 
-/** Mismas anclas absolutas que el header, por la misma razon: el footer
- *  tambien se monta fuera de la home. "Contact" ya no es un ancla sino
- *  `/contact`, que es una pagina de verdad. */
-const columns = [
-  {
-    title: "Services",
-    links: [
-      { href: "/services/website-design/", label: "Web Design" },
-      { href: "/services/email-marketing/", label: "Email Marketing" },
-      { href: "/services/seo/", label: "SEO Services" },
-      { href: "/services/ppc/", label: "PPC" },
-    ],
-  },
-  {
-    title: "Company",
-    // "About" apunta a la pagina, no al ancla de la home: existe /about-us y es
-    // la unica via que queda para llegar, desde que todas las paginas montan
-    // este footer en lugar del de la replica del Figma.
-    links: [
-      { href: "/about-us/", label: "About" },
-      { href: "/blog/", label: "Blog" },
-      { href: "/contact-us/", label: "Contact" },
-    ],
-  },
-  /**
-   * "Legal Notice" apunta a /legal-notice, que todavia no existe.
-   *
-   * "Cookie preferences" no es un enlace, es un boton: ver `CookiePreferences`
-   * mas abajo.
-   */
-  {
-    title: "Legal",
-    links: [
-      { href: "/legal-notice/", label: "Legal Notice" },
-      { href: "/privacy-policy/", label: "Privacy Policy" },
-    ],
-    cookieButton: true,
-  },
-];
-
 /**
+ * El pie de todas las paginas, en los dos idiomas. Columnas y textos salen de
+ * lib/chrome-copy.ts segun `locale`; en español no hay columna de servicios
+ * porque esas paginas no estan traducidas (ver el comentario de ese archivo).
+ *
  * Los enlaces miden 44px de alto en movil y 32px en escritorio (`lg:min-h-8`).
  *
  * WCAG 2.2 AA pide 24x24 (SC 2.5.8); los 44 son AAA (SC 2.5.5). Tenerlos a 44
@@ -50,6 +16,7 @@ const columns = [
  * y con cinco servicios la columna se estiraba sin motivo. En movil se quedan
  * en 44 porque ahi si se pulsa con el dedo.
  */
+
 /**
  * Abre el panel de preferencias de CookieYes.
  *
@@ -70,41 +37,53 @@ const columns = [
  * Y sustituye tambien a la URL /cookie-preference/ que tenia el WordPress: el
  * panel es un modal, no una pagina, asi que esa URL no vuelve por aqui.
  */
-function CookiePreferences() {
+function CookiePreferences({ label }: { label: string }) {
   return (
     <button
       type="button"
       className="cky-banner-element inline-flex min-h-[44px] items-center text-left text-ui text-ink-soft transition-colors hover:text-ink focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet lg:min-h-8"
     >
-      Cookie preferences
+      {label}
     </button>
   );
 }
 
-export function SiteFooter() {
+export function SiteFooter({
+  locale = "en",
+}: {
+  locale?: Locale;
+  /** Sin uso mientras el selector de idioma este retirado. Ver arriba. */
+  path?: string;
+} = {}) {
+  const copy = chrome[locale];
+  const { columns } = copy.footer;
+
   return (
     <footer className="border-t border-line pt-18 pb-14">
       <div className="mx-auto max-w-[var(--container-wrap)] px-6 lg:px-[var(--spacing-gut)]">
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] lg:gap-12">
+        <div
+          className={`grid gap-8 sm:grid-cols-2 lg:gap-12 ${
+            columns.length === 3
+              ? "lg:grid-cols-[2fr_1fr_1fr_1fr]"
+              : "lg:grid-cols-[2fr_1fr_1fr]"
+          }`}
+        >
           <div>
             <Link
-              href="/"
-              aria-label="emmvi, home"
+              href={localizePath("/", locale)}
+              aria-label={copy.header.homeLabel}
               className="inline-flex rounded-sm text-ink focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
             >
               <Wordmark className="h-8 w-auto" />
             </Link>
             <p className="mt-5 max-w-[24em] text-body text-ink-soft">
-              Websites and the systems that run behind them, for small
-              businesses in Europe and the Americas.
+              {copy.footer.tagline}
             </p>
           </div>
 
           {columns.map((col) => (
             <nav key={col.title} aria-label={col.title}>
-              <h2 className="text-ui font-semibold text-ink">
-                {col.title}
-              </h2>
+              <p className="text-ui font-semibold text-ink">{col.title}</p>
               <ul className="mt-2">
                 {col.links.map((l) => (
                   <li key={l.label}>
@@ -116,9 +95,9 @@ export function SiteFooter() {
                     </a>
                   </li>
                 ))}
-                {"cookieButton" in col ? (
+                {col.cookieButton ? (
                   <li>
-                    <CookiePreferences />
+                    <CookiePreferences label={copy.footer.cookies} />
                   </li>
                 ) : null}
               </ul>
@@ -127,8 +106,8 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-14 flex flex-wrap justify-between gap-6 border-t border-line pt-8 text-small text-ink-soft">
-          <p>&copy; 2026 emmvi. All rights reserved.</p>
-          <p>emmvi&reg; is a registered trademark in Spain.</p>
+          <p>{copy.footer.rights}</p>
+          <p>{copy.footer.trademark}</p>
         </div>
       </div>
     </footer>

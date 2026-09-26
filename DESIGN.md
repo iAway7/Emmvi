@@ -44,7 +44,7 @@ la página demuestra algo en vez de afirmarlo.
 | Token | Valor | Uso |
 |---|---|---|
 | `--color-paper` | `#ffffff` | fondo base |
-| `--color-paper-alt` | `#f8f8f8` | bandas de sección |
+| `--color-paper-alt` | `#f9fafd` | bandas de sección |
 | `--color-paper-panel` | `#f9fafd` | paneles grandes, radius 32 |
 | `--color-ink` | `#171717` | títulos y texto primario |
 | `--color-ink-soft` | `#666666` | cuerpo |
@@ -58,9 +58,14 @@ la página demuestra algo en vez de afirmarlo.
 | `--night` | `linear-gradient(180deg,#171717,#000 62%,#2e2e2e)` | paneles de demostración |
 
 Restricción medida, y ya no la hay en claro: el violeta rinde 6.68:1 sobre
-blanco, 6.29:1 sobre `#f8f8f8` y 6.40:1 sobre el panel — AA de texto chico en
-las tres. El violeta anterior (`#635dff`) se quedaba en 4.36:1 sobre la banda
-gris y obligaba a la variante oscurecida; ese límite desapareció.
+blanco y 6.40:1 sobre `#f9fafd` — AA de texto chico en las dos. El violeta
+anterior (`#635dff`) se quedaba en 4.36:1 sobre la banda gris y obligaba a la
+variante oscurecida; ese límite desapareció.
+
+`--color-paper-alt` y `--color-paper-panel` valen hoy lo mismo (`#f9fafd`): la
+banda de sección era `#f8f8f8` y se igualó al panel. Se conservan como dos
+nombres porque siguen diciendo cosas distintas —una banda a ancho completo no
+es un panel con radio de 32— y volverían a divergir si alguna lo hiciera.
 
 **Donde sí aprieta ahora es en oscuro.** El violeta nuevo es más oscuro, así que
 sobre el degradado radial de la página de espera cae a 2.61:1 y no llega ni al
@@ -103,6 +108,31 @@ en `eslint.config.mjs`) falla ante cualquier `text-[18px]` o `text-[1.25rem]` en
 `app/` y `components/`. Si hace falta un tamaño nuevo se añade aquí y en
 `globals.css`, no en la página. La única excepción viva es la comilla
 decorativa de 128px de `/services/seo`, desactivada en su línea con el motivo.
+
+**La etiqueta decide el tamaño del encabezado.** `h1`, `h2`, `h3` y `h4` llevan
+su token en la capa base de `globals.css` y **no llevan token de tamaño en el
+JSX**: la misma regla de ESLint falla ante `<h2 className="text-h3">`. Así un
+h2 mide 51px en toda la página y en todo el sitio, y en móvil 28. Es lo que
+faltaba tras la escala: con los tokens sueltos, en `/services/gohighlevel-automation`
+convivían h2 de 51 y de 24px, y h3 de 16px por debajo del cuerpo.
+
+Reparto de etiquetas, que es lo que hay que decidir al escribir una sección:
+
+- `h1`, una por página: el hero.
+- `h2`: el título de una sección de landing, con o sin antetítulo delante.
+- `h3`: el título de una tarjeta o de un panel, cuelgue de un h2 o del h1
+  (las tarjetas de valores de About us, o las entradas del índice del blog,
+  cuelgan del h1: se acepta el salto de nivel antes que un h2 de 51px en una
+  tarjeta).
+- `h4`: un título dentro de una tarjeta.
+- Lo que quiera medir 16px no es un encabezado. Un rótulo de columna del pie,
+  el título de un paso en una lista densa, una pregunta del FAQ con su
+  respuesta debajo: son `<p>` con `text-ui font-bold`. Un antetítulo es un
+  `<p>` con `text-eyebrow`.
+
+Un solo contexto cambia la escala, y lo hace por etiqueta en CSS: `.doc`, el
+documento largo a 68ch (artículos del blog y páginas legales), donde el h2 es
+un apartado y va a `text-h3` y el h3 a `text-h4`. A 51px se comía la columna.
 
 Es la lección del sitio anterior. El backup del WordPress (agosto de 2026)
 tenía un kit global de Elementor y encima **46 tamaños puestos a mano** widget
@@ -325,7 +355,7 @@ contesta en menos de un minuto, así que la página **mantiene reserva de llamad
 y correo**. Y no promete fecha de lanzamiento, porque no hay ninguna que se
 pueda cumplir.
 
-`app/page.tsx` la sirve en la raíz cuando `COMING_SOON=1`: la URL sigue siendo
+`app/(en)/page.tsx` la sirve en la raíz cuando `COMING_SOON=1`: la URL sigue siendo
 `emmvi.com/`, así que al quitar la variable aparece la home sin que nadie tenga
 una `/coming-soon` guardada ni indexada. Comprobado en build de producción en
 los dos sentidos.
@@ -843,7 +873,10 @@ Medido sobre el render, no deducido: altura de mayúscula de 48 px con ascendent
 y sin descendente en "Need a Paid Ads" (48/0.75 = 64) contra 38 px en "Talk to
 our Sales team" (38/0.75 ≈ 51), que es el h2 conocido de las otras pantallas.
 Cuadra con los interlineados del archivo: 77 px (64 × 1.2) y 60 px (51 × 1.17).
-Se usa `text-display` en un `<h2>`, que es un token de tamaño, no de jerarquía.
+
+**Aquí no se replica.** Se hizo con `text-display` en un `<h2>` hasta que la
+escala pasó a ir por etiqueta (ver *Typography*): un h2 mide lo que mide un h2,
+y esta era la única pantalla con cuatro secciones al tamaño del h1. Van a 51.
 
 ### Qué no se publica
 
@@ -1035,8 +1068,10 @@ header pasa a mirar también las entradas de primer nivel, no solo el
 desplegable de servicios, para que la nav marque la página en la que se está.
 
 El frame **no tiene hero aparte**: la primera sección, la de la chapa "Our
-Mission", lo es. Su titular va a 64 px —`text-display` en un `<h1>`— y es el
-único de la pantalla a ese tamaño; los otros cuatro son `text-h2` a 51.
+Mission", lo es. Su titular es el `<h1>` y va a 64 px, el único de la
+pantalla a ese tamaño; los otros cuatro son `<h2>` a 51. Los antetítulos en
+versalitas de "About Us" y "Our mission" eran `<h2>` con el tamaño del eyebrow;
+son `<p>`: el tamaño lo pone la etiqueta.
 
 ### Las tres bandas de texto
 

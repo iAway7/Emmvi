@@ -113,7 +113,7 @@ Dos cosas que ya han mordido una vez:
 
 ## Página 404
 
-`app/not-found.tsx` captura cualquier ruta que no exista y sustituye a la
+`app/(en)/not-found.tsx` captura cualquier ruta que no exista (con la ayuda del catch-all `app/(en)/[...rest]`, ver «Dos idiomas») y sustituye a la
 pantalla por defecto de Next. Devuelve 404 de verdad, no un 200 disfrazado, y
 va con `robots: noindex`.
 
@@ -580,7 +580,7 @@ cambia la página miente:
 | El sitio no pone cookies propias | No hay estado de sesión ni preferencias; las de terceros son de GTM y Calendly |
 | Las tipografías no llaman a Google | `next/font` las descarga en build |
 | Calendly ve tu IP sin que pulses nada | `components/calendly-button.tsx` carga su script solo |
-| Google recibe IP y navegador al cargar | El contenedor de GTM, en `app/layout.tsx` |
+| Google recibe IP y navegador al cargar | El contenedor de GTM, en `components/document.tsx` |
 | PostHog en la nube europea, sin transferencia | Pendiente de instalar; ver más abajo |
 
 Los datos del responsable ya están puestos. **Es una persona física, no una
@@ -616,7 +616,7 @@ real no coincide, la página promete algo que no se cumple:
 
 ### Google Tag Manager
 
-Contenedor `GTM-M2BGFZRC`, en `app/layout.tsx`. Dos diferencias obligadas
+Contenedor `GTM-M2BGFZRC`, en `components/document.tsx`. Dos diferencias obligadas
 respecto al fragmento que da Google:
 
 - Va por `next/script` en vez de un `<script>` suelto en el `<head>`: el App
@@ -698,6 +698,75 @@ los resultados de móvil. `app/apple-icon.tsx` lo redibuja en PNG de 180x180
 para iOS, que no usa un SVG al guardar la página en la pantalla de inicio:
 sin él, Safari pone una captura de la página. Se genera a partir del propio
 `icon.svg`, así que corregir el icono los arregla los dos.
+
+## Dos idiomas
+
+El sitio está en inglés y en español. **El inglés vive en la raíz y el
+español bajo `/es/`**, con el mismo slug: `/contact-us/` y `/es/contact-us/`.
+No se movió el inglés a `/en/` porque son las URLs que Google ya tiene
+indexadas y a las que apuntan los 301 del WordPress anterior.
+
+**Sin redirección por idioma del navegador.** No hay middleware (ver «Página
+de espera») y tampoco conviene: el rastreador de Google entra desde EE. UU. y
+una redirección automática le escondería una de las dos versiones.
+
+**El selector de idioma está retirado de momento.** El componente existe
+(`components/language-switcher.tsx`) y `SiteHeader` y `SiteFooter` siguen
+recibiendo `path` para él, pero no se monta hasta que el español tenga más
+páginas. Mientras tanto se llega a `/es/` solo por URL directa.
+
+### Cómo está montado
+
+- **Dos layouts raíz**: `app/(en)/layout.tsx` y `app/(es)/layout.tsx`. Es la
+  única forma de que `<html lang>` cambie con la URL sin middleware. Lo que
+  comparten (`<html>`, `<body>`, la fuente y GTM) está en
+  `components/document.tsx`.
+- **`lib/i18n.ts`** tiene la lista `translatedPaths` de páginas que existen en
+  los dos idiomas, y las funciones que traducen rutas (`localizePath`) y
+  generan el `hreflang` (`languageAlternates`). Esa lista decide tres cosas a
+  la vez: qué páginas llevan `hreflang`, a dónde iría el selector de idioma y
+  qué rutas en español entran en el sitemap.
+- **`pageMetadata`** (lib/site.ts) acepta `locale`. La canónica lleva el
+  prefijo y el `hreflang` sale solo para las páginas de `translatedPaths`.
+- **Cabecera, pie, menú y formulario** reciben `locale` y leen sus textos de
+  `lib/chrome-copy.ts`. Los mensajes del formulario (validación, éxito, error)
+  están en `lib/contact.ts` y la Server Action contesta en el idioma que le
+  llega en el campo oculto `locale`.
+- **Las páginas traducidas son plantillas con diccionario**: la home y el
+  contacto están en `components/pages/` con su texto en `lib/copy/`, tipado
+  para que si el inglés gana una sección el español deje de compilar hasta
+  tenerla. Gracias y 404 llevan el texto en la propia plantilla. Aviso legal y
+  política de privacidad son páginas aparte (prosa con enlaces, cambia poco);
+  la fecha y los plazos de la política están en `lib/privacy.ts` para que no
+  puedan diverger.
+- **404 por idioma**: con dos layouts raíz Next no sabe bajo cuál pintar una
+  URL sin ruta y cae en su pantalla por defecto. Los catch-all
+  `app/(en)/[...rest]` y `app/(es)/es/[...rest]` lanzan `notFound()` desde
+  dentro de cada grupo, y así sale el 404 propio en el idioma que toca.
+
+### Cómo añadir una página en español
+
+1. Crear `app/(es)/es/<ruta>/page.tsx` con `pageMetadata({ path: "/<ruta>", locale: "es", ... })`.
+2. Añadir `"/<ruta>"` a `translatedPaths` en `lib/i18n.ts`. Sin esto la
+   página existe pero no lleva `hreflang`, el selector no la encuentra y no
+   entra en el sitemap.
+3. En la versión inglesa, pasar `path="/<ruta>"` a `SiteHeader` y `SiteFooter`,
+   para que el selector, cuando vuelva, lleve a la equivalente.
+
+### Lo que no está traducido
+
+- **Las cinco pantallas de servicio y /about-us**: son el posicionamiento
+  viejo del Figma (`indexLegacyPages`). En español, «Servicios» y «Nosotros»
+  apuntan a las secciones de la home.
+- **El blog**: se publica solo, en inglés. El pie en español lo enlaza y lo
+  dice.
+- **El texto dentro de las escenas ilustradas de la home**: es `<text>` en el
+  SVG (`components/home-illustrations.tsx`), así que es traducible, pero cada
+  frase en español es más larga y hay que revisar el encaje escena por escena.
+  El `aria-label` sí cambia de idioma.
+- **Las citas de los testimonios están traducidas.** Nombre y empresa quedan
+  intactos. Si se prefiere dejarlas en el original, se cambian en
+  `lib/copy/home.ts`.
 
 ## Cabecera y pie
 
@@ -787,6 +856,48 @@ Quitar `COMING_SOON` publica la home.
   conceda la categoría de analítica.
 
 ## /services/gohighlevel-automation
+
+**El diseño sale de `emmvi GHL Recorrido.html`** (entregado el 25 de septiembre
+de 2026), no del Figma ni de los patrones de la home.
+
+Lo que trae de nuevo es **el recorrido**: la página deja de ser una lista de lo
+que se monta y pasa a seguir una sola consulta —llega a las 21:47, se contesta
+en 34 segundos, se persigue al día siguiente, se cierra— que aparece tres
+veces: en el demo del hero, en la banda violeta a ancho completo y, negada, en
+los síntomas.
+
+Sus colores ya eran los del sistema, así que van por token. Lo que se cambió al
+portarlo:
+
+| Del archivo | Aquí | Por qué |
+|---|---|---|
+| 1140px de ancho | el `wrap` del sitio | la cabecera y el pie se alinean a ese; más estrecho dejaba la nav flotando |
+| quince tamaños a mano, de 11 a 56px | la escala de `globals.css` | lo obliga la regla `no-restricted-syntax` de ESLint |
+| radios de 10/16/22px | los 8/12/32 de DESIGN.md | |
+| tres campos sueltos sin destino | `ContactForm` | el del sitio valida, lleva honeypot, limita por IP y manda de verdad |
+| botón oscuro con borde blanco | `CalendlyButton variant="light"` | es la variante que la home ya usa sobre panel oscuro |
+
+**El degradado violeta sí se conserva** (`#423af4` a `#5a52f6`). Es la única
+banda del sitio que llena el ancho de violeta y plano se veía más duro. Medido:
+con blanco da 6.68:1 en el extremo oscuro y **5.29:1 en el claro**, que sigue
+pasando AA de texto pequeño. Si alguien aclara más ese segundo color, ahí es
+donde se rompe.
+
+### Tres cosas del archivo que no se publicaron
+
+1. **"We are a certified admin and automation partner".** No lo somos. El FAQ
+   responde que no, como antes. Afirmar una certificación inexistente es lo
+   contrario de la regla de PRODUCT.md y se cae en la primera llamada.
+2. **El testimonio de Adriana venía reescrito**, con una frase que ella no
+   dijo. Va el texto real, el mismo que usan la home y
+   `/services/email-marketing`. Poner palabras en boca de una clienta real es
+   justo lo que la regla de prueba social prohíbe.
+3. **"HighLevel, Inc."** en el aviso de marca, y "Emmvi" con mayúscula. La
+   entidad es GoHighLevel Inc. y el nombre va en minúscula.
+
+Además, "enquiry" pasa a **"quote request"** en todo el cuerpo, que es el
+vocabulario elegido y el que ya usa la home.
+
 
 > **Sale como borrador** (2026-09-21, decisión del usuario: "quitemos del menú
 > GHL por el momento"). La página existe y se despliega, pero:

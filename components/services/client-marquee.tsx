@@ -1,3 +1,5 @@
+import type { Locale } from "@/lib/i18n";
+
 /**
  * Cinta de clientes: corre sola hacia la izquierda, sin dots ni flechas.
  *
@@ -59,9 +61,15 @@ function Logos({ duplicate = false }: { duplicate?: boolean }) {
   );
 }
 
-export function ClientMarquee() {
+/** Etiqueta del grupo de logos, en cada idioma. */
+const groupLabel: Record<Locale, string> = {
+  en: "Companies we have worked with",
+  es: "Empresas con las que hemos trabajado",
+};
+
+export function ClientMarquee({ locale = "en" }: { locale?: Locale }) {
   return (
-    <div className="marquee" aria-label="Companies we have worked with" role="group">
+    <div className="marquee" aria-label={groupLabel[locale]} role="group">
       <div className="marquee__track">
         <Logos />
         <Logos duplicate />

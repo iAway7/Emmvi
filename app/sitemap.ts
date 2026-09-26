@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 
-import { SITE_URL, sitemapRoutes } from "@/lib/site";
+import { isTranslated, localizePath } from "@/lib/i18n";
+import { SITE_URL, sitemapRoutes, spanishSitemapRoutes } from "@/lib/site";
 
 /**
  * sitemap.xml, generado en build a partir de la lista de lib/site.ts. No se
@@ -16,13 +17,33 @@ import { SITE_URL, sitemapRoutes } from "@/lib/site";
  * hubieran tocado. Un sitemap que miente sobre la frescura vale menos que uno
  * que no dice nada. `changeFrequency` y `priority` se omiten por lo mismo —
  * Google los ignora desde hace años.
+ *
+ * **Las paginas traducidas llevan `alternates.languages`**, que Next escribe
+ * como `xhtml:link hreflang`. Es la misma informacion que ya va en el <head>
+ * de cada pagina; repetirla aqui es lo que Google recomienda cuando el sitio
+ * tiene mas de un idioma, y ademas es la unica forma de que un rastreador que
+ * llega por el sitemap sepa que /es/contact-us/ es la version española de
+ * /contact-us/ sin abrir ninguna de las dos.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   // Con barra final, porque `trailingSlash: true` es lo que sirve el sitio y
   // lo que Next escribe en la canonica de cada pagina. Un sitemap que lista
   // una forma distinta de la canonica se contradice solo, y el buscador tiene
   // que decidir cual vale.
-  return sitemapRoutes.map((route) => ({
+  const entry = (route: string): MetadataRoute.Sitemap[number] => ({
     url: `${SITE_URL}${route.endsWith("/") ? route : route + "/"}`,
-  }));
+    ...(isTranslated(route)
+      ? {
+          alternates: {
+            languages: {
+              en: `${SITE_URL}${localizePath(route, "en")}`,
+              es: `${SITE_URL}${localizePath(route, "es")}`,
+              "x-default": `${SITE_URL}${localizePath(route, "en")}`,
+            },
+          },
+        }
+      : {}),
+  });
+
+  return [...sitemapRoutes, ...spanishSitemapRoutes].map(entry);
 }

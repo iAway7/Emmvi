@@ -51,7 +51,7 @@ export default function GlobalError({
     <html lang="en" className={dmSans.variable}>
       <body>
         <main className="mx-auto flex min-h-dvh max-w-[42rem] flex-col justify-center px-6 py-16">
-          <h1 className="text-h2 text-balance text-ink">
+          <h1 className="text-ink">
             Something went wrong on our side
           </h1>
           <p className="mt-6 max-w-[44ch] text-lede text-pretty text-ink-soft">

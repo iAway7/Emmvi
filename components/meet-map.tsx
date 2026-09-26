@@ -1,3 +1,5 @@
+import type { Locale } from "@/lib/i18n";
+
 /**
  * Mapa de puntos del borrador emmvi-home.html: enseña de donde trabaja emmvi
  * en vez de solo decirlo. Spain y Argentina marcadas en el violeta de marca.
@@ -12,7 +14,13 @@
  * Los colores salen de los tokens, no del #635DFF literal del borrador, para
  * que una correccion de marca llegue tambien aqui.
  */
-export function MeetMap() {
+/** Lo que anuncia el lector de pantalla, en cada idioma. */
+const mapLabel: Record<Locale, string> = {
+  en: "emmvi works from Spain and Argentina, for clients across Europe and the Americas",
+  es: "emmvi trabaja desde España y Argentina, para clientes de Europa y América",
+};
+
+export function MeetMap({ locale = "en" }: { locale?: Locale }) {
   return (
     // Envoltorio para poder consultar el ancho DEL MAPA, no el de la ventana:
     // el mapa esta dibujado para 1200 de ancho y en media columna se queda en
@@ -23,7 +31,7 @@ export function MeetMap() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       role="img"
-      aria-label="emmvi works from Spain and Argentina, for clients across Europe and the Americas"
+      aria-label={mapLabel[locale]}
       className="meet-map block h-auto w-full"
     >
       <path

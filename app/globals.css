@@ -10,7 +10,7 @@
 @theme {
   /* --- color --- */
   --color-paper: #ffffff;
-  --color-paper-alt: #f8f8f8;        /* bandas de sección */
+  --color-paper-alt: #f9fafd;        /* bandas de sección */
   --color-paper-panel: #f9fafd;      /* paneles grandes, radius 32 */
   --color-ink: #171717;              /* títulos y texto primario */
   --color-ink-soft: #666666;         /* cuerpo de texto */
@@ -142,6 +142,10 @@
   /* Paneles oscuros de Email Marketing: banda de cifras y testimonios. Es un
      degradado horizontal, distinto del --night vertical de la home. */
   --dusk: linear-gradient(90deg, #242428 0%, #16151e 50%, #080714 100%);
+  /* Lavanda recuperado del WordPress viejo (allí iba con radio 32). Casi
+     blanco con un tinte violeta apenas visible: sirve para separar un panel
+     del fondo blanco sin dibujar un borde. Se usa con bg-[image:var(--lavender)]. */
+  --lavender: linear-gradient(90deg, #f9faff 0%, #f5f4ff 100%);
   /* El diseño de marca es claro. Sin modo oscuro hasta que exista en Figma. */
   color-scheme: light;
 }
@@ -152,6 +156,42 @@
     color: var(--color-ink);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+  }
+
+  /* La etiqueta decide el tamano. Un <h2> mide lo que mide un h2 en toda la
+     pagina y en todo el sitio; no lleva token de tamano en el JSX (lo impide
+     una regla de ESLint) y si un diseno quiere un titulo mas chico, lo que
+     tiene no es un encabezado: es un <p> con el token que le toque.
+
+       h1  pagina          text-display   36 → 64px
+       h2  seccion         text-h2        28 → 51px
+       h3  tarjeta, panel  text-h3        22 → 24px
+       h4  dentro de tarjeta text-h4      20px
+
+     Antes cada encabezado elegia su token y en una misma pagina convivian
+     h2 de 51 y de 24px, y h3 de 16px por debajo del cuerpo. */
+  h1 {
+    @apply text-display text-balance;
+  }
+  h2 {
+    @apply text-h2 text-balance;
+  }
+  h3 {
+    @apply text-h3 text-balance;
+  }
+  h4 {
+    @apply text-h4 text-balance;
+  }
+
+  /* Documento largo: articulos del blog y paginas legales, a 68ch. Ahi el h2
+     es un apartado y no una seccion de landing, y a 51px se comia la columna.
+     Es el unico contexto que cambia la escala, y lo hace aqui, por etiqueta:
+     nunca elemento a elemento. */
+  .doc h2 {
+    @apply text-h3;
+  }
+  .doc h3 {
+    @apply text-h4;
   }
 
   html {
@@ -297,6 +337,20 @@ html:has(dialog[open]) {
          si acaba demasiado tarde, se lee el texto mientras aun se mueve. */
       animation-range: entry 10% cover 28%;
     }
+  }
+}
+
+/* Entrada del hero (home-lab). Titular, lede, botones y escena aparecen en
+   ese orden, con 90 ms entre uno y otro: dice que leer primero. Solo
+   transform y opacity, y bajo reduced-motion no se mueve nada. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-in {
+    animation: hero-in 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: calc(var(--i, 0) * 90ms);
+  }
+  @keyframes hero-in {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: none; }
   }
 }
 

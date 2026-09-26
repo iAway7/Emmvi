@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { chrome } from "@/lib/chrome-copy";
+import { localizePath, type Locale } from "@/lib/i18n";
 import { CONTACT_EMAIL, controller } from "@/lib/site";
 
 /**
@@ -43,37 +45,31 @@ import { CONTACT_EMAIL, controller } from "@/lib/site";
  * La casilla hace falta para **otra cosa**: mandarle correo comercial despues.
  * Eso si es consentimiento, y va separado, opcional y desmarcado. Hoy no se
  * manda nada de eso, asi que no hay casilla.
+ *
+ * En español enlaza a la politica en español: la segunda capa tiene que estar
+ * en el idioma en que se leyo la primera.
  */
-export function DataNotice() {
+export function DataNotice({ locale = "en" }: { locale?: Locale }) {
+  const copy = chrome[locale].notice;
+  const strong = "font-semibold text-ink";
+  const link = "text-ink underline underline-offset-[3px] hover:text-violet";
+
   return (
     <p className="mt-5 text-small text-pretty text-ink-soft">
-      <strong className="font-semibold text-ink">Controller:</strong>{" "}
-      {controller.tradingName}.{" "}
-      <strong className="font-semibold text-ink">Purpose:</strong> to answer
-      you and quote for the work, on the basis of steps taken at your request
-      before a contract.{" "}
-      <strong className="font-semibold text-ink">Your rights:</strong> access,
-      erasure and objection at{" "}
-      <a
-        href={`mailto:${CONTACT_EMAIL}`}
-        className="text-ink underline underline-offset-[3px] hover:text-violet"
-      >
+      <strong className={strong}>{copy.controller}</strong>{" "}
+      {controller.tradingName}. <strong className={strong}>{copy.purpose}</strong>{" "}
+      {copy.purposeText} <strong className={strong}>{copy.rights}</strong>{" "}
+      {copy.rightsText}{" "}
+      <a href={`mailto:${CONTACT_EMAIL}`} className={link}>
         {CONTACT_EMAIL}
       </a>
-      , or complain to the{" "}
-      <a
-        href="https://www.aepd.es"
-        className="text-ink underline underline-offset-[3px] hover:text-violet"
-      >
+      {copy.complain}{" "}
+      <a href="https://www.aepd.es" className={link}>
         AEPD
       </a>
-      .{" "}
-      <strong className="font-semibold text-ink">The rest:</strong>{" "}
-      <Link
-        href="/privacy-policy/"
-        className="text-ink underline underline-offset-[3px] hover:text-violet"
-      >
-        Privacy Policy
+      . <strong className={strong}>{copy.rest}</strong>{" "}
+      <Link href={localizePath("/privacy-policy", locale)} className={link}>
+        {copy.privacy}
       </Link>
       .
     </p>
