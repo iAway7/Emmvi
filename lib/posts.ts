@@ -4,6 +4,7 @@ import { harnessingAiWithoutCode } from "@/content/posts/harnessing-ai-without-c
 import { howEmailMarketingAnd } from "@/content/posts/how-email-marketing-and-automated-series-can-increase-roi";
 import { howEmailMarketingHelps } from "@/content/posts/how-email-marketing-helps-maximize-customer-engagement";
 import { howToGetMore } from "@/content/posts/how-to-get-more-google-reviews";
+import { hvacCrm } from "@/content/posts/hvac-crm";
 import { missedCallTextBack } from "@/content/posts/missed-call-text-back";
 import { quoteFollowUp } from "@/content/posts/quote-follow-up";
 import { solarCrm } from "@/content/posts/solar-crm";
@@ -135,6 +136,7 @@ export type Post = {
  * content/rewrites/, sin publicar. Ver el README de esa carpeta.
  */
 export const posts: readonly Post[] = [
+  hvacCrm,
   solarCrm,
   howToGetMore,
   quoteFollowUp,
