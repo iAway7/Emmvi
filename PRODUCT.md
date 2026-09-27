@@ -19,14 +19,14 @@ real es "¿esto me va a dar más problemas de los que me quita?".
 Trabajo a resolver: dejar de perder presupuestos por no contestar a tiempo y no
 hacer seguimiento.
 
-Mercado: inglés, clientes en Europa y América. Emmvi opera desde España y
+Mercado: inglés, clientes en Europa y América. emmvi opera desde España y
 Argentina, lo que cubre ambas jornadas laborales. **El tamaño del equipo no se
-comunica**: Emmvi se presenta como empresa, no como un par de personas. Se
+comunica**: emmvi se presenta como empresa, no como un par de personas. Se
 pueden nombrar personas y ciudades; nunca cuántos son.
 
 ## Product Purpose
 
-Emmvi vende **una sola cosa**: el sitio que capta la consulta y las
+emmvi vende **una sola cosa**: el sitio que capta la consulta y las
 automatizaciones que impiden que se pierda — CRM, respuestas automáticas,
 seguimiento de presupuestos, solicitud de reseñas y reporting. Diseño y
 automatización no se venden por separado.
@@ -35,7 +35,7 @@ El sitio existe para conseguir una llamada de 30 minutos. No vende en la página
 y no lleva precio: el precio se habla en la llamada.
 
 Éxito: un instalador que llega desde un email en frío entiende en un scroll qué
-hace Emmvi, se cree que es cumplible, y reserva la llamada.
+hace emmvi, se cree que es cumplible, y reserva la llamada.
 
 ## Brand Personality
 
@@ -53,7 +53,7 @@ Emoción objetivo: alivio con escepticismo satisfecho. No entusiasmo.
 
 ## Anti-references
 
-- **El propio sitio actual de Emmvi** (emmvi.com, hoy caído) y el Figma
+- **El propio sitio actual de emmvi** (emmvi.com, hoy caído) y el Figma
   "Emmvi - Website Redesign": hero "Get More Customers Without Doing More Work",
   sub "Identify usability issues, optimize user experiences, and increase your
   conversions", tabs de Website Design / Email Marketing / SEO / PPC. Es la

@@ -1,10 +1,10 @@
-# Emmvi
+# emmvi
 
 Sitio de [emmvi.com](https://emmvi.com). Next.js 16 · React 19 · Tailwind 4 · TypeScript.
 
 El contexto del proyecto está en dos archivos que conviene leer antes de tocar nada:
 
-- **[PRODUCT.md](PRODUCT.md)** — qué es Emmvi, a quién le habla, qué promete y qué
+- **[PRODUCT.md](PRODUCT.md)** — qué es emmvi, a quién le habla, qué promete y qué
   no. Incluye la regla de escritura: *prometemos lo que podemos cumplir*.
 - **[DESIGN.md](DESIGN.md)** — tokens, tipografía, componentes y los contrastes
   medidos de la paleta.
@@ -412,14 +412,14 @@ como tres son tres paradas del teclado para una palabra.
 
 **Los diecisiete tienen imagen destacada, y están recuperadas.** Se dieron por
 inexistentes durante un tiempo —`app/blog/page.tsx` llegó a decir "no hay
-ninguna que sea de Emmvi"— porque nadie buscó `_thumbnail_id` en `postmeta`.
+ninguna que sea de emmvi"— porque nadie buscó `_thumbnail_id` en `postmeta`.
 Están las diecisiete, en `public/blog/<slug>.<ext>`, y cada artículo la declara
 en su propio archivo.
 
-**No son trabajo de Emmvi**, y conviene tenerlo claro antes de defenderlas: son
+**No son trabajo de emmvi**, y conviene tenerlo claro antes de defenderlas: son
 ilustraciones de banco, plantillas de Canva y arte generado con IA, que es lo
 que el WordPress publicaba. No son prueba social prestada —no afirman nada
-sobre Emmvi ni sobre sus clientes, que es lo que PRODUCT.md prohíbe— pero
+sobre emmvi ni sobre sus clientes, que es lo que PRODUCT.md prohíbe— pero
 tampoco son una señal de calidad. Vienen en cinco proporciones distintas, de
 750×401 a 1066×1600, ninguna comparte paleta con el sitio y alguna lleva su
 propio titular quemado dentro, que en una tarjeta queda dicho dos veces.
@@ -563,6 +563,42 @@ Efecto lateral de esa ruta: ESLint pasó a resolver rutas de un solo segmento
 como páginas reales, y destapó siete `<a>` internos que debían ser `<Link>`.
 Están convertidos.
 
+#### La versión Markdown y `/llms.txt`
+
+Cada artículo se sirve además en `https://emmvi.com/<slug>.md`, y hay un
+`/llms.txt` que los lista todos. El artículo lo enlaza en su línea de datos
+—junto al tiempo de lectura y la fecha—, en discreto.
+
+Es para el lector que no es una persona: un modelo al que le pegan el enlace,
+un agente que rastrea, o alguien que quiere el texto sin la maqueta. Para todos
+ellos el HTML del artículo es ruido alrededor del cuerpo.
+
+**Sale de `Block[]`, no de raspar el HTML.** `lib/markdown.ts` es una función
+pura sobre los datos que ya están en `content/posts/`: ni dependencia nueva, ni
+una segunda copia del texto que se pueda desincronizar. Mismo planteamiento que
+`lib/toc.ts` y `readingTime`.
+
+Tres decisiones que conviene no deshacer sin motivo:
+
+| Qué | Por qué |
+|---|---|
+| La URL es `.md`, vía *rewrite* a `app/md/[slug]/` | El App Router no sabe poner una extensión detrás de un segmento dinámico. `.md` es la forma asentada y la que alguien prueba a mano. `trailingSlash: true` no la toca: comprobado, 200 y sin 308 |
+| Canónica por cabecera `Link`, y `/md/` cerrado en robots | La reescritura deja dos caminos a los mismos bytes, y un recurso que no es HTML no tiene dónde meter un `<link rel=canonical>` |
+| `force-static` en `/llms.txt` | En Next 16 los Route Handlers son dinámicos por defecto. Todo lo que lee sale de `posts`, que se resuelve en build |
+
+El escapado de `lib/markdown.ts` **no se dispara ni una vez** sobre los
+dieciocho artículos de hoy: el texto recuperado de WordPress no trae `*`, `_`,
+`[` ni backticks. Está puesto igualmente porque quien escribe aquí a diario es
+la tarea de las 9:07, sin nadie revisando la salida.
+
+**Lo que no se hizo: los botones de "resume esto en una IA".** Se valoró el
+patrón —una tarjeta con ChatGPT, Gemini, Claude y Perplexity, cada uno con el
+prompt en la query— y se descartó. Los deep-link hacen que Claude reciba al
+lector con un aviso de contenido potencialmente malicioso; el botón cae justo
+donde el artículo pone su llamada a la acción, que es el momento en que alguien
+acaba de leer; y un humano pulsando un botón no hace que ningún modelo cite el
+sitio. Lo que sí juega en ese terreno es esto: el Markdown servido.
+
 ### Política de privacidad
 
 `app/privacy-policy/page.tsx`, en esa URL porque es la que WordPress dejó
@@ -584,7 +620,7 @@ cambia la página miente:
 | PostHog en la nube europea, sin transferencia | Pendiente de instalar; ver más abajo |
 
 Los datos del responsable ya están puestos. **Es una persona física, no una
-sociedad**: Emmvi es nombre comercial y quien responde es el titular, de ahí que
+sociedad**: emmvi es nombre comercial y quien responde es el titular, de ahí que
 el texto diga *"trading name of"* y no *"a company registered in"*.
 
 El mecanismo del hueco sigue montado por si vuelve a hacer falta: mientras
@@ -823,10 +859,10 @@ posicionamiento viejo— y ahí vuelve cuando deje de ser borrador.
 
 ### Lo que la página no dice, y es deliberado
 
-- **Ninguna certificación.** HighLevel tiene programa propio y Emmvi no lo ha
+- **Ninguna certificación.** HighLevel tiene programa propio y emmvi no lo ha
   hecho. El FAQ lo dice con todas las letras en vez de callarlo: es el
   principio 3 de DESIGN.md, y en este término concreto es lo que más separa a
-  Emmvi del resto de resultados, que venden el sello.
+  emmvi del resto de resultados, que venden el sello.
 - **Ninguna cifra sin medir.** Nada de "entrega en 48 h" ni "60% menos de
   admin", que es de lo que vive la competencia de esta búsqueda.
 - **Ningún porcentaje de facturación**, por la regla de PRODUCT.md.
@@ -836,7 +872,7 @@ posicionamiento viejo— y ahí vuelve cuando deje de ser borrador.
 La sección "In the box" lista las **52 funciones del catálogo de HighLevel**, en
 su propia taxonomía (Capture / Nurture / Close / Evangelize / Reactivate) y con
 sus nombres de producto, sobre fondo negro. De ellas, **15 van marcadas: las que
-Emmvi monta.** Debajo, en papel, las nueve cosas que hacemos, en verbos.
+emmvi monta.** Debajo, en papel, las nueve cosas que hacemos, en verbos.
 
 El volumen es el argumento, no relleno: enseña de un vistazo la distancia entre
 lo que se paga y lo que está encendido. Por eso la lista no se comprime, no va
@@ -863,7 +899,7 @@ al tocar la página.
 
 **"Websites, Funnels & Landing Pages" se queda sin marcar a propósito**, y el
 cierre de la sección explica por qué: GoHighLevel trae constructor de webs y
-Emmvi no lo usa para eso. Es la única de las 37 que merece explicación, porque
+emmvi no lo usa para eso. Es la única de las 37 que merece explicación, porque
 es la que un lector podría esperar marcada.
 
 **Sin precio.** GoHighLevel cuesta hoy $97/mes el plan Starter y $297 el
@@ -873,7 +909,7 @@ propios. "You already pay for it every month" hace el trabajo sin caducar.
 ### El aviso de marca
 
 El pie de la página dice que GoHighLevel es marca de GoHighLevel Inc. y que
-Emmvi no está afiliada ni certificada. No es un trámite: la página usa el
+emmvi no está afiliada ni certificada. No es un trámite: la página usa el
 nombre de un producto ajeno en el título, en la URL y en todo el cuerpo, y sin
 esa línea "GoHighLevel automation" en un `h1` se lee como acreditación.
 
@@ -928,8 +964,8 @@ link building porque son sus tarjetas de servicio. Una descripción que promete
 algo que la página no cumple sube el rebote y acaba costando posiciones.
 
 Los títulos pasan de 11–23 caracteres a 46–57, dentro de los ~60 que Google
-muestra. `/about-us` va con `absoluteTitle` porque "About Emmvi" más la
-plantilla daría "About Emmvi · Emmvi".
+muestra. `/about-us` va con `absoluteTitle` porque "About emmvi" más la
+plantilla daría "About emmvi · emmvi".
 
 **El blog no se toca.** Las diecisiete descripciones son las del WordPress
 original, ya indexadas, y están en rango salvo tres que pasan de 160 y se
@@ -946,14 +982,94 @@ Los diecisiete posts no declaraban nada. Ahora llevan `BlogPosting`
 
 `author` y `publisher` apuntan al `@id` de `OrganizationSchema` en vez de
 repetir sus datos: los dos marcados quedan en el mismo grafo y los artículos los
-firma Emmvi, que es lo que corresponde a textos recuperados sin autor
+firma emmvi, que es lo que corresponde a textos recuperados sin autor
 atribuible.
 
-`dateModified` es igual a `datePublished` a propósito. La única fecha que se
-conoce es la de publicación de esta versión; inventar una modificación reciente
-para parecer fresco es la clase de afirmación sin respaldo que este sitio no
-hace. `image` solo sale en el artículo que de verdad tiene una —uno de los
+`image` solo sale en el artículo que de verdad tiene una —uno de los
 diecisiete—, porque Google comprueba que exista.
+
+### La fecha de revisión
+
+`Post.updated`, opcional. **Hoy no la declara ninguno de los dieciocho, y eso
+es lo correcto.** Sin ella, `dateModified` vale lo mismo que `datePublished` y
+el artículo no enseña ninguna fecha de actualización, que es exactamente lo
+que se venía haciendo: la única fecha conocida es la de publicación, e
+inventar una revisión reciente para parecer fresco es la clase de afirmación
+sin respaldo que este sitio no hace.
+
+Lo que cambia es que ahora hay salida cuando la revisión es real. **El caso
+previsto son las reescrituras de `content/rewrites/`**: sustituir el `body` de
+un original por su versión nueva es exactamente el cambio que esta fecha
+describe. Corregir una errata no lo es.
+
+Al ponerla, tres sitios la recogen solos:
+
+| Dónde | Qué sale |
+|---|---|
+| La línea de datos del artículo | `… · 23 September 2026 · Updated 27 September 2026 · Markdown` |
+| `ArticleSchema` | `dateModified` pasa a la fecha de revisión |
+| El front matter del `.md` | Una línea `updated:` |
+
+Va **detrás** de la fecha de publicación y no en su lugar: dicen cosas
+distintas, y sustituir una por otra esconde la antigüedad del artículo, que es
+justo lo que se critica de quien lo hace. `slug`, `title` y `published` no se
+tocan al revisar.
+
+### El marcado, pensado para quien pregunta a una IA
+
+Tres cambios de 2026-09-27, todos con el mismo motivo: un modelo que responde
+una pregunta se trae **una** URL, normalmente un artículo, y decide con lo que
+encuentre en ella.
+
+**`Organization` pasa de la home al layout**, o sea a todas las páginas. Antes
+sólo estaba en la raíz, y quien aterrizaba en un artículo no tenía forma de
+saber de quién era el sitio. Peor: `ArticleSchema` y el nuevo `FaqSchema`
+apuntan los dos al `@id` `/#organization`, que resolvía a una página distinta
+de la que se estaba leyendo. Va contra la recomendación de Google de
+declararlo en una sola página; se asume, porque los consumidores de JSON-LD
+unifican por `@id` y repetirlo no crea dos organizaciones.
+
+**Las seis preguntas de la home llevan `FAQPage`** (`components/faq-schema.tsx`).
+No es para los resultados enriquecidos: desde 2023 Google reserva ese carrusel
+a administración y salud. Es porque las seis respuestas son literalmente lo que
+alguien le pregunta a un modelo —*¿sirve para una empresa pequeña?*, *¿de quién
+son los datos?*— y sin marcado hay que deducirlas de un `<details>`, que es un
+componente de interfaz y no una estructura de datos.
+
+La lista se mudó a `lib/faq.ts` para que el acordeón y el marcado lean **la
+misma copia**. Estaba dentro de `app/page.tsx` y dársela al JSON-LD habría
+obligado a duplicarla.
+
+**`sameAs` declara los dos perfiles**, en `components/organization-schema.tsx`:
+la página de LinkedIn y la ficha de Google. Es lo que ata la entidad a algo de
+fuera del dominio, que es lo que un modelo necesita antes de recomendar nada.
+Las URLs van canónicas y no acortadas: un `share.google/…` es un salto que
+puede caducar y que no identifica nada por sí mismo.
+
+La ficha de Google se declara por su entidad de Knowledge Graph
+(`kgmid=/g/11vsrtn_bw`). Que ese identificador exista significa que Google ya
+trata "emmvi" como una empresa con ficha propia y no como una cadena de texto.
+Google ignorará ese `sameAs` —ata su ficha por el perfil verificado, no por lo
+que diga el sitio—; va para los modelos que no son de Google, que no tienen
+ese atajo.
+
+**Sin `aggregateRating`, y el motivo no es la falta de reseñas.** Hay tres en
+la ficha desde septiembre de 2026, así que conviene no confundirse: Google no
+admite que un sitio publique el marcado de sus *propias* reseñas. Es
+*self-serving review content*, no da resultado enriquecido y expone a una
+acción manual. La valoración vive en la ficha de Google, que es donde se lee
+de primera mano.
+
+Dos cosas que siguen fuera, y por qué:
+
+- **`areaServed`.** El footer y la home dicen "Europe and the Americas"; la
+  pantalla de espera dice "the UK, the US and Spain". Son dos alcances
+  distintos y el marcado no es donde se arbitra. Arreglar la contradicción en
+  el texto desbloquea el campo.
+- **`address`.** El aviso legal lo publica porque la LSSI-CE obliga, pero allí
+  es el domicilio de una persona física cumpliendo una norma. Pasarlo a dato
+  estructurado invita a tratar el sitio como negocio local con sede visitable,
+  y eso lo decide el titular.
 
 ## Pendiente en /contact
 
@@ -966,12 +1082,12 @@ del footer. Ver DESIGN.md.
   en el mensaje de error del formulario, y que salió de la configuración de
   Calendly y no de una decisión del usuario.
 - **No promete tiempo de respuesta**, a propósito: lo que se afirma es que
-  alguien lee el mensaje y mira tu sitio antes de contestar. Si Emmvi quiere
+  alguien lee el mensaje y mira tu sitio antes de contestar. Si emmvi quiere
   comprometerse a "el mismo día laborable", entra en el paso 01 de "What
   happens after you send it" y en ningún otro sitio.
 - **El tamaño del equipo no se comunica.** El panel tenía un bloque "Who you
-  are writing to" que presentaba Emmvi como dos personas; se quitó, y con él
-  las menciones que había en la home y en el FAQ. Emmvi se presenta como
+  are writing to" que presentaba emmvi como dos personas; se quitó, y con él
+  las menciones que había en la home y en el FAQ. emmvi se presenta como
   empresa: se pueden nombrar personas y ciudades, nunca cuántos son.
 - **`COMING_SOON` no la apaga.** Con la variable a 1 la raíz sirve la página de
   espera, pero `/contact` sigue viva y accesible, igual que `/about-us` y las
@@ -1020,7 +1136,7 @@ una llamada. Tres decisiones que conviene no deshacer sin pensarlo:
   facturación se juega entera, y el Figma la dibuja esperando justo ese número.
   Lo que sí se compromete es verificable: los flujos montados y probados, las
   campañas saliendo, el informe mensual — y que si eso no se mueve a los pocos
-  meses, la conversación la empieza Emmvi.
+  meses, la conversación la empieza emmvi.
 - **"Have you worked with brands in my niche?" nombra a los tres clientes
   reales** —la tienda, el gimnasio y el productor musical— y admite que eso es
   variedad, no especialidad. Es lo único verificable que hay, y estirar un caso
@@ -1083,7 +1199,7 @@ texto completo del original está en el backup, no en el repo.
 - **La banda de logos no es la del Figma.** El archivo pone Google Premier
   Partner, Amazon Ads, Bing Ads y Meta Business Partners; los dos primeros son
   sellos de acreditación. Ahora van Google, Facebook, Instagram, TikTok y
-  LinkedIn. Si Emmvi consigue alguna de esas certificaciones y puede
+  LinkedIn. Si emmvi consigue alguna de esas certificaciones y puede
   demostrarlo, el sello entra: los dos SVG están sin usar en
   `public/figma/ppc/badge-*.svg`.
 - **Falta Microsoft Advertising, y es de las cinco más usadas.** Se quitó porque
@@ -1136,7 +1252,7 @@ de servicio, y es la primera que **sí estaba enlazada** desde ese shell: "About
 Us" en la nav y "Our Team" en el footer daban 404 hasta ahora.
 
 - **Hay tres afirmaciones sobre el propio equipo que no se han tocado**, porque
-  no son prueba social prestada sino cosas que Emmvi dice de sí misma — mismo
+  no son prueba social prestada sino cosas que emmvi dice de sí misma — mismo
   criterio que "A team of certified paid advertising experts" en PPC. Conviene
   confirmar que se pueden defender en una llamada:
   - "Founded in 2017"

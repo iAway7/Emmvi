@@ -16,6 +16,11 @@ Los comentarios del código también lo escriben en minúscula. No es cosmética
 varios citan literalmente la plantilla del título, y si ahí pone `Emmvi`
 describen algo que el código ya no hace.
 
+**Y esta documentación, por lo mismo.** README.md, DESIGN.md y PRODUCT.md
+citan a cada paso texto que el sitio sirve —`%s · emmvi`, "About emmvi",
+"Meet emmvi"—, así que un `Emmvi` aquí no es una errata de estilo: describe
+una pantalla distinta de la que hay.
+
 Para comprobarlo de una vez:
 
 ```
@@ -23,9 +28,27 @@ grep -rn "Emmvi" --include="*.tsx" --include="*.ts" --include="*.css" \
   --include="*.svg" app components lib content public
 ```
 
-Sin resultados es lo correcto. La única excepción viva está fuera del
-repositorio: la OEPM registró el distintivo escrito `Emmvi`, así que un
-documento legal que cite el registro puede llevarlo en alta.
+Sin resultados es lo correcto.
+
+En los `.md` de la raíz el mismo grep **sí** devuelve siete líneas, y las siete
+son a propósito: son los sitios donde la mayúscula es el dato y no la forma de
+escribir la marca.
+
+- **Cinco en esta sección**, que enuncia la forma prohibida, la busca y recoge
+  la única excepción viva fuera del repositorio: la OEPM registró el distintivo
+  escrito `Emmvi`, así que un documento legal que cite el registro puede
+  llevarlo en alta.
+- **Una en `README.md`**: el `<title>` que el Wayback Machine archivó en mayo
+  de 2024. Corregirlo sería falsear lo que el archivo guardó.
+- **Una en `PRODUCT.md`**: el nombre del fichero de Figma, que es lo que se
+  teclea para encontrarlo.
+
+Todo lo demás que cita el Figma o el WordPress anterior **sí** va en minúscula,
+aunque el original llevara alta: el comentario de `app/services/ppc/page.tsx` ya
+lo hace con "The Benefits of Paid Online Advertising With emmvi".
+
+La regla no alcanza a `.impeccable/critique/`: son informes fechados, no
+documentación que se mantenga.
 
 ## Theme
 
@@ -117,10 +140,10 @@ con blanco y **9.25:1** con blanco al 80%. Los dos rodeos siguen en pie porque
 ya funcionan, pero pasan a ser preferencia y no necesidad; sus comentarios lo
 dicen.
 
-### El mapa de "Meet Emmvi"
+### El mapa de "Meet emmvi"
 
 `components/meet-map.tsx`. Mapa de puntos con Spain y Argentina marcadas en el
-violeta de marca: enseña de dónde trabaja Emmvi en vez de solo decirlo.
+violeta de marca: enseña de dónde trabaja emmvi en vez de solo decirlo.
 
 Va **inline y no como `<img>`** porque los puntos cambian de grosor con el
 ancho — 2.6 → 6px, y las etiquetas 19 → 34px — para sobrevivir a la escala
@@ -139,7 +162,7 @@ exclusiones va apretado.
 
 Estructura de la home (de `emmvi-home.html`, el diseño que eligió el usuario):
 hero centrado → "Does this sound familiar?" (4 objeciones en 2×2, banda gris) →
-"Two things, done properly" (2 tarjetas con captura) → "Meet Emmvi" (panel
+"Two things, done properly" (2 tarjetas con captura) → "Meet emmvi" (panel
 `--night`) → "Why work with us" (2×2) → "How it works" (3 pasos, banda gris) →
 "Who we work with" (filas con regla) → testimonios → FAQ → panel de contacto
 (radius 32) → footer de 4 columnas.
@@ -256,7 +279,7 @@ De ahí que el titular, el eyebrow y el divisor lleven los tres
 el violeta anterior el titular sí pasaba, y por eso iba en el de marca: sobre
 oscuro había dos violetas y ahora hay uno.
 
-No es un "volvemos pronto": la promesa de Emmvi es que toda consulta se
+No es un "volvemos pronto": la promesa de emmvi es que toda consulta se
 contesta en menos de un minuto, así que la página **mantiene reserva de llamada
 y correo**. Y no promete fecha de lanzamiento, porque no hay ninguna que se
 pueda cumplir.
@@ -271,8 +294,8 @@ sintaxis ESM y Vercel lo carga como CommonJS sin `"type": "module"`, dando
 `MIDDLEWARE_INVOCATION_FAILED`. Para un flag estático el middleware sobraba —
 resolverlo en build evita una invocación serverless por petición.
 
-El `title` y la `description` describen Emmvi, no el estado del sitio, con
-`title: { absolute: ... }` porque la plantilla `%s · Emmvi` del layout sí se
+El `title` y la `description` describen emmvi, no el estado del sitio, con
+`title: { absolute: ... }` porque la plantilla `%s · emmvi` del layout sí se
 aplica a segmentos hijos (a la home no) y el título salía duplicado.
 
 ## Contact
@@ -316,8 +339,8 @@ a `#contact`, así que siguen resolviendo dentro de la página en vez de saltar 
 la home. Con `scroll-mt-24`, que libra los 88px del header sticky.
 
 **Sin ReplyProof.** Ese panel demuestra la respuesta en menos de un minuto que
-Emmvi *construye para el cliente*; junto a este formulario se leería como una
-promesa sobre la propia bandeja de Emmvi, que no está automatizada. Sigue
+emmvi *construye para el cliente*; junto a este formulario se leería como una
+promesa sobre la propia bandeja de emmvi, que no está automatizada. Sigue
 reservado para `/for/installers`.
 
 **Sin tiempo de respuesta prometido.** Lo que se afirma es que *lo lee alguien
@@ -326,9 +349,9 @@ reserva, que cae en el calendario sola. Añadir "contestamos el mismo día
 laborable" es una decisión del usuario, no una de diseño.
 
 **El panel no dice quién contesta.** Tenía un bloque "Who you are writing to"
-que presentaba a Emmvi como dos personas; se quitó por indicación del usuario,
+que presentaba a emmvi como dos personas; se quitó por indicación del usuario,
 y con él todas las menciones al tamaño del equipo que había en el sitio (la
-home y el FAQ). **Emmvi se comunica como empresa**: se pueden nombrar personas
+home y el FAQ). **emmvi se comunica como empresa**: se pueden nombrar personas
 y ciudades, nunca cuántos son.
 
 Las tres filas de "Worth knowing before we talk" son el principio 3 de
@@ -772,7 +795,7 @@ se replica. `--container-wrap` vale igual que en las otras tres.
 Cuatro de los titulares de esta pantalla miden **64 px, como el h1**, no los
 51 px del `text-h2` de las otras: "Need a Paid Ads Agency to Boost ROI?",
 "Skilled Paid Ads Control…", "What Is Paid Advertising…" y "The Benefits of
-Paid Online Advertising With Emmvi". Los dos que sí van a 51 son el FAQ y
+Paid Online Advertising With emmvi". Los dos que sí van a 51 son el FAQ y
 "Talk to our Sales team".
 
 Medido sobre el render, no deducido: altura de mayúscula de 48 px con ascendente
@@ -849,7 +872,7 @@ párrafo de "Skilled Paid Ads Control" escribe "matters most- whether", con guio
 corto pegado.
 
 **Un titular se acorta.** El Figma escribe "The Benefits of Paid Online
-Advertising With Emmvi", que a 64 px son **cuatro líneas** en su columna — el
+Advertising With emmvi", que a 64 px son **cuatro líneas** en su columna — el
 archivo lo dibuja en tres porque Roboto es más estrecho que DM Sans. Queda "Why
 Run Your Ads With Us", que cae en dos y adopta la forma de pregunta de los otros
 dos titulares de la pantalla. Medido en la columna real, no estimado.
@@ -956,6 +979,43 @@ La paleta no crece: el badge reutiliza el rosa de Email Marketing y los dos
 paneles oscuros son `--dusk`, medido sobre el render (`#232328 → #16151e →
 #080714`). El verde `#20d662` de las cifras del Figma **no entra como token**,
 porque las cifras no se publican.
+
+## Los avisos del artículo
+
+Dos cajas con etiqueta e icono dentro del cuerpo: **Tip** y **Important**. Se
+escriben desde `content/posts/` como un `aside` con `tone`.
+
+```ts
+{ kind: "aside", tone: "tip", text: "Adjust it to the job. …" }
+{ kind: "aside", tone: "important", text: "This is general guidance, …" }
+```
+
+**Ninguno estrena color**, que es la regla de arriba. El consejo va en el
+violeta de marca sobre `violet-wash` —el mismo par que los badges de
+categoría— y la advertencia en tinta sobre `paper-alt`. Se distinguen por peso
+y no por semáforo: el aviso es el oscuro, y por eso pesa más en la página. El
+verde de la referencia que inspiró esto se queda fuera por lo mismo que el del
+Figma.
+
+Mantienen el filete de 3 px del `aside` de siempre. Es lo que ata las dos
+formas: se ve que son la misma familia. Lo que añaden es el fondo, que es lo
+que los saca del hilo de lectura.
+
+**Son dos y no cinco a propósito.** Con seis colores de aviso dejan de avisar
+de nada y el artículo pasa a parecer un panel de control.
+
+**`tone` es opcional y sin él no cambia nada.** El uso más común hoy del
+`aside` es reproducir un mensaje de ejemplo —los tres de `quote-follow-up`—, y
+ahí un titulillo que ponga "Tip" encima sobraría. Esos siguen como estaban.
+
+La etiqueta va en `<strong>`, no en un `<h4>`: no es una sección del artículo
+y no debe salir en el índice ni romper la jerarquía entre un `h2` y el `h3`
+siguiente. Se puede sustituir con `label` cuando el aviso pide algo más
+concreto que "Tip".
+
+En la versión `.md` la etiqueta sobrevive, en negrita dentro de la cita. No se
+usa la sintaxis `> [!TIP]` de GitHub: fuera de GitHub se lee como un corchete
+suelto, y quien consume ese fichero es sobre todo un modelo.
 
 
 ## Services — About Us
