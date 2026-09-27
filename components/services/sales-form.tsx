@@ -1,6 +1,7 @@
 "use client";
 
 import posthog from "posthog-js";
+import { DataNotice } from "@/components/data-notice";
 import { useActionState } from "react";
 
 import { submitContact, type ContactState } from "@/app/actions/contact";
@@ -18,7 +19,6 @@ import { FIELD_LIMITS } from "@/lib/contact";
  */
 
 const PAGE_RANGES = ["1-5", "6-10", "11-20", "More than 20"];
-const HOSTING_ANSWERS = ["Yes", "No", "Not sure yet"];
 const BUDGET_RANGES = [
   "Less than $1.000",
   "$1.000 - $3.000",
@@ -110,7 +110,7 @@ export function SalesForm() {
       ) : null}
 
       <div className="grid items-stretch gap-5 sm:grid-cols-2">
-        <div className="flex flex-col">
+        <div className="flex flex-col sm:col-span-2">
           <label htmlFor="s-name" className={labelClass}>
             Full Name
             <Required />
@@ -121,25 +121,8 @@ export function SalesForm() {
             type="text"
             required
             maxLength={50}
-            autoComplete="given-name"
+            autoComplete="name"
             defaultValue={v?.name}
-            className={fieldClass}
-          />
-        </div>
-
-        <div className="flex flex-col">
-          <label htmlFor="s-last" className={labelClass}>
-            Last Name
-            <Required />
-          </label>
-          <input
-            id="s-last"
-            name="lastName"
-            type="text"
-            required
-            maxLength={50}
-            autoComplete="family-name"
-            defaultValue={e?.lastName}
             className={fieldClass}
           />
         </div>
@@ -188,28 +171,9 @@ export function SalesForm() {
             name="pages"
             required
             defaultValue={e?.pages || PAGE_RANGES[0]}
-            className={fieldClass}
+            className={`${fieldClass} select-field`}
           >
             {PAGE_RANGES.map((o) => (
-              <option key={o}>{o}</option>
-            ))}
-          </select>
-        </div>
-
-        <div className="flex flex-col sm:col-span-2">
-          <label htmlFor="s-hosting" className={labelClass}>
-            Are you going to host the website with us?
-            <Required />
-          </label>
-          <select
-            id="s-hosting"
-            key={selectKey("hosting", e?.hosting)}
-            name="hosting"
-            required
-            defaultValue={e?.hosting || HOSTING_ANSWERS[0]}
-            className={fieldClass}
-          >
-            {HOSTING_ANSWERS.map((o) => (
               <option key={o}>{o}</option>
             ))}
           </select>
@@ -226,7 +190,7 @@ export function SalesForm() {
             name="budget"
             required
             defaultValue={e?.budget || BUDGET_RANGES[0]}
-            className={fieldClass}
+            className={`${fieldClass} select-field`}
           >
             {BUDGET_RANGES.map((o) => (
               <option key={o}>{o}</option>
@@ -258,6 +222,7 @@ export function SalesForm() {
       >
         {isPending ? "Sending…" : "Submit"}
       </button>
+      <DataNotice />
     </form>
   );
 }

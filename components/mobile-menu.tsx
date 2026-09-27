@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 
+import { chrome, type NavLink } from "@/lib/chrome-copy";
+import type { Locale } from "@/lib/i18n";
 import { Wordmark } from "./wordmark";
 
 /**
@@ -12,14 +14,23 @@ import { Wordmark } from "./wordmark";
  *
  * Por debajo de 900px la nav del header se oculta, asi que este es el unico
  * acceso a Services / Who we work with / About / FAQ.
+ *
+ * Los textos y enlaces salen de lib/chrome-copy.ts segun `locale`, igual que
+ * en la cabecera: el menu es la misma nav, en otra pantalla. `links` los
+ * sustituye; lo usa la cabecera de la replica del Figma
+ * (components/services/header.tsx), que tiene su propia nav.
  */
-type NavLink = {
-  href: string;
-  label: string;
-  children?: readonly { href: string; label: string }[];
-};
-
-export function MobileMenu({ links }: { links: readonly NavLink[] }) {
+export function MobileMenu({
+  locale = "en",
+  links: override,
+}: {
+  locale?: Locale;
+  /** Para el selector de idioma, retirado de momento (site-header.tsx). */
+  path?: string;
+  links?: readonly NavLink[];
+}) {
+  const copy = chrome[locale];
+  const links = override ?? copy.header.links;
   const ref = useRef<HTMLDialogElement>(null);
   const [open, setOpen] = useState(false);
 
@@ -51,7 +62,7 @@ export function MobileMenu({ links }: { links: readonly NavLink[] }) {
         type="button"
         aria-expanded={open}
         aria-controls="mobile-menu"
-        aria-label={open ? "Close menu" : "Open menu"}
+        aria-label={open ? copy.menu.close : copy.menu.open}
         onClick={() => {
           ref.current?.showModal();
           setOpen(true);
@@ -75,7 +86,7 @@ export function MobileMenu({ links }: { links: readonly NavLink[] }) {
       <dialog
         ref={ref}
         id="mobile-menu"
-        aria-label="Menu"
+        aria-label={copy.menu.label}
         className="m-0 h-full max-h-none w-full max-w-none bg-paper p-0 text-ink backdrop:bg-ink/40"
       >
         <div className="flex h-full flex-col">
@@ -84,7 +95,7 @@ export function MobileMenu({ links }: { links: readonly NavLink[] }) {
             <button
               type="button"
               onClick={close}
-              aria-label="Close menu"
+              aria-label={copy.menu.close}
               className="inline-flex size-11 items-center justify-center rounded-sm text-ink focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
             >
               <svg
@@ -102,7 +113,10 @@ export function MobileMenu({ links }: { links: readonly NavLink[] }) {
             </button>
           </div>
 
-          <nav aria-label="Main" className="flex-1 overflow-y-auto px-6 pb-10">
+          <nav
+            aria-label={copy.header.navLabel}
+            className="flex-1 overflow-y-auto px-6 pb-10"
+          >
             <ul className="border-t border-line">
               {links.map((l) =>
                 l.children ? (
@@ -112,7 +126,7 @@ export function MobileMenu({ links }: { links: readonly NavLink[] }) {
                      acordeon aqui solo anadiria un toque mas para llegar a lo
                      mismo. */
                   <li key={l.href} className="border-b border-line py-5">
-                    <h2 className="text-h3 text-ink">{l.label}</h2>
+                    <h3 className="text-ink">{l.label}</h3>
                     <ul className="mt-1">
                       {l.children.map((c) => (
                         <li key={c.href}>
@@ -146,7 +160,7 @@ export function MobileMenu({ links }: { links: readonly NavLink[] }) {
               onClick={close}
               className="mt-8 inline-flex h-12 w-full items-center justify-center rounded-sm bg-ink px-6 text-ui font-medium text-paper transition-colors duration-150 hover:bg-ink-black focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
             >
-              Schedule a call
+              {copy.header.cta}
             </a>
           </nav>
         </div>

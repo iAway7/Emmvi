@@ -28,10 +28,13 @@ grep -rn "Emmvi" --include="*.tsx" --include="*.ts" --include="*.css" \
   --include="*.svg" app components lib content public
 ```
 
-Sin resultados es lo correcto.
+Devuelve **una** línea, y es correcta: el comentario de
+`app/(en)/services/gohighlevel-automation/page.tsx` cuenta que *el archivo
+escribía "Emmvi" con mayúscula*. En minúscula la frase se contradiría sola.
+Cualquier otro resultado sí es un fallo.
 
-En los `.md` de la raíz el mismo grep **sí** devuelve siete líneas, y las siete
-son a propósito: son los sitios donde la mayúscula es el dato y no la forma de
+En los `.md` de la raíz el mismo grep devuelve siete líneas, y las siete son a
+propósito: son los sitios donde la mayúscula es el dato y no la forma de
 escribir la marca.
 
 - **Cinco en esta sección**, que enuncia la forma prohibida, la busca y recoge
@@ -67,7 +70,7 @@ la página demuestra algo en vez de afirmarlo.
 | Token | Valor | Uso |
 |---|---|---|
 | `--color-paper` | `#ffffff` | fondo base |
-| `--color-paper-alt` | `#f8f8f8` | bandas de sección |
+| `--color-paper-alt` | `#f9fafd` | bandas de sección |
 | `--color-paper-panel` | `#f9fafd` | paneles grandes, radius 32 |
 | `--color-ink` | `#171717` | títulos y texto primario |
 | `--color-ink-soft` | `#666666` | cuerpo |
@@ -81,9 +84,14 @@ la página demuestra algo en vez de afirmarlo.
 | `--night` | `linear-gradient(180deg,#171717,#000 62%,#2e2e2e)` | paneles de demostración |
 
 Restricción medida, y ya no la hay en claro: el violeta rinde 6.68:1 sobre
-blanco, 6.29:1 sobre `#f8f8f8` y 6.40:1 sobre el panel — AA de texto chico en
-las tres. El violeta anterior (`#635dff`) se quedaba en 4.36:1 sobre la banda
-gris y obligaba a la variante oscurecida; ese límite desapareció.
+blanco y 6.40:1 sobre `#f9fafd` — AA de texto chico en las dos. El violeta
+anterior (`#635dff`) se quedaba en 4.36:1 sobre la banda gris y obligaba a la
+variante oscurecida; ese límite desapareció.
+
+`--color-paper-alt` y `--color-paper-panel` valen hoy lo mismo (`#f9fafd`): la
+banda de sección era `#f8f8f8` y se igualó al panel. Se conservan como dos
+nombres porque siguen diciendo cosas distintas —una banda a ancho completo no
+es un panel con radio de 32— y volverían a divergir si alguna lo hiciera.
 
 **Donde sí aprieta ahora es en oscuro.** El violeta nuevo es más oscuro, así que
 sobre el degradado radial de la página de espera cae a 2.61:1 y no llega ni al
@@ -99,16 +107,78 @@ usa Roboto; DM Sans lo reemplazó y se conserva.
 Escala fluida con `clamp()`. El borrador tenía `h1` clavado en 64px sin override
 móvil — desbordaba. Los extremos de cada `clamp()` respetan el valor del Figma.
 
-| Token | Tamaño | Alto de línea | Tracking | Peso |
-|---|---|---|---|---|
-| `text-display` | 36 → 64px | 1.06 | −0.025em | 800 |
-| `text-h2` | 32 → 51px | 1.1 | −0.02em | 800 |
-| `text-h3` | 24px | 1.3 | −0.021em | 700 |
-| `text-lede` | 20 → 24px | 1.417 | −0.008em | 400 |
-| `text-body` | 18px | 1.611 | — | 400 |
-| `text-copy` | 16px | 1.625 (26px) | — | — |
-| `text-ui` | 16px | 1.5 (24px) | — | — |
-| `text-small` | 14px | 1.43 | — | 400 |
+**Los `clamp()` se quedan en su mínimo hasta 480px** y crecen en línea recta
+hasta el máximo en 1280px. En un teléfono la escala es fija y ordenada —36 /
+28 / 22 / 18 / 18 / 16 / 14— y no depende del ancho exacto del aparato. Antes
+cada token arrancaba a crecer desde 0px con su propia pendiente: a 430px el
+`h2` (34px) ya pasaba al `h1`, que la home había bajado a 32px con un override,
+y el lede se iba a 21px. **El cuerpo en móvil no pasa de 18px**, tampoco el
+grande: los párrafos de 20–24px de About us, SEO y los testimonios llevan su
+`max-md:` a 18.
+
+| Token | Tamaño | Alto de línea | Tracking | Peso | Papel |
+|---|---|---|---|---|---|
+| `text-display` | 36 → 64px | 1.06 | −0.0437em | 800 | h1 de página |
+| `text-h2` | 28 → 51px | 1.1 | −0.0353em | 800 | título de sección |
+| `text-h3` | 22 → 24px | 1.3 | −0.021em | 700 | título de tarjeta grande |
+| `text-h4` | 20px | 1.3 | −0.02em | 700 | título de tarjeta chica, pregunta del FAQ, nombre de persona, subtítulo del blog |
+| `text-lede` | 18 → 24px | 1.417 | −0.008em | 400 | párrafo bajo un título, y **toda cita** (con `font-medium` si va en tarjeta) |
+| `text-body` | 18px | 1.611 | — | 400 | cuerpo de sección, respuesta del FAQ, prosa del blog |
+| `text-copy` | 16px | 1.625 (26px) | — | — | texto de lectura en tarjetas |
+| `text-ui` | 16px | 1.5 (24px) | — | — | nav, botones, etiquetas, chips |
+| `text-small` | 14px | 1.43 | — | 400 | legal, pie, listas densas |
+| `text-stat` | 32px | 1 | −0.03em | 800 | cifras, números de paso, la comilla de una tarjeta |
+
+Los tracking de `text-display` y `text-h2` se eligieron en px sobre el tamaño
+grande —−2.8px a 64 y −1.8px a 51— y se guardan en em para que acompañen al
+`clamp`. Con el valor fijo en px el apretado del h1 subía del 4.4% al 7.8% al
+llegar a 36px, porque la letra encoge y el tracking no.
+
+**No hay tamaños fuera de la tabla.** Una regla de ESLint (`no-restricted-syntax`
+en `eslint.config.mjs`) falla ante cualquier `text-[18px]` o `text-[1.25rem]` en
+`app/` y `components/`. Si hace falta un tamaño nuevo se añade aquí y en
+`globals.css`, no en la página. La única excepción viva es la comilla
+decorativa de 128px de `/services/seo`, desactivada en su línea con el motivo.
+
+**La etiqueta decide el tamaño del encabezado.** `h1`, `h2`, `h3` y `h4` llevan
+su token en la capa base de `globals.css` y **no llevan token de tamaño en el
+JSX**: la misma regla de ESLint falla ante `<h2 className="text-h3">`. Así un
+h2 mide 51px en toda la página y en todo el sitio, y en móvil 28. Es lo que
+faltaba tras la escala: con los tokens sueltos, en `/services/gohighlevel-automation`
+convivían h2 de 51 y de 24px, y h3 de 16px por debajo del cuerpo.
+
+Reparto de etiquetas, que es lo que hay que decidir al escribir una sección:
+
+- `h1`, una por página: el hero.
+- `h2`: el título de una sección de landing, con o sin antetítulo delante.
+- `h3`: el título de una tarjeta o de un panel, cuelgue de un h2 o del h1
+  (las tarjetas de valores de About us, o las entradas del índice del blog,
+  cuelgan del h1: se acepta el salto de nivel antes que un h2 de 51px en una
+  tarjeta).
+- `h4`: un título dentro de una tarjeta.
+- Lo que quiera medir 16px no es un encabezado. Un rótulo de columna del pie,
+  el título de un paso en una lista densa, una pregunta del FAQ con su
+  respuesta debajo: son `<p>` con `text-ui font-bold`. Un antetítulo es un
+  `<p>` con `text-eyebrow`.
+
+Un solo contexto cambia la escala, y lo hace por etiqueta en CSS: `.doc`, el
+documento largo a 68ch (artículos del blog y páginas legales), donde el h2 es
+un apartado y va a `text-h3` y el h3 a `text-h4`. A 51px se comía la columna.
+
+Es la lección del sitio anterior. El backup del WordPress (agosto de 2026)
+tenía un kit global de Elementor y encima **46 tamaños puestos a mano** widget
+por widget: el h1 medía 64px en escritorio en todas partes pero en móvil 51px
+en las páginas de servicio y 40px en la home; el h2 de sección en móvil, 40px,
+igualaba al h1 de la home; el kit tenía el h3 a 40px, más grande que su h2 a
+36; y 57 párrafos de 18px no tenían variante móvil porque nadie se acordó. El
+sistema de ahora resuelve eso con diez tokens y una regla que impide volver.
+
+Cómo se mapeó lo que había: las citas de 24/34 y 20/32 van a `text-lede`; los
+títulos de 18, 19 y 20px van a `text-h4`; las cifras de 32px a `text-stat`; los
+párrafos de 16 con interlineado suelto a `text-copy` o `text-ui`; los 15px a
+`text-small`. El párrafo de 30px de About us baja a `text-lede` (24 en
+escritorio) y su antetítulo de 18 a `text-eyebrow` (16): eran dos excepciones
+sin más motivo que el Figma.
 
 **Dos densidades del mismo cuerpo de 16px.** La escala tenía un solo
 interlineado por tamaño, y las páginas necesitaban los dos: se habían resuelto
@@ -121,9 +191,6 @@ interlineado y 34 con 24px. No era un tamaño que faltara, eran dos densidades.
 Ninguno fija peso, para que compongan con `font-medium` / `font-semibold`.
 `text-eyebrow` tiene las mismas métricas que `text-ui` pero lleva el peso 500
 dentro; se conserva por semántica, pero para 16px normal va `text-ui`.
-
-Quedan cinco `text-[1rem]` sueltos y son correctos: interlineados únicos de 22,
-28 y 32px, y el glifo `+` del acordeón.
 
 `text-wrap: balance` en h1–h3, `pretty` en prosa larga. Cuerpo tope 65–75ch.
 
@@ -175,6 +242,41 @@ transiciones de color en hover (150ms) y el acordeón nativo del FAQ.
 `ReplyProof` (el panel de mensajes que se completa solo) queda en
 `components/` sin usar en la home, reservado para `/for/installers`. Con
 `prefers-reduced-motion: reduce` aparece ya entregado.
+
+**`/about-us` sí lleva aparición al entrar**, y es la única por ahora. Son 7,5
+pantallas de secciones apiladas: ahí el reveal le da ritmo al scroll. La home,
+que cuenta una historia con ilustraciones, no lo necesita.
+
+Se hace con `.reveal` en globals.css, **sin librería**: `animation-timeline:
+view()`, que corre en el compositor. Tres decisiones que conviene no deshacer:
+
+- **El estado inicial vive dentro del `@supports`.** Donde no hay soporte —hoy
+  Firefox, que lo tiene tras un flag— no se oculta nada nunca. Sacarlo fuera
+  reintroduce el fallo clásico: contenido invisible para siempre si la
+  animación no arranca.
+- **En las bandas con fondo propio la clase va al hijo**, no a la `<section>`.
+  Animar la banda desplazaría también su fondo y su borde.
+- **La primera sección no se anima.** Está sobre el pliegue y moverla al cargar
+  es justo lo que molesta.
+
+El easing es el de `reply-arrive`, para que el sitio se mueva igual en todas
+partes.
+
+### Respuesta al puntero
+
+El sitio se sentía inerte y el diagnóstico estaba en los números: **31
+`transition-colors` contra 2 `transition-transform`**. Todo el hover cambiaba
+solo de color, y el hover es la interacción más frecuente que hay.
+
+- **`.lift`** — sube 3px y saca sombra. Va **solo en lo que es enlace de
+  verdad**, hoy las dos tarjetas del blog. Levantar una tarjeta informativa
+  promete un clic que no existe, y eso es peor que no animar: el resto se
+  quedan con su cambio de borde.
+- **`.press`** — el botón se hunde 1px al pulsar. Está en la cadena base de
+  `CtaLink`, así que alcanza a todos los CTA del sitio. Confirma el clic en el
+  momento en que ocurre, antes de que responda la navegación.
+
+Las dos viven dentro de `prefers-reduced-motion: no-preference`.
 
 ## Components
 
@@ -284,7 +386,7 @@ contesta en menos de un minuto, así que la página **mantiene reserva de llamad
 y correo**. Y no promete fecha de lanzamiento, porque no hay ninguna que se
 pueda cumplir.
 
-`app/page.tsx` la sirve en la raíz cuando `COMING_SOON=1`: la URL sigue siendo
+`app/(en)/page.tsx` la sirve en la raíz cuando `COMING_SOON=1`: la URL sigue siendo
 `emmvi.com/`, así que al quitar la variable aparece la home sin que nadie tenga
 una `/coming-soon` guardada ni indexada. Comprobado en build de producción en
 los dos sentidos.
@@ -802,7 +904,10 @@ Medido sobre el render, no deducido: altura de mayúscula de 48 px con ascendent
 y sin descendente en "Need a Paid Ads" (48/0.75 = 64) contra 38 px en "Talk to
 our Sales team" (38/0.75 ≈ 51), que es el h2 conocido de las otras pantallas.
 Cuadra con los interlineados del archivo: 77 px (64 × 1.2) y 60 px (51 × 1.17).
-Se usa `text-display` en un `<h2>`, que es un token de tamaño, no de jerarquía.
+
+**Aquí no se replica.** Se hizo con `text-display` en un `<h2>` hasta que la
+escala pasó a ir por etiqueta (ver *Typography*): un h2 mide lo que mide un h2,
+y esta era la única pantalla con cuatro secciones al tamaño del h1. Van a 51.
 
 ### Qué no se publica
 
@@ -1031,8 +1136,10 @@ header pasa a mirar también las entradas de primer nivel, no solo el
 desplegable de servicios, para que la nav marque la página en la que se está.
 
 El frame **no tiene hero aparte**: la primera sección, la de la chapa "Our
-Mission", lo es. Su titular va a 64 px —`text-display` en un `<h1>`— y es el
-único de la pantalla a ese tamaño; los otros cuatro son `text-h2` a 51.
+Mission", lo es. Su titular es el `<h1>` y va a 64 px, el único de la
+pantalla a ese tamaño; los otros cuatro son `<h2>` a 51. Los antetítulos en
+versalitas de "About Us" y "Our mission" eran `<h2>` con el tamaño del eyebrow;
+son `<p>`: el tamaño lo pone la etiqueta.
 
 ### Las tres bandas de texto
 

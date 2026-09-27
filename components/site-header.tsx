@@ -1,64 +1,53 @@
 import Link from "next/link";
+
+import { chrome } from "@/lib/chrome-copy";
+import { localizePath, type Locale } from "@/lib/i18n";
 import { CtaLink } from "./cta-link";
 import { MobileMenu } from "./mobile-menu";
 import { NavDropdown } from "./nav-dropdown";
 import { Wordmark } from "./wordmark";
 
 /**
- * Anclas absolutas (`/#services`, no `#services`): este header ya no vive solo
- * en la home — `/contact` lo monta tambien, y ahi un ancla relativa no lleva a
- * ninguna parte. Desde la home siguen siendo navegacion dentro del documento,
- * asi que el scroll suave no cambia.
+ * La cabecera de todas las paginas, en los dos idiomas.
  *
- * El CTA se queda en `#contact` a proposito: las dos paginas que montan este
+ * Los textos y los enlaces salen de lib/chrome-copy.ts segun `locale`. Las
+ * anclas son absolutas (`/#services`, no `#services`) porque este header no
+ * vive solo en la home, y fuera de ella un ancla relativa no lleva a ninguna
+ * parte. Desde la home siguen siendo navegacion dentro del documento, asi que
+ * el scroll suave no cambia.
+ *
+ * El CTA se queda en `#contact` a proposito: las paginas que montan este
  * header tienen su propia seccion con ese id, asi que no hace falta salir de
  * la pagina para llegar al formulario.
- */
-/**
- * Las cinco paginas de servicio. Cuelgan de "Services" en la nav en vez de
- * quedarse solo en el pie, que hasta ahora era la unica via para llegar a
- * ellas desde dentro del sitio.
  *
- * "Full-Stack Development" no vive bajo /services/ como las otras cuatro: es
- * la URL que el WordPress tenia indexada y se conserva. Ver next.config.ts.
- *
- * /services/gohighlevel-automation no esta aqui: la pagina existe pero sale
- * como borrador, sin enlazar y sin indexar. Ver su propio page.tsx.
+ * `path` es la ruta canonica en ingles de la pagina que lo monta. Lo usaba el
+ * selector de idioma (components/language-switcher.tsx), que **esta retirado
+ * de momento**: se decidio no enseñarlo hasta que el español tenga mas
+ * paginas. El prop se conserva para volver a montarlo sin tocar las paginas.
  */
-const services = [
-  { href: "/services/website-design/", label: "Web Design" },
-  { href: "/services/email-marketing/", label: "Email Marketing" },
-  { href: "/services/seo/", label: "SEO Services" },
-  { href: "/services/ppc/", label: "PPC" },
-  { href: "/full-stack-development-services/", label: "Full-Stack Development" },
-];
+export function SiteHeader({
+  locale = "en",
+  path,
+}: {
+  locale?: Locale;
+  /** Solo se pasa al menu movil mientras el selector este retirado. */
+  path?: string;
+} = {}) {
+  const copy = chrome[locale];
+  const { links } = copy.header;
 
-/**
- * `children` convierte una entrada en desplegable. "Services" dejo de ser un
- * ancla a la seccion de la home: ahora abre el menu, que es lo que un visitante
- * espera de esa palabra en una barra de navegacion.
- */
-const links = [
-  { href: "/#services", label: "Services", children: services },
-  { href: "/#who", label: "Who we work with" },
-  // Pagina propia, no el ancla de la seccion "Meet emmvi" de la home.
-  { href: "/about-us/", label: "About" },
-  { href: "/#faq", label: "FAQ" },
-];
-
-export function SiteHeader() {
   return (
     <header className="sticky top-0 z-20 border-b border-line bg-paper/94 backdrop-blur-lg">
       <div className="mx-auto flex h-[88px] max-w-[var(--container-wrap)] items-center justify-between gap-8 px-6 lg:px-[var(--spacing-gut)]">
         <Link
-          href="/"
-          aria-label="emmvi, home"
+          href={localizePath("/", locale)}
+          aria-label={copy.header.homeLabel}
           className="inline-flex min-h-[44px] items-center rounded-sm text-ink focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
         >
           <Wordmark className="h-8 w-auto" />
         </Link>
 
-        <nav aria-label="Main" className="hidden min-[900px]:block">
+        <nav aria-label={copy.header.navLabel} className="hidden min-[900px]:block">
           <ul className="flex items-center gap-6">
             {links.map((l) => (
               <li key={l.href}>
@@ -89,9 +78,9 @@ export function SiteHeader() {
             una media query la regla va despues de todas las utilidades planas,
             asi que esta si gana. */}
         <CtaLink href="#contact" className="max-[899px]:hidden">
-          Schedule a call
+          {copy.header.cta}
         </CtaLink>
-        <MobileMenu links={links} />
+        <MobileMenu locale={locale} path={path} />
       </div>
     </header>
   );

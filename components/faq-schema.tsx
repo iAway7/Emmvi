@@ -1,4 +1,5 @@
-import { faqs } from "@/lib/faq";
+import type { Locale } from "@/lib/i18n";
+import { homeCopy } from "@/lib/copy/home";
 import { SITE_URL } from "@/lib/site";
 
 /**
@@ -16,20 +17,28 @@ import { SITE_URL } from "@/lib/site";
  * interfaz y no una estructura de datos. Con esto, el par pregunta/respuesta
  * va declarado.
  *
- * Sale de `lib/faq.ts`, la misma lista que pinta el acordeon: una sola copia
- * de cada respuesta.
+ * **Sale de `lib/copy/home.ts`, la misma copia que pinta el acordeon**, asi
+ * que no hay dos versiones de cada respuesta ni una que se corrija sin la
+ * otra. Y como ese fichero esta por idioma, cada home declara sus preguntas en
+ * el suyo: la de /es/ las declara en espanol, que es lo que hay en pantalla.
  *
  * Se ata a la organizacion por `@id` —igual que hace `ArticleSchema`— para que
  * los tres marcados del sitio formen un grafo y no tres islas.
  */
-export function FaqSchema() {
+export function FaqSchema({ locale }: { locale: Locale }) {
+  const t = homeCopy[locale];
+  // La home inglesa vive en la raiz y la espanola en /es/. Dos URLs distintas,
+  // dos bloques de preguntas distintos: el `@id` tiene que distinguirlos o el
+  // segundo se lee como una redefinicion del primero.
+  const base = locale === "en" ? SITE_URL : `${SITE_URL}/es`;
+
   const faqPage = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "@id": `${SITE_URL}/#faq`,
-    inLanguage: "en",
+    "@id": `${base}/#faq`,
+    inLanguage: locale,
     publisher: { "@id": `${SITE_URL}/#organization` },
-    mainEntity: faqs.map((f) => ({
+    mainEntity: t.faq.items.map((f) => ({
       "@type": "Question",
       name: f.q,
       acceptedAnswer: { "@type": "Answer", text: f.a },

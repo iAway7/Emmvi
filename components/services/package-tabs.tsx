@@ -75,7 +75,7 @@ export function PackageTabs({ tabs }: { tabs: PackageTab[] }) {
                 : "border-line hover:border-ink-soft"
             }`}
           >
-            <span className="text-[1.5rem] leading-none font-extrabold text-ink">
+            <span className="text-h3 leading-none font-extrabold text-ink">
               {String(i + 1).padStart(2, "0")}
             </span>
             <span
@@ -90,7 +90,7 @@ export function PackageTabs({ tabs }: { tabs: PackageTab[] }) {
       </div>
 
       <div id={`${id}-panel`} role="tabpanel" tabIndex={0} className="focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet">
-        <h3 className="text-h2 text-balance text-ink">
+        <h3 className="text-ink">
           {current.heading ?? current.title}
         </h3>
         {/* Sin cuerpo escrito no se pinta nada, en vez del "Copy pending" en

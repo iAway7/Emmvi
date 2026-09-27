@@ -10,7 +10,7 @@
 @theme {
   /* --- color --- */
   --color-paper: #ffffff;
-  --color-paper-alt: #f8f8f8;        /* bandas de sección */
+  --color-paper-alt: #f9fafd;        /* bandas de sección */
   --color-paper-panel: #f9fafd;      /* paneles grandes, radius 32 */
   --color-ink: #171717;              /* títulos y texto primario */
   --color-ink-soft: #666666;         /* cuerpo de texto */
@@ -67,22 +67,47 @@
      nunca como decoracion "tecnica". */
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
 
-  --text-display: clamp(2.25rem, 1.15rem + 4.4vw, 4rem);          /* h1 → 64px */
+  /* Los clamp() se quedan en su minimo hasta 480px y crecen en linea recta
+     hasta el maximo del Figma en 1280px. Asi en un telefono la escala es fija
+     y ordenada —36 / 28 / 22 / 18 / 18 / 16 / 14— y no depende del ancho
+     exacto del aparato. Antes cada token arrancaba a crecer desde 0px con su
+     propia pendiente, y a 430px el h2 (34px) ya pasaba al h1 (forzado a 32 en
+     la home) y el lede se iba a 21px. */
+  --text-display: clamp(2.25rem, 1.2rem + 3.5vw, 4rem);           /* 36 → 64px */
   --text-display--line-height: 1.06;
-  --text-display--letter-spacing: -0.025em;
+  /* -2.8px a 64px, que es donde se eligio. En em para que acompane al
+     clamp: con el valor fijo, a 36px el apretado subia del 4.4% al 7.8%. */
+  --text-display--letter-spacing: -0.0437em;
   --text-display--font-weight: 800;
 
-  --text-h2: clamp(2rem, 1.35rem + 2.6vw, 3.1875rem);             /* → 51px */
+  --text-h2: clamp(1.75rem, 0.8875rem + 2.875vw, 3.1875rem);      /* 28 → 51px */
   --text-h2--line-height: 1.1;
-  --text-h2--letter-spacing: -0.02em;
+  /* -1.8px a 51px. Mismo motivo que el display. */
+  --text-h2--letter-spacing: -0.0353em;
   --text-h2--font-weight: 800;
 
-  --text-h3: 1.5rem;                                              /* 24px */
+  --text-h3: clamp(1.375rem, 1.3rem + 0.25vw, 1.5rem);            /* 22 → 24px */
   --text-h3--line-height: 1.3;
   --text-h3--letter-spacing: -0.021em;
   --text-h3--font-weight: 700;
 
-  --text-lede: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);            /* → 24px */
+  /* Titulo de tarjeta, pregunta del FAQ, nombre de persona, subtitulo del
+     blog. Fijo: es el escalon entre el h3 y el cuerpo, y en movil sigue por
+     encima del cuerpo de 18. Antes eran 18, 19 y 20px repartidos a mano. */
+  --text-h4: 1.25rem;                                             /* 20px */
+  --text-h4--line-height: 1.3;
+  --text-h4--letter-spacing: -0.02em;
+  --text-h4--font-weight: 700;
+
+  /* Cifras: numeros de paso, contadores, la comilla de apertura de una
+     tarjeta. Interlineado 1 porque van solas en su linea. */
+  --text-stat: 2rem;                                              /* 32px */
+  --text-stat--line-height: 1;
+  --text-stat--letter-spacing: -0.03em;
+  --text-stat--font-weight: 800;
+
+  /* Tope de 18px en movil: es cuerpo, aunque sea el grande. */
+  --text-lede: clamp(1.125rem, 0.9rem + 0.75vw, 1.5rem);          /* 18 → 24px */
   --text-lede--line-height: 1.417;
   --text-lede--letter-spacing: -0.008em;
 
@@ -120,6 +145,10 @@
   /* Paneles oscuros de Email Marketing: banda de cifras y testimonios. Es un
      degradado horizontal, distinto del --night vertical de la home. */
   --dusk: linear-gradient(90deg, #242428 0%, #16151e 50%, #080714 100%);
+  /* Lavanda recuperado del WordPress viejo (allí iba con radio 32). Casi
+     blanco con un tinte violeta apenas visible: sirve para separar un panel
+     del fondo blanco sin dibujar un borde. Se usa con bg-[image:var(--lavender)]. */
+  --lavender: linear-gradient(90deg, #f9faff 0%, #f5f4ff 100%);
   /* El diseño de marca es claro. Sin modo oscuro hasta que exista en Figma. */
   color-scheme: light;
 }
@@ -130,6 +159,42 @@
     color: var(--color-ink);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+  }
+
+  /* La etiqueta decide el tamano. Un <h2> mide lo que mide un h2 en toda la
+     pagina y en todo el sitio; no lleva token de tamano en el JSX (lo impide
+     una regla de ESLint) y si un diseno quiere un titulo mas chico, lo que
+     tiene no es un encabezado: es un <p> con el token que le toque.
+
+       h1  pagina          text-display   36 → 64px
+       h2  seccion         text-h2        28 → 51px
+       h3  tarjeta, panel  text-h3        22 → 24px
+       h4  dentro de tarjeta text-h4      20px
+
+     Antes cada encabezado elegia su token y en una misma pagina convivian
+     h2 de 51 y de 24px, y h3 de 16px por debajo del cuerpo. */
+  h1 {
+    @apply text-display text-balance;
+  }
+  h2 {
+    @apply text-h2 text-balance;
+  }
+  h3 {
+    @apply text-h3 text-balance;
+  }
+  h4 {
+    @apply text-h4 text-balance;
+  }
+
+  /* Documento largo: articulos del blog y paginas legales, a 68ch. Ahi el h2
+     es un apartado y no una seccion de landing, y a 51px se comia la columna.
+     Es el unico contexto que cambia la escala, y lo hace aqui, por etiqueta:
+     nunca elemento a elemento. */
+  .doc h2 {
+    @apply text-h3;
+  }
+  .doc h3 {
+    @apply text-h4;
   }
 
   html {
@@ -255,6 +320,99 @@ html:has(dialog[open]) {
    El hueco entre logos va como padding-right de cada lista y NO como gap del
    carril: con gap en el carril el -50% cae a mitad de hueco y la costura salta.
    -------------------------------------------------------------------------- */
+/* Aparicion al entrar en pantalla, para paginas largas de secciones apiladas.
+   CSS puro, sin libreria: la animacion la lleva el compositor, no hay JS que
+   hidratar ni observer que registrar.
+
+   El estado inicial vive DENTRO del @supports a proposito. Es la propiedad que
+   importa: donde no hay soporte —hoy Firefox, que lo tiene tras un flag— no se
+   oculta nada nunca, asi que no existe el fallo clasico de "contenido
+   invisible para siempre" si la animacion no llega a arrancar.
+
+   El easing es el mismo de `reply-arrive`, para que el sitio se mueva igual en
+   todas partes. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal-in 600ms cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation-timeline: view();
+      /* Arranca poco despues de asomar y termina antes de llegar al centro:
+         si acaba demasiado tarde, se lee el texto mientras aun se mueve. */
+      animation-range: entry 10% cover 28%;
+    }
+  }
+}
+
+/* Entrada del hero (home-lab). Titular, lede, botones y escena aparecen en
+   ese orden, con 90 ms entre uno y otro: dice que leer primero. Solo
+   transform y opacity, y bajo reduced-motion no se mueve nada. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-in {
+    animation: hero-in 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: calc(var(--i, 0) * 90ms);
+  }
+  @keyframes hero-in {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: none; }
+  }
+}
+
+/* Respuesta al puntero.
+   Todo el hover del sitio cambiaba solo de color —31 `transition-colors`
+   contra 2 `transition-transform`— y por eso se sentia inerte: la interaccion
+   mas frecuente que existe no movia nada.
+
+   `.lift` va SOLO en lo que de verdad lleva a algun sitio. Levantar una
+   tarjeta informativa promete un clic que no existe, y eso es peor que no
+   animar: el resto de tarjetas se quedan con su cambio de borde. */
+@media (prefers-reduced-motion: no-preference) {
+  .lift {
+    transition:
+      translate 200ms cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .lift:hover {
+    translate: 0 -3px;
+    box-shadow: 0 14px 30px -14px rgb(0 0 0 / 0.22);
+  }
+
+  /* El boton se hunde al pulsar. Confirma el clic en el momento en que ocurre,
+     antes de que la navegacion responda. */
+  .press {
+    transition: translate 120ms ease-out;
+  }
+
+  .press:active {
+    translate: 0 1px;
+  }
+}
+
+/* Flecha propia para los <select>.
+   Con la nativa el desplegable no se parecia al resto de campos: cada sistema
+   dibuja la suya, con su tamano y su color, y al lado de un input con borde
+   redondeado de 1px cantaba. `appearance: none` la quita y aqui va una que si
+   usa el gris del sitio. El padding derecho deja sitio para que el texto
+   largo no se meta debajo. */
+.select-field {
+  appearance: none;
+  padding-right: 2.5rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5 6 6.5l5-5' stroke='%23666666' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    translate: 0 20px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
 @keyframes marquee-left {
   from {
     transform: translateX(0);
@@ -406,6 +564,250 @@ html:has(dialog[open]) {
 }
 
 /* --------------------------------------------------------------------------
+   Motion de home-lab (components/pages/home-lab.tsx y scenes-lab.tsx).
+
+   Tres familias, y todas quietas con reduced motion:
+   1. Al cargar: la escena del hero cuenta la respuesta en el tiempo real de
+      la promesa (solicitud, 34 segundos, respuesta, tick).
+   2. Bucles lentos: los avisos del caos flotan, los "?" laten, los destellos
+      titilan. Son ambiente, no informacion, por eso van muy despacio.
+   3. Con el scroll (animation-timeline: view()): cada escena se monta pieza
+      a pieza mientras entra en pantalla y queda completa al centrarse. El
+      estado inicial vive DENTRO del @supports y del @media: sin soporte, la
+      escena esta completa.
+   -------------------------------------------------------------------------- */
+@keyframes lab-rise {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes lab-pop {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes jt-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes lab-float {
+  50% {
+    transform: translateY(-9px);
+  }
+}
+
+@keyframes lab-pulse {
+  50% {
+    transform: scale(1.12);
+  }
+}
+
+@keyframes lab-twinkle {
+  50% {
+    opacity: 0.45;
+    transform: scale(0.85);
+  }
+}
+
+@keyframes lab-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+@keyframes lab-halo {
+  from {
+    transform: scale(0.6);
+    opacity: 0.9;
+  }
+  to {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+/* Hojas apiladas (home-lab). La hoja se monta sobre la seccion anterior con su
+   esquina redondeada; la geometria va en las clases de Tailwind (`-mt-8
+   rounded-t-[32px]`), no aqui.
+
+   **Sin sombra, por decision del usuario (2026-09-27).** Llevaba una tintada de
+   violeta hacia arriba para que el borde se leyera como un pliegue; el corte
+   redondeado ya lo consigue solo. `.shadow-tint`, que es la misma idea en
+   tarjetas y paneles, sigue puesta: aquello son piezas sueltas sobre el fondo,
+   no secciones. */
+.home-lab .shadow-tint {
+  box-shadow:
+    0 1px 2px rgba(66, 58, 244, 0.04),
+    0 18px 40px -24px rgba(66, 58, 244, 0.22);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* 1. Hero: la respuesta llega mientras se lee el titular. */
+  .scene-lab--reply .rp-req,
+  .scene-lab--reply .rp-later,
+  .scene-lab--reply .rp-reply,
+  .scene-lab--reply .rp-tick,
+  .scene-lab--reply .rp-send {
+    opacity: 0;
+    transform: translateY(12px);
+    animation: lab-rise 600ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .scene-lab--reply .rp-send {
+    transform: scale(0.6);
+    transform-box: fill-box;
+    transform-origin: center;
+    animation-delay: 700ms;
+  }
+  .scene-lab--reply .rp-req {
+    animation-delay: 1000ms;
+  }
+  .scene-lab--reply .rp-later {
+    animation-delay: 1700ms;
+  }
+  .scene-lab--reply .rp-reply {
+    animation-delay: 2100ms;
+  }
+  .scene-lab--reply .rp-tick {
+    transform: scale(0.6);
+    transform-box: fill-box;
+    transform-origin: center;
+    animation-delay: 2700ms;
+  }
+
+  /* 2. Bucles de ambiente. */
+  .scene-lab .spark {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: lab-twinkle 3.2s ease-in-out infinite;
+    animation-delay: calc(var(--i, 0) * -1.1s);
+  }
+  .scene-lab--chaos .ch-float {
+    animation: lab-float 5.5s ease-in-out infinite;
+    animation-delay: calc(var(--i, 0) * -1.3s);
+  }
+  .scene-lab--chaos .ch-q {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: lab-pulse 2.4s ease-in-out infinite;
+    animation-delay: calc(var(--i, 0) * -1.2s);
+  }
+  .home-lab .meet-map__pin circle:first-child {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: lab-halo 2.8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  }
+  .home-lab .meet-map__pin:last-of-type circle:first-child {
+    animation-delay: -1.4s;
+  }
+
+  /* Respuesta del FAQ: aparece en vez de saltar. */
+  .home-lab details[open] .faq-answer {
+    animation: lab-fade-in 260ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* La escena entera entra con un leve zoom, ademas de sus piezas. */
+    .home-lab .reveal-scene {
+      opacity: 0;
+      transform: scale(0.97);
+      animation: lab-rise 600ms cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 25%;
+    }
+
+    /* 3. Recorrido: la linea se dibuja y cada paso aparece al llegar. */
+    .scene-lab--journey .jt-line {
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      animation: jt-draw linear both;
+      animation-timeline: view();
+      animation-range: cover 6% cover 46%;
+    }
+    .scene-lab--journey .jt-card,
+    .scene-lab--journey .jt-clock {
+      opacity: 0;
+      transform: translateY(18px);
+      animation: lab-rise cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation-timeline: view();
+    }
+    .scene-lab--journey .jt-card-1 {
+      animation-range: cover 4% cover 14%;
+    }
+    .scene-lab--journey .jt-card-2,
+    .scene-lab--journey .jt-clock {
+      animation-range: cover 15% cover 26%;
+    }
+    .scene-lab--journey .jt-card-3 {
+      animation-range: cover 26% cover 37%;
+    }
+    .scene-lab--journey .jt-card-4 {
+      animation-range: cover 37% cover 47%;
+    }
+    .scene-lab--journey .jt-star {
+      opacity: 0;
+      transform: scale(0.4);
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: lab-pop cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation-timeline: view();
+      animation-range: cover calc(42% + var(--i) * 1.2%)
+        cover calc(45.2% + var(--i) * 1.2%);
+    }
+
+    /* Tablero: seis tarjetas caen en su columna, luego la nota. */
+    .scene-lab--board .bd-card,
+    .scene-lab--board .bd-note {
+      opacity: 0;
+      transform: translateY(-14px);
+      animation: lab-rise cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation-timeline: view();
+      animation-range: cover calc(8% + var(--i, 6) * 5%)
+        cover calc(18% + var(--i, 6) * 5%);
+    }
+
+    /* Sitio propio: navegador, tarjeta, llave, tarjeta. */
+    .scene-lab--work .wk-in,
+    .scene-lab--call .cl-in {
+      opacity: 0;
+      transform: translateY(16px);
+      animation: lab-rise cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation-timeline: view();
+      animation-range: cover calc(6% + var(--i, 0) * 9%)
+        cover calc(20% + var(--i, 0) * 9%);
+    }
+    .scene-lab--work .wk-pop,
+    .scene-lab--call .wk-pop {
+      opacity: 0;
+      transform: scale(0.5);
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: lab-pop cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation-timeline: view();
+      animation-range: cover 30% cover 40%;
+    }
+
+    /* Llamada: el hueco de las 10:30 se marca despues del calendario. */
+    .scene-lab--call .cl-pick {
+      transform: scale(0.92);
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: lab-pop cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation-timeline: view();
+      animation-range: cover 22% cover 30%;
+    }
+  }
+}
+
+/* --------------------------------------------------------------------------
    Mapa de "Meet emmvi". Los grosores van aqui y no en el marcado porque
    cambian con el ancho: a 375px el mapa se sirve de borde a borde y los
    puntos, dibujados para 1200, se pierden si no engordan.
@@ -432,7 +834,14 @@ html:has(dialog[open]) {
   stroke-linejoin: round;
 }
 
-@media (max-width: 900px) {
+/* Consulta el ancho del propio mapa, no el de la ventana: en la tarjeta de
+   media columna el mapa mide 500px aunque la ventana tenga 1440, y ahi el
+   trazo fino desaparece igual que en movil. */
+.meet-map-wrap {
+  container-type: inline-size;
+}
+
+@container (max-width: 900px) {
   .meet-map__land {
     stroke-width: 6px;
   }

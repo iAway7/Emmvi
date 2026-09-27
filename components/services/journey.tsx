@@ -115,7 +115,7 @@ export function Journey() {
               <div className="grid size-full place-items-center rounded-full bg-[#f0edff] px-6 text-center">
                 <div>
                   <Icon className="mx-auto size-8 text-ink" />
-                  <h3 className="mt-4 text-h3 text-balance text-ink">{title}</h3>
+                  <h3 className="mt-4 text-ink">{title}</h3>
                 </div>
               </div>
             </div>

@@ -99,10 +99,10 @@ Contrastes medidos de la paleta (no estimados):
 |---|---|---|
 | `#171717` ink sobre `#ffffff` | 17.93:1 | AA texto |
 | `#666666` ink-soft sobre `#ffffff` | 5.74:1 | AA texto |
-| `#666666` ink-soft sobre `#f8f8f8` | 5.41:1 | AA texto |
+| `#666666` ink-soft sobre `#f9fafd` | 5.50:1 | AA texto |
 | `#423af4` violeta sobre `#ffffff` | 6.68:1 | AA texto |
 | `#ffffff` sobre `#423af4` violeta | 6.68:1 | AA texto (botones) |
-| `#423af4` violeta sobre `#f8f8f8` | 6.29:1 | AA texto |
+| `#423af4` violeta sobre `#f9fafd` | 6.40:1 | AA texto |
 | `#423af4` violeta sobre `#1a1a1a` | 2.61:1 | **no vale ni en texto grande** |
 | `#847ff8` violet-light sobre `#1a1a1a` | 5.28:1 | AA texto |
 

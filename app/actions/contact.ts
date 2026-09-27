@@ -4,9 +4,15 @@ import { headers } from "next/headers";
 import { after } from "next/server";
 import { Resend } from "resend";
 
-import { escapeHtml, isRateLimited, normalizeText, validate } from "@/lib/contact";
+import {
+  escapeHtml,
+  formMessages,
+  isRateLimited,
+  normalizeText,
+  toLocale,
+  validate,
+} from "@/lib/contact";
 import { notifySlack } from "@/lib/slack";
-import { CONTACT_EMAIL } from "@/lib/site";
 
 /**
  * Campos extra del formulario de /services/website-design, que el Figma dibuja
@@ -14,9 +20,7 @@ import { CONTACT_EMAIL } from "@/lib/site";
  * llegan vacios y no cambian nada de su comportamiento.
  */
 export type SalesExtras = {
-  lastName: string;
   pages: string;
-  hosting: string;
   budget: string;
 };
 
@@ -46,35 +50,38 @@ const toEmails = (process.env.CONTACT_TO_EMAIL ?? "")
 
 const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
-const GENERIC_ERROR = `Something went wrong sending that. Email us at ${CONTACT_EMAIL} instead.`;
-
 export async function submitContact(
   _prev: ContactState,
   formData: FormData,
 ): Promise<ContactState> {
+  /**
+   * Idioma del formulario que envia, para contestar en el mismo. Llega en un
+   * campo oculto (components/contact-form.tsx); si falta o trae otra cosa,
+   * ingles.
+   */
+  const locale = toLocale(formData.get("locale"));
+  const t = formMessages[locale];
+
   // Honeypot: campo oculto que un humano nunca rellena.
   if (formData.get("website")) {
-    return { status: "success", message: "Thanks. We will be in touch." };
+    return { status: "success", message: t.honeypot };
   }
 
   const field = (key: string) => normalizeText(String(formData.get(key) ?? ""));
   const extras: SalesExtras = {
-    lastName: field("lastName"),
     pages: field("pages"),
-    hosting: field("hosting"),
     budget: field("budget"),
   };
 
-  // El nombre viaja partido en dos cuando lo manda el formulario de ventas.
   const firstName = String(formData.get("name") ?? "");
   const raw = {
-    name: extras.lastName ? `${firstName} ${extras.lastName}` : firstName,
+    name: firstName,
     email: formData.get("email"),
     company: formData.get("company"),
     message: formData.get("message"),
   };
 
-  const result = validate(raw);
+  const result = validate(raw, locale);
   if (!result.ok) {
     return {
       status: "error",
@@ -94,7 +101,7 @@ export async function submitContact(
   if (isRateLimited(ip)) {
     return {
       status: "error",
-      message: "Too many messages from this connection. Try again in a few minutes.",
+      message: t.rateLimited,
       values: { ...result.values, name: firstName },
       extras,
     };
@@ -103,7 +110,6 @@ export async function submitContact(
   const { name, email, company, message } = result.values;
   const qualifiers: [string, string][] = [
     ["Pages", extras.pages],
-    ["Hosting with us", extras.hosting],
     ["Budget", extras.budget],
   ];
 
@@ -136,7 +142,7 @@ export async function submitContact(
     avisar(false);
     return {
       status: "error",
-      message: GENERIC_ERROR,
+      message: t.generic,
       values: { ...result.values, name: firstName },
       extras,
     };
@@ -165,7 +171,7 @@ export async function submitContact(
       avisar(false);
       return {
         status: "error",
-        message: GENERIC_ERROR,
+        message: t.generic,
         values: { ...result.values, name: firstName },
         extras,
       };
@@ -175,7 +181,7 @@ export async function submitContact(
     avisar(false);
     return {
       status: "error",
-      message: GENERIC_ERROR,
+      message: t.generic,
       values: { ...result.values, name: firstName },
       extras,
     };
@@ -185,6 +191,6 @@ export async function submitContact(
 
   return {
     status: "success",
-    message: "Thanks. We read every one of these and will reply shortly.",
+    message: t.success,
   };
 }

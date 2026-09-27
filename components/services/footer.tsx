@@ -59,9 +59,9 @@ export function WebsiteDesignFooter() {
 
           {columns.map((col) => (
             <nav key={col.title} aria-label={col.title}>
-              <h2 className="text-ui font-semibold text-ink">
+              <p className="text-ui font-semibold text-ink">
                 {col.title}
-              </h2>
+              </p>
               <ul className="mt-1">
                 {col.links.map((l) => (
                   <li key={l.label}>

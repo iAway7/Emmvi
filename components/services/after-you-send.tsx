@@ -48,7 +48,7 @@ const points = [
 export function AfterYouSend() {
   return (
     <div className="max-w-[34em]">
-      <h3 className="text-h3 text-balance text-ink">
+      <h3 className="text-ink">
         What happens when you send this
       </h3>
       <ul className="mt-7 flex list-none flex-col gap-6">

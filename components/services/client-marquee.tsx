@@ -1,3 +1,5 @@
+import type { Locale } from "@/lib/i18n";
+
 /**
  * Cinta de clientes: corre sola hacia la izquierda, sin dots ni flechas.
  *
@@ -23,6 +25,7 @@ const clients = [
   { src: "/clients/steady-content.svg", name: "SteadyContent", h: "h-8", w: 300, ih: 57 },
   { src: "/clients/afax.png", name: "aFax", h: "h-9", w: 308, ih: 144 },
   { src: "/clients/kurokink.svg", name: "KuroKink", h: "h-7", w: 1659, ih: 438 },
+  { src: "/clients/fenekoi.png", name: "Fenekoi", h: "h-10", w: 331, ih: 240 },
   { src: "/clients/jbz-beats.png", name: "JBZ Beats", h: "h-12", w: 81, ih: 80 },
   { src: "/clients/tc-tails.png", name: "TC Tails Dog Grooming", h: "h-12", w: 80, ih: 80 },
 ];
@@ -58,12 +61,43 @@ function Logos({ duplicate = false }: { duplicate?: boolean }) {
   );
 }
 
-export function ClientMarquee() {
+/** Etiqueta del grupo de logos, en cada idioma. */
+const groupLabel: Record<Locale, string> = {
+  en: "Companies we have worked with",
+  es: "Empresas con las que hemos trabajado",
+};
+
+/**
+ * La etiqueta va **visible**, no solo en `aria-label`.
+ *
+ * Antes solo existia para el lector de pantalla, asi que quien ve la pagina se
+ * encontraba una fila de logos ajenos sin ninguna explicacion: no decia si son
+ * clientes, integraciones o patrocinadores. Es el mismo patron que ya usan las
+ * bandas de /services/seo ("Tools we work with") y /services/ppc.
+ *
+ * Con el texto a la vista, `aria-label` sobra y se cambia por `aria-labelledby`
+ * apuntando a el: si no, el lector de pantalla lo anuncia dos veces.
+ *
+ * El id es fijo porque el componente sale **una vez por pagina** (home, home-lab
+ * y /services/website-design). Si algun dia se montan dos en la misma, hay que
+ * pasar a `useId()` — y eso obliga a convertirlo en componente de cliente.
+ */
+export function ClientMarquee({ locale = "en" }: { locale?: Locale }) {
   return (
-    <div className="marquee" aria-label="Companies we have worked with" role="group">
-      <div className="marquee__track">
-        <Logos />
-        <Logos duplicate />
+    <div>
+      <p id="client-marquee-label" className="text-center text-small text-ink-soft">
+        {groupLabel[locale]}
+      </p>
+
+      <div
+        className="marquee mt-7"
+        aria-labelledby="client-marquee-label"
+        role="group"
+      >
+        <div className="marquee__track">
+          <Logos />
+          <Logos duplicate />
+        </div>
       </div>
     </div>
   );

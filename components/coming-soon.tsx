@@ -54,7 +54,7 @@ export function ComingSoon() {
         Websites and automation
       </p>
 
-      <h1 className="mt-4 text-[clamp(2rem,1.2rem+3.5vw,3.5rem)] font-extrabold tracking-[0.02em] text-balance text-violet-light uppercase">
+      <h1 className="mt-4 text-[clamp(2rem,1.2rem+3.5vw,3.5rem)] font-extrabold tracking-[0.02em] text-violet-light uppercase">
         Being rebuilt
       </h1>
 
