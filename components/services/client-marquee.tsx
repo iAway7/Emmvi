@@ -67,12 +67,37 @@ const groupLabel: Record<Locale, string> = {
   es: "Empresas con las que hemos trabajado",
 };
 
+/**
+ * La etiqueta va **visible**, no solo en `aria-label`.
+ *
+ * Antes solo existia para el lector de pantalla, asi que quien ve la pagina se
+ * encontraba una fila de logos ajenos sin ninguna explicacion: no decia si son
+ * clientes, integraciones o patrocinadores. Es el mismo patron que ya usan las
+ * bandas de /services/seo ("Tools we work with") y /services/ppc.
+ *
+ * Con el texto a la vista, `aria-label` sobra y se cambia por `aria-labelledby`
+ * apuntando a el: si no, el lector de pantalla lo anuncia dos veces.
+ *
+ * El id es fijo porque el componente sale **una vez por pagina** (home, home-lab
+ * y /services/website-design). Si algun dia se montan dos en la misma, hay que
+ * pasar a `useId()` — y eso obliga a convertirlo en componente de cliente.
+ */
 export function ClientMarquee({ locale = "en" }: { locale?: Locale }) {
   return (
-    <div className="marquee" aria-label={groupLabel[locale]} role="group">
-      <div className="marquee__track">
-        <Logos />
-        <Logos duplicate />
+    <div>
+      <p id="client-marquee-label" className="text-center text-small text-ink-soft">
+        {groupLabel[locale]}
+      </p>
+
+      <div
+        className="marquee mt-7"
+        aria-labelledby="client-marquee-label"
+        role="group"
+      >
+        <div className="marquee__track">
+          <Logos />
+          <Logos duplicate />
+        </div>
       </div>
     </div>
   );

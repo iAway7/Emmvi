@@ -7,6 +7,9 @@ import { JourneySteps } from "@/components/journey-steps";
 import { MeetMap } from "@/components/meet-map";
 import { OrganizationSchema } from "@/components/organization-schema";
 import { ClientMarquee } from "@/components/services/client-marquee";
+import { StatBand } from "@/components/stat-band";
+import { ToolMarquee } from "@/components/tool-marquee";
+import { stats, tools } from "@/lib/capabilities";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { homeCopy } from "@/lib/copy/home";
@@ -112,10 +115,14 @@ export function HomePage({ locale }: { locale: Locale }) {
               </a>
             </div>
           </div>
+          {/* Acotada en movil. Con `-mx-6` salia a ancho completo de pantalla:
+              375px de ancho son 520 de alto, el 64% de la ventana, y el hero
+              se comia la pantalla entera. A 260 baja al 44% y el titular, el
+              parrafo y el CTA caben con ella a la vista. */}
           <HomeIllustration
             name="reply"
             label={t.hero.scene}
-            className="max-md:-mx-6"
+            className="max-md:mx-auto max-md:max-w-[260px]"
           />
         </section>
 
@@ -126,6 +133,31 @@ export function HomePage({ locale }: { locale: Locale }) {
             ShapeShift, Cameo y Bounce, que no son clientes. */}
         <section className={`reveal ${wrap} pb-16 lg:pb-20`}>
           <ClientMarquee locale={locale} />
+        </section>
+
+        {/* --- Herramientas y cifras ---------------------------------- */}
+        {/* Nombres y no logos: añadir una herramienta es una linea de texto,
+            no un SVG que recortar. Y un nombre dice "trabajamos con esto" sin
+            insinuar la relacion comercial que un logotipo ajeno si insinua —
+            el mismo motivo por el que salieron los sellos de Google Premier
+            Partner de /services/ppc.
+            La lista y las cifras viven en lib/capabilities.ts, compartidas con
+            el laboratorio para que no se separen. */}
+        <section className={`reveal bg-night ${section}`}>
+          <div className={wrap}>
+            <h2 className="text-white">{t.tools.title}</h2>
+            <p className="mt-5 max-w-[34em] text-body text-pretty text-white/80">
+              {t.tools.body}
+            </p>
+          </div>
+
+          <div className="mt-12 text-white">
+            <ToolMarquee tools={tools} locale={locale} />
+          </div>
+
+          <div className={`${wrap} mt-16`}>
+            <StatBand stats={stats} locale={locale} tone="dark" />
+          </div>
         </section>
 
         <StorySection lavender flip title={t.lost.title} body={t.lost.body}>

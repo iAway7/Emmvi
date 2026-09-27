@@ -38,6 +38,7 @@ export type HomeCopy = {
     scene: string;
   };
   lost: { title: string; body: string; scene: string };
+  tools: { title: string; body: string };
   services: { title: string; lede: string; scene: string };
   board: { title: string; body: string; scene: string };
   work: { title: string; body: string; scene: string };
@@ -84,6 +85,10 @@ const en: HomeCopy = {
     seeMore: "See what happens to a request",
     scene:
       "A quote request for an EV charger sent from a website at 21:47, answered by text 34 seconds later, with the quote follow-up and the review request queued next.",
+  },
+  tools: {
+    title: "The tools we work in",
+    body: "Whatever you already pay for, we work inside it.",
   },
   lost: {
     title: "Where the work gets lost",
@@ -237,6 +242,10 @@ const es: HomeCopy = {
     seeMore: "Ver qué pasa con una solicitud",
     scene:
       "Una solicitud de presupuesto para un cargador de coche eléctrico enviada desde una web a las 21:47, respondida por mensaje 34 segundos después, con el seguimiento del presupuesto y la petición de reseña en cola.",
+  },
+  tools: {
+    title: "Las herramientas en las que trabajamos",
+    body: "Trabajamos dentro de lo que ya pagas.",
   },
   lost: {
     title: "Dónde se pierde el trabajo",

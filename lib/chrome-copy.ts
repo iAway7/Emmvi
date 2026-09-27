@@ -76,22 +76,34 @@ export type ChromeCopy = {
 };
 
 /**
- * Las cinco paginas de servicio. Cuelgan de "Services" en la nav en vez de
- * quedarse solo en el pie, que hasta ahora era la unica via para llegar a
- * ellas desde dentro del sitio.
+ * Las cinco paginas de servicio que cuelgan de "Services" en la nav.
  *
- * "Full-Stack Development" no vive bajo /services/ como las otras cuatro: es
- * la URL que el WordPress tenia indexada y se conserva. Ver next.config.ts.
+ * **GoHighLevel Automation entra y Full-Stack Development sale**, por decision
+ * del usuario el 2026-09-27. Va primera: es la unica de la lista que vende el
+ * posicionamiento nuevo.
  *
- * /services/gohighlevel-automation no esta aqui: la pagina existe pero sale
- * como borrador, sin enlazar y sin indexar. Ver su propio page.tsx.
+ * Dos cosas que ese cambio deja pendientes, anotadas aqui porque no se ven
+ * desde este archivo:
+ *
+ * - La pagina de Full-Stack **se queda sin un solo enlace interno**. El pie
+ *   nunca la tuvo, asi que esta era su unica via. Sigue en el sitemap
+ *   (`currentRoutes` de lib/site.ts) y responde 200, pero una pagina indexada
+ *   a la que no apunta nadie se rastrea peor. O vuelve al pie, o sale del
+ *   sitemap con el mismo criterio que /web-hosting.
+ * - **La pagina de GoHighLevel sigue siendo borrador**: pide `noindex` y no
+ *   esta en el sitemap. Enlazarla desde las veinticinco paginas del sitio y
+ *   pedirle a Google que no la indexe es trabajo que se tira. Para publicarla,
+ *   ver la cabecera de su propio page.tsx.
  */
 const services: readonly NavChild[] = [
+  {
+    href: "/services/gohighlevel-automation/",
+    label: "GoHighLevel Automation",
+  },
   { href: "/services/website-design/", label: "Web Design" },
   { href: "/services/email-marketing/", label: "Email Marketing" },
   { href: "/services/seo/", label: "SEO Services" },
   { href: "/services/ppc/", label: "PPC" },
-  { href: "/full-stack-development-services/", label: "Full-Stack Development" },
 ];
 
 const en: ChromeCopy = {

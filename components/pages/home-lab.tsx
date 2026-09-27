@@ -14,6 +14,9 @@ import { MeetMap } from "@/components/meet-map";
 import { OrganizationSchema } from "@/components/organization-schema";
 import { ClientMarquee } from "@/components/services/client-marquee";
 import { SiteFooter } from "@/components/site-footer";
+import { StatBand } from "@/components/stat-band";
+import { ToolMarquee } from "@/components/tool-marquee";
+import { stats, tools } from "@/lib/capabilities";
 import { SiteHeader } from "@/components/site-header";
 import { homeCopy } from "@/lib/copy/home";
 import type { Locale } from "@/lib/i18n";
@@ -130,6 +133,7 @@ function StorySection({
   );
 }
 
+
 export function HomeLabPage({ locale }: { locale: Locale }) {
   const t = homeCopy[locale];
 
@@ -166,6 +170,30 @@ export function HomeLabPage({ locale }: { locale: Locale }) {
 
         <section className={`reveal ${wrap} pb-20 lg:pb-28`}>
           <ClientMarquee locale={locale} />
+        </section>
+
+        {/* --- Herramientas (banco de pruebas) ------------------------- */}
+        {/* Nombres y no logos: añadir una es una linea de texto, no un SVG que
+            recortar. Y un nombre dice "trabajamos con esto" sin insinuar una
+            relacion comercial que un logotipo ajeno si insinua.
+            Lista provisional: son las once que el sitio ya nombra en las
+            paginas de SEO y Email Marketing. */}
+        <section className={`reveal bg-night ${section}`}>
+          <div className={wrap}>
+            <h2 className="text-white">
+              The tools we work in
+            </h2>
+            <p className="mt-5 max-w-[34em] text-body text-pretty text-white/80">
+              Whatever you already pay for, we work inside it.
+            </p>
+          </div>
+          <div className="mt-12 text-white">
+            <ToolMarquee tools={tools} locale={locale} />
+          </div>
+
+          <div className={`${wrap} mt-16`}>
+            <StatBand stats={stats} locale={locale} tone="dark" />
+          </div>
         </section>
 
         <StorySection z={1} tone="lavender" flip peek title={t.lost.title} body={t.lost.body}>

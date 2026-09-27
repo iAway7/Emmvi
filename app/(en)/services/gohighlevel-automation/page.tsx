@@ -6,6 +6,7 @@ import { ContactForm } from "@/components/contact-form";
 import { CtaLink } from "@/components/cta-link";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { StageTimeline, type Stage } from "@/components/services/stage-timeline";
 import { GhlIllustration } from "@/components/services/ghl-illustrations";
 import { pageMetadata } from "@/lib/site";
 
@@ -75,6 +76,112 @@ export const metadata: Metadata = {
   }),
   robots: { index: false, follow: false },
 };
+
+/**
+ * El catalogo de GoHighLevel, en su propia taxonomia y con sus nombres de
+ * producto. **Copiado de gohighlevel.com**, no de memoria: las pestanas
+ * Capture y Nurture se verificaron contra el sitio vivo palabra por palabra y
+ * las otras tres salen de capturas del mismo sitio.
+ *
+ * `ours` marca las quince que emmvi monta. Es lo que respalda el "52 / 15" de
+ * la banda oscura: sin esta lista los dos numeros son una afirmacion que hay
+ * que creerse, y con ella se cuentan.
+ *
+ * La seccion estuvo publicada y se perdio al portar el diseno del recorrido.
+ * Vuelve en tarjetas por etapa en vez de cinco columnas de texto, que es lo
+ * que pidio el usuario y ademas se escanea mejor.
+ *
+ * Es una afirmacion sobre el producto de otro, asi que envejece sola: si
+ * HighLevel cambia su catalogo, esto miente.
+ */
+const platform: Stage[] = [
+  {
+    stage: "Capture",
+    items: [
+      { name: "CRM", ours: true },
+      { name: "Voice AI", ours: true },
+      { name: "Forms, Surveys & Quizzes", ours: true },
+      { name: "Websites, Funnels & Landing Pages", ours: true },
+      { name: "Webinar Funnels", ours: true },
+      { name: "Chat Widget / Conversation AI", ours: true },
+      { name: "Call Tracking", ours: true },
+      { name: "Inbound SMS & Social DMs", ours: true },
+      { name: "Social Planner" },
+      { name: "Missed Call Text-Back", ours: true },
+      { name: "AI Biz Card Scanner", ours: true },
+      { name: "QR Codes", ours: true },
+      { name: "Prospecting Tool", ours: true },
+      { name: "Ad Manager" },
+    ],
+  },
+  {
+    stage: "Nurture",
+    items: [
+      { name: "Conversation AI", ours: true },
+      { name: "Consolidated conversation stream", ours: true },
+      { name: "Sales Pipelines", ours: true },
+      { name: "Workflows & Automations", ours: true },
+      { name: "Calendars", ours: true },
+      { name: "Text Snippets", ours: true },
+      { name: "Appointment Reminders", ours: true },
+      { name: "Ringless Voicemail", ours: true },
+      { name: "Mobile App" },
+      { name: "Automated Outbound Call Connect", ours: true },
+    ],
+  },
+  {
+    stage: "Close",
+    items: [
+      { name: "Lead Scoring", ours: true },
+      { name: "Estimates & Proposals", ours: true },
+      { name: "Invoicing", ours: true },
+      { name: "Payment Integrations", ours: true },
+      { name: "Paid Calendars", ours: true },
+      { name: "Order Forms / Upsells / Downsells", ours: true },
+      { name: "Membership Offers / Courses", ours: true },
+      { name: "One-click Upsell Funnels", ours: true },
+      { name: "Text-2-Pay", ours: true },
+      { name: "Tap-2-Pay", ours: true },
+      { name: "Gift Cards" },
+      { name: "Loyalty Programs" },
+    ],
+  },
+  {
+    stage: "Evangelize",
+    items: [
+      { name: "Reputation Management", ours: true },
+      { name: "Automated Review Requests", ours: true },
+      { name: "AI Review Reply", ours: true },
+      { name: "Affiliate Manager" },
+      { name: "Website Review Widgets", ours: true },
+      { name: "Video Review Capture", ours: true },
+      { name: "Video Review Widgets", ours: true },
+      { name: "Social Planner Auto-Review Posts", ours: true },
+      { name: "Communities" },
+    ],
+  },
+  {
+    stage: "Reactivate",
+    items: [
+      { name: "Broadcast Campaigns", ours: true },
+      { name: "Smart Lists / Segmentation", ours: true },
+      { name: "Automated Birthday Campaigns", ours: true },
+      { name: "Automated Seasonal Campaigns", ours: true },
+      { name: "Database Reactivation Templates" },
+      { name: "Newsletter Automation", ours: true },
+      { name: "Content AI", ours: true },
+    ],
+  },
+];
+
+
+/** Las dos cifras se cuentan, no se escriben: un "52" a mano queda falso en
+ *  cuanto alguien toca el array, y son las que cargan el argumento. */
+const allItems = platform.flatMap((p) => p.items);
+const platformCount = new Set(allItems.map((i) => i.name)).size;
+const oursCount = allItems.filter((i) => i.ours).length;
+const restCount = platformCount - oursCount;
+
 
 /** El recorrido de una sola consulta. Es la espina de la pagina: el demo del
  *  hero lo abre, esta banda lo resume y los sintomas de abajo lo niegan. */
@@ -164,7 +271,7 @@ const buildRest = [
   {
     n: "06",
     title: "One screen that tells the truth",
-    body: "Where quote requests came from, which turned into work, what is still open.",
+    body: "Where quote requests came from, how many turned into work, what is still open, and whether this month is going better than the last one.",
   },
 ];
 
@@ -189,7 +296,10 @@ const order = [
   {
     n: "04",
     title: "Bring your data across",
-    body: "Contacts, history and pipelines out of the spreadsheet and into one place.",
+    // La deduplicacion no estaba y es de lo que mas duele en un CRM heredado:
+    // el mismo cliente tres veces con tres telefonos. Va aqui y no en una
+    // seccion propia porque es parte de traer los datos, no un servicio.
+    body: "Contacts, history and pipelines out of the spreadsheet and into one place, with the same customer merged into one record instead of arriving three times.",
   },
   {
     n: "05",
@@ -437,10 +547,13 @@ export default function GoHighLevelAutomation() {
                 </h2>
               </div>
               <p className="max-w-[46ch] text-lede text-pretty text-white/78">
-                It is the one you already pay for, finally doing the work.
-                Fifty-two features come with the licence; the fifteen that turn
-                a quote request into a job are the forms, the pipeline, the
-                replies and the calendar. We build those and leave the rest.
+                {/* `{" "}` obligatorio: JSX se come el salto de linea que va
+                    justo antes de una expresion, y sin el se publicaba
+                    "work.52 features" pegado. */}
+                It is the one you already pay for, finally doing the work. We
+                set up {oursCount} of the {platformCount} features it comes
+                with. The {restCount} we leave alone belong to somebody
+                else&rsquo;s business model.
               </p>
             </div>
             {/* Tarjetas, no bloques sueltos con filete: es la forma de las
@@ -483,6 +596,63 @@ export default function GoHighLevelAutomation() {
         </section>
 
         {/* --- Lo que se monta dentro ------------------------------------- */}
+        {/* --- El catalogo entero, con lo nuestro marcado ------------------ */}
+        {/* Va justo detras de la banda que nombra las dos cifras, para que el
+            lector pueda contarlas en vez de creerselas.
+
+            Por etapa y en tarjetas, no en cinco columnas de texto: la version
+            anterior listaba las 52 en columnas y a 52 lineas seguidas no se
+            escanea. Cada tarjeta se lee sola.
+
+            Las que no montamos van en `ink-soft` (5.74:1) y no en un gris mas
+            claro: apagadas, no ilegibles. Y el hueco del tick se reserva
+            igualmente, para que los nombres queden alineados. */}
+        <section className={`${wrap} ${section}`}>
+          {/* El logo oficial de HighLevel, a su tamano de rotulo y no de
+              cartel: aqui identifica de quien es el catalogo que viene debajo,
+              que es uso nominativo. Grande se leeria como sello de partner, y
+              no lo somos —el aviso del pie y el FAQ lo dicen—.
+
+              El SVG es el archivo de marca sin tocar, con su clearspace: no se
+              recolorea ni se recorta. */}
+          <Image
+            src="/tools/gohighlevel.svg"
+            alt="GoHighLevel"
+            width={1000}
+            height={225}
+            className="h-7 w-auto"
+          />
+          {/* "All 52, and the 19" pedia que ya supieras de que iban esos dos
+              numeros: fuera de contexto no decia nada. El titular dice ahora
+              como se lee la lista, que es lo unico que hace falta saber para
+              mirarla; las cifras viven en el parrafo, donde tienen sitio para
+              explicarse. */}
+          <p className={`${eyebrow} mt-5 text-ink-soft`}>
+            What the licence includes
+          </p>
+          <h2 className="mt-3.5 max-w-[24ch] text-balance text-ink">
+            We set up the ticked ones.
+          </h2>
+          <p className="mt-3.5 max-w-[48ch] text-copy text-pretty text-ink-soft">
+            GoHighLevel&rsquo;s own feature list, in their own words. We set up{" "}
+            {oursCount} of the {platformCount}. The {restCount} without a tick
+            are gift cards, affiliate programmes and the like: real features,
+            for a different kind of business.
+          </p>
+
+          {/* Recorrido y no cinco tarjetas apiladas: las etapas del catalogo
+              de HighLevel son el orden en que pasa una consulta, no cinco
+              cajones. La forma dice lo mismo que el contenido, que ademas es
+              el tema de la pagina entera.
+
+              El componente renderiza las cinco siempre y oculta las que no
+              tocan, asi que el buscador ve las 52 funciones sin pulsar nada. */}
+          <div className="mt-8 lg:mt-10">
+            <StageTimeline stages={platform} label="GoHighLevel feature stages" />
+          </div>
+
+        </section>
+
         <section id="build" className="scroll-mt-24 bg-paper-panel">
           <div className={`${wrap} ${section}`}>
             <p className={`${eyebrow} text-ink-soft`}>What we build inside it</p>
