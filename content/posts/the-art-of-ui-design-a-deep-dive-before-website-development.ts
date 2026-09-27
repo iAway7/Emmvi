@@ -182,7 +182,7 @@ const body: Post["body"] = [
 
 export const theArtOfUi: Post = {
   slug: "the-art-of-ui-design-a-deep-dive-before-website-development",
-  title: "The Art of UI Design: A Deep Dive Before Website Development",
+  title: "UI Design: What Happens Before the Build",
   description: "Master the art of UI design before development: learn key principles, user-focused layouts, visual hierarchy, and best practices to build intuitive, high-converting websites.",
   lede: "The research, wireframes and prototypes that come before anyone writes code.",
   category: "UI Design",

@@ -121,7 +121,7 @@ const body: Post["body"] = [
 
 export const harnessingAiWithoutCode: Post = {
   slug: "harnessing-ai-without-code-how-crms-and-automation-tools-empower-online-businesses",
-  title: "Harnessing AI Without Code: CRMs and Automation Tools Empower Online Businesses",
+  title: "AI Without Code: What CRMs and Automation Do",
   description: "Harness AI without code: learn how CRMs and automation tools empower 2025 online businesses by boosting productivity, lead management, and customer journeys.",
   lede: "What AI inside a CRM really does for a small business, without writing code.",
   category: "AI",

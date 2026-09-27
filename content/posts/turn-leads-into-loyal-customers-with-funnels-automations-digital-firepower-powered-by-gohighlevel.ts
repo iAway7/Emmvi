@@ -139,7 +139,7 @@ const body: Post["body"] = [
 
 export const turnLeadsIntoLoyal: Post = {
   slug: "turn-leads-into-loyal-customers-with-funnels-automations-digital-firepower-powered-by-gohighlevel",
-  title: "Turn Leads Into Loyal Customers with: Funnels, Automations & Digital Firepower Powered by GoHighLevel",
+  title: "Turn Leads Into Repeat Customers with GoHighLevel",
   description: "Convert leads into loyal customers with powerful GoHighLevel funnels and smart automations, integrating email, SEO, landing pages, and workflows for scalable business growth.",
   lede: "How funnels and automations turn a first enquiry into a repeat customer.",
   category: "Automation",

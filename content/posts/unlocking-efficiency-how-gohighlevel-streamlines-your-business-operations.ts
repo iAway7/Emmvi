@@ -137,7 +137,7 @@ const body: Post["body"] = [
 
 export const unlockingEfficiencyHowGohighlevel: Post = {
   slug: "unlocking-efficiency-how-gohighlevel-streamlines-your-business-operations",
-  title: "Unlocking Efficiency: How GoHighLevel Streamlines Your Business Operations",
+  title: "GoHighLevel: What It Replaces in Your Business",
   description: "Unlock operational efficiency with GoHighLevel: automate workflows, centralize client funnels, CRM, and reporting to streamline your business with ease.",
   lede: "What GoHighLevel replaces, and which parts are worth setting up first.",
   category: "GoHighLevel",

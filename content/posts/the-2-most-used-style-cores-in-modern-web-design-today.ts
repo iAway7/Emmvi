@@ -66,7 +66,7 @@ const body: Post["body"] = [
 
 export const the2MostUsed: Post = {
   slug: "the-2-most-used-style-cores-in-modern-web-design-today",
-  title: "The 2 Most Used Style Cores in Modern Web Design Today (And Why They Work)",
+  title: "The 2 Style Cores Modern Web Design Keeps Using",
   description: "Explore the 2 most popular style cores in modern web design (minimalism and brutalism) and their impact on UX, branding, and how to implement them effectively.",
   lede: "Clean minimalism and neo-brutalism: what each one is for, and how to choose.",
   category: "Website Design",
