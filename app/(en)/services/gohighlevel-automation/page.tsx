@@ -816,8 +816,11 @@ export default function GoHighLevelAutomation() {
             llama HighLevel y la matriz GoHighLevel. Sin el simbolo (R): el
             estado del registro no se ha comprobado en ninguna oficina de
             marcas. */}
+        {/* Sin filete encima: el aviso ya viene detras de una banda violeta a
+            ancho completo, que separa de sobra. La regla solo anadia un tercer
+            borde en cuatro centimetros. */}
         <aside className={`${wrap} pt-10 pb-14`}>
-          <p className="border-t border-line pt-7 text-small text-pretty text-ink-soft">
+          <p className="text-small text-pretty text-ink-soft">
             GoHighLevel is a trademark of GoHighLevel Inc. emmvi is an
             independent service provider and is not affiliated with, endorsed by
             or certified by GoHighLevel Inc.

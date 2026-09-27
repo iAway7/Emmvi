@@ -8,7 +8,7 @@ import Image from "next/image";
 
 import { CalendlyButton } from "@/components/calendly-button";
 import { ContactForm } from "@/components/contact-form";
-import { HomeIllustration } from "@/components/home-illustrations";
+import { SceneLab } from "@/components/scenes-lab";
 import { JourneySteps } from "@/components/journey-steps";
 import { MeetMap } from "@/components/meet-map";
 import { OrganizationSchema } from "@/components/organization-schema";
@@ -38,53 +38,6 @@ const wrap =
   "mx-auto w-full max-w-[var(--container-wrap)] px-6 lg:px-[var(--spacing-gut)]";
 const section = "py-16 lg:py-[104px]";
 
-/** Cada seccion de la historia: titular, texto y una escena. `flip` pone la
- *  escena a la izquierda en escritorio, para que las secciones se alternen en
- *  vez de repetir la misma composicion. */
-function StorySection({
-  id,
-  title,
-  body,
-  children,
-  alt = false,
-  lavender = false,
-  flip = false,
-}: {
-  id?: string;
-  title: string;
-  body: React.ReactNode;
-  children: React.ReactNode;
-  alt?: boolean;
-  /** Fondo con el degradado --lavender en vez de la banda gris. */
-  lavender?: boolean;
-  flip?: boolean;
-}) {
-  return (
-    <section
-      id={id}
-      className={`${lavender ? "bg-[image:var(--lavender)]" : alt ? "bg-paper-alt" : ""} ${id ? "scroll-mt-24" : ""} ${section}`}
-    >
-      <div
-        className={`${wrap} grid items-center gap-8 md:gap-16 ${
-          flip
-            ? "md:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]"
-            : "md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]"
-        }`}
-      >
-        <div className={flip ? "md:order-2" : ""}>
-          <h2 className="text-ink">{title}</h2>
-          <div className="mt-5 max-w-[30em] text-lede text-pretty text-ink-soft">
-            {body}
-          </div>
-        </div>
-        <div className={`-mx-6 md:mx-0 ${flip ? "md:order-1" : ""}`}>
-          {children}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 /** Recortes de las citas para la home: la frase que mas dice, en tres lineas.
  *  Son fragmentos literales de las citas completas de lib/copy/home.ts, sin
  *  reescribir nada. Solo en ingles: la version española cae en la integra. */
@@ -97,6 +50,86 @@ const labQuotes: Record<string, string> = {
     "It looks clean, it loads fast, and it works great on phones too. He really listened to what I needed and made the process super smooth.",
 };
 
+/**
+ * Composicion de la home real (bandas alternas, texto a un lado y escena al
+ * otro) con profundidad encima. Lo que la hacia plana no era la estructura
+ * sino que cada banda era un rectangulo a sangre pegado al siguiente:
+ *
+ * - Cada seccion es una "hoja" (.sheet): se monta 48px sobre la anterior con
+ *   la esquina superior redondeada, y el z-index crece hacia abajo. La pagina
+ *   se lee como hojas apiladas, no como franjas.
+ * - En las bandas con fondo, la escena asoma por encima del borde superior
+ *   de su hoja (md:-mt-*), asi que cruza dos fondos.
+ * - Tarjetas y paneles llevan sombra tintada del violeta (.shadow-tint), no
+ *   negra.
+ * - Las bandas grises llevan un brillo radial muy suave arriba a la izquierda
+ *   en vez de un gris uniforme.
+ *
+ * Los textos siguen en lib/copy/home.ts. Las escenas son las de scenes-lab.tsx.
+ */
+const sheet =
+  "sheet relative -mt-8 rounded-t-[32px] md:-mt-12 md:rounded-t-[48px]";
+const glow =
+  "bg-paper-alt bg-[radial-gradient(120%_80%_at_0%_0%,#ffffff_0%,transparent_60%)]";
+
+function StorySection({
+  id,
+  z,
+  title,
+  body,
+  children,
+  tone = "paper",
+  flip = false,
+  peek = false,
+}: {
+  id?: string;
+  /** Orden de apilado: crece hacia abajo. */
+  z: number;
+  title: string;
+  body: React.ReactNode;
+  children: React.ReactNode;
+  tone?: "paper" | "alt" | "lavender";
+  flip?: boolean;
+  /** La escena asoma por encima del borde de la hoja. */
+  peek?: boolean;
+}) {
+  const bg =
+    tone === "lavender"
+      ? "bg-[image:var(--lavender)]"
+      : tone === "alt"
+        ? glow
+        : "bg-paper";
+  return (
+    <section
+      id={id}
+      style={{ zIndex: z }}
+      className={`${sheet} ${bg} ${id ? "scroll-mt-24" : ""} ${section}`}
+    >
+      <div
+        className={`${wrap} grid items-center gap-8 md:gap-16 ${
+          flip
+            ? "md:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]"
+            : "md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]"
+        }`}
+      >
+        <div className={`reveal ${flip ? "md:order-2" : ""}`}>
+          <h2 className="text-ink">{title}</h2>
+          <div className="mt-5 max-w-[30em] text-lede text-pretty text-ink-soft">
+            {body}
+          </div>
+        </div>
+        <div
+          className={`reveal-scene -mx-6 md:mx-0 ${flip ? "md:order-1" : ""} ${
+            peek ? "md:-mt-32 lg:-mt-40" : ""
+          }`}
+        >
+          {children}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function HomeLabPage({ locale }: { locale: Locale }) {
   const t = homeCopy[locale];
 
@@ -105,63 +138,51 @@ export function HomeLabPage({ locale }: { locale: Locale }) {
       <OrganizationSchema />
       <SiteHeader locale={locale} path="/" />
 
-      <main id="top">
-        {/* El titular es la promesa verificable, no un resultado de negocio: se
-            puede defender en la llamada. Al lado, la escena que la demuestra:
-            la solicitud de las 21:47 contestada 34 segundos despues. En movil
-            la escena se recorta al telefono, que es lo que tiene que leerse. */}
-        <section className={`${wrap} grid items-center gap-10 pt-12 pb-16 md:grid-cols-2 md:gap-12 md:pt-16 md:pb-20 lg:pt-[88px] lg:pb-24`}>
+      <main id="top" className="home-lab">
+        <section
+          className={`${wrap} grid items-center gap-10 pt-12 pb-16 md:grid-cols-2 md:gap-12 md:pt-16 md:pb-20 lg:pt-[88px] lg:pb-24`}
+        >
           <div>
-            <h1 className="hero-in max-w-[14em] text-ink">
-              {t.hero.title}
-            </h1>
+            <h1 className="hero-in max-w-[14em] text-ink">{t.hero.title}</h1>
             <p className="hero-in mt-5 max-w-[30em] text-lede text-pretty text-ink-soft md:mt-6 [--i:1]">
               {t.hero.lede}
             </p>
             <div className="hero-in mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 md:mt-9 [--i:2]">
-              <CalendlyButton className="max-md:w-full">
-                {t.hero.cta}
-              </CalendlyButton>
+              <CalendlyButton className="max-md:w-full">{t.hero.cta}</CalendlyButton>
               <a
                 href="#services"
-                className="inline-flex min-h-[44px] items-center text-ui font-medium text-ink underline underline-offset-[5px] hover:text-ink-black max-md:hidden"
+                className="inline-flex min-h-[44px] items-center text-ui font-medium text-ink underline underline-offset-[5px] transition-[text-underline-offset,color] duration-200 hover:text-ink-black hover:underline-offset-[8px] max-md:hidden"
               >
                 {t.hero.seeMore}
               </a>
             </div>
           </div>
-          <HomeIllustration
+          <SceneLab
             name="reply"
             label={t.hero.scene}
             className="hero-in max-md:-mx-6 [--i:3]"
           />
         </section>
 
-        {/* Cinta de clientes, la misma de /services/website-design. Va aqui,
-            entre el hero y el relato: los logos contestan a "¿y a quien se lo
-            habeis hecho?", y mas abajo partirian en dos la historia de la
-            solicitud. Son todos clientes reales; el trust band del Figma usaba
-            ShapeShift, Cameo y Bounce, que no son clientes. */}
-        <section className={`reveal ${wrap} pb-16 lg:pb-20`}>
+        <section className={`reveal ${wrap} pb-20 lg:pb-28`}>
           <ClientMarquee locale={locale} />
         </section>
 
-        <StorySection lavender flip title={t.lost.title} body={t.lost.body}>
-          <HomeIllustration name="chaos" label={t.lost.scene} />
+        <StorySection z={1} tone="lavender" flip peek title={t.lost.title} body={t.lost.body}>
+          <SceneLab name="chaos" label={t.lost.scene} />
         </StorySection>
 
-        {/* El centro de la pagina: lo que le pasa a una solicitud. En
-            escritorio es la escena ancha; en movil las cuatro tarjetas en
-            columna, porque en fila no se leen a 390px. */}
-        <section id="services" className={`reveal scroll-mt-24 ${section}`}>
+        <section
+          id="services"
+          style={{ zIndex: 2 }}
+          className={`${sheet} reveal bg-paper scroll-mt-24 ${section}`}
+        >
           <div className={wrap}>
-            <h2 className="text-ink md:text-center">
-              {t.services.title}
-            </h2>
+            <h2 className="text-ink md:text-center">{t.services.title}</h2>
             <p className="mt-5 max-w-[30em] text-lede text-pretty text-ink-soft md:mx-auto md:text-center">
               {t.services.lede}
             </p>
-            <HomeIllustration
+            <SceneLab
               name="journey"
               label={t.services.scene}
               className="mx-auto mt-10 max-w-[1040px] max-md:hidden"
@@ -170,51 +191,48 @@ export function HomeLabPage({ locale }: { locale: Locale }) {
           </div>
         </section>
 
-        <StorySection alt title={t.board.title} body={t.board.body}>
-          <HomeIllustration name="board" label={t.board.scene} />
+        <StorySection z={3} tone="alt" peek title={t.board.title} body={t.board.body}>
+          <SceneLab name="board" label={t.board.scene} />
         </StorySection>
 
-        <StorySection flip title={t.work.title} body={t.work.body}>
-          <HomeIllustration name="work" label={t.work.scene} />
+        <StorySection z={4} flip title={t.work.title} body={t.work.body}>
+          <SceneLab name="work" label={t.work.scene} />
         </StorySection>
 
-        {/* --night acaba en #2e2e2e, asi que el blanco al 80% aguanta hasta el
-            final del recorrido: 9.25:1 en el peor punto. Antes terminaba en
-            #7d7d7d y habia que reservar el tramo claro como aire. */}
-        <section id="about" className={`bg-night scroll-mt-24 ${section}`}>
+        <section
+          id="about"
+          style={{ zIndex: 5 }}
+          className={`${sheet} bg-night scroll-mt-24 ${section}`}
+        >
           <div className={`reveal ${wrap}`}>
             <h2 className="text-white">{t.about.title}</h2>
-            {/* Sin nombres propios y sin repartir roles entre personas: las
-                dos cosas dicen cuanta gente hay. Ciudades si — eso es donde se
-                trabaja, no cuantos. Ver PRODUCT.md. */}
             <p className="mt-6 max-w-[38em] text-body text-pretty text-white/80">
               {t.about.body}
             </p>
-            {/* De borde a borde en movil: el mapa esta dibujado para 1200 de
-                ancho y dentro del canal se queda en nada. */}
             <div className="mt-12 -mx-6 w-screen max-w-[100vw] lg:mx-0 lg:w-auto lg:max-w-none">
               <MeetMap locale={locale} />
             </div>
-
             <p className="mt-10 max-w-[38em] text-body text-pretty text-white/80">
               {t.about.timezones}
             </p>
           </div>
         </section>
 
-        <section id="who" className={`reveal scroll-mt-24 ${section}`}>
+        <section
+          id="who"
+          style={{ zIndex: 6 }}
+          className={`${sheet} bg-paper scroll-mt-24 ${section}`}
+        >
           <div className={wrap}>
-            <h2 className="text-ink">{t.who.title}</h2>
+            <h2 className="reveal text-ink">{t.who.title}</h2>
             <div className="mt-14 border-t border-line">
               {t.who.rows.map((row) => (
                 <div
                   key={row.title}
-                  className="grid gap-4 border-b border-line py-8 md:grid-cols-[0.95fr_1.05fr] md:gap-12"
+                  className="reveal grid gap-4 border-b border-line py-8 md:grid-cols-[0.95fr_1.05fr] md:gap-12"
                 >
                   <h3 className="text-ink">{row.title}</h3>
-                  <p className="text-body text-pretty text-ink-soft">
-                    {row.body}
-                  </p>
+                  <p className="text-body text-pretty text-ink-soft">{row.body}</p>
                 </div>
               ))}
             </div>
@@ -224,21 +242,14 @@ export function HomeLabPage({ locale }: { locale: Locale }) {
           </div>
         </section>
 
-        <section className={`reveal ${section}`}>
+        <section className={`${section} pt-0 lg:pt-0`}>
           <div className={wrap}>
-            <h2 className="text-ink">
-              {t.testimonials.title}
-            </h2>
-            {/* Una cita grande y dos pequeñas, no tres tarjetas iguales. La
-                primera lleva la foto y el sitio que enseñamos mas arriba, asi
-                que es la que mas prueba; las otras dos la acompañan en columna.
-                Las citas van recortadas a la frase que importa: la version
-                integra sigue en lib/copy/home.ts. */}
+            <h2 className="reveal text-ink">{t.testimonials.title}</h2>
             <div className="mt-12 grid gap-6 min-[900px]:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
               {t.testimonials.items.map((item, i) => (
                 <blockquote
                   key={item.name}
-                  className={`m-0 flex flex-col rounded-md border border-line bg-paper p-8 ${
+                  className={`reveal shadow-tint m-0 flex flex-col rounded-md border border-line bg-paper p-8 ${
                     i === 0
                       ? "min-[900px]:row-span-2 min-[900px]:justify-between min-[900px]:p-12"
                       : ""
@@ -273,9 +284,7 @@ export function HomeLabPage({ locale }: { locale: Locale }) {
                       </span>
                     )}
                     <span className="text-ui tracking-[-0.2px]">
-                      <span className="block font-semibold text-ink">
-                        {item.name}
-                      </span>
+                      <span className="block font-semibold text-ink">{item.name}</span>
                       <span className="block text-ink-soft">{item.org}</span>
                     </span>
                   </cite>
@@ -285,11 +294,15 @@ export function HomeLabPage({ locale }: { locale: Locale }) {
           </div>
         </section>
 
-        <section id="call" className={`bg-paper-alt scroll-mt-24 ${section}`}>
+        <section
+          id="call"
+          style={{ zIndex: 7 }}
+          className={`${sheet} ${glow} scroll-mt-24 ${section}`}
+        >
           <div
-            className={`reveal ${wrap} grid items-center gap-8 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-16`}
+            className={`${wrap} grid items-center gap-8 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-16`}
           >
-            <div>
+            <div className="reveal">
               <h2 className="text-ink">
                 {t.call.before}
                 <span className="whitespace-nowrap">{t.call.nowrap}</span>
@@ -299,9 +312,7 @@ export function HomeLabPage({ locale }: { locale: Locale }) {
                 {t.call.lede}
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
-                <CalendlyButton className="max-md:w-full">
-                  {t.call.cta}
-                </CalendlyButton>
+                <CalendlyButton className="max-md:w-full">{t.call.cta}</CalendlyButton>
                 <a
                   href="#contact"
                   className="inline-flex min-h-[44px] items-center text-ui text-ink-soft underline underline-offset-[5px] hover:text-ink max-md:w-full max-md:justify-center"
@@ -310,15 +321,17 @@ export function HomeLabPage({ locale }: { locale: Locale }) {
                 </a>
               </div>
             </div>
-            <HomeIllustration
-              name="call"
-              label={t.call.scene}
-              className="-mx-6 md:mx-0"
-            />
+            <div className="reveal-scene -mx-6 md:mx-0 md:-mt-32 lg:-mt-40">
+              <SceneLab name="call" label={t.call.scene} />
+            </div>
           </div>
         </section>
 
-        <section id="faq" className={`reveal scroll-mt-24 ${section}`}>
+        <section
+          id="faq"
+          style={{ zIndex: 8 }}
+          className={`${sheet} reveal bg-paper scroll-mt-24 ${section}`}
+        >
           <div className={wrap}>
             <h2 className="text-ink">{t.faq.title}</h2>
             <div className="mt-12 max-w-[920px]">
@@ -338,17 +351,15 @@ export function HomeLabPage({ locale }: { locale: Locale }) {
                       <span className="hidden group-open:inline">&minus;</span>
                     </span>
                   </summary>
-                  <p className="mt-4 text-body text-pretty text-ink-soft">
-                    {f.a}
-                  </p>
+                  <p className="faq-answer mt-4 text-body text-pretty text-ink-soft">{f.a}</p>
                 </details>
               ))}
             </div>
           </div>
         </section>
 
-        <section id="contact" className={`reveal ${wrap} scroll-mt-24 ${section}`}>
-          <div className="grid items-start gap-10 rounded-lg bg-paper-panel p-9 min-[900px]:grid-cols-2 min-[900px]:gap-16 min-[900px]:p-16">
+        <section id="contact" className={`reveal ${wrap} scroll-mt-24 ${section} pt-0 lg:pt-0`}>
+          <div className="shadow-tint grid items-start gap-10 rounded-lg bg-paper-panel p-9 min-[900px]:grid-cols-2 min-[900px]:gap-16 min-[900px]:p-16">
             <div>
               <h2 className="text-ink">{t.contact.title}</h2>
               <p className="mt-5 max-w-[34em] text-lede text-pretty text-ink-soft">

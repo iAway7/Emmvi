@@ -11,9 +11,16 @@ import { CONTACT_EMAIL } from "@/lib/site";
  * Pagina de gracias, recuperada del WordPress anterior: es una de las 31 URLs
  * indexadas y hasta ahora devolvia 404. En los dos idiomas.
  *
- * La composicion es la del original —ilustracion arriba, titular, dos
- * parrafos, todo centrado— y la ilustracion es la misma, recoloreada del
- * #2e343b que traia al tinte del sitio. Eran cuatro rellenos, un solo color.
+ * La composicion es la del original —ilustracion arriba, titular, texto,
+ * todo centrado— y la ilustracion es la misma, recoloreada del #2e343b que
+ * traia al tinte del sitio. Eran cuatro rellenos, un solo color.
+ *
+ * **Un solo parrafo, no dos.** El original traia dos y la primera version de
+ * esta pagina los conservo: el segundo explicaba que leemos lo escrito y
+ * miramos tu sitio antes de contestar, y ofrecia la llamada de treinta
+ * minutos. Las dos cosas ya estaban dichas — lo primero en el paso 01 de
+ * /contact-us, de donde acaba de llegar quien lee esto, y lo segundo en el
+ * boton que tiene debajo. Era texto que repetia la pagina anterior.
  *
  * **El texto no se restaura tal cual**, y es a proposito. El original decia
  * "typically within the next 24-48 hours", y /contact ya tomo la decision
@@ -34,9 +41,8 @@ export const thankYouCopy = {
   en: {
     title: "Thank you",
     description:
-      "Your message is in. A person reads every one of these, and you will hear back.",
-    lede: "Your message is in. A person reads every one of these, not a queue and not a bot.",
-    body: "We read what you wrote and look at your site before answering, so the reply is worth reading. If it makes sense, we will suggest a thirty-minute call to go through it properly.",
+      "Your message is in. A person reads it, and you will hear back.",
+    lede: "Your message is in. A person reads it, not a queue and not a bot.",
     book: "Book the call now",
     home: "Back to the homepage",
     nothingElse: "Nothing else to do. If you would rather write again, the address is",
@@ -44,9 +50,8 @@ export const thankYouCopy = {
   es: {
     title: "Gracias",
     description:
-      "Tu mensaje ha llegado. Cada uno lo lee una persona, y tendrás respuesta.",
-    lede: "Tu mensaje ha llegado. Cada uno lo lee una persona: ni una cola ni un bot.",
-    body: "Leemos lo que has escrito y miramos tu web antes de contestar, para que la respuesta merezca la pena. Si tiene sentido, te propondremos una llamada de treinta minutos para verlo con calma.",
+      "Tu mensaje ha llegado. Lo lee una persona, y tendrás respuesta.",
+    lede: "Tu mensaje ha llegado. Lo lee una persona: ni una cola ni un bot.",
     book: "Reservar la llamada ahora",
     home: "Volver a la portada",
     nothingElse: "No hay nada más que hacer. Si prefieres escribir otra vez, la dirección es",
@@ -80,10 +85,6 @@ export function ThankYouPage({ locale }: { locale: Locale }) {
           <h1 className="mt-10 text-ink">{t.title}</h1>
 
           <p className="mt-6 text-lede text-pretty text-ink-soft">{t.lede}</p>
-
-          <p className="mt-5 max-w-[46ch] text-body text-pretty text-ink-soft">
-            {t.body}
-          </p>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
             {/* La via rapida de verdad: quien acaba de escribir es quien mas

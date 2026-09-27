@@ -99,7 +99,7 @@ export function Testimonials() {
             key={t.name}
             className="w-[86%] shrink-0 snap-center min-[900px]:w-auto"
           >
-            <figure className="flex h-full flex-col rounded-md border border-line bg-paper-panel p-8">
+            <figure className="flex h-full flex-col rounded-md bg-[image:var(--lavender)] p-8">
               <blockquote className="flex-1 text-copy text-pretty text-ink-soft">
                 {t.quote}
               </blockquote>
@@ -116,7 +116,7 @@ export function Testimonials() {
                 ) : (
                   <span
                     aria-hidden="true"
-                    className="grid size-10 shrink-0 place-items-center rounded-full bg-[#f0edff] text-small font-bold text-violet-ink"
+                    className="grid size-10 shrink-0 place-items-center rounded-full bg-violet text-small font-bold text-paper"
                   >
                     {t.initials}
                   </span>

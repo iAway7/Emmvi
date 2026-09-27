@@ -92,8 +92,8 @@ grande: los párrafos de 20–24px de About us, SEO y los testimonios llevan su
 
 | Token | Tamaño | Alto de línea | Tracking | Peso | Papel |
 |---|---|---|---|---|---|
-| `text-display` | 36 → 64px | 1.06 | −0.025em | 800 | h1 de página |
-| `text-h2` | 28 → 51px | 1.1 | −0.02em | 800 | título de sección |
+| `text-display` | 36 → 64px | 1.06 | −0.0437em | 800 | h1 de página |
+| `text-h2` | 28 → 51px | 1.1 | −0.0353em | 800 | título de sección |
 | `text-h3` | 22 → 24px | 1.3 | −0.021em | 700 | título de tarjeta grande |
 | `text-h4` | 20px | 1.3 | −0.02em | 700 | título de tarjeta chica, pregunta del FAQ, nombre de persona, subtítulo del blog |
 | `text-lede` | 18 → 24px | 1.417 | −0.008em | 400 | párrafo bajo un título, y **toda cita** (con `font-medium` si va en tarjeta) |
@@ -102,6 +102,11 @@ grande: los párrafos de 20–24px de About us, SEO y los testimonios llevan su
 | `text-ui` | 16px | 1.5 (24px) | — | — | nav, botones, etiquetas, chips |
 | `text-small` | 14px | 1.43 | — | 400 | legal, pie, listas densas |
 | `text-stat` | 32px | 1 | −0.03em | 800 | cifras, números de paso, la comilla de una tarjeta |
+
+Los tracking de `text-display` y `text-h2` se eligieron en px sobre el tamaño
+grande —−2.8px a 64 y −1.8px a 51— y se guardan en em para que acompañen al
+`clamp`. Con el valor fijo en px el apretado del h1 subía del 4.4% al 7.8% al
+llegar a 36px, porque la letra encoge y el tracking no.
 
 **No hay tamaños fuera de la tabla.** Una regla de ESLint (`no-restricted-syntax`
 en `eslint.config.mjs`) falla ante cualquier `text-[18px]` o `text-[1.25rem]` en
