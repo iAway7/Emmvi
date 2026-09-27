@@ -69,7 +69,7 @@ export async function generateMetadata({
     path: `/${slug}`,
     title: post.title,
     description: post.description,
-    article: { publishedTime: post.published },
+    article: { publishedTime: post.published, modifiedTime: post.updated },
   });
 }
 
@@ -90,11 +90,14 @@ export default async function PostPage({
   const toc = tableOfContents(post.body);
   const related = relatedPosts(post);
   const minutos = readingTime(post.body);
-  const fecha = new Date(post.published).toLocaleDateString("en-GB", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
+  const fechaLarga = (iso: string) =>
+    new Date(iso).toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+
+  const fecha = fechaLarga(post.published);
 
   return (
     <>
@@ -148,6 +151,43 @@ export default async function PostPage({
             {minutos} min read
             <span aria-hidden="true"> · </span>
             <time dateTime={post.published}>{fecha}</time>
+            {/* La revision solo sale cuando la hubo de verdad: `updated` nace
+                vacio en los dieciocho y se pone al reescribir un cuerpo. Un
+                sitio que marca todo como actualizado hoy para parecer fresco
+                afirma algo que no sostiene. Ver `Post.updated`.
+
+                Va detras de la fecha de publicacion y no en su lugar: las dos
+                dicen cosas distintas y sustituir una por otra esconde la
+                antiguedad del articulo, que es justo lo que se critica de
+                quien lo hace. */}
+            {post.updated ? (
+              <>
+                <span aria-hidden="true"> · </span>
+                <span>
+                  Updated{" "}
+                  <time dateTime={post.updated}>
+                    {fechaLarga(post.updated)}
+                  </time>
+                </span>
+              </>
+            ) : null}
+            <span aria-hidden="true"> · </span>
+            {/* El mismo articulo en Markdown, para quien lo lee con una
+                maquina: un modelo al que le pegan el enlace, o alguien que
+                quiere el texto sin la maqueta. Va aqui, en la linea de los
+                datos del articulo, porque es un dato del articulo y no una
+                accion: en un boton propio competiria con la llamada del final,
+                que es lo que esta pagina si quiere que se pulse.
+
+                `<a>` y no `<Link>`: detras hay un Route Handler que devuelve
+                texto, no una pagina, y la navegacion de cliente de Next
+                esperaria un payload que no existe. */}
+            <a
+              href={`/${post.slug}.md`}
+              className="rounded-sm underline decoration-line underline-offset-[3px] transition-colors hover:text-ink hover:decoration-ink focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
+            >
+              Markdown
+            </a>
           </p>
         </div>
 

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import type { Block, Inline, Rich } from "@/lib/posts";
+import { ASIDE_LABELS } from "@/lib/posts";
 import { tableOfContents } from "@/lib/toc";
 
 /**
@@ -168,6 +169,82 @@ function Texto({ value }: { value: Rich }) {
   );
 }
 
+/**
+ * El aviso con etiqueta: el consejo y la advertencia.
+ *
+ * **Ninguno de los dos estrena color.** DESIGN.md dice que la paleta no crece,
+ * y es la regla que dejo fuera el verde del Figma. El consejo va en el violeta
+ * de marca sobre `violet-wash`, que es el mismo par que ya usan los badges de
+ * categoria; la advertencia va en tinta sobre `paper-alt`. Se distinguen por
+ * peso, no por semaforo: el aviso es el oscuro, y por eso pesa mas en la
+ * pagina.
+ *
+ * **Caja con filete, no tarjeta suelta.** El filete de 3 px lo hereda del
+ * `aside` de siempre, que es lo que ata las dos formas: un lector ve que son
+ * la misma familia. El fondo es lo que lo saca del hilo de lectura, que es
+ * justo lo que se le pide a un aviso.
+ *
+ * La etiqueta va en `<strong>` dentro del mismo bloque y no en un `<h4>`: no
+ * es una seccion del articulo y no debe salir en el indice ni romper la
+ * jerarquia de encabezados entre un h2 y el h3 siguiente.
+ */
+const TONOS = {
+  tip: {
+    caja: "border-violet bg-violet-wash",
+    titulo: "text-violet",
+    // Bombilla. Trazo, como el resto de iconos del sitio.
+    icono: "M9 18h6M10 21h4M12 3a6 6 0 0 0-3.6 10.8c.5.4.8.9.9 1.5l.1.7h5.2l.1-.7c.1-.6.4-1.1.9-1.5A6 6 0 0 0 12 3Z",
+  },
+  important: {
+    caja: "border-ink bg-paper-alt",
+    titulo: "text-ink",
+    // Exclamacion en circulo.
+    icono: "M12 8v5M12 16.5v.5M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Z",
+  },
+} as const;
+
+function Callout({
+  tone,
+  label,
+  text,
+}: {
+  tone: "tip" | "important";
+  label?: string;
+  text: Rich;
+}) {
+  const t = TONOS[tone];
+
+  return (
+    <div
+      className={`mt-8 flex gap-3.5 rounded-md border-l-[3px] p-5 ${t.caja}`}
+    >
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={1.6}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        // `mt-1` lo alinea con la mayuscula de la etiqueta y no con la caja:
+        // centrado en el bloque flotaria alto cuando el texto son tres lineas.
+        className={`mt-1 size-[18px] shrink-0 ${t.titulo}`}
+      >
+        <path d={t.icono} />
+      </svg>
+
+      <div>
+        <strong className={`block text-[1rem] font-semibold ${t.titulo}`}>
+          {label ?? ASIDE_LABELS[tone]}
+        </strong>
+        <p className="mt-1.5 text-body text-pretty text-ink">
+          <Texto value={text} />
+        </p>
+      </div>
+    </div>
+  );
+}
+
 export function PostBody({ blocks }: { blocks: readonly Block[] }) {
   /**
    * Los `id` de los h2 salen de `tableOfContents`, no de recalcularlos aqui:
@@ -234,15 +311,27 @@ export function PostBody({ blocks }: { blocks: readonly Block[] }) {
           }
 
           case "aside":
-            // Filete violeta a la izquierda, no una tarjeta: es una nota
-            // dentro de la lectura, no una seccion aparte.
+            // Sin tono: filete violeta a la izquierda, no una tarjeta. Es una
+            // nota dentro de la lectura, no una seccion aparte. Es lo que
+            // pinta los mensajes de ejemplo, que no quieren titulillo.
+            if (!block.tone) {
+              return (
+                <p
+                  key={i}
+                  className="mt-8 border-l-[3px] border-violet pl-5 text-body text-pretty text-ink"
+                >
+                  <Texto value={block.text} />
+                </p>
+              );
+            }
+
             return (
-              <p
+              <Callout
                 key={i}
-                className="mt-8 border-l-[3px] border-violet pl-5 text-body text-pretty text-ink"
-              >
-                <Texto value={block.text} />
-              </p>
+                tone={block.tone}
+                label={block.label}
+                text={block.text}
+              />
             );
 
           case "image":

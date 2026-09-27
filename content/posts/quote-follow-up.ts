@@ -37,7 +37,7 @@ const body: Post["body"] = [
     [{ text: "Day 7:", bold: true }, " a gentle nudge with one useful piece of information, such as the next available start date."],
     [{ text: "Day 14:", bold: true }, " a closing message that makes it easy to say no. After this one, you stop."],
   ] },
-  { kind: "p", text: "Adjust it to the job. A same-week boiler repair needs a faster rhythm than a full renovation, where people often take a month to decide. What matters is that the schedule exists and runs every time, not only when you happen to remember." },
+  { kind: "aside", tone: "tip", text: "Adjust it to the job. A same-week boiler repair needs a faster rhythm than a full renovation, where people often take a month to decide. What matters is that the schedule exists and runs every time, not only when you happen to remember." },
 
   { kind: "h2", text: "What each follow-up should say" },
   { kind: "p", text: "Every message should be short enough to read on a phone in one glance, signed with your business name, and end with one easy question. Nobody should need to open the quote again to understand what you're asking." },
@@ -69,7 +69,7 @@ const body: Post["body"] = [
     { text: "how missed call text back works for installers", href: "/missed-call-text-back/" },
     ".",
   ] },
-  { kind: "aside", text: "This is general guidance, not a recommendation for every business. If you only send a few quotes a month, a reminder in your calendar may be all you need. Check whether the quoting or job software you already pay for includes follow-ups before adding another tool." },
+  { kind: "aside", tone: "important", text: "This is general guidance, not a recommendation for every business. If you only send a few quotes a month, a reminder in your calendar may be all you need. Check whether the quoting or job software you already pay for includes follow-ups before adding another tool." },
 
   { kind: "h2", text: "Track every quote in one pipeline" },
   { kind: "p", text: "Follow-up only works if you can see which quotes are open. For most installers that means a simple pipeline with a handful of stages: New enquiry, Site visit, Quote sent, Won, Lost. Every quote sits in exactly one stage, and anything in \"Quote sent\" for more than a few days is visibly waiting on you or on the customer." },

@@ -76,7 +76,7 @@ const body: Post["body"] = [
     "Reply to it, and check that the reply reaches the person who should see it.",
     "Repeat after hours, to check the evening message.",
   ] },
-  { kind: "aside", text: "This is general guidance, not a recommendation for every business. If you answer nearly every call yourself, or your work comes mostly through referrals who already have your mobile, a text back may add little. Check what your current phone provider already offers before paying for anything new." },
+  { kind: "aside", tone: "important", text: "This is general guidance, not a recommendation for every business. If you answer nearly every call yourself, or your work comes mostly through referrals who already have your mobile, a text back may add little. Check what your current phone provider already offers before paying for anything new." },
 
   { kind: "h2", text: "A day with and without it" },
   { kind: "p", text: "Illustration, not data: an EV charger installer misses four calls on a busy Thursday. One is at 8:15 while they're driving, two land mid-install, and one comes in at 7:30pm." },

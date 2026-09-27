@@ -14,10 +14,17 @@ import { SITE_URL } from "@/lib/site";
  * vienen del WordPress anterior y no tienen autor atribuible, y PRODUCT.md
  * pide no repartir nombres propios por el sitio.
  *
- * **`dateModified` es la misma fecha que `datePublished`**, y es deliberado:
- * la fecha que hay es la de publicacion de esta version, la unica que se
- * conoce. Inventar una fecha de modificacion mas reciente para parecer fresco
- * es exactamente el tipo de afirmacion sin respaldo que el proyecto no hace.
+ * **`dateModified` sale de `updated`, y si no hay `updated` es la fecha de
+ * publicacion.** Que es lo mismo que decia antes, pero ahora con una salida:
+ * hasta hoy los diecisiete declaraban las dos fechas iguales porque no habia
+ * ninguna revision que declarar. Cuando se reescriba un cuerpo —el caso son
+ * las reescrituras de content/rewrites/— esa fecha existe y es real, y
+ * entonces sirve.
+ *
+ * Lo que no cambia es el motivo de fondo: sin revision no hay fecha de
+ * revision. Inventar una mas reciente para parecer fresco es exactamente el
+ * tipo de afirmacion sin respaldo que el proyecto no hace, y por eso `updated`
+ * es opcional y nace vacio en los dieciocho.
  *
  * `image` solo va cuando el articulo trae una de verdad —hoy uno de los
  * diecisiete—. Declarar una imagen que no existe es peor que no declarar
@@ -35,7 +42,7 @@ export function ArticleSchema({ post }: { post: Post }) {
     headline: post.title,
     description: post.description,
     datePublished: post.published,
-    dateModified: post.published,
+    dateModified: post.updated ?? post.published,
     inLanguage: "en",
     author: { "@id": `${SITE_URL}/#organization` },
     publisher: { "@id": `${SITE_URL}/#organization` },

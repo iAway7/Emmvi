@@ -171,7 +171,7 @@ type PageMeta = {
    * `article` y añade la fecha, que es lo que hace que al compartir un enlace
    * se vea como un articulo fechado y no como una pagina mas del sitio.
    */
-  article?: { publishedTime: string };
+  article?: { publishedTime: string; modifiedTime?: string };
 };
 
 /**
@@ -211,7 +211,15 @@ export function pageMetadata({
     description,
     alternates: { canonical: path },
     openGraph: article
-      ? { ...openGraph, type: "article" as const, publishedTime: article.publishedTime }
+      ? {
+          ...openGraph,
+          type: "article" as const,
+          publishedTime: article.publishedTime,
+          // Solo si hubo revision de verdad. Ver `Post.updated`.
+          ...(article.modifiedTime
+            ? { modifiedTime: article.modifiedTime }
+            : {}),
+        }
       : { ...openGraph, type: "website" as const },
     ...(legacy && !indexLegacyPages
       ? // `follow` sigue en true aunque no se indexen: los enlaces internos que

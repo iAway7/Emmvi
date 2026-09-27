@@ -55,9 +55,53 @@ export type Block =
   | { kind: "h3"; text: string }
   | { kind: "p"; text: Rich }
   | { kind: "list"; items: readonly Rich[]; ordered?: boolean }
-  /** Nota al margen: un limite, una advertencia, lo que no se dice arriba. */
-  | { kind: "aside"; text: Rich }
+  /**
+   * Nota al margen: un limite, una advertencia, lo que no se dice arriba.
+   *
+   * Sin `tone` es lo que ha sido siempre —filete violeta y texto, sin mas—, y
+   * es lo que quiere el uso mas comun hoy: reproducir un mensaje de ejemplo.
+   * Ahi un titulillo que ponga "Tip" encima sobraria.
+   *
+   * Con `tone` se convierte en un aviso con etiqueta e icono, para lo que hoy
+   * se disuelve en el cuerpo: el consejo practico y la advertencia. Un lector
+   * que baja rapido los ve; en un parrafo normal, no.
+   */
+  | {
+      kind: "aside";
+      text: Rich;
+      /**
+       * `tip` es el consejo accionable; `important` el limite o la
+       * advertencia. **Son dos y no cinco a proposito**: en cuanto hay seis
+       * colores de aviso, dejan de avisar de nada y el articulo parece un
+       * panel de control.
+       *
+       * Ninguno estrena color. `tip` va en el violeta de marca e `important`
+       * en tinta sobre papel, porque DESIGN.md dice que la paleta no crece —
+       * el verde del Figma ya se quedo fuera por eso mismo.
+       */
+      tone?: "tip" | "important";
+      /**
+       * Sustituye a la etiqueta por defecto ("Tip" / "Important") cuando el
+       * aviso pide una mas concreta: "Before you publish", "One limit".
+       *
+       * En ingles, como todo lo que lee el visitante.
+       */
+      label?: string;
+    }
   | { kind: "image"; src: string; alt: string; width: number; height: number };
+
+/**
+ * La etiqueta por defecto de cada tono de `aside`.
+ *
+ * Vive aqui, con el tipo, y no dentro del componente que la pinta, porque la
+ * leen dos sitios: `components/post-body.tsx` para la caja y
+ * `lib/markdown.ts` para el `.md`. Con una copia en cada uno, el dia que "Tip"
+ * pase a ser otra cosa cambiaria en la pagina y no en lo que lee una maquina.
+ */
+export const ASIDE_LABELS = {
+  tip: "Tip",
+  important: "Important",
+} as const;
 
 export type Post = {
   /** Sin barras. Es la ruta: emmvi.com/<slug>. */
@@ -115,6 +159,25 @@ export type Post = {
    * desconoce. Al publicar conviene ponerla al dia.
    */
   published: string;
+  /**
+   * Fecha de la ultima revision **de verdad**, cuando la haya habido.
+   *
+   * **Ausente es lo normal, y es lo honesto.** Sin este campo, el articulo
+   * declara `dateModified` igual a `datePublished` y no enseña ninguna fecha
+   * de actualizacion. Un sitio que marca los diecisiete como revisados hoy
+   * para parecer fresco esta afirmando algo que no puede sostener, que es lo
+   * que PRODUCT.md prohibe.
+   *
+   * **Se pone cuando se reescribe el cuerpo, no cuando se toca una coma.**
+   * El caso previsto son las reescrituras de `content/rewrites/`: sustituir el
+   * `body` de un original por su version nueva es exactamente el cambio que
+   * esta fecha describe. Corregir una errata no lo es.
+   *
+   * `slug`, `title` y `published` no se tocan al revisar: la URL es lo que
+   * Google conoce y la fecha de publicacion sigue siendo cuando se publico.
+   * Ver el README de content/rewrites/.
+   */
+  updated?: string;
   body: Block[];
 };
 
