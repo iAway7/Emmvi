@@ -16,9 +16,11 @@ const body: Post["body"] = [
   ] },
   { kind: "h2", text: "1. Automate Repetitive Tasks with Ease" },
   { kind: "p", text: [
-    "Zapier eliminates the need for manual data entry and redundant tasks by connecting over 6,000 apps and automating workflows, known as",
+    "Zapier eliminates the need for manual data entry and redundant tasks by connecting apps and automating workflows, known as",
     { text: "Zaps", bold: true },
-    ".",
+    ". Zapier's own directory lists more than 9,000 apps as of September 2026, and",
+    { text: "you can check yours there", href: "https://zapier.com/apps" },
+    "before counting on it.",
   ] },
   { kind: "list", items: [
     [
@@ -57,7 +59,7 @@ const body: Post["body"] = [
   { kind: "p", text: [
     "Unlike traditional automation solutions that require coding skills, Zapier is built for",
     { text: "non-technical users", bold: true },
-    ". With an intuitive drag-and-drop interface, setting up workflows is simple and requires no programming knowledge.",
+    ". The editor walks you through each step, a trigger and then one or more actions, and setting up workflows requires no programming knowledge.",
   ] },
   { kind: "list", items: [
     [
@@ -79,6 +81,11 @@ const body: Post["body"] = [
     "For businesses that need more than just basic automation,",
     { text: "multi-step Zaps", bold: true },
     "allow for complex workflows involving multiple apps and conditions.",
+  ] },
+  { kind: "p", text: [
+    "Multi-step Zaps need a paid plan. As of September 2026,",
+    { text: "Zapier's pricing page", href: "https://zapier.com/pricing" },
+    "limits the free plan to two-step Zaps (one trigger, one action) and 100 tasks a month.",
   ] },
   { kind: "list", items: [
     [
@@ -111,7 +118,7 @@ const body: Post["body"] = [
     ],
     [
       { text: "Flexible Pricing", bold: true },
-      ": With free and premium plans available, Zapier caters to businesses at every stage of growth.",
+      ": There is a free plan to start with and paid plans for more tasks and multi-step Zaps.",
     ],
   ] },
   { kind: "aside", tone: "important", text: "This is general guidance, not a recommendation for every business. emmvi is an independent service provider and is not affiliated with, endorsed by or certified by Zapier. If the apps you use already connect to each other directly, a connector in the middle is a cost and one more thing to maintain for no gain." },
@@ -131,12 +138,13 @@ const body: Post["body"] = [
 
 export const zapierTheNoCode: Post = {
   slug: "zapier-the-no-code-automation-revolution-for-businesses",
-  title: "Zapier: The No-Code Automation Revolution for Businesses.",
+  title: "Zapier: The No-Code Automation Revolution for Businesses",
   description: "Zapier’s no-code automation revolutionizes business workflows: connect apps, reduce manual tasks, boost efficiency and focus on growth without writing any code.",
   lede: "What Zapier connects, what a Zap is, and the tasks worth automating first.",
   category: "Automation",
   // Fecha original de publicacion. No se toca: es parte de lo que se restaura.
   published: "2025-03-28",
+  updated: "2026-09-28",
   /** Destacada del WordPress. `alt` vacio a proposito: la imagen va dentro
    *  del enlace, pegada al titular que ya dice lo mismo, y describir una
    *  ilustracion generica ahi solo anade ruido a un lector de pantalla. */
