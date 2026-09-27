@@ -150,27 +150,34 @@ export default async function PostPage({
           <p className="mt-6 font-mono text-small text-ink-soft">
             {minutos} min read
             <span aria-hidden="true"> · </span>
-            <time dateTime={post.published}>{fecha}</time>
-            {/* La revision solo sale cuando la hubo de verdad: `updated` nace
-                vacio en los dieciocho y se pone al reescribir un cuerpo. Un
-                sitio que marca todo como actualizado hoy para parecer fresco
-                afirma algo que no sostiene. Ver `Post.updated`.
+            {/* Una fecha, no dos.
 
-                Va detras de la fecha de publicacion y no en su lugar: las dos
-                dicen cosas distintas y sustituir una por otra esconde la
-                antiguedad del articulo, que es justo lo que se critica de
-                quien lo hace. */}
+                Cuando hay revision **sustituye** a la de publicacion en vez de
+                sumarse. Al principio se pintaban las dos, por no esconder la
+                antiguedad del articulo; el argumento no se sostiene en el unico
+                caso en que `updated` existe, que es cuando se ha reemplazado el
+                cuerpo entero por una reescritura. Entonces el texto que se esta
+                leyendo **es** de esa fecha, y la vieja describe una version que
+                ya no esta en la pagina.
+
+                Las dos fechas siguen publicadas para quien las necesita: el
+                `datePublished` del JSON-LD conserva la original, que es lo que
+                le dice al buscador desde cuando existe esta URL. Lo que se
+                quita es el renglon, no el dato.
+
+                `updated` nace vacio y solo lo pone quien reescribe. Un sitio
+                que marca todo como actualizado hoy para parecer fresco afirma
+                algo que no sostiene. Ver `Post.updated`. */}
             {post.updated ? (
-              <>
-                <span aria-hidden="true"> · </span>
-                <span>
-                  Updated{" "}
-                  <time dateTime={post.updated}>
-                    {fechaLarga(post.updated)}
-                  </time>
-                </span>
-              </>
-            ) : null}
+              <span>
+                Updated{" "}
+                <time dateTime={post.updated}>
+                  {fechaLarga(post.updated)}
+                </time>
+              </span>
+            ) : (
+              <time dateTime={post.published}>{fecha}</time>
+            )}
             <span aria-hidden="true"> · </span>
             {/* El mismo articulo en Markdown, para quien lo lee con una
                 maquina: un modelo al que le pegan el enlace, o alguien que
