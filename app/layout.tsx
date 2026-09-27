@@ -3,6 +3,7 @@ import { DM_Sans } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 
+import { OrganizationSchema } from "@/components/organization-schema";
 import { SITE_URL } from "@/lib/site";
 
 /**
@@ -97,6 +98,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','${GTM_ID}');`}
         </Script>
+
+        {/* Quien responde de este sitio, declarado en **todas** las paginas.
+            Estuvo solo en la home hasta 2026-09-27, que es tanto como no
+            estar: quien llega desde un buscador o desde una IA aterriza en un
+            articulo, y alli no habia nada que dijera de quien es el sitio.
+
+            Ademas `ArticleSchema` y `FaqSchema` apuntan los dos al `@id`
+            `/#organization`. Con la definicion solo en la home, esa referencia
+            colgaba de una pagina distinta de la que se estaba leyendo. */}
+        <OrganizationSchema />
 
         {children}
       </body>
