@@ -90,7 +90,7 @@ const body: Post["body"] = [
 export const emailAutomationAndFunnel: Post = {
   slug: "email-automation-and-funnel-building-the-secret-to-driving-more-sales",
   title: "Email Automation and Funnels That Do the Selling",
-  description: "Unlock more sales with email automation and funnel building: learn proven sequences, segmentation, and conversion-focused strategies to boost revenue and growth.",
+  description: "How a sales funnel works, which emails do the selling at each stage, and what to set up first so the follow-up runs without anyone remembering.",
   lede: "How a sales funnel works, and which emails do the selling while you sleep.",
   category: "Email Marketing",
   // Fecha original de publicacion. No se toca: es parte de lo que se restaura.
