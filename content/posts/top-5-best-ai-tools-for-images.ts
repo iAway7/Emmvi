@@ -84,6 +84,7 @@ const body: Post["body"] = [
   ] },
   { kind: "h3", text: "Unlocking Infinite Creativity with AI" },
   { kind: "p", text: "These AI tools are transforming the way we create and edit images, making high-quality design and art more accessible to everyone. Whether you need precise photo enhancements, creative art generation, or deep customization, one of these AI-powered solutions is sure to fit your needs." },
+  { kind: "aside", tone: "important", text: "This is general guidance, not a recommendation for every business. These tools were compared in 2025 and the field moves quickly, so prices, limits and licence terms have almost certainly changed. Check each one on its own site before subscribing, and read the licence in particular if the images are for client work." },
 ];
 
 export const top5BestAi: Post = {

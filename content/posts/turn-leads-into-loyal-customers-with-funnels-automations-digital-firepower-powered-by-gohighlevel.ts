@@ -105,6 +105,8 @@ const body: Post["body"] = [
     "Competitor analysis",
   ] },
   { kind: "p", text: "More traffic. Better leads. Less ad spend." },
+  { kind: "aside", tone: "important", text: "This is general guidance, not a recommendation for every business. emmvi is an independent service provider and is not affiliated with, endorsed by or certified by GoHighLevel Inc. The setup described here suits a business that already gets enough enquiries to lose some. If you are not there yet, the funnel is not the first thing to fix." },
+
   { kind: "h2", text: "💥 Why Choose emmvi.com?" },
   { kind: "p", text: [
     "We’re not just designers. We’re strategists. We combine",

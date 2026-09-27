@@ -75,6 +75,8 @@ const body: Post["body"] = [
     ],
   ] },
   { kind: "p", text: "Each tool has its strengths, so choose based on your needs and your audience." },
+  { kind: "aside", tone: "important", text: "This is general guidance, not a recommendation for every business. emmvi is an independent service provider and is not affiliated with, endorsed by or certified by GoHighLevel Inc. Naming a tool here is not an endorsement: check what your current email or CRM software already sends before paying for another one." },
+
   { kind: "h2", text: "Final Thoughts" },
   { kind: "p", text: "Email automation and sales funnels aren’t just useful. They’re essential for modern marketing. Done right, they help you create consistent, scalable growth while delivering a better experience for your leads and customers." },
   { kind: "p", text: "Start small, test what works, and refine over time. Before long, you’ll have a system in place that’s working for your business 24/7." },

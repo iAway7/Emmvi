@@ -363,6 +363,8 @@ const body: Post["body"] = [
     "Customer support response time can be slower compared to others",
     "No phone support, only live chat and email",
   ] },
+  { kind: "aside", tone: "important", text: "This is general guidance, not a recommendation for every business. The prices here are the ones these providers advertised in 2025 and they have not been rechecked since. Introductory rates in particular tend to renew much higher, so confirm both the current price and the renewal price on the provider's own site before signing up." },
+
   { kind: "h2", text: "Which Web Hosting Provider is Right for You?" },
   { kind: "p", text: "Choosing the right web hosting provider depends largely on your unique needs, preferences, and budget. Here’s a quick recap of our top five web hosting providers to help guide your decision:" },
   { kind: "list", items: [

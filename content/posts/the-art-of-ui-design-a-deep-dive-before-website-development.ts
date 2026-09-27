@@ -168,6 +168,8 @@ const body: Post["body"] = [
   { kind: "p", text: "UI designers prepare all design assets for developers, including high-resolution images, icons, fonts, and other visual elements. They also provide specifications such as color codes, font sizes, and spacing guidelines, ensuring that the website’s visual elements are implemented accurately." },
   { kind: "h3", text: "b. Design Collaboration and Testing" },
   { kind: "p", text: "The design handoff isn’t a one-way process; it requires ongoing collaboration. Designers work closely with developers to ensure that the website functions exactly as envisioned. This often involves several rounds of testing and revisions to ensure the design is properly implemented." },
+  { kind: "aside", tone: "important", text: "This is general guidance, not a recommendation for every business. This is what a full design phase looks like, and a small site rarely needs all of it. Naming a tool is not an endorsement either: the steps matter more than the software you run them in." },
+
   { kind: "h2", text: "Final Thoughts" },
   { kind: "p", text: "The UI design process is a foundational part of creating a successful website. By understanding the users and business goals, wireframing and prototyping the structure, refining the visual design, and collaborating closely with developers, designers lay the groundwork for an intuitive, engaging, and functional website." },
   { kind: "p", text: "A strong UI design isn’t just about looking good. It’s about creating an experience that’s seamless, efficient, and tailored to the needs of the user. Whether you’re building a new website or redesigning an existing one, focusing on a thoughtful and thorough UI design process will set your project up for success." },

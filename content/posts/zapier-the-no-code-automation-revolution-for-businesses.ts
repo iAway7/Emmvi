@@ -114,6 +114,8 @@ const body: Post["body"] = [
       ": With free and premium plans available, Zapier caters to businesses at every stage of growth.",
     ],
   ] },
+  { kind: "aside", tone: "important", text: "This is general guidance, not a recommendation for every business. emmvi is an independent service provider and is not affiliated with, endorsed by or certified by Zapier. If the apps you use already connect to each other directly, a connector in the middle is a cost and one more thing to maintain for no gain." },
+
   { kind: "h2", text: "Conclusion" },
   { kind: "p", text: [
     "Zapier is revolutionizing the way businesses automate tasks, integrate apps, and streamline operations. By reducing manual work, enhancing efficiency, and providing seamless app connections, Zapier empowers businesses to",

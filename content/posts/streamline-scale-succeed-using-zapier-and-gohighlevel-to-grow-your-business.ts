@@ -64,6 +64,7 @@ const body: Post["body"] = [
     { text: "Contact us today", href: "/contact-us" },
     "and let’s start building systems that scale.",
   ] },
+  { kind: "aside", tone: "important", text: "This is general guidance, not a recommendation for every business. emmvi is an independent service provider and is not affiliated with, endorsed by or certified by GoHighLevel Inc. or Zapier. Connecting two platforms only pays off once the work between them is repetitive enough to be worth automating." },
 ];
 
 export const streamlineScaleSucceedUsing: Post = {

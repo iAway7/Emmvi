@@ -122,6 +122,8 @@ const body: Post["body"] = [
     ],
   ] },
   { kind: "p", text: "This scalability ensures that as your business expands, GoHighLevel continues to provide the tools necessary to support your growth." },
+  { kind: "aside", tone: "important", text: "This is general guidance, not a recommendation for every business. emmvi is an independent service provider and is not affiliated with, endorsed by or certified by GoHighLevel Inc. An all in one platform pays off when you are already paying for several tools, and not when you are paying for one that works." },
+
   { kind: "h2", text: "Conclusion" },
   { kind: "p", text: "GoHighLevel is more than just another marketing tool. It’s a comprehensive solution that helps businesses of all sizes improve efficiency, automate processes, and enhance customer relationships. By centralizing key business functions, streamlining workflows, and providing deep insights into your marketing and sales efforts, GoHighLevel empowers your company to grow, optimize performance, and deliver better experiences for customers. If you're looking to take your business to the next level, GoHighLevel could be the game-changing solution you need." },
   { kind: "p", text: [

@@ -104,6 +104,8 @@ const body: Post["body"] = [
       ": Some businesses struggle with integrating AI. Solution: Start with simple automations using Zapier and gradually scale up AI-powered solutions.",
     ],
   ], ordered: true },
+  { kind: "aside", tone: "important", text: "This is general guidance, not a recommendation for every business. emmvi is an independent service provider and is not affiliated with, endorsed by or certified by GoHighLevel Inc. or Zapier. AI features change faster than articles do, so confirm what each tool does today on its own pricing page before deciding." },
+
   { kind: "h2", text: "Final Thoughts" },
   { kind: "p", text: [
     "AI is not a threat to online businesses. It’s a powerful tool that, when used correctly, can transform operations, enhance customer experiences, and drive growth. By integrating AI into",

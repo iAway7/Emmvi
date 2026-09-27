@@ -99,6 +99,8 @@ const body: Post["body"] = [
   { kind: "p", text: "Dive into Wix's treasure trove of over 800 templates, all meticulously crafted by skilled designers, and guess what? Many of them are absolutely free!" },
   { kind: "p", text: "These templates are a hit, especially for users who might not be design or development pros. But hey, if you're feeling adventurous and want to start from scratch, Wix gives you a blank canvas to play with." },
   { kind: "p", text: "Here's the scoop: Once you start editing, changing your template can be a bit tricky. So, take your time picking a theme that vibes with you right from the start. Switching templates later on, after you've already started editing, can be a bit of a hassle. Happy creating!" },
+  { kind: "aside", tone: "important", text: "This is general guidance, not a recommendation for every business. The prices and feature sets here are from 2025 and both platforms have changed since. If you already have a site that works, the honest answer is often that neither is worth the move." },
+
   { kind: "h2", text: "Final Impressions" },
   { kind: "p", text: "Webflow shines with its unparalleled versatility, making it a canvas for virtually any web design dream. While a bit of HTML and CSS know-how is a plus, the magic of JavaScript within Webflow unleashes a world of creative potential." },
   { kind: "p", text: "With its user-friendly editor, Webflow simplifies the website development and maintenance journey, waving goodbye to the need for a dedicated coding team." },
