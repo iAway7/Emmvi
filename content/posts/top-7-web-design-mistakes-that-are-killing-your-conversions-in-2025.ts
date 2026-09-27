@@ -1,115 +1,62 @@
 import type { Post } from "@/lib/posts";
 
 /**
- * Recuperado del backup del WordPress anterior (agosto de 2026), convertido
- * desde el marcado Gutenberg original.
+ * Recuperado del backup del WordPress anterior (agosto de 2026) y sustituido
+ * el 27 de septiembre de 2026 por la reescritura de content/rewrites/.
  *
- * Texto intacto. Lo unico reescrito son los enlaces internos, que apuntaban a
- * rutas viejas: van al destino actual en vez de encadenar una redireccion, y
- * los que llevaban a una pagina retirada se quedan en texto llano.
+ * El original daba cifras sin fuente ("Over 60% of traffic comes from mobile
+ * in 2025", "more than 3 seconds", "under 5 seconds"), que PRODUCT.md
+ * prohibe, y estaba escrito con emojis y en lenguaje de consultora. Este
+ * cuerpo mantiene los siete errores sin inventar numeros. El titulo visible
+ * pierde el "in 2025"; el slug lo conserva porque es la URL que Google conoce.
+ * Slug, fecha de publicacion, imagen y categoria no se tocan.
  */
 const body: Post["body"] = [
+  { kind: "p", text: "Design arguments usually turn into taste arguments, which nobody wins. These seven are not matters of taste. Each one is a specific reason a visitor who wanted to contact you did not, and each one has a fix that takes hours rather than a redesign." },
+
+  { kind: "h2", text: "1. Slow on a phone" },
+  { kind: "p", text: "Not slow on your laptop on office broadband. Slow on a four-year-old phone, on mobile data, on a street. That is where trade websites get opened. The usual culprits are uncompressed photographs straight off a camera, a carousel nobody asked for, and five tracking scripts." },
+  { kind: "p", text: "Test it on your own phone with wifi turned off. If you find yourself waiting, so did every visitor you lost." },
+
+  { kind: "h2", text: "2. Unclear what you do" },
+  { kind: "p", text: "Homepages often open with a mood, a wide photograph and a slogan about excellence, and state the actual trade somewhere further down. The visitor has to work for the one piece of information they came for. Say the trade and the area in the first line." },
+
+  { kind: "h2", text: "3. A phone number you cannot tap" },
+  { kind: "p", text: "If the number is baked into an image, or lives only in the footer, you have put a step between deciding to call and calling. It belongs in the header, as a real link, on every page." },
+
+  { kind: "h2", text: "4. A form that asks too much" },
+  { kind: "p", text: "Company name, budget range, how did you hear about us, preferred contact method. Every one of those is a small reason to stop. Collect what you need to have a first conversation and get the rest during it." },
+
+  { kind: "h2", text: "5. Silence after the form" },
+  { kind: "p", text: "This is the one nobody counts as a design problem, and it costs more than the other six together. The visitor submits, sees a thank-you line, and then hears nothing until someone gets round to the inbox. Meanwhile they have sent the same quote request to two competitors." },
   { kind: "p", text: [
-    "Your website might look stunning, but is it",
-    "actually",
-    "converting visitors into leads or customers?",
+    "How fast the first reply goes out has a name in sales, ",
+    { text: "speed to lead", href: "/speed-to-lead" },
+    ", and it is the cheapest of the seven to fix.",
   ] },
-  { kind: "p", text: [
-    "In 2025, successful web design is no longer just about aesthetics. It’s about strategy, usability, and performance. At",
-    { text: "emmvi", bold: true },
-    ", we see it all the time: beautiful websites that underperform because of simple, avoidable mistakes.",
-  ] },
-  { kind: "p", text: [
-    "Let’s break down the",
-    { text: "top 7 web design mistakes", bold: true },
-    "that are silently killing your conversions (and how to fix them).",
-  ] },
-  { kind: "h2", text: "1. Slow Load Times" },
-  { kind: "h3", text: "🚫 Problem:" },
-  { kind: "p", text: "Visitors won’t wait. If your website takes more than 3 seconds to load, you’re losing traffic and trust, fast." },
-  { kind: "h3", text: "✅ Fix:" },
-  { kind: "list", items: [
-    "Compress images (use next-gen formats like WebP).",
-    "Leverage caching and a CDN.",
-    "Minimize third-party scripts and bloat.",
-  ] },
-  { kind: "p", text: "🔧 Pro Tip: Use tools like Google PageSpeed Insights or GTmetrix to diagnose performance issues." },
-  { kind: "h2", text: "2. Confusing Navigation" },
-  { kind: "h3", text: "🚫 Problem:" },
-  { kind: "p", text: "If users can’t find what they’re looking for in under 5 seconds, they’ll bounce." },
-  { kind: "h3", text: "✅ Fix:" },
-  { kind: "list", items: [
-    "Keep menus simple and intuitive.",
-    "Use clear CTAs (call-to-actions) above the fold.",
-    "Maintain consistent structure across pages.",
-  ] },
-  { kind: "p", text: "📱 Mobile Tip: Ensure your mobile nav is just as clean, no more hidden or overcrowded hamburger menus." },
-  { kind: "h2", text: "3. Weak or Vague CTAs" },
-  { kind: "h3", text: "🚫 Problem:" },
-  { kind: "p", text: "A generic “Submit” button just doesn’t cut it anymore. CTAs need to be specific, action-driven, and benefit-oriented." },
-  { kind: "h3", text: "✅ Fix:" },
-  { kind: "list", items: [
-    "Replace “Learn More” with “Get Your Free Audit”",
-    "Highlight urgency or value (“Start Saving Today”, “Claim Your Spot Now”)",
-    "Place CTAs in multiple strategic locations",
-  ] },
-  { kind: "h2", text: "4. Not Mobile-Optimized" },
-  { kind: "h3", text: "🚫 Problem:" },
-  { kind: "p", text: "Over 60% of traffic comes from mobile in 2025, if your site’s not responsive, you're hemorrhaging conversions." },
-  { kind: "h3", text: "✅ Fix:" },
-  { kind: "list", items: [
-    "Use mobile-first design practices.",
-    "Test across multiple devices and screen sizes.",
-    "Prioritize tap targets, thumb zones, and legible font sizes.",
-  ] },
-  { kind: "p", text: "🧪 Try: Google's Mobile-Friendly Test tool." },
-  { kind: "h2", text: "5. Overcomplicated Design" },
-  { kind: "h3", text: "🚫 Problem:" },
-  { kind: "p", text: "Cluttered layouts, excessive animations, or a rainbow of fonts/colors overwhelm users and distract from your goal." },
-  { kind: "h3", text: "✅ Fix:" },
-  { kind: "list", items: [
-    "Embrace whitespace.",
-    "Stick to a cohesive color palette (2 to 3 main colors).",
-    "Use consistent typography and visual hierarchy.",
-  ] },
-  { kind: "h2", text: "6. Lack of Trust Signals" },
-  { kind: "h3", text: "🚫 Problem:" },
-  { kind: "p", text: "If users don't trust you, they won’t convert, even if everything else is perfect." },
-  { kind: "h3", text: "✅ Fix:" },
-  { kind: "list", items: [
-    "Add client testimonials, case studies, or Google reviews.",
-    "Use secure HTTPS and trust badges (especially for ecommerce).",
-    "Highlight guarantees, certifications, or affiliations.",
-  ] },
-  { kind: "p", text: "💬 Bonus: Videos of customer success stories build instant credibility." },
-  { kind: "h2", text: "7. Ignoring Analytics & Heatmaps" },
-  { kind: "h3", text: "🚫 Problem:" },
-  { kind: "p", text: "Design based on assumptions = missed opportunities." },
-  { kind: "h3", text: "✅ Fix:" },
-  { kind: "list", items: [
-    "Use Google Analytics + tools like Hotjar or Microsoft Clarity.",
-    "Track bounce rates, user paths, and scroll depth.",
-    "Run A/B tests to continuously improve performance.",
-  ] },
-  { kind: "h2", text: "🚀 Ready to Boost Your Conversions?" },
-  { kind: "p", text: "Your website is often your first (and most powerful) sales tool. If it’s not converting, it’s costing you." },
-  { kind: "p", text: [
-    "At",
-    { text: "emmvi", bold: true },
-    ", we specialize in conversion-focused web design that doesn’t just look great. It works. Want a free audit of your current site?",
-    { text: "Let’s talk", bold: true, href: "/contact-us" },
-    ".",
-  ] },
+  { kind: "aside", tone: "important", label: "The half that decides", text: "The page is the easy half. The half that decides whether the quote request becomes a job is what happens in the hour afterwards, and that is not a design decision. It is a system you either have or do not." },
+
+  { kind: "h2", text: "6. Generic proof" },
+  { kind: "p", text: "Stock photographs of people in hard hats who are not your team. Logos of companies you did not work for. Testimonials with no name attached. A visitor cannot verify any of it, and the ones who notice trust you less than if you had shown nothing." },
+  { kind: "p", text: "Three real photographs of your own jobs, with the town named, beat any of it." },
+
+  { kind: "h2", text: "7. Pages that end nowhere" },
+  { kind: "p", text: "A visitor reaches the bottom of a service page and there is nothing to do. No contact form, no number, no next page. They go back to the search results, which is where your competitors are." },
+  { kind: "p", text: "Every page should end with the same obvious action. It does not have to be clever. It has to be there." },
+
+  { kind: "h2", text: "The order to fix them in" },
+  { kind: "p", text: "Five, one and three, in that order. What happens after the form is sent, then speed, then the tappable number. They are the cheapest and they move the most. The rest can wait for the next round." },
 ];
 
 export const top7WebDesign: Post = {
   slug: "top-7-web-design-mistakes-that-are-killing-your-conversions-in-2025",
-  title: "Top 7 Web Design Mistakes That Are Killing Your Conversions in 2025",
-  description: "Discover the top 7 web design mistakes killing your conversions in 2025, and how to fix them to boost UX, speed, mobile performance, and sales.",
-  lede: "Seven design mistakes that lose you enquiries, and the fix for each one.",
+  title: "7 Web Design Mistakes That Cost You Quote Requests",
+  description: "Seven specific things that make visitors leave a service business website without getting in touch, and what to do about each one.",
+  lede: "Seven design mistakes that lose you quote requests, and the fix for each one.",
   category: "Website Design",
   // Fecha original de publicacion. No se toca: es parte de lo que se restaura.
   published: "2025-04-06",
+  updated: "2026-09-27",
   /** Destacada del WordPress. `alt` vacio a proposito: la imagen va dentro
    *  del enlace, pegada al titular que ya dice lo mismo, y describir una
    *  ilustracion generica ahi solo anade ruido a un lector de pantalla. */
