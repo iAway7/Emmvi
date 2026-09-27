@@ -1,100 +1,68 @@
 import type { Post } from "@/lib/posts";
 
 /**
- * Recuperado del backup del WordPress anterior (agosto de 2026), convertido
- * desde el marcado Gutenberg original.
+ * Recuperado del backup del WordPress anterior (agosto de 2026) y sustituido
+ * el 27 de septiembre de 2026 por la reescritura de content/rewrites/.
  *
- * Texto intacto. Lo unico reescrito son los enlaces internos, que apuntaban a
- * rutas viejas: van al destino actual en vez de encadenar una redireccion, y
- * los que llevaban a una pagina retirada se quedan en texto llano.
+ * El original describia versiones y funciones que caducan en meses, y su
+ * description nombraba cinco herramientas distintas de las del cuerpo. Este
+ * cuerpo se escribe por lo que dura: para que sirve cada una, que licencia
+ * deja y cuando no usar ninguna. Runway sale de la lista porque se ha ido al
+ * video; se dice en la entrada. Slug, fecha de publicacion, imagen y
+ * categoria no se tocan.
  */
 const body: Post["body"] = [
-  { kind: "p", text: "Artificial intelligence has revolutionized the world of image generation, editing, and enhancement. Whether you're a professional designer, an artist, or just someone who loves playing around with visuals, AI tools can save time and produce stunning results. Here are the top five AI tools for working with images in 2025:" },
-  { kind: "h2", text: "1. Adobe Firefly" },
+  { kind: "p", text: "This field moves faster than anything else in software, so treat the specifics below as a starting point rather than a verdict. What changes slowly is what each tool is shaped for, and that is what the list is about." },
+  { kind: "p", text: "Runway, which was on the earlier version of this list, is left out: it has put its weight behind video, and this list is about still images." },
+
+  { kind: "h2", text: "Midjourney" },
+  { kind: "p", text: "Still the one with the strongest aesthetic. Ask for something atmospheric and it will give you something that looks deliberately art-directed rather than merely assembled. The cost is control: getting a specific thing, rather than a beautiful thing, takes practice." },
+  { kind: "p", text: "Best for: mood, backgrounds, concept work. Worst for: an image that has to contain exact text or a specific product." },
+
+  { kind: "h2", text: "ChatGPT and DALL·E" },
+  { kind: "p", text: "The most forgiving to talk to, because you can describe what is wrong in ordinary language and iterate without learning any syntax. Text inside images, the standing joke for years, has improved a great deal and is now usable for simple cases." },
+  { kind: "p", text: "Best for: quick iteration, illustrations, anything where you would rather have a conversation than write a prompt." },
+
+  { kind: "h2", text: "Adobe Firefly" },
   { kind: "p", text: [
-    { text: "Adobe Firefly", href: "https://www.adobe.com/es/learn/firefly/web/introduction-to-firefly" },
-    "is a cutting-edge AI image generation tool integrated into Adobe’s Creative Cloud suite. It allows users to generate images from text prompts, apply AI-powered editing, and enhance photos effortlessly. Firefly stands out for its seamless integration with Photoshop, Illustrator, and other Adobe products, making it a top choice for professionals.",
+    "The commercially cautious option. ",
+    { text: "Adobe says", href: "https://www.adobe.com/ai/overview/firefly/gen-ai-approach.html" },
+    " it trains Firefly on licensed content such as Adobe Stock and on public-domain material, and it offers intellectual property indemnification to enterprise customers. That is why it turns up in companies whose legal department has opinions. It is also built into Photoshop as generative fill, which is where most people actually use it.",
   ] },
+  { kind: "p", text: "Best for: extending or repairing photographs you already own, and for organisations that need a clear answer about provenance." },
+
+  { kind: "h2", text: "Stable Diffusion" },
+  { kind: "p", text: "Open weights, runs on your own machine, endlessly customisable. It is the only one on this list where nothing you make has to leave your computer, and the only one with a genuine learning curve attached." },
+  { kind: "p", text: "Best for: volume, consistency through custom training, and work that cannot be uploaded to someone else's service. Worst for: anyone who wants an image in the next five minutes." },
+
+  { kind: "h2", text: "Canva" },
+  { kind: "p", text: "The one non-designers reach for, and reasonably so. Its image generation is not the most capable of the five, but it sits inside the tool where the finished graphic gets made, and not having to move between applications is worth more than a slightly better render." },
+  { kind: "p", text: "Best for: social posts, quick graphics, anybody who was never going to open Photoshop." },
+
+  { kind: "h2", text: "The licence question" },
+  { kind: "p", text: "Before you put a generated image on something you sell, check three things: whether your plan permits commercial use, whether the free tier differs from the paid one on that point, and whether the provider offers any indemnity if a claim arrives." },
+  { kind: "p", text: "These terms vary between providers and change with some regularity. It is a five-minute check on the current terms page, and it is the difference between an image you can use and one you are borrowing without knowing it." },
+
+  { kind: "h2", text: "When not to use one" },
+  { kind: "p", text: "If you run a service business, the images that convince people are photographs of work you actually did. A generated picture of a kitchen you never fitted is the same problem as a stock photograph of a smiling stranger in a hard hat. The visitor cannot verify it, and the ones who spot it trust you less than if you had shown nothing." },
   { kind: "p", text: [
-    { text: "Key Features:", bold: true },
+    "Use these tools for the parts of a site nobody is asked to believe: a background, an abstract header, an illustration. For proof, use a phone and take a picture of the job. The same goes for the rest of the page, as ",
+    { text: "these web design mistakes", href: "/top-7-web-design-mistakes-that-are-killing-your-conversions-in-2025" },
+    " show.",
   ] },
-  { kind: "list", items: [
-    "Text-to-image generation",
-    "AI-powered image enhancement",
-    "Deep integration with Adobe software",
-    "Intuitive interface for professionals and beginners",
-  ] },
-  { kind: "h2", text: "2. DALL·E 3 by OpenAI" },
-  { kind: "p", text: [
-    { text: "DALL·E 3", href: "https://openai.com/index/dall-e/" },
-    "is one of the most advanced AI image generators, capable of producing highly detailed and realistic images from text descriptions. It excels in creating artistic and creative visuals, making it ideal for marketing, digital art, and concept designs.",
-  ] },
-  { kind: "p", text: [
-    { text: "Key Features:", bold: true },
-  ] },
-  { kind: "list", items: [
-    "High-quality image generation from text",
-    "Enhanced realism and creativity",
-    "Ability to refine images with inpainting",
-    "Integration with ChatGPT for seamless workflow",
-  ] },
-  { kind: "h2", text: "3. Stable Diffusion" },
-  { kind: "p", text: [
-    { text: "Stable Diffusion", href: "https://stablediffusionweb.com/" },
-    "is a powerful open-source AI model that allows users to generate images with great customization. It’s favored by artists, developers, and AI enthusiasts for its flexibility and ability to be fine-tuned for specific artistic styles.",
-  ] },
-  { kind: "p", text: [
-    { text: "Key Features:", bold: true },
-  ] },
-  { kind: "list", items: [
-    "Fully open-source and customizable",
-    "Runs locally for privacy and control",
-    "Extensive community support and plugins",
-    "Capable of generating ultra-high-resolution images",
-  ] },
-  { kind: "h2", text: "4. MidJourney" },
-  { kind: "p", text: [
-    { text: "MidJourney", href: "https://www.midjourney.com/home" },
-    "is an AI tool specializing in generating highly stylized and artistic images. It is widely used by artists, designers, and content creators looking for unique, visually stunning results. One of its standout features is its ability to generate images in the beloved",
-    { text: "Studio Ghibli", bold: true },
-    "style, making it a favorite among fans of animation and fantasy art.",
-  ] },
-  { kind: "p", text: [
-    { text: "Key Features:", bold: true },
-  ] },
-  { kind: "list", items: [
-    "Exceptional artistic styles, including Ghibli-inspired visuals",
-    "Community-driven development",
-    "Works via Discord for easy access",
-    "Ideal for concept art, branding, and storytelling visuals",
-  ] },
-  { kind: "h2", text: "5. Runway ML" },
-  { kind: "p", text: [
-    { text: "Runway ML", href: "http://runwayml.com" },
-    "is a creative AI platform that offers a variety of AI-powered tools for video and image editing. It’s an excellent choice for designers, filmmakers, and content creators who need advanced AI capabilities without requiring deep technical knowledge.",
-  ] },
-  { kind: "p", text: [
-    { text: "Key Features:", bold: true },
-  ] },
-  { kind: "list", items: [
-    "AI-powered image and video editing",
-    "Green screen removal and object tracking",
-    "Easy-to-use interface",
-    "Cloud-based processing for efficiency",
-  ] },
-  { kind: "h3", text: "Unlocking Infinite Creativity with AI" },
-  { kind: "p", text: "These AI tools are transforming the way we create and edit images, making high-quality design and art more accessible to everyone. Whether you need precise photo enhancements, creative art generation, or deep customization, one of these AI-powered solutions is sure to fit your needs." },
-  { kind: "aside", tone: "important", text: "This is general guidance, not a recommendation for every business. These tools were compared in 2025 and the field moves quickly, so prices, limits and licence terms have almost certainly changed. Check each one on its own site before subscribing, and read the licence in particular if the images are for client work." },
+
+  { kind: "aside", tone: "important", text: "This is general guidance, not a recommendation for every business, and emmvi is not affiliated with any of these vendors. Features, limits and licence terms change often, so check each tool on its own site before subscribing, and read the licence in particular if the images are for client work." },
 ];
 
 export const top5BestAi: Post = {
   slug: "top-5-best-ai-tools-for-images",
-  title: "Top 5 Best AI Tools for Images",
-  description: "Discover the top 5 AI image tools for 2025 (Midjourney, Fotor, Luminar Neo, Pixlr and Artbreeder) to enhance, generate, and edit visuals like a pro.",
-  lede: "Five AI image tools, what each is good at, and where they fall short.",
+  title: "5 AI Tools for Images, and When Not to Use Them",
+  description: "Midjourney, ChatGPT, Adobe Firefly, Stable Diffusion and Canva: what each AI image tool is good at, what the licence allows, and when a photo is better.",
+  lede: "The interesting question is no longer whether these work. It is which job you are handing them, and whether you are allowed to sell what comes out.",
   category: "AI",
   // Fecha original de publicacion. No se toca: es parte de lo que se restaura.
   published: "2025-04-03",
+  updated: "2026-09-27",
   /** Destacada del WordPress. `alt` vacio a proposito: la imagen va dentro
    *  del enlace, pegada al titular que ya dice lo mismo, y describir una
    *  ilustracion generica ahi solo anade ruido a un lector de pantalla. */
