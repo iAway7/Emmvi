@@ -9,8 +9,8 @@ import type { Post } from "@/lib/posts";
  * los que llevaban a una pagina retirada se quedan en texto llano.
  */
 const body: Post["body"] = [
-  { kind: "p", text: "In the world of website management, choosing the right web hosting provider can be a game-changer for your online presence. Whether you’re running a personal blog, a small business site, or a large e-commerce platform, your hosting provider will play a critical role in your website's speed, uptime, and overall performance. With so many options on the market, how do you determine which one is the best for your needs?" },
-  { kind: "p", text: "In this article, we’ll break down five of the best web hosting providers of 2025. From budget-friendly options to premium services, we’ll explore their strengths, features, and ideal use cases. By the end, you’ll have a clearer picture of which hosting provider suits your specific requirements." },
+  { kind: "p", text: "In the world of website management, choosing the right web hosting provider matters more than it first appears. Whether you’re running a personal blog, a small business site, or a large e-commerce platform, your hosting provider will play a critical role in your website's speed, uptime, and overall performance. With so many options on the market, how do you determine which one is the best for your needs?" },
+  { kind: "p", text: "In this article, we’ll break down five well-known web hosting providers. From budget-friendly options to premium services, we’ll explore their strengths, features, and ideal use cases. By the end, you’ll have a clearer picture of which hosting provider suits your specific requirements." },
   { kind: "h2", text: "1. Bluehost: Best for Beginners and WordPress Sites" },
   { kind: "p", text: [
     { text: "Overview:", bold: true },
@@ -39,7 +39,7 @@ const body: Post["body"] = [
     ],
     [
       { text: "24/7 Customer Support:", bold: true },
-      "Whether you're setting up your site for the first time or troubleshooting an issue, Bluehost offers customer support via chat, phone, and email around the clock.",
+      "Whether you're setting up your site for the first time or troubleshooting an issue, Bluehost offers live chat around the clock, with phone support included on its Business plan and above.",
     ],
     [
       { text: "Free SSL Certificate:", bold: true },
@@ -53,23 +53,23 @@ const body: Post["body"] = [
   { kind: "p", text: [
     { text: "Pricing:", bold: true },
   ] },
+  // Precios comprobados en bluehost.com/hosting/shared en septiembre de 2026.
+  // Los planes cambiaron de nombre desde el original (Basic, Plus, Choice Plus).
   { kind: "list", items: [
     [
-      { text: "Basic Plan", bold: true },
-      ": Starts at $2.95/month",
+      { text: "Starter", bold: true },
+      ": $3.99/month introductory, renews at $9.99/month",
     ],
     [
-      { text: "Plus Plan", bold: true },
-      ": Starts at $5.45/month",
+      { text: "Business", bold: true },
+      ": $6.99/month introductory, renews at $13.99/month",
     ],
     [
-      { text: "Choice Plus Plan", bold: true },
-      // El original trae un <br> entre el precio y la nota; la conversion lo
-      // perdio y quedaba "monthBluehost". Va un espacio en su lugar: dentro de
-      // un <li> no cabe otro bloque.
-      ": Starts at $5.45/month Bluehost often offers significant discounts for the first term, making it affordable to get started.",
+      { text: "eCommerce Essentials", bold: true },
+      ": $14.99/month introductory, renews at $21.99/month",
     ],
   ] },
+  { kind: "p", text: "Prices as of September 2026, from Bluehost's own shared hosting page. The introductory rate applies to the first term only, and the gap to the renewal rate is large, so budget for the second number." },
   { kind: "p", text: [
     { text: "Pros:", bold: true },
   ] },
@@ -125,19 +125,16 @@ const body: Post["body"] = [
   { kind: "p", text: [
     { text: "Pricing:", bold: true },
   ] },
-  { kind: "list", items: [
-    [
-      { text: "StartUp Plan", bold: true },
-      ": $3.99/month",
-    ],
-    [
-      { text: "GrowBig Plan", bold: true },
-      ": $6.69/month",
-    ],
-    [
-      { text: "GoGeek Plan", bold: true },
-      ": $10.69/month",
-    ],
+  // Los precios en dolares del original no se pudieron comprobar: la web
+  // redirige por pais y solo mostro euros. Se quitan en vez de dejarlos.
+  { kind: "p", text: [
+    "SiteGround sells three shared plans,",
+    { text: "StartUp", bold: true },
+    ",",
+    { text: "GrowBig", bold: true },
+    "and",
+    { text: "GoGeek", bold: true },
+    ", in rising order of resources. Prices vary by country and currency, and the introductory rate renews noticeably higher, so check both figures on SiteGround's site for your region before you commit.",
   ] },
   { kind: "p", text: [
     { text: "Pros:", bold: true },
@@ -182,8 +179,8 @@ const body: Post["body"] = [
       "HostGator provides free SSL certificates with most of its plans, ensuring your site is secure for visitors and compliant with modern web standards.",
     ],
     [
-      { text: "45-Day Money-Back Guarantee:", bold: true },
-      "HostGator offers an extended 45-day money-back guarantee, allowing users to try out their services risk-free.",
+      { text: "30-Day Money-Back Guarantee:", bold: true },
+      "HostGator refunds hosting fees in full during the first 30 days. Domain registration and add-ons are not included in the refund.",
     ],
   ] },
   { kind: "p", text: [
@@ -193,19 +190,18 @@ const body: Post["body"] = [
   { kind: "p", text: [
     { text: "Pricing:", bold: true },
   ] },
-  { kind: "list", items: [
-    [
-      { text: "Hatchling Plan", bold: true },
-      ": $2.75/month",
-    ],
-    [
-      { text: "Baby Plan", bold: true },
-      ": $3.50/month",
-    ],
-    [
-      { text: "Business Plan", bold: true },
-      ": $5.25/month",
-    ],
+  // Los importes no se vieron en la pagina de HostGator (septiembre de 2026):
+  // se quitan en vez de dejar los de 2025 sin comprobar.
+  { kind: "p", text: [
+    "HostGator's shared hosting comes in four plans:",
+    { text: "Hatchling", bold: true },
+    ",",
+    { text: "Baby", bold: true },
+    ",",
+    { text: "Business", bold: true },
+    "and",
+    { text: "Pro", bold: true },
+    ". Each is quoted with an introductory rate and a higher renewal rate. Check both on HostGator's own site, since the renewal rate is what you pay from the second term.",
   ] },
   { kind: "p", text: [
     { text: "Pros:", bold: true },
@@ -223,13 +219,18 @@ const body: Post["body"] = [
     "Higher renewal rates",
     "Customer support can be slow at times",
   ] },
-  { kind: "h2", text: "4. A2 Hosting: Best for Speed Enthusiasts" },
+  { kind: "h2", text: "4. A2 Hosting (now hosting.com): Best for Speed" },
   { kind: "p", text: [
     { text: "Overview:", bold: true },
-    { text: "A2 Hosting", href: "https://www.a2hosting.com/" },
-    "is a performance-focused hosting provider that promises blazing-fast speeds across all of its hosting plans. Established in 2001, A2 Hosting has made a name for itself with its",
+    "A2 Hosting is a performance-focused hosting provider. Established in 2001, it made a name for itself with its",
     { text: "Turbo Servers", bold: true },
-    ", which offer incredibly fast loading times. This makes it an excellent choice for websites where speed is a top priority, such as e-commerce stores, news sites, and high-traffic blogs.",
+    ", built for fast loading times. That made it a common pick for websites where speed is a top priority, such as e-commerce stores, news sites, and high-traffic blogs.",
+  ] },
+  { kind: "p", text: [
+    { text: "Now hosting.com:", bold: true },
+    "a few weeks after this article first appeared, A2 Hosting",
+    { text: "rebranded as hosting.com", href: "https://hosting.com/blog/a-new-chapter-begins-a2-hosting/" },
+    "following its acquisition by World Host Group. The old address now redirects to hosting.com, which still sells Turbo Hosting. Existing A2 accounts carried over. Everything below describes the service under its new name.",
   ] },
   { kind: "p", text: [
     { text: "Key Features:", bold: true },
@@ -237,17 +238,15 @@ const body: Post["body"] = [
   { kind: "list", items: [
     [
       { text: "Turbo Boost Technology:", bold: true },
-      "A2 Hosting’s proprietary Turbo Servers are designed to deliver up to 20x faster loading speeds than standard hosting. This technology uses optimized caching, SSD storage, and advanced routing for lightning-fast performance.",
+      "A2 Hosting marketed its Turbo Servers as up to 20x faster than its own standard hosting. That was the company's figure, not an independent test, and your result depends on your site as much as the server. The setup relies on optimized caching and SSD storage.",
     ],
     [
       { text: "Free Website Migration:", bold: true },
-      "A2 Hosting offers free website migration for users who are switching from another hosting provider. This process is handled by their team of experts, ensuring a smooth transition.",
+      "hosting.com offers free managed migration for users who are switching from another hosting provider, handled by its own support staff.",
     ],
     [
-      { text: "Anytime Money-Back Guarantee:", bold: true },
-      "Unlike many competitors, A2 Hosting offers an",
-      { text: "anytime money-back guarantee", bold: true },
-      ", which allows users to get a refund at any time if they’re not satisfied with the service.",
+      { text: "30-Day Money-Back Guarantee:", bold: true },
+      "A2 Hosting was known for an anytime money-back guarantee. Under the hosting.com name the advertised guarantee is 30 days, so do not count on the old terms.",
     ],
     [
       { text: "Optimized for Developers:", bold: true },
@@ -255,37 +254,26 @@ const body: Post["body"] = [
     ],
     [
       { text: "Free SSL Certificate:", bold: true },
-      "Just like the other providers, A2 Hosting provides a free SSL certificate to help secure your site and improve SEO rankings.",
+      "Just like the other providers, hosting.com includes a free SSL certificate to help secure your site.",
     ],
   ] },
   { kind: "p", text: [
     { text: "Ideal for:", bold: true },
-    "A2 Hosting is perfect for users who value speed and performance above all else. Whether you’re running a high-traffic blog, an e-commerce store, or a site that requires fast load times, A2 Hosting offers the speed you need.",
+    "A2 Hosting, now hosting.com, suits users who value speed and performance above all else: a high-traffic blog, an e-commerce store, or any site where load time is the first concern.",
   ] },
   { kind: "p", text: [
     { text: "Pricing:", bold: true },
   ] },
-  { kind: "list", items: [
-    [
-      { text: "Startup Plan", bold: true },
-      ": $2.99/month",
-    ],
-    [
-      { text: "Drive Plan", bold: true },
-      ": $4.99/month",
-    ],
-    [
-      { text: "Turbo Boost Plan", bold: true },
-      ": $9.99/month",
-    ],
-  ] },
+  // Los planes de A2 (Startup, Drive, Turbo Boost) ya no se venden con ese
+  // nombre y hosting.com no mostro importes: se quitan los de 2025.
+  { kind: "p", text: "The A2 plan names in the original version of this article (Startup, Drive and Turbo Boost) are no longer sold under those names. hosting.com lists its own shared plans with an introductory and a renewal price; check both on its site." },
   { kind: "p", text: [
     { text: "Pros:", bold: true },
   ] },
   { kind: "list", items: [
-    "Lightning-fast Turbo Servers",
-    "Free website migration",
-    "Anytime money-back guarantee",
+    "Turbo Servers built for speed",
+    "Free managed migration",
+    "30-day money-back guarantee",
     "Great for developers",
   ] },
   { kind: "p", text: [
@@ -293,6 +281,7 @@ const body: Post["body"] = [
   ] },
   { kind: "list", items: [
     "Turbo features are only available on higher-tier plans",
+    "The rebrand means older reviews and guides still use the A2 name and terms",
     "Prices can rise upon renewal",
   ] },
   { kind: "h2", text: "5. DreamHost: Best for Long-Term Value" },
@@ -307,7 +296,7 @@ const body: Post["body"] = [
   { kind: "list", items: [
     [
       { text: "Affordable Long-Term Pricing:", bold: true },
-      "DreamHost offers competitive pricing with a focus on long-term value. Unlike many hosting providers, DreamHost’s renewal rates remain reasonable, and they offer one of the most affordable plans for unlimited storage and bandwidth.",
+      "DreamHost offers competitive pricing with a focus on long-term value. Unlike many hosting providers, DreamHost’s renewal rates remain reasonable, and bandwidth is unmetered.",
     ],
     [
       { text: "Fast and Reliable Performance:", bold: true },
@@ -333,26 +322,15 @@ const body: Post["body"] = [
   { kind: "p", text: [
     { text: "Pricing:", bold: true },
   ] },
-  { kind: "list", items: [
-    [
-      { text: "Shared Starter Plan", bold: true },
-      ": $2.59/month",
-    ],
-    [
-      { text: "Shared Unlimited Plan", bold: true },
-      ": $3.95/month",
-    ],
-    [
-      { text: "DreamPress Managed WordPress Hosting", bold: true },
-      ": $16.95/month",
-    ],
-  ] },
+  // DreamHost solo mostro euros desde aqui y los planes cambiaron de nombre:
+  // se quitan los importes en dolares de 2025.
+  { kind: "p", text: "DreamHost has renamed its plans since this article was first published, and prices depend on your region and the length of the term. Its entry shared plan and its DreamPress managed WordPress plan both show a first-year rate and a renewal rate; check both on DreamHost's site." },
   { kind: "p", text: [
     { text: "Pros:", bold: true },
   ] },
   { kind: "list", items: [
     "Affordable pricing with long-term value",
-    "Unlimited storage and bandwidth on most plans",
+    "Unmetered bandwidth on its plans",
     "Free domain privacy and SSL certificate",
     "Strong uptime and speed performance",
   ] },
@@ -363,7 +341,7 @@ const body: Post["body"] = [
     "Customer support response time can be slower compared to others",
     "No phone support, only live chat and email",
   ] },
-  { kind: "aside", tone: "important", text: "This is general guidance, not a recommendation for every business. The prices here are the ones these providers advertised in 2025 and they have not been rechecked since. Introductory rates in particular tend to renew much higher, so confirm both the current price and the renewal price on the provider's own site before signing up." },
+  { kind: "aside", tone: "important", text: "This is general guidance, not a recommendation for every business, and emmvi is not affiliated with any of these providers. Only Bluehost's prices are listed, because they were the only ones we could confirm on the provider's own site in September 2026. Introductory rates renew much higher, so confirm both the current price and the renewal price before signing up." },
 
   { kind: "h2", text: "Which Web Hosting Provider is Right for You?" },
   { kind: "p", text: "Choosing the right web hosting provider depends largely on your unique needs, preferences, and budget. Here’s a quick recap of our top five web hosting providers to help guide your decision:" },
@@ -381,30 +359,27 @@ const body: Post["body"] = [
       "offers scalability and flexibility, making it a great choice for businesses and users who need the ability to grow and manage high-traffic sites.",
     ],
     [
-      { text: "A2 Hosting", bold: true },
-      "stands out for those who prioritize website speed and performance, with Turbo Servers that deliver blazing-fast load times and a focus on developers.",
+      { text: "A2 Hosting, now hosting.com,", bold: true },
+      "stands out for those who prioritize website speed and performance, with Turbo Servers and a focus on developers.",
     ],
     [
       { text: "DreamHost", bold: true },
       "provides great value for long-term users, with affordable pricing, robust features, and excellent performance.",
     ],
   ], ordered: true },
-  { kind: "p", text: "Ultimately, the best web hosting provider for you will depend on your specific needs, whether it's ease of use, speed, scalability, or customer support. All five of these providers offer a combination of great features and affordable pricing, ensuring that your website will have the performance, reliability, and support you need to thrive online." },
-  { kind: "p", text: [
-    "Ready to",
-    "get started with your web hosting",
-    "? Explore these providers and choose the one that’s right for you today!",
-  ] },
+  { kind: "p", text: "Ultimately, the best web hosting provider for you will depend on your specific needs, whether it's ease of use, speed, scalability, or customer support. All five of these providers offer a solid set of features at an entry price most small businesses can manage." },
+  { kind: "p", text: "Before you pick one, compare the renewal price, not only the first-term rate, and check what support you get on the plan you can actually afford." },
 ];
 
 export const theBest5Web: Post = {
   slug: "the-best-5-web-hosting-providers-in-2025",
-  title: "The Best 5 Web Hosting Providers in 2025",
-  description: "Compare the top 5 web hosting providers in 2025 (performance, uptime, pricing and features) to choose the best platform for your website needs.",
+  title: "The Best 5 Web Hosting Providers Compared",
+  description: "Bluehost, SiteGround, HostGator, A2 Hosting (now hosting.com) and DreamHost compared on speed, support, features and price.",
   lede: "Five hosts compared on speed, price and support, and who each one suits.",
   category: "Web Hosting",
   // Fecha original de publicacion. No se toca: es parte de lo que se restaura.
   published: "2025-04-02",
+  updated: "2026-09-27",
   /** Destacada del WordPress. `alt` vacio a proposito: la imagen va dentro
    *  del enlace, pegada al titular que ya dice lo mismo, y describir una
    *  ilustracion generica ahi solo anade ruido a un lector de pantalla. */
