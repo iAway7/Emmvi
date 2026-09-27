@@ -26,9 +26,20 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      // Duplicado exacto de la raiz cuando la espera esta activa, y una
-      // pantalla de obras cuando no lo esta. Nunca interesa que se rastree.
-      disallow: "/coming-soon",
+      disallow: [
+        // Duplicado exacto de la raiz cuando la espera esta activa, y una
+        // pantalla de obras cuando no lo esta. Nunca interesa que se rastree.
+        "/coming-soon",
+        // El destino interno de la reescritura de `/<slug>.md`. Los mismos
+        // bytes por otro camino; la URL buena es la de la extension, que es la
+        // que enlaza el articulo y lista /llms.txt. No la enlaza nadie, pero
+        // costaba una linea cerrarla.
+        //
+        // **No afecta al `.md`.** El rastreador pide `/<slug>.md` y la
+        // reescritura ocurre despues, dentro del servidor: lo que se compara
+        // con esta regla es lo que se pidio.
+        "/md/",
+      ],
     },
     sitemap: `${SITE_URL}/sitemap.xml`,
   };

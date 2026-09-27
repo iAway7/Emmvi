@@ -69,6 +69,20 @@ const nextConfig: NextConfig = {
       permanent: true,
     }));
   },
+
+  /**
+   * `/<slug>.md` sirve el Markdown del articulo, desde `app/md/[slug]/`.
+   *
+   * Hace falta una reescritura porque el App Router no sabe poner una
+   * extension detras de un segmento dinamico. Es interna: la URL que se enlaza
+   * y se comparte es la de la izquierda, y el usuario no ve `/md/`.
+   *
+   * El `.` separa segmento de extension, asi que `:slug` para en el punto y
+   * recoge el slug entero. Ver lib/markdown.ts.
+   */
+  async rewrites() {
+    return [{ source: "/:slug.md", destination: "/md/:slug" }];
+  },
 };
 
 export default nextConfig;
