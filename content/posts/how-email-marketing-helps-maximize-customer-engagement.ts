@@ -7,6 +7,9 @@ import type { Post } from "@/lib/posts";
  * Texto intacto. Lo unico reescrito son los enlaces internos, que apuntaban a
  * rutas viejas: van al destino actual en vez de encadenar una redireccion, y
  * los que llevaban a una pagina retirada se quedan en texto llano.
+ *
+ * Revisado el 2026-09-28: voz (fuera emojis y frases de consultora) y una
+ * afirmacion sin fuente reescrita. Mismas seis secciones, mismo orden.
  */
 const body: Post["body"] = [
   { kind: "p", text: [
@@ -16,10 +19,9 @@ const body: Post["body"] = [
   { kind: "p", text: "When done right, it goes beyond just promotions and newsletters. It becomes a direct line of communication between your brand and your audience: one that feels personal, relevant, and valuable." },
   { kind: "p", text: "Let’s break down exactly how email marketing helps you connect with your audience and keep them engaged." },
   { kind: "h2", text: "1. Personalized Communication That Feels Human" },
-  { kind: "p", text: "Ever opened an email that felt like it was written just for you? That’s the magic of personalization. Email lets you use a subscriber’s name, preferences, purchase history, and behavior to deliver content that speaks directly to them." },
+  { kind: "p", text: "Ever opened an email that felt like it was written just for you? That’s personalization. Email lets you use a subscriber’s name, preferences, purchase history, and behavior to deliver content that speaks directly to them." },
   { kind: "p", text: "From custom subject lines to tailored recommendations, personalization makes your emails feel less like a marketing blast and more like a one-on-one conversation." },
   { kind: "p", text: [
-    "➡️",
     { text: "Why it matters:", bold: true },
     "People are more likely to engage with content that feels relevant and personal.",
   ] },
@@ -31,7 +33,6 @@ const body: Post["body"] = [
     ", making your emails more useful and engaging.",
   ] },
   { kind: "p", text: [
-    "➡️",
     { text: "Pro tip:", bold: true },
     "Use behavioral data (like what pages a user visits or what products they browse) to trigger segmented email campaigns automatically.",
   ] },
@@ -43,7 +44,6 @@ const body: Post["body"] = [
     ", providing value, and reminding your customers why they love your brand.",
   ] },
   { kind: "p", text: [
-    "➡️",
     { text: "What to send:", bold: true },
     "Educational content, behind-the-scenes updates, product news, customer stories, and special offers.",
   ] },
@@ -51,20 +51,20 @@ const body: Post["body"] = [
   { kind: "p", text: "Unlike most marketing channels, email can open up a two-way conversation. A great call-to-action can encourage subscribers to reply, leave feedback, take a quick poll, or review a product." },
   { kind: "p", text: "This interaction makes your audience feel heard, and helps you learn more about what they want." },
   { kind: "p", text: [
-    "➡️",
     { text: "Try this:", bold: true },
     "Include simple CTAs like “Reply and tell us what you think” or “Vote in our quick poll.”",
   ] },
-  { kind: "h2", text: "5. Automation = Engagement on Autopilot" },
+  { kind: "h2", text: "5. Automation Sends It on Time" },
   { kind: "p", text: [
     "Email automation allows you to",
     { text: "deliver the right message at the perfect moment", href: "/services/email-marketing" },
-    ", without lifting a finger. Whether it’s a welcome email, an abandoned cart reminder, or a birthday greeting, automation keeps your audience engaged while saving you time.",
+    ", without anyone sending it by hand. Whether it’s a welcome email, an abandoned cart reminder, a birthday greeting or",
+    { text: "a follow-up on a quote that hasn’t been answered", href: "/quote-follow-up" },
+    ", automation keeps your audience engaged while saving you time.",
   ] },
   { kind: "p", text: [
-    "➡️",
-    { text: "Bonus:", bold: true },
-    "Automated emails often get higher open and click rates because they’re timely and highly relevant.",
+    { text: "Why it works:", bold: true },
+    "An automated email goes out right after something happened, so it arrives while the reader still remembers why they signed up, asked or bought. Check your own open and click numbers to see how much that is worth for your list.",
   ] },
   { kind: "h2", text: "6. You Can Track Everything, and Improve Fast" },
   { kind: "p", text: [
@@ -80,28 +80,28 @@ const body: Post["body"] = [
   ] },
   { kind: "p", text: "This data gives you instant feedback on what’s working (and what’s not), so you can fine-tune your strategy and keep improving engagement over time." },
   { kind: "p", text: [
-    "➡️",
     { text: "Look out for:", bold: true },
     "Patterns in subject lines, send times, and types of content that lead to the most engagement.",
   ] },
   { kind: "h2", text: "Final Thoughts: Don’t Underestimate the Inbox" },
-  { kind: "p", text: "Email marketing is more than just a tool for promotions. It’s a powerful way to create meaningful, lasting connections with your customers. When used strategically, it drives engagement, builds trust, and turns casual subscribers into loyal fans." },
-  { kind: "p", text: "So if you're looking to boost customer engagement, start by looking in your inbox. Your next big win might be just one email away." },
+  { kind: "p", text: "Email marketing is more than just a tool for promotions. It’s a way to stay in touch with customers between purchases. Used with a plan, it keeps people engaged, builds trust, and brings casual subscribers back as repeat customers." },
+  { kind: "p", text: "So if you want more engagement from the customers you already have, start with your inbox. A plain email sent at the right moment does more than a clever one sent late." },
   { kind: "p", text: [
     { text: "Need help with email strategy or automation?", bold: true },
     { text: "Let’s chat", href: "/contact-us" },
-    ". Whether you're building a list from scratch or want to increase your open rates, there’s always room to level up your email game.",
+    ". Whether you're building a list from scratch or want more of your emails opened, we can look at what you send today and what to change.",
   ] },
 ];
 
 export const howEmailMarketingHelps: Post = {
   slug: "how-email-marketing-helps-maximize-customer-engagement",
   title: "How Email Marketing Helps Maximize Customer Engagement",
-  description: "Maximize customer engagement with email marketing: learn how segmentation, personalization, automation, and analytics boost open rates, loyalty, and conversions.",
+  description: "How email marketing keeps customers engaged: personalization, segmentation, regular touchpoints, replies, automation, and the numbers worth tracking.",
   lede: "Six reasons email still beats social for keeping customers, and what to send.",
   category: "Email Marketing",
   // Fecha original de publicacion. No se toca: es parte de lo que se restaura.
   published: "2025-03-11",
+  updated: "2026-09-28",
   /** Destacada del WordPress. `alt` vacio a proposito: la imagen va dentro
    *  del enlace, pegada al titular que ya dice lo mismo, y describir una
    *  ilustracion generica ahi solo anade ruido a un lector de pantalla. */
