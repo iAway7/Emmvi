@@ -49,7 +49,7 @@ export function ContactPage({ locale }: { locale: Locale }) {
         >
           <div className="grid gap-8 rounded-lg bg-paper-panel p-9 min-[900px]:grid-cols-[1fr_auto_1fr] min-[900px]:items-stretch min-[900px]:gap-10 min-[900px]:p-16">
             <div className="min-[900px]:self-center">
-              <BookCallIllustration className="mb-6 w-full max-w-[300px]" />
+              <BookCallIllustration locale={locale} className="mb-6 w-full max-w-[300px]" />
               <h3 className="text-ink">{t.book.title}</h3>
               <p className={`mt-3 max-w-[34em] ${rowBody}`}>{t.book.body}</p>
               <div className="mt-6">

@@ -202,7 +202,7 @@ const es: ChromeCopy = {
       { href: "/es/#about", label: "Nosotros" },
       { href: "/es/#faq", label: "Preguntas" },
     ],
-    cta: "Reservar una llamada",
+    cta: "Reservar llamada",
   },
   menu: { open: "Abrir el menú", close: "Cerrar el menú", label: "Menú" },
   switcher: {
@@ -211,7 +211,7 @@ const es: ChromeCopy = {
   },
   footer: {
     tagline:
-      "Webs y los sistemas que las hacen funcionar por detrás, para pequeñas empresas de Europa y América.",
+      "Webs y los sistemas de detrás, para pequeñas empresas de Europa y América.",
     columns: [
       {
         title: "Empresa",
@@ -249,7 +249,7 @@ const es: ChromeCopy = {
     controller: "Responsable:",
     purpose: "Finalidad:",
     purposeText:
-      "responderte y presupuestar el trabajo, sobre la base de las medidas precontractuales que nos pides.",
+      "responderte y presupuestar el trabajo, como medida precontractual a petición tuya.",
     rights: "Tus derechos:",
     rightsText: "acceso, supresión y oposición en",
     complain: ", o reclamar ante la",

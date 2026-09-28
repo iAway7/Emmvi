@@ -120,6 +120,7 @@ export function HomePage({ locale }: { locale: Locale }) {
               se comia la pantalla entera. A 260 baja al 44% y el titular, el
               parrafo y el CTA caben con ella a la vista. */}
           <HomeIllustration
+            locale={locale}
             name="reply"
             label={t.hero.scene}
             className="max-md:mx-auto max-md:max-w-[260px]"
@@ -161,7 +162,7 @@ export function HomePage({ locale }: { locale: Locale }) {
         </section>
 
         <StorySection lavender flip title={t.lost.title} body={t.lost.body}>
-          <HomeIllustration name="chaos" label={t.lost.scene} />
+          <HomeIllustration name="chaos" locale={locale} label={t.lost.scene} />
         </StorySection>
 
         {/* El centro de la pagina: lo que le pasa a una solicitud. En
@@ -176,6 +177,7 @@ export function HomePage({ locale }: { locale: Locale }) {
               {t.services.lede}
             </p>
             <HomeIllustration
+              locale={locale}
               name="journey"
               label={t.services.scene}
               className="mx-auto mt-10 max-w-[1040px] max-md:hidden"
@@ -185,11 +187,11 @@ export function HomePage({ locale }: { locale: Locale }) {
         </section>
 
         <StorySection alt title={t.board.title} body={t.board.body}>
-          <HomeIllustration name="board" label={t.board.scene} />
+          <HomeIllustration name="board" locale={locale} label={t.board.scene} />
         </StorySection>
 
         <StorySection flip title={t.work.title} body={t.work.body}>
-          <HomeIllustration name="work" label={t.work.scene} />
+          <HomeIllustration name="work" locale={locale} label={t.work.scene} />
         </StorySection>
 
         {/* --night acaba en #2e2e2e, asi que el blanco al 80% aguanta hasta el
@@ -313,6 +315,7 @@ export function HomePage({ locale }: { locale: Locale }) {
               </div>
             </div>
             <HomeIllustration
+              locale={locale}
               name="call"
               label={t.call.scene}
               className="-mx-6 md:mx-0"

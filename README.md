@@ -768,6 +768,10 @@ páginas. Mientras tanto se llega a `/es/` solo por URL directa.
   `lib/chrome-copy.ts`. Los mensajes del formulario (validación, éxito, error)
   están en `lib/contact.ts` y la Server Action contesta en el idioma que le
   llega en el campo oculto `locale`.
+- **El español va más corto que el inglés a propósito.** Una frase española
+  ocupa un 20-30 % más, y en un h1 a tamaño display eso son dos líneas de más
+  en el móvil. Titulares de cuatro a seis palabras; lo que explica va al
+  párrafo. No es una traducción literal y no debe serlo.
 - **Las páginas traducidas son plantillas con diccionario**: la home y el
   contacto están en `components/pages/` con su texto en `lib/copy/`, tipado
   para que si el inglés gana una sección el español deje de compilar hasta
@@ -789,6 +793,17 @@ páginas. Mientras tanto se llega a `/es/` solo por URL directa.
 3. En la versión inglesa, pasar `path="/<ruta>"` a `SiteHeader` y `SiteFooter`,
    para que el selector, cuando vuelva, lleve a la equivalente.
 
+### Las escenas ilustradas
+
+El texto de las escenas de la home es `<text>` dentro del SVG, y en `/es/` se
+sustituye al vuelo con el mapa `spanish` de `components/home-illustrations.tsx`
+(clave: el texto inglés exacto; valor: el español). **Cada frase española es
+igual o más corta que la inglesa**, porque las cajas del dibujo no crecen: si
+hay que alargar alguna, se comprueba en la escena, no en la lista. Lo que no
+está en el mapa se queda en inglés (nombres, horas, códigos postales y las
+iniciales de los días del calendario, que comparten letra con los avatares del
+tablero).
+
 ### Lo que no está traducido
 
 - **Las cinco pantallas de servicio y /about-us**: son el posicionamiento
@@ -796,10 +811,6 @@ páginas. Mientras tanto se llega a `/es/` solo por URL directa.
   apuntan a las secciones de la home.
 - **El blog**: se publica solo, en inglés. El pie en español lo enlaza y lo
   dice.
-- **El texto dentro de las escenas ilustradas de la home**: es `<text>` en el
-  SVG (`components/home-illustrations.tsx`), así que es traducible, pero cada
-  frase en español es más larga y hay que revisar el encaje escena por escena.
-  El `aria-label` sí cambia de idioma.
 - **Las citas de los testimonios están traducidas.** Nombre y empresa quedan
   intactos. Si se prefiere dejarlas en el original, se cambian en
   `lib/copy/home.ts`.
@@ -847,10 +858,13 @@ Quitar `COMING_SOON` publica la home.
   White que firma el primer testimonio de `/services/website-design`) y
   `public/home/automation-flow.png`. El texto `[Screenshot of a site you
   built]`, que se renderizaba literalmente, ya no existe.
-- `/for/installers/` **sigue sin existir**, pero ya no la enlaza nadie: fuera
-  el enlace de la home y fuera la entrada del pie. El contenido sigue escrito
-  en `emmvi-for-installers.html` para cuando se monte; mientras tanto, la
-  frase de la home termina en "This is the one we have gone deepest on."
+- La página para instaladores **ya existe, en `/installers/`** (2026-09-28):
+  `app/(en)/installers/page.tsx`, composición en
+  `components/pages/installers.tsx` y texto en `lib/copy/installers.ts`.
+  Sigue el borrador "emmvi Installers.html" sección a sección, con la cabecera
+  y el pie del sitio. Nadie la enlaza todavía desde la home ni desde el pie:
+  es la página de destino del outreach. La demo del SMS del borrador no se
+  publicó: necesitaba un webhook de GoHighLevel que aún no existe.
 - Las tres cajas de línea discontinua de `/services/website-design`,
   `/services/email-marketing` y `/services/ppc` **decían "Placeholder. The
   Figma signs this quote with a client logo we cannot verify"** a la vista del

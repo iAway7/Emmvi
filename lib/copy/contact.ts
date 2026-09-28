@@ -85,22 +85,22 @@ const es: ContactCopy = {
   meta: {
     title: "Contacto",
     description:
-      "Cuéntanos qué intentas arreglar y te daremos una opinión sincera, o reserva una llamada de treinta minutos. Cada mensaje lo lee una persona y lo contesta una persona.",
+      "Cuéntanos qué intentas arreglar y te daremos una opinión sincera, o reserva treinta minutos. Cada mensaje lo lee y lo contesta una persona.",
   },
   hero: {
     title: "Habla con nosotros",
     lede:
-      "Cuéntanos qué intentas arreglar. Te daremos una opinión sincera: qué cambiaríamos, qué dejaríamos como está y si de verdad nos necesitas.",
+      "Cuéntanos qué intentas arreglar. Te diremos qué cambiaríamos, qué dejaríamos y si nos necesitas.",
   },
   book: {
     title: "Reserva la llamada",
     body:
-      "Treinta minutos. Miramos qué pasa hoy con una solicitud en tu web y te decimos qué cambiaríamos. Es la vía más rápida y cae directamente en el calendario.",
-    cta: "Reservar una llamada de 30 minutos",
+      "Treinta minutos. Miramos qué pasa hoy con una solicitud en tu web y te decimos qué cambiaríamos. Es la vía más rápida.",
+    cta: "Reservar 30 minutos",
   },
   or: "o",
   afterwards: {
-    title: "Qué pasa después de enviarlo",
+    title: "Qué pasa después",
     steps: [
       {
         n: "01",
@@ -109,30 +109,30 @@ const es: ContactCopy = {
       },
       {
         n: "02",
-        title: "Recibes una opinión sincera",
-        body: "Qué cambiaríamos, qué dejaríamos como está y si nos necesitas. A veces la respuesta es que no.",
+        title: "Una opinión sincera",
+        body: "Qué cambiaríamos, qué dejaríamos y si nos necesitas. A veces la respuesta es que no.",
       },
       {
         n: "03",
         title: "Una llamada si tiene sentido",
-        body: "Treinta minutos para verlo con calma. Sin presentaciones y sin nada que decidir en la propia llamada.",
+        body: "Treinta minutos para verlo con calma. Sin presentaciones y sin nada que decidir en la llamada.",
       },
     ],
   },
   notes: {
-    title: "Conviene saberlo antes de hablar",
+    title: "Antes de hablar",
     items: [
       {
         title: "No hacemos anuncios, SEO ni redes",
-        body: "Construimos la web y los sistemas que van detrás: formularios, CRM, respuestas inmediatas, seguimiento de presupuestos, peticiones de reseña e informes. Si lo que necesitas es alguien que gestione un presupuesto mensual de anuncios, dilo y te indicaremos a quién acudir en vez de quedarnos el trabajo.",
+        body: "Construimos la web y los sistemas de detrás: formularios, CRM, respuestas inmediatas, seguimiento, reseñas e informes. Si necesitas quien gestione anuncios, te diremos a quién acudir.",
       },
       {
-        title: "Los precios no están en la web",
-        body: "Lo que cuesta depende de lo que tenga que hacer la web y de cuánto seguimiento quieras automatizar. Ponemos una cifra después de la llamada, cuando sepamos cuál de las dos cosas es.",
+        title: "Sin precios en la web",
+        body: "Depende de lo que tenga que hacer la web y de cuánto seguimiento quieras automatizar. Ponemos cifra después de la llamada.",
       },
       {
         title: "Todo lo que construimos es tuyo",
-        body: "La web, el dominio y los datos de tus clientes son tuyos. Si te vas, te los llevas y te ayudamos con la mudanza.",
+        body: "La web, el dominio y los datos son tuyos. Si te vas, te los llevas y te ayudamos con la mudanza.",
       },
     ],
   },

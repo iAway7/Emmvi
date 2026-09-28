@@ -112,6 +112,7 @@ export const controller = {
  */
 const currentRoutes = [
   "/",
+  "/installers",
   "/contact-us",
   "/blog",
   "/privacy-policy",

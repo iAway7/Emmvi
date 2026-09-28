@@ -34,10 +34,10 @@ export const tools = [
  *    los clientes. Si alguien la revisa, que no la "corrija" a 10.
  */
 export const stats: Stat[] = [
-  { value: "10 yrs", label: { en: "In digital marketing", es: "En marketing digital" } },
-  { value: "5 yrs",  label: { en: "Building inside GoHighLevel", es: "Trabajando dentro de GoHighLevel" } },
+  { value: { en: "10 yrs", es: "10 años" }, label: { en: "In digital marketing", es: "En marketing digital" } },
+  { value: { en: "5 yrs", es: "5 años" }, label: { en: "Building inside GoHighLevel", es: "Dentro de GoHighLevel" } },
   { value: String(tools.length), label: { en: "Tools wired together", es: "Herramientas conectadas" } },
   // El 113 va al final, lejos del "10 yrs": dos cifras iguales pegadas se leen
   // como una repeticion, no como dos datos.
-  { value: "113",    label: { en: "Businesses we have built for", es: "Negocios para los que hemos construido" } },
+  { value: "113",    label: { en: "Businesses we have built for", es: "Negocios atendidos" } },
 ];

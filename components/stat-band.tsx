@@ -17,7 +17,8 @@ import type { Locale } from "@/lib/i18n";
  */
 export type Stat = {
   /** La cifra. Corta: se lee de un vistazo o no se lee. */
-  value: string;
+  /** Por idioma cuando lleva unidad ("10 yrs" / "10 años"); suelto si es solo cifra. */
+  value: string | Record<Locale, string>;
   /** Que cuenta, en mayusculas y monoespaciada como en la referencia. */
   label: Record<Locale, string>;
 };
@@ -43,7 +44,7 @@ export function StatBand({
         <div key={s.label.en}>
           <dt className="sr-only">{s.label[locale]}</dt>
           <dd className="m-0">
-            <span className={`block text-stat ${numero}`}>{s.value}</span>
+            <span className={`block text-stat ${numero}`}>{typeof s.value === "string" ? s.value : s.value[locale]}</span>
             <span
               aria-hidden="true"
               className={`mt-3 block font-mono text-small tracking-[0.06em] uppercase ${etiqueta}`}

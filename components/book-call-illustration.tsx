@@ -4,6 +4,7 @@
  * con texto grande para verse a unos 300px, que es el tamano al que va.
  * Sin fecha concreta: solo las iniciales de los dias. Ver components/scene.tsx.
  */
+import type { Locale } from "@/lib/i18n";
 import { Scene, type SceneData } from "@/components/scene";
 
 const scene: SceneData = {
@@ -12,12 +13,42 @@ const scene: SceneData = {
   markup: "<rect fill=\"#e6e6ea\" x=\"48\" y=\"58\" width=\"340\" height=\"250\" rx=\"26\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"30\" y=\"40\" width=\"340\" height=\"250\" rx=\"26\"/><text x=\"62\" y=\"90\" font-size=\"24\" font-weight=\"800\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">30-minute call</text><circle stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" cx=\"80\" cy=\"136\" r=\"20\"/><text x=\"80\" y=\"143\" font-size=\"17\" font-weight=\"500\" fill=\"#171717\" text-anchor=\"middle\" opacity=\"1\">M</text><circle stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" cx=\"138\" cy=\"136\" r=\"20\"/><text x=\"138\" y=\"143\" font-size=\"17\" font-weight=\"500\" fill=\"#171717\" text-anchor=\"middle\" opacity=\"1\">T</text><circle stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" cx=\"196\" cy=\"136\" r=\"20\"/><text x=\"196\" y=\"143\" font-size=\"17\" font-weight=\"500\" fill=\"#171717\" text-anchor=\"middle\" opacity=\"1\">W</text><circle stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" cx=\"254\" cy=\"136\" r=\"20\"/><text x=\"254\" y=\"143\" font-size=\"17\" font-weight=\"700\" fill=\"#171717\" text-anchor=\"middle\" opacity=\"1\">T</text><circle stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" cx=\"312\" cy=\"136\" r=\"20\"/><text x=\"312\" y=\"143\" font-size=\"17\" font-weight=\"500\" fill=\"#171717\" text-anchor=\"middle\" opacity=\"1\">F</text><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"62\" y=\"178\" width=\"276\" height=\"44\" rx=\"12\"/><text x=\"200\" y=\"207\" font-size=\"19\" font-weight=\"700\" fill=\"#171717\" text-anchor=\"middle\" opacity=\"1\">09:00</text><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#423af4\" x=\"62\" y=\"234\" width=\"276\" height=\"44\" rx=\"12\"/><text x=\"200\" y=\"263\" font-size=\"19\" font-weight=\"700\" fill=\"#ffffff\" text-anchor=\"middle\" opacity=\"1\">10:30</text><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" d=\"M300 246 l0 40 l11 -9 l8 18 l9 -4 l-8 -18 l15 -2 z\"/><g transform=\"rotate(8 408.0 68.0)\"><rect fill=\"#e6e6ea\" x=\"370\" y=\"30\" width=\"96\" height=\"96\" rx=\"21.12\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#dcdafe\" x=\"360\" y=\"20\" width=\"96\" height=\"96\" rx=\"21.12\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"382.0\" y=\"52.0\" width=\"36\" height=\"32\" rx=\"6\"/><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" d=\"M420.0 62.0 l14 -9 v30 l-14 -9 z\"/></g><g transform=\"rotate(4 400.0 235.0)\"><rect fill=\"#e6e6ea\" x=\"338\" y=\"208\" width=\"140\" height=\"70\" rx=\"35\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"330\" y=\"200\" width=\"140\" height=\"70\" rx=\"35\"/></g><g transform=\"rotate(4 400 235)\"><circle stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" cx=\"362\" cy=\"235\" r=\"14\"/><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"none\" d=\"M354 235 l6 6 l11 -12\"/><text x=\"386\" y=\"242\" font-size=\"18\" font-weight=\"700\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">Booked</text></g><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" d=\"M440 144 Q442.88 157.12 456 160 Q442.88 162.88 440 176 Q437.12 162.88 424 160 Q437.12 157.12 440 144 Z\"/><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#dcdafe\" d=\"M24 286 Q26.52 297.48 38 300 Q26.52 302.52 24 314 Q21.48 302.52 10 300 Q21.48 297.48 24 286 Z\"/>",
 };
 
-export function BookCallIllustration({ className }: { className?: string }) {
+/**
+ * Los dos textos de la escena, por idioma. Misma regla que en las escenas de
+ * la home (components/home-illustrations.tsx): el español igual o mas corto
+ * que el ingles, porque la caja no crece. Los dias (M T W T F) se quedan.
+ */
+const copy: Record<Locale, { texts: Record<string, string>; label: string }> = {
+  en: {
+    texts: {},
+    label:
+      "Booking the 30-minute call: a day picked, 10:30 selected, and the call marked as booked.",
+  },
+  es: {
+    texts: { "30-minute call": "Llamada de 30 min", Booked: "Hecho" },
+    label:
+      "Reserva de la llamada de 30 minutos: un día elegido, las 10:30 seleccionadas y la llamada marcada como hecha.",
+  },
+};
+
+export function BookCallIllustration({
+  locale = "en",
+  className,
+}: {
+  locale?: Locale;
+  className?: string;
+}) {
+  const { texts, label } = copy[locale];
+  const markup = scene.markup.replace(
+    /(<text[^>]*>)([^<]+)(<\/text>)/g,
+    (match, open, text, close) =>
+      text in texts ? `${open}${texts[text]}${close}` : match,
+  );
   return (
     <Scene
       id="book-call"
-      scene={scene}
-      label="Booking the 30-minute call: a day picked, 10:30 selected, and the call marked as booked."
+      scene={{ ...scene, markup }}
+      label={label}
       className={className}
     />
   );

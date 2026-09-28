@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { posts } from "@/lib/posts";
+import { posts, readingMinutes } from "@/lib/posts";
 import { pageMetadata } from "@/lib/site";
 
 /**
@@ -102,9 +102,16 @@ export default function BlogIndex() {
                       llevan su propia composicion y un badge flotando tapa lo
                       que haya debajo. Sobre papel no molesta a nada y ademas
                       no depende del contraste de cada foto. */}
-                  <p className="inline-flex w-fit items-center rounded-sm bg-violet-wash px-2.5 py-1 text-small font-medium text-violet">
-                    {post.category}
-                  </p>
+                  <div className="flex items-center gap-3">
+                    <p className="inline-flex w-fit items-center rounded-sm bg-violet-wash px-2.5 py-1 text-small font-medium text-violet">
+                      {post.category}
+                    </p>
+                    {/* Los minutos se cuentan del cuerpo (lib/posts.ts), no se
+                        escriben a mano: asi no se quedan viejos al editar. */}
+                    <p className="text-small text-ink-soft">
+                      {readingMinutes(post.body)} min
+                    </p>
+                  </div>
                   <h3 className="mt-2 text-ink group-hover:text-violet">
                     {post.title}
                   </h3>

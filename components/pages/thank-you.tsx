@@ -49,12 +49,11 @@ export const thankYouCopy = {
   },
   es: {
     title: "Gracias",
-    description:
-      "Tu mensaje ha llegado. Lo lee una persona, y tendrás respuesta.",
-    lede: "Tu mensaje ha llegado. Lo lee una persona: ni una cola ni un bot.",
-    book: "Reservar la llamada ahora",
-    home: "Volver a la portada",
-    nothingElse: "No hay nada más que hacer. Si prefieres escribir otra vez, la dirección es",
+    description: "Tu mensaje ha llegado. Lo lee una persona y te contestamos.",
+    lede: "Tu mensaje ha llegado. Lo lee una persona, no un bot.",
+    book: "Reservar la llamada",
+    home: "Volver al inicio",
+    nothingElse: "No hay nada más que hacer. Si prefieres escribir, la dirección es",
   },
 } satisfies Record<Locale, Record<string, string>>;
 

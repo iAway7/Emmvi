@@ -75,15 +75,16 @@
      la home) y el lede se iba a 21px. */
   --text-display: clamp(2.25rem, 1.2rem + 3.5vw, 4rem);           /* 36 → 64px */
   --text-display--line-height: 1.06;
-  /* -2.8px a 64px, que es donde se eligio. En em para que acompane al
-     clamp: con el valor fijo, a 36px el apretado subia del 4.4% al 7.8%. */
-  --text-display--letter-spacing: -0.0437em;
+  /* -3.8px a 64px, que es donde se eligio. En em para que acompane al
+     clamp: con el valor fijo en px, al encoger la letra el apretado
+     relativo se dispara. */
+  --text-display--letter-spacing: -0.0594em;
   --text-display--font-weight: 800;
 
   --text-h2: clamp(1.75rem, 0.8875rem + 2.875vw, 3.1875rem);      /* 28 → 51px */
   --text-h2--line-height: 1.1;
-  /* -1.8px a 51px. Mismo motivo que el display. */
-  --text-h2--letter-spacing: -0.0353em;
+  /* -2.8px a 51px. Mismo motivo que el display. */
+  --text-h2--letter-spacing: -0.0549em;
   --text-h2--font-weight: 800;
 
   --text-h3: clamp(1.375rem, 1.3rem + 0.25vw, 1.5rem);            /* 22 → 24px */
@@ -301,6 +302,27 @@
     .ppc-chip--ccw {
       animation-direction: reverse;
     }
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Recorrido de /installers (components/quote-timeline.tsx): el nodo activo
+   late. Solo transform y opacity, y con reduced motion no late.
+   -------------------------------------------------------------------------- */
+@keyframes tl-pulse {
+  from {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  to {
+    transform: scale(2.3);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .tl-pulse {
+    animation: tl-pulse 1.8s ease-out infinite;
   }
 }
 

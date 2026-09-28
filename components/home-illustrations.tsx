@@ -4,6 +4,7 @@
  * en movil lo sustituye JourneySteps, en HTML.
  */
 import { Scene, type SceneData } from "@/components/scene";
+import type { Locale } from "@/lib/i18n";
 
 const scenes: Record<SceneName, SceneData> = {
   "reply": { viewBox: "0 0 1440 1000", mobileViewBox: "946 26 466 646", markup: "<path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"none\" d=\"M250 300 H470\"/><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"none\" d=\"M200 360 V600\"/><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"none\" d=\"M1000 740 H1300\"/><rect fill=\"#e6e6ea\" x=\"458\" y=\"178\" width=\"560\" height=\"640\" rx=\"36\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#f1f1f3\" x=\"440\" y=\"160\" width=\"560\" height=\"640\" rx=\"36\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"470\" y=\"200\" width=\"500\" height=\"560\" rx=\"18\"/><text x=\"506\" y=\"262\" font-size=\"30\" font-weight=\"700\" fill=\"#171717\">Get a quote</text><text x=\"506\" y=\"316\" font-size=\"20\" fill=\"#5c5c66\">What do you need?</text><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"506\" y=\"332\" width=\"428\" height=\"58\" rx=\"12\"/><text x=\"528\" y=\"370\" font-size=\"21\" fill=\"#171717\">EV charger, driveway parking</text><text x=\"506\" y=\"436\" font-size=\"20\" fill=\"#5c5c66\">Postcode</text><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"506\" y=\"452\" width=\"200\" height=\"58\" rx=\"12\"/><text x=\"528\" y=\"490\" font-size=\"21\" fill=\"#171717\">LS6 2AB</text><rect x=\"506\" y=\"548\" width=\"300\" height=\"16\" rx=\"8\" fill=\"#e6e6ea\"/><rect x=\"506\" y=\"580\" width=\"220\" height=\"16\" rx=\"8\" fill=\"#e6e6ea\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#171717\" x=\"750\" y=\"640\" width=\"190\" height=\"62\" rx=\"12\"/><text x=\"845\" y=\"680\" font-size=\"22\" font-weight=\"600\" fill=\"#ffffff\" text-anchor=\"middle\">Send request</text><rect fill=\"#e6e6ea\" x=\"968\" y=\"48\" width=\"440\" height=\"620\" rx=\"48\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"950\" y=\"30\" width=\"440\" height=\"620\" rx=\"48\"/><rect x=\"1120\" y=\"54\" width=\"100\" height=\"14\" rx=\"7\" fill=\"#171717\"/><text x=\"990\" y=\"120\" font-size=\"20\" fill=\"#5c5c66\">Messages</text><text x=\"1350\" y=\"120\" font-size=\"20\" fill=\"#5c5c66\" text-anchor=\"end\">21:47</text><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#f1f1f3\" d=\"M990 150 h270 a22 22 0 0 1 22 22 v96 a22 22 0 0 1 -22 22 h-248 a22 22 0 0 1 -22 -22 v-118 z\"/><text x=\"1012\" y=\"190\" font-size=\"17\" fill=\"#5c5c66\">Quote request \u00b7 website</text><text x=\"1012\" y=\"224\" font-size=\"21\" fill=\"#171717\">Price for an EV charger,</text><text x=\"1012\" y=\"254\" font-size=\"21\" fill=\"#171717\">driveway parking?</text><text x=\"1170\" y=\"336\" font-size=\"18\" fill=\"#5c5c66\" text-anchor=\"middle\">21:47 \u00b7 34 seconds later</text><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#423af4\" d=\"M1062 368 h286 a22 22 0 0 1 22 22 v140 l0 0 h-286 a22 22 0 0 1 -22 -22 v-118 a22 22 0 0 1 22 -22 z\"/><text x=\"1084\" y=\"408\" font-size=\"17\" fill=\"#ffffff\" opacity=\"0.8\">You</text><text x=\"1084\" y=\"442\" font-size=\"21\" fill=\"#ffffff\">Thanks Mark, got it. Survey</text><text x=\"1084\" y=\"472\" font-size=\"21\" fill=\"#ffffff\">call tomorrow at 9am?</text><text x=\"1084\" y=\"502\" font-size=\"21\" fill=\"#ffffff\">Reply CHANGE if not.</text><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"990\" y=\"570\" width=\"360\" height=\"52\" rx=\"26\"/><text x=\"1016\" y=\"603\" font-size=\"19\" fill=\"#5c5c66\">Message</text><g transform=\"rotate(-9 200 300)\"><rect fill=\"#e6e6ea\" x=\"150\" y=\"256\" width=\"112\" height=\"112\" rx=\"24\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" x=\"140\" y=\"246\" width=\"112\" height=\"112\" rx=\"24\"/><circle stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" cx=\"196\" cy=\"302\" r=\"32\"/><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"none\" d=\"M196 284 V302 L210 312\"/></g><g transform=\"rotate(8 1348 740)\"><rect fill=\"#e6e6ea\" x=\"1308\" y=\"698\" width=\"96\" height=\"96\" rx=\"20\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#dcdafe\" x=\"1300\" y=\"690\" width=\"96\" height=\"96\" rx=\"20\"/><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"none\" d=\"M1324 742 L1374 716 L1356 764 L1348 744 Z\"/></g><rect fill=\"#e6e6ea\" x=\"32\" y=\"620\" width=\"600\" height=\"340\" rx=\"36\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"14\" y=\"602\" width=\"600\" height=\"340\" rx=\"36\"/><text x=\"56\" y=\"664\" font-size=\"28\" font-weight=\"700\" fill=\"#171717\">What happens next</text><rect x=\"38\" y=\"690\" width=\"552\" height=\"62\" rx=\"14\" fill=\"#f7f1df\"/><circle stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" cx=\"80\" cy=\"721\" r=\"16\"/><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"none\" d=\"M72 721 l6 6 l11 -12\"/><text x=\"110\" y=\"729\" font-size=\"22\" fill=\"#171717\">Reply sent \u00b7 34 s</text><circle stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" cx=\"80\" cy=\"794\" r=\"16\"/><text x=\"110\" y=\"802\" font-size=\"22\" fill=\"#171717\">Quote follow-up \u00b7 day 2</text><circle stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" cx=\"80\" cy=\"864\" r=\"16\"/><text x=\"110\" y=\"872\" font-size=\"22\" fill=\"#171717\">Review request \u00b7 after the job</text><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" d=\"M880 780 q4 22 24 26 q-20 4 -24 26 q-4 -22 -24 -26 q20 -4 24 -26 z\"/><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" d=\"M700 900 q3 16 18 19 q-15 3 -18 19 q-3 -16 -18 -19 q15 -3 18 -19 z\"/><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#dcdafe\" d=\"M1400 880 q3 16 18 19 q-15 3 -18 19 q-3 -16 -18 -19 q15 -3 18 -19 z\"/>" },
@@ -16,16 +17,126 @@ const scenes: Record<SceneName, SceneData> = {
 
 export type SceneName = "reply" | "chaos" | "journey" | "board" | "work" | "call";
 
+/**
+ * Texto de las escenas en español. Clave: el texto exacto del <text> en
+ * ingles, tal como esta en el markup (con las entidades, `&#x27;`). Valor:
+ * lo que se pinta en /es/.
+ *
+ * **Cada frase española es igual o mas corta que la inglesa**, medida en
+ * caracteres, porque las cajas del dibujo no crecen: un texto mas largo se
+ * sale del bocadillo o pisa al de al lado. Por eso "Send request" es "Enviar"
+ * y no "Enviar solicitud", y "2 missed calls" es "2 perdidas". Si hace falta
+ * alargar alguna, hay que comprobarla en la escena, no en la lista.
+ *
+ * Lo que no esta aqui se queda como esta: nombres, horas, codigos postales, y
+ * las iniciales de los dias del calendario (M T W T F), que comparten letra
+ * con las iniciales de los avatares del tablero y no se pueden sustituir a
+ * ciegas.
+ */
+const spanish: Record<string, string> = {
+  // reply
+  "Get a quote": "Pide precio",
+  "What do you need?": "¿Qué necesitas?",
+  "EV charger, driveway parking": "Cargador coche, en garaje",
+  Postcode: "C. postal",
+  "Send request": "Enviar",
+  Messages: "Mensajes",
+  "Quote request · website": "Solicitud · web",
+  "Price for an EV charger,": "¿Precio de un cargador",
+  "driveway parking?": "para el garaje?",
+  "21:47 · 34 seconds later": "21:47 · 34 s después",
+  You: "Tú",
+  "Thanks Mark, got it. Survey": "Gracias Mark. ¿Visita",
+  "call tomorrow at 9am?": "mañana a las 9?",
+  "Reply CHANGE if not.": "Responde NO si no.",
+  Message: "Mensaje",
+  "What happens next": "Qué pasa después",
+  "Reply sent · 34 s": "Respuesta · 34 s",
+  "Quote follow-up · day 2": "Seguimiento · día 2",
+  "Review request · after the job": "Reseña · tras el trabajo",
+  // chaos
+  "Hi, are you free Thursday": "Hola, ¿puedes el jueves",
+  "to look at the boiler?": "ver la caldera?",
+  Unread: "Sin leer",
+  "2 missed calls": "2 perdidas",
+  "While you were on the roof": "Mientras estabas arriba",
+  Inbox: "Correo",
+  "Re: Quote for solar panels": "Re: Presupuesto solar",
+  "Just checking you got this?": "¿Te llegó el presupuesto?",
+  "call Sarah back??": "llamar a Sarah??",
+  "quote - Leeds job": "presupuesto Leeds",
+  "EV charger guy?": "el del cargador?",
+  "Voicemail · 0:48": "Buzón · 0:48",
+  "New number": "Desconocido",
+  // journey
+  "Request in": "Solicitud",
+  "Price for an EV charger?": "¿Precio de un cargador?",
+  "From your website": "Desde tu web",
+  "Reply sent": "Respuesta",
+  "Survey call tomorrow, 9am?": "¿Visita mañana a las 9?",
+  "Sent automatically": "Enviado solo",
+  "Day 2": "Día 2",
+  "Quote follow-up": "Seguimiento",
+  "Any questions on the quote?": "¿Dudas con el presupuesto?",
+  "Day 9": "Día 9",
+  "Review request": "Pedir reseña",
+  "Mind leaving us a review?": "¿Nos dejas una reseña?",
+  // board
+  New: "Nueva",
+  "EV charger": "Cargador",
+  Today: "Hoy",
+  Quoted: "Enviada",
+  "Heat pump": "Aerotermia",
+  "Day 5": "Día 5",
+  Won: "Venta",
+  "Solar + battery": "Solar + batería",
+  Mon: "Lun",
+  "Review asked": "Reseña pedida",
+  Done: "Fin",
+  "Every request lands here": "Todas caen aquí",
+  // work
+  "You own all of it": "Todo es tuyo",
+  "The website": "La web",
+  "The domain": "El dominio",
+  "The customer data": "Los datos",
+  "Built, hosted and": "Hecha, alojada",
+  "looked after by us": "y mantenida",
+  "Changes when you need them": "Cambios cuando haga falta",
+  // call
+  "Book a 30-minute call": "Reserva 30 minutos",
+  "Thursday 1 October": "Jueves 1 de octubre",
+  "What happens in 30 minutes": "Qué pasa en 30 minutos",
+  "We look at your site today": "Miramos tu web de hoy",
+  "No slide deck": "Sin rodeos",
+  "We follow one request through": "Seguimos una solicitud",
+  "From form to reply": "De web a respuesta",
+  "We tell you what we&#x27;d change": "Te decimos qué cambiaríamos",
+  "Even if you don&#x27;t hire us": "Aunque no nos contrates",
+};
+
+/** Sustituye el contenido de cada <text> que tenga traduccion. */
+function translate(markup: string): string {
+  return markup.replace(
+    /(<text[^>]*>)([^<]+)(<\/text>)/g,
+    (match, open, text, close) =>
+      text in spanish ? `${open}${spanish[text]}${close}` : match,
+  );
+}
+
 export function HomeIllustration({
   name,
   label,
+  locale = "en",
   className,
 }: {
   name: SceneName;
   label: string;
+  locale?: Locale;
   className?: string;
 }) {
-  return (
-    <Scene id={name} scene={scenes[name]} label={label} className={className} />
-  );
+  const scene =
+    locale === "es"
+      ? { ...scenes[name], markup: translate(scenes[name].markup) }
+      : scenes[name];
+  return <Scene id={name} scene={scene} label={label} className={className} />;
 }

@@ -228,58 +228,64 @@ const en: HomeCopy = {
   },
 };
 
+/**
+ * El español va mas corto que el ingles a proposito, no solo traducido: una
+ * frase española ocupa un 20-30 % mas que la inglesa, y en un h1 a tamaño
+ * display eso son dos lineas de mas en el movil. Titulares de cuatro a seis
+ * palabras; lo que explica va en el parrafo. Ver PRODUCT.md.
+ */
 const es: HomeCopy = {
   meta: {
-    title: "emmvi · Cada solicitud de presupuesto respondida en menos de un minuto",
+    title: "emmvi · Cada solicitud, respondida en un minuto",
     description:
-      "Construimos la web que recibe la solicitud y el sistema que hay detrás: la respuesta inmediata, el seguimiento del presupuesto y la petición de reseña.",
+      "La web que recibe la solicitud y el sistema que responde, persigue el presupuesto y pide la reseña.",
   },
   hero: {
-    title: "Cada solicitud de presupuesto respondida en menos de un minuto",
+    title: "Cada solicitud, respondida en un minuto",
     lede:
-      "Construimos la web que recibe la solicitud y el sistema que responde, hace seguimiento del presupuesto y pide la reseña.",
-    cta: "Reservar una llamada de 30 minutos",
+      "La web que recibe la solicitud y el sistema que responde, persigue el presupuesto y pide la reseña.",
+    cta: "Reservar 30 minutos",
     seeMore: "Ver qué pasa con una solicitud",
     scene:
-      "Una solicitud de presupuesto para un cargador de coche eléctrico enviada desde una web a las 21:47, respondida por mensaje 34 segundos después, con el seguimiento del presupuesto y la petición de reseña en cola.",
+      "Una solicitud de presupuesto para un cargador de coche eléctrico, enviada desde la web a las 21:47 y respondida por mensaje 34 segundos después, con el seguimiento y la petición de reseña en cola.",
   },
   tools: {
-    title: "Las herramientas en las que trabajamos",
+    title: "Las herramientas que ya usas",
     body: "Trabajamos dentro de lo que ya pagas.",
   },
   lost: {
     title: "Dónde se pierde el trabajo",
     body:
-      "No en la obra. En las horas después de que llegue la solicitud, mientras estás en un tejado y el teléfono va en el bolsillo.",
+      "No en la obra. En las horas siguientes a la solicitud, con el teléfono en el bolsillo.",
     scene:
-      "Un WhatsApp sin leer, dos llamadas perdidas, catorce correos sin abrir, un mensaje de voz de un número nuevo y una hoja de libreta que dice llamar a Sarah.",
+      "Un WhatsApp sin leer, dos llamadas perdidas, catorce correos sin abrir, un buzón de voz de un número nuevo y una hoja de libreta que dice llamar a Sarah.",
   },
   services: {
     title: "Qué pasa con una solicitud",
     lede: "Del formulario a la reseña, sin que nadie tenga que acordarse.",
     scene:
-      "Entra una solicitud a las 21:47, la respuesta sale 34 segundos después, el presupuesto tiene seguimiento el día 2 y se pide una reseña el día 9.",
+      "Entra una solicitud a las 21:47, la respuesta sale 34 segundos después, el presupuesto se persigue el día 2 y la reseña se pide el día 9.",
   },
   board: {
-    title: "Todas las solicitudes en un solo sitio",
+    title: "Todo en un solo tablero",
     body:
-      "Web, llamadas, WhatsApp y correo caen en un mismo tablero, cada una con responsable y fecha. Se acabó la libreta.",
+      "Web, llamadas, WhatsApp y correo, cada uno con responsable y fecha. Se acabó la libreta.",
     scene:
-      "Un tablero con columnas Nueva, Presupuestada, Ganada y Reseña pedida, con una tarjeta por trabajo, alimentado por WhatsApp, llamadas, correo y el formulario de la web.",
+      "Un tablero con columnas Nueva, Presupuestada, Ganada y Reseña pedida, una tarjeta por trabajo, alimentado por WhatsApp, llamadas, correo y el formulario de la web.",
   },
   work: {
     title: "Bien hecha, y tuya",
     body:
-      "Diseño, desarrollo y alojamiento, a nuestro cargo. La web, el dominio y los datos de tus clientes son tuyos. Si te vas, te los llevas.",
+      "Diseño, desarrollo y alojamiento, a nuestro cargo. La web, el dominio y los datos son tuyos. Si te vas, te los llevas.",
     scene:
-      "La portada de jbzbeats.com, una web que construimos, en una ventana de navegador, junto a una tarjeta que dice que el cliente es dueño de la web, el dominio y los datos de clientes.",
+      "La portada de jbzbeats.com, una web que construimos, en un navegador, junto a una tarjeta que dice que el cliente es dueño de la web, el dominio y los datos.",
   },
   about: {
     title: "Conoce a emmvi",
     body:
-      "emmvi construye webs y los sistemas que las hacen funcionar por detrás, desde Valencia y desde Argentina. Diseño, desarrollo y automatización se hacen en casa: hablas con quien hace el trabajo y nada pasa por un proveedor que no conoces.",
+      "Webs y los sistemas que van detrás, desde Valencia y desde Argentina. Diseño, desarrollo y automatización en casa: hablas con quien hace el trabajo.",
     timezones:
-      "Trabajar en las dos zonas horarias cubre casi toda la jornada laboral de clientes en Europa y América.",
+      "Dos zonas horarias cubren casi toda la jornada de clientes en Europa y América.",
   },
   who: {
     title: "Con quién trabajamos",
@@ -287,30 +293,30 @@ const es: HomeCopy = {
       {
         title: "Instaladores y servicios a domicilio",
         body:
-          "Solar, cargadores de coche eléctrico, seguridad, climatización. Es donde más hemos profundizado.",
+          "Solar, cargadores, seguridad, climatización. Donde más hemos profundizado.",
       },
       {
         title: "Clínicas y consultas privadas",
         body:
-          "Citas, recordatorios y seguimiento de presupuestos, con el cuidado extra que piden los datos de salud.",
+          "Citas, recordatorios y seguimiento, con el cuidado que piden los datos de salud.",
       },
       {
         title: "Agencias que necesitan quien construya",
         body:
-          "Construimos con tu nombre. Tú mantienes la relación con el cliente; nosotros hacemos el trabajo y no nos metemos en medio.",
+          "Construimos con tu nombre. Tú llevas al cliente; nosotros, el trabajo.",
       },
     ],
     note:
-      "Si no estás en esta lista, dilo en la llamada. Te diremos con sinceridad si somos los indicados.",
+      "Si no estás en la lista, dilo en la llamada. Te diremos si somos los indicados.",
   },
   testimonials: {
     eyebrow: "Testimonios",
-    title: "Lo que dicen nuestros clientes",
+    title: "Lo que dicen los clientes",
     items: [
       {
         title: "Por fin llegan clientes",
         quote:
-          "Gustavo y Nico hacen un gran trabajo. Estoy muy contento con las varias webs que me han construido. Tienen muy buen ojo para el diseño y se centran en la experiencia de uso, para que todo no solo se vea bien sino que sea fácil de navegar. Son buenos, fiables y fáciles de tratar.",
+          "Gustavo y Nico hacen un gran trabajo. Estoy muy contento con las webs que me han construido. Tienen buen ojo para el diseño y cuidan la experiencia de uso: todo se ve bien y es fácil de navegar. Buenos, fiables y fáciles de tratar.",
         name: "Jared White",
         org: "JBZ Beats",
         photo: "/testimonials/jared-white.png",
@@ -319,7 +325,7 @@ const es: HomeCopy = {
       {
         title: "Automatización que funciona",
         quote:
-          "Me ahogaba en trabajo manual y le pedí ayuda a Nico con las automatizaciones. Montó flujos de correo, seguimientos y pequeños sistemas que ni sabía que necesitaba. Ahora todo está mucho más ordenado. Muy agradecida, esto me cambió el negocio.",
+          "Me ahogaba en trabajo manual y le pedí ayuda a Nico con las automatizaciones. Montó flujos de correo, seguimientos y pequeños sistemas que ni sabía que necesitaba. Ahora todo está más ordenado. Me cambió el negocio.",
         name: "Adriana Patania",
         org: "Gimnasio local",
         photo: "/testimonials/adriana-patania-1.png",
@@ -328,7 +334,7 @@ const es: HomeCopy = {
       {
         title: "Un rediseño sin fricción",
         quote:
-          "Gus me ayudó a rediseñar mi web y, la verdad, quedó mucho mejor de lo que imaginaba. Se ve limpia, carga rápido y funciona genial en el móvil. Escuchó de verdad lo que necesitaba y el proceso fue muy fácil. Lo recomiendo sin dudar.",
+          "Gus rediseñó mi web y quedó mucho mejor de lo que imaginaba. Limpia, rápida y funciona genial en el móvil. Escuchó lo que necesitaba y el proceso fue muy fácil. Lo recomiendo.",
         name: "Alicia Ryz",
         org: "Tienda online",
         photo: "/testimonials/alicia-ryz.png",
@@ -337,50 +343,50 @@ const es: HomeCopy = {
     ],
   },
   call: {
-    before: "Empieza con una llamada de ",
-    nowrap: "30 minutos",
+    before: "Empieza con una llamada",
+    nowrap: "",
     after: "",
     lede:
-      "Miramos tu web, seguimos una solicitud de principio a fin y te decimos qué cambiaríamos. Aunque no nos contrates.",
-    cta: "Reservar una llamada de 30 minutos",
+      "Treinta minutos. Miramos tu web, seguimos una solicitud y te decimos qué cambiaríamos. Aunque no nos contrates.",
+    cta: "Reservar 30 minutos",
     or: "o escríbenos",
     scene:
-      "Un calendario de reservas con las 10:30 seleccionadas, junto a lo que pasa en esos 30 minutos: miramos tu web, seguimos una solicitud y te decimos qué cambiaríamos.",
+      "Un calendario con las 10:30 seleccionadas, junto a lo que pasa en esos 30 minutos: miramos tu web, seguimos una solicitud y te decimos qué cambiaríamos.",
   },
   faq: {
     title: "Preguntas frecuentes",
     items: [
       {
         q: "¿Qué hacéis exactamente?",
-        a: "Dos cosas: diseñamos y construimos webs, y montamos el CRM y las automatizaciones que van detrás. Eso incluye la propia web, los formularios, las respuestas inmediatas, el seguimiento de presupuestos, las peticiones de reseña y los informes.",
+        a: "Dos cosas: diseñamos y construimos webs, y montamos el CRM y las automatizaciones de detrás. Eso incluye formularios, respuestas inmediatas, seguimiento de presupuestos, peticiones de reseña e informes.",
         open: true,
       },
       {
         q: "¿Encajáis con una empresa pequeña?",
-        a: "Es la mayor parte de nuestro trabajo. No estamos hechos para proyectos de gran empresa y no fingimos lo contrario. Si tu empresa es lo bastante pequeña como para que el dueño siga leyendo los mensajes que entran, seguramente encajamos.",
+        a: "Es la mayor parte de nuestro trabajo. No estamos hechos para gran empresa. Si el dueño sigue leyendo los mensajes que entran, seguramente encajamos.",
       },
       {
-        q: "Ya tengo web. ¿Necesito una nueva?",
-        a: "No siempre. A veces la web está bien y el problema es lo que pasa después de que alguien rellene el formulario. Te diremos cuál de las dos cosas es en la llamada.",
+        q: "Ya tengo web. ¿Necesito otra?",
+        a: "No siempre. A veces la web está bien y el problema es lo que pasa después del formulario. Te lo diremos en la llamada.",
       },
       {
-        q: "¿Funciona con el software que ya uso?",
-        a: "Normalmente sí. Trabajamos con GoHighLevel, Kickserv, Airtable, Stripe y casi cualquier herramienta con API. Si la tuya no se conecta, te lo diremos antes de que pagues nada.",
+        q: "¿Funciona con mi software?",
+        a: "Normalmente sí. Trabajamos con GoHighLevel, Kickserv, Airtable, Stripe y casi cualquier herramienta con API. Si la tuya no conecta, te lo diremos antes de que pagues nada.",
       },
       {
-        q: "¿De quién son la web y los datos de clientes?",
+        q: "¿De quién son la web y los datos?",
         a: "Tuyos. Si te vas, te llevas la web, el dominio y la base de datos, y te ayudamos a mover el alojamiento.",
       },
       {
         q: "¿Cómo empiezo?",
-        a: "Reserva una llamada de treinta minutos. Miramos qué pasa hoy con una solicitud en tu web y te decimos qué cambiaríamos. Sin presentaciones.",
+        a: "Reserva treinta minutos. Miramos qué pasa hoy con una solicitud en tu web y te decimos qué cambiaríamos. Sin presentaciones.",
       },
     ],
   },
   contact: {
     title: "Habla con nosotros",
     lede:
-      "Cuéntanos qué intentas arreglar. Te diremos qué haríamos y si merece la pena pagarnos por ello.",
+      "Cuéntanos qué intentas arreglar. Te diremos qué haríamos y si merece la pena pagarlo.",
   },
 };
 

@@ -31,10 +31,10 @@ export const notFoundCopy = {
   es: {
     title: "Página no encontrada",
     heading: "Esta página no existe",
-    lede: "Puede que el enlace esté mal o que la página se haya movido. Por tu parte no hay nada roto.",
-    home: "Ir a la portada",
+    lede: "El enlace está mal o la página se ha movido. Por tu parte no hay nada roto.",
+    home: "Ir al inicio",
     contact: "Escríbenos",
-    hint: "¿Buscas algo concreto? Todo está enlazado al pie de cualquier página.",
+    hint: "¿Buscas algo concreto? Está todo enlazado al pie de cada página.",
   },
 } satisfies Record<Locale, Record<string, string>>;
 

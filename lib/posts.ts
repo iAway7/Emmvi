@@ -107,6 +107,34 @@ export const ASIDE_LABELS = {
   important: "Important",
 } as const;
 
+/**
+ * Minutos de lectura, contados del cuerpo real y no estimados a ojo.
+ *
+ * 200 palabras por minuto: es el numero conservador que se usa para texto web
+ * —las horquillas habituales van de 200 a 250— y aqui interesa quedarse corto.
+ * Prometer 5 minutos y que sean 7 molesta; prometer 7 y que sean 5, no.
+ *
+ * Las imagenes no suman. El `aside` si: es texto que se lee.
+ *
+ * Minimo un minuto, porque "0 min" no informa de nada.
+ */
+function palabrasDe(r: Rich): number {
+  if (typeof r === "string") return r.trim().split(/\s+/).filter(Boolean).length;
+  return r.reduce(
+    (n, i) => n + palabrasDe(typeof i === "string" ? i : i.text),
+    0,
+  );
+}
+
+export function readingMinutes(body: readonly Block[]): number {
+  const palabras = body.reduce((n, b) => {
+    if (b.kind === "image") return n;
+    if (b.kind === "list") return n + b.items.reduce((m, i) => m + palabrasDe(i), 0);
+    return n + palabrasDe(b.text);
+  }, 0);
+  return Math.max(1, Math.round(palabras / 200));
+}
+
 export type Post = {
   /** Sin barras. Es la ruta: emmvi.com/<slug>. */
   slug: string;
