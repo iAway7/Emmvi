@@ -362,7 +362,7 @@ export default function PpcPage() {
               {/* El Figma escribe "matters most- whether", con guion corto
                   pegado. Es puntuación rota, no decisión de diseño. */}
               <p className="mt-6 max-w-[601px] text-copy text-pretty text-ink-soft">
-                We help you get found when and where it matters most &mdash;
+                We help you get found when and where it matters most,
                 whether that&rsquo;s on Google, Facebook, TikTok, LinkedIn, or any
                 other channel. Our paid advertising agency offers a variety of
                 services to help you reach your goals, including but not limited

@@ -20,7 +20,27 @@ const mapLabel: Record<Locale, string> = {
   es: "emmvi trabaja desde España y Argentina, para clientes de Europa y América",
 };
 
-export function MeetMap({ locale = "en" }: { locale?: Locale }) {
+export function MeetMap({
+  locale = "en",
+  tone = "dark",
+  pins = true,
+}: {
+  locale?: Locale;
+  /**
+   * `light` invierte los puntos: tinta translucida sobre papel en vez de
+   * blanco sobre panel oscuro. Los colores los pone globals.css, que gana a
+   * los atributos de presentacion del SVG, asi que el caso por defecto sigue
+   * pintandose igual aunque la hoja no cargue.
+   */
+  tone?: "dark" | "light";
+  /**
+   * `false` quita las dos chinchetas con su rotulo y deja solo los puntos
+   * violeta de cada pais. Para cuando el mapa va de fondo o ya hay algo
+   * encima que dice donde: en /about-us los rotulos caian sobre los
+   * retratos, y en /careers las fotos del equipo ocupan el sitio del pin.
+   */
+  pins?: boolean;
+}) {
   return (
     // Envoltorio para poder consultar el ancho DEL MAPA, no el de la ventana:
     // el mapa esta dibujado para 1200 de ancho y en media columna se queda en
@@ -32,7 +52,9 @@ export function MeetMap({ locale = "en" }: { locale?: Locale }) {
       xmlns="http://www.w3.org/2000/svg"
       role="img"
       aria-label={mapLabel[locale]}
-      className="meet-map block h-auto w-full"
+      className={`meet-map block h-auto w-full${
+        tone === "light" ? " meet-map--light" : ""
+      }`}
     >
       <path
         className="meet-map__land"
@@ -47,20 +69,24 @@ export function MeetMap({ locale = "en" }: { locale?: Locale }) {
         stroke="var(--color-violet)"
         strokeLinecap="round"
       />
-      <g className="meet-map__pin">
-        <circle cx="588" cy="125" r="17" fill="var(--color-violet)" fillOpacity=".2" />
-        <circle cx="588" cy="125" r="5" fill="var(--color-violet)" />
-        <text x="588" y="97" textAnchor="middle">
-          Spain
-        </text>
-      </g>
-      <g className="meet-map__pin">
-        <circle cx="387" cy="377" r="17" fill="var(--color-violet)" fillOpacity=".2" />
-        <circle cx="387" cy="377" r="5" fill="var(--color-violet)" />
-        <text x="359" y="384" textAnchor="end">
-          Argentina
-        </text>
-      </g>
+      {pins ? (
+        <>
+          <g className="meet-map__pin">
+            <circle cx="588" cy="125" r="17" fill="var(--color-violet)" fillOpacity=".2" />
+            <circle cx="588" cy="125" r="5" fill="var(--color-violet)" />
+            <text x="588" y="97" textAnchor="middle">
+              Spain
+            </text>
+          </g>
+          <g className="meet-map__pin">
+            <circle cx="387" cy="377" r="17" fill="var(--color-violet)" fillOpacity=".2" />
+            <circle cx="387" cy="377" r="5" fill="var(--color-violet)" />
+            <text x="359" y="384" textAnchor="end">
+              Argentina
+            </text>
+          </g>
+        </>
+      ) : null}
     </svg>
     </div>
   );

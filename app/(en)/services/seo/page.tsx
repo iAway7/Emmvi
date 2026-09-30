@@ -105,7 +105,7 @@ const packageTabs: PackageTab[] = [
   {
     title: "Keyword Research",
     heading: "Keyword Research Service",
-    body: "At emmvi, our team of SEO experts is dedicated to elevating your online presence. We employ a range of advanced tools, including Google Ads Keyword Planner, Ahrefs Keyword Generator, and cutting-edge AI-driven keyword research instruments to unearth the perfect keywords for your website, content, or online marketing initiatives. Keywords are the building blocks of online searches\u2014words and phrases people use to discover information, products, or services on the internet. By strategically targeting the most relevant keywords, you can amplify your visibility, drive more traffic, and increase conversions on major search engines such as Google, Bing, YouTube, Amazon, and beyond. Unlock the potential of your digital presence with our comprehensive keyword research services.",
+    body: "At emmvi, our team of SEO experts is dedicated to elevating your online presence. We employ a range of advanced tools, including Google Ads Keyword Planner, Ahrefs Keyword Generator, and cutting-edge AI-driven keyword research instruments to unearth the perfect keywords for your website, content, or online marketing initiatives. Keywords are the building blocks of online searches: the words and phrases people use to discover information, products, or services on the internet. By strategically targeting the most relevant keywords, you can amplify your visibility, drive more traffic, and increase conversions on major search engines such as Google, Bing, YouTube, Amazon, and beyond. Unlock the potential of your digital presence with our comprehensive keyword research services.",
   },
   {
     title: "On-page Optimization",

@@ -26,7 +26,7 @@ export const figmaVsXd: Post = {
     { kind: "h2", text: "What actually happened" },
     {
       kind: "p",
-      text: "In September 2022 Adobe announced it was buying Figma for around twenty billion dollars. Between the announcement and the deal closing, XD was effectively wound down — Adobe stopped active feature development and removed it from the main Creative Cloud plans, keeping it available to existing users as a single app.",
+      text: "In September 2022 Adobe announced it was buying Figma for around twenty billion dollars. Between the announcement and the deal closing, XD was effectively wound down. Adobe stopped active feature development and removed it from the main Creative Cloud plans, keeping it available to existing users as a single app.",
     },
     {
       kind: "p",
@@ -60,7 +60,7 @@ export const figmaVsXd: Post = {
       kind: "list",
       ordered: true,
       items: [
-        "Export the assets — images, icons, logos — and rebuild the layout in the new tool. Tedious, but the result is native and editable.",
+        "Export the assets (images, icons, logos) and rebuild the layout in the new tool. Tedious, but the result is native and editable.",
         "Use a third-party importer plugin. These get you most of the way and then leave you correcting text styles and spacing by hand.",
         "Export flat PDFs or images as a record. Not editable, but at least the design is not lost when the file stops opening.",
       ],

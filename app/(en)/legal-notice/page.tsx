@@ -100,7 +100,7 @@ export default function LegalNotice() {
           </p>
           <p className={p}>
             If you use the contact form, what you write is yours and you are
-            responsible for it &mdash; including for having the right to share
+            responsible for it, including for having the right to share
             any details about other people that you put in the message.
           </p>
 
@@ -111,8 +111,8 @@ export default function LegalNotice() {
             ordinary quoting and linking above.
           </p>
           <p className={p}>
-            Other companies&rsquo; names, logos and marks appear on this site
-            &mdash; the tools we use and the platforms we write about. They
+            Other companies&rsquo; names, logos and marks appear on this site:
+            the tools we use and the platforms we write about. They
             belong to their owners. We mention them to be specific about what we
             work with, and that mention is not a partnership, an endorsement or
             a certification unless the page says so in plain words.
@@ -128,7 +128,7 @@ export default function LegalNotice() {
             and say what we think of them. That is an opinion written at a point
             in time, from our own experience. It is not professional,
             technical, financial or legal advice, and nobody is paid to appear
-            in it &mdash; there are no affiliate links on this site.
+            in it. There are no affiliate links on this site.
           </p>
           <p className={p}>
             Software changes faster than articles do. Check the current terms,

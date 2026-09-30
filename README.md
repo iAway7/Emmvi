@@ -1382,13 +1382,23 @@ Us" en la nav y "Our Team" en el footer daban 404 hasta ahora.
   confirmar que se pueden defender en una llamada:
   - "Founded in 2017"
   - "over 8+ years of experience"
-  - los siete cargos, que son los del posicionamiento viejo (Gustavo sale como
-    *UI Designer*, no como fundador)
+  - dos cargos siguen siendo los del Figma: Camila y Facundo como *Software
+    Engineer* y *Sr. Software Engineer*. Los otros cinco los puso el usuario el
+    2026-10-01: Nico en *Marketing Operations*, Gustavo y Eze como *Product
+    Designer*, Lucas como *Motion Designer* y Araceli como *Social Media
+    Manager*. Ninguno de los siete dice "fundador", que es una decisión
+    pendiente, no un olvido
+- **El equipo nombra un servicio que el sitio no vende, y calla dos que sí.**
+  Araceli sale como *Social Media Manager* y el menú de servicios no tiene
+  redes: son web design, email marketing, SEO, PPC y automatización con
+  GoHighLevel, y lo único que toca redes es la parte pagada, dentro de PPC. Al
+  revés pasa con SEO y PPC: desde que Nico pasó a *Marketing Operations* nadie
+  en la página aparece llevándolos. Quien compare las dos páginas lo nota. Se
+  arregla por el lado que el usuario decida — añadiendo el servicio o
+  cambiando el cargo—, y de momento queda dicho aquí.
 - **Falta el retrato de Nicolas Mastromarino.** La entrega traía seis de siete;
   el suyo se exportó del propio Figma y se reescaló a los 191 px de los demás.
   Si existe el original, sustituir `public/figma/about-us/nicolas-mastromarino.png`.
-- **"Explore Opportunities" no tiene destino.** El Figma no lo enlaza y no hay
-  página de empleo: de momento lleva al formulario de contacto.
 - La cita del panel de contacto **sí es real** (Adriana Patania). El Figma repite
   ahí la de Email Marketing firmada con un logo sin verificar, y esta pantalla no
   tiene sección de testimonios donde compensarlo.

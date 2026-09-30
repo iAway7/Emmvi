@@ -1,5 +1,6 @@
 import type { Locale } from "@/lib/i18n";
-import { CONTACT_EMAIL } from "@/lib/site";
+import { CALENDLY_URL } from "@/lib/links";
+import { CONTACT_EMAIL, SITE_URL } from "@/lib/site";
 
 /**
  * Validacion y rate limiting del formulario de contacto.
@@ -147,4 +148,62 @@ export function escapeHtml(value: string) {
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
+}
+
+/**
+ * El acuse de recibo que le llega a quien rellena el formulario, en su idioma.
+ *
+ * Existe porque hasta 2026-09-30 el formulario solo avisaba hacia dentro: el
+ * visitante veia el mensaje de exito en pantalla y a partir de ahi, silencio.
+ * La primera consulta real que entro por aqui estuvo dos dias sin respuesta y
+ * sin nada en su bandeja que dijera que habia llegado a alguna parte.
+ *
+ * **El plazo que promete es una promesa.** Si deja de cumplirse hace mas dano
+ * que no decir nada, porque el visitante ya cuenta los dias. Se cambia aqui.
+ *
+ * No lleva imagenes a proposito: un logo remoto que no cargue deja un hueco
+ * roto en el primer correo que esa persona recibe de la empresa, y el texto se
+ * lee igual con las imagenes bloqueadas, que es como llega a un desconocido.
+ */
+const autoReplyCopy: Record<
+  Locale,
+  { subject: string; greeting: (name: string) => string; body: string[]; cta: string }
+> = {
+  en: {
+    subject: "Thanks, we got your message",
+    greeting: (name) => `Hi ${name},`,
+    body: [
+      "Thanks for getting in touch. Your message reached us and we read every one that comes through the site.",
+      "We normally reply within one working day. If you would rather talk it through sooner, you can book a 30 minute call:",
+    ],
+    cta: "Book a 30 minute call",
+  },
+  es: {
+    subject: "Gracias, hemos recibido tu mensaje",
+    greeting: (name) => `Hola ${name}:`,
+    body: [
+      "Gracias por escribirnos. Tu mensaje nos ha llegado y leemos todos los que entran por la web.",
+      "Normalmente respondemos en un día laborable. Si prefieres hablarlo antes, puedes reservar una llamada de 30 minutos:",
+    ],
+    cta: "Reservar una llamada de 30 minutos",
+  },
+};
+
+export function buildAutoReply(locale: Locale, name: string) {
+  const copy = autoReplyCopy[locale];
+  const greeting = copy.greeting(name);
+
+  const html = [
+    `<div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:15px;line-height:1.6;color:#171717;">`,
+    `<p style="margin:0 0 16px;">${escapeHtml(greeting)}</p>`,
+    ...copy.body.map((line) => `<p style="margin:0 0 16px;">${escapeHtml(line)}</p>`),
+    `<p style="margin:0 0 28px;"><a href="${CALENDLY_URL}" style="color:#423af4;">${escapeHtml(copy.cta)}</a></p>`,
+    `<p style="margin:0;color:#666666;font-size:13px;">emmvi<br>`,
+    `<a href="${SITE_URL}" style="color:#666666;">emmvi.com</a></p>`,
+    `</div>`,
+  ].join("\n");
+
+  const text = [greeting, "", ...copy.body, "", CALENDLY_URL, "", "emmvi", SITE_URL].join("\n");
+
+  return { subject: copy.subject, html, text };
 }

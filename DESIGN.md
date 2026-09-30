@@ -462,6 +462,55 @@ social), que el precio no está en el sitio y sale después de la llamada, y que
 el cliente se lleva todo si se va. Decir el límite antes de la llamada es lo que
 hace creíble el resto.
 
+## Careers
+
+`app/(en)/careers/page.tsx`. Página del **sitio vivo**, sin frame en el Figma:
+el "Explore Opportunities" de About us apuntaba al formulario porque no había
+a dónde mandarlo, y desde el 2026-10-01 apunta aquí. Solo en inglés, como
+About us y los servicios.
+
+**Replica attio.com/careers**, por decisión del usuario, sección por sección
+y en el mismo orden: chapa + titular + CTA con la retícula de cuadrados →
+"Join a team of builders." → "We build inside…" → "Our values." en 2×2 →
+"Open positions." con la lista agrupada → "Right role, right time." con el
+avión de papel → "Keep up to date." en tarjetas. Del aspecto se toman la
+columna con guías discontinuas, las reglas de sección, el "01" apagado
+delante de cada puesto, el "[1]" en superíndice del grupo y el punto final
+de los títulos.
+
+**No hay puestos, y lo dice la línea de recuento** ("No open positions right
+now."), donde Attio dice cuántos casan con los filtros. Los filtros no se
+copian: con cero puestos serían controles muertos. Sí se copia el grupo
+"Open Applications [1]" con su fila "General Application", que es un
+`mailto:` a `CONTACT_EMAIL` con el asunto "Open application" puesto, para que
+en la bandeja no se confunda con una consulta comercial. El panel "Right
+role, right time" lleva el mismo enlace: no hay lista de correo a la que
+suscribirse.
+
+**El equipo sale con foto y sobre el mapa**, por indicación del usuario
+(2026-10-01): donde Attio pone la nube de avatares y la cita de un empleado,
+aquí va el `MeetMap` en claro con las siete fotos de About us apiladas sobre
+cada país, Gustavo, Araceli y Facundo en España y el resto en Argentina. Es la
+excepción consciente a "no decir cuántos somos" de PRODUCT.md: en una página
+de empleo, quien va a escribir tiene derecho a ver con quién trabajaría.
+
+El mapa va **sin chinchetas** (`pins={false}`, añadido para esto): los
+rótulos "Spain" y "Argentina" caían sobre las fotos, y en About us, donde el
+mapa va de fondo del equipo, sobre los retratos. Quedan los puntos violeta de
+cada país, que es lo único que tiene que leerse.
+
+Lo demás que de Attio no se copia: el vídeo (no hay), la cita de un empleado
+(no se inventa) y los logos de otras empresas en "We've sharpened our skills
+at…" (la voz pide nombres de herramientas, no logotipos: van seis nombres en
+gris en la misma fila).
+
+**Sin formulario.** El `<ContactForm>` valida y avisa para una petición de
+presupuesto (art. 6.1.b); una candidatura es otro tratamiento con otra base.
+Hasta que haya un puesto que lo justifique, va por correo.
+
+Enlazada desde la columna "Company" del pie y en `currentRoutes` de
+`lib/site.ts`, así que entra en el sitemap. No está en la nav del header.
+
 ## Imagery
 
 Tres ilustraciones del propio Figma, no de stock, entregadas por el usuario ya
@@ -1162,6 +1211,40 @@ líneas superpuestas en 83 px: un filete de 1 px de punta a punta y los primeros
 tinta bajo el titular de la tercera. Se dibuja con dos `<span>`, no con un SVG:
 son dos rectángulos de color plano.
 
+**Las tres se apilan al hacer scroll.** Cada una se queda clavada arriba y la
+siguiente pasa por encima, que es lo que convierte tres bloques de texto
+seguidos en una sola secuencia. No está en el Figma: es una decisión de esta
+implementación, y la única de la pantalla que no sale del archivo.
+
+Es `position: sticky` y nada más — ni JS, ni animación, ni `animation-timeline`.
+Tres detalles lo sostienen, y los tres se rompen por omisión:
+
+- **Fondo opaco en las tres.** Las dos claras no tenían ninguno y dejaban ver la
+  banda oscura por debajo.
+- **Nada de z-index entre ellas.** Al ser las tres elementos posicionados, cada
+  una pinta sobre la anterior por orden del DOM. Quien sí lo necesita es la
+  sección de después: sin posicionar se pinta *por debajo* de lo clavado, y
+  "Our Team" desaparecía tras la última banda. Lleva `relative z-10` y fondo
+  propio.
+- **El contenedor `.band-stack`.** Una banda solo se queda clavada dentro de su
+  bloque contenedor. Sin él, el contenedor es `<main>` y las tres se quedan
+  clavadas hasta el pie de página.
+
+La tercera no llega a clavarse —cuando le tocaría, el contenedor ya se ha
+acabado—, así que el recorrido es: la oscura se clava, "Our mission" la tapa y
+se clava, "The team behind" tapa a esa y sigue de largo. Es el comportamiento
+normal del efecto, no un fallo: la última banda es la que entrega la página al
+resto.
+
+**Solo a partir de 900 px y con movimiento no reducido.** En móvil las bandas
+miden más que el viewport y apilar lo que no cabe esconde texto en vez de
+enseñarlo. Fuera de ahí quedan las tres secciones seguidas de siempre.
+
+Las entradas `reveal` conviven con el apilado porque terminan antes: su rango
+acaba en `cover 28 %`, y a esa altura la banda todavía está a media pantalla de
+clavarse. Si alguna vez se alarga ese rango, la animación se congelaría al
+quedar la banda fija.
+
 ### Las tarjetas de valores
 
 Tres columnas de 380 px con 78 de hueco a 1296 de ancho, que aquí van en
@@ -1222,10 +1305,64 @@ de las otras tres pantallas dejaría la página entera sin una sola voz de
 cliente. Va la de **Adriana Patania**, que es real y habla del trabajo de Nico,
 que es de quien va esta página.
 
-Lo que sí se conserva del archivo, sin tocar: "Founded in 2017", "8+ years of
-experience" y los siete cargos. Son afirmaciones sobre el propio equipo, no
-prueba social prestada — mismo criterio que "A team of certified paid
-advertising experts" en PPC. Quedan señaladas en el README para confirmarlas.
+Lo que sí se conserva del archivo, sin tocar: "Founded in 2017" y "8+ years of
+experience". Son afirmaciones sobre el propio equipo, no prueba social
+prestada — mismo criterio que "A team of certified paid advertising experts" en
+PPC. Quedan señaladas en el README para confirmarlas.
+
+De los cargos ya solo dos son los del Figma, los de Camila y Facundo. Los otros
+cinco los puso el usuario: Nico en Marketing Operations, Gustavo y Eze como
+Product Designer, Lucas como Motion Designer y Araceli como Social Media
+Manager. Lucas edita vídeo y hace motion graphics, y *Motion Designer* nombra
+las dos cosas a la vez. El de Araceli nombra un canal que el sitio no vende;
+está señalado en el README.
+
+El ancho no restringe: la columna mide 218 px y a 16 px entra en una línea
+hasta "Brand Designer & Illustrator" (203 px), así que estos títulos se eligen
+por lo que dicen y no por lo que caben.
+
+### El mapa de fondo de "Our Team"
+
+El mismo `MeetMap` de la home y de `/careers`, en una variante clara. La sección
+se llama *Worldwide Digital Marketing Professionals* y el mapa lo enseña en vez
+de repetirlo.
+
+El componente gana un `tone`. El trazo blanco sigue siendo un atributo del SVG
+—así el caso por defecto se pinta bien aunque la hoja no cargue— y la variante
+clara lo tapa desde CSS, que gana a los atributos de presentación.
+
+**La variante clara la comparte con `/careers`, y ahí el mapa es figura, no
+fondo**: ocupa su propio bloque con las fotos del equipo encima de cada país.
+Así que lo que este uso necesita de menos va en `.team-map`, el envoltorio, y
+no en `.meet-map--light`. Bajarlo en la variante habría apagado también el de
+`/careers`.
+
+Dos ajustes, los dos por lo mismo —aquí hay contenido encima y allí no:
+
+- **Los puntos al 7 %, no al 16 %.** Al 16 caían justo detrás de los nombres y
+  los cargos y competían con ellos a tamaño real. Al 7 pesan más o menos como
+  `--color-line`, que es lo que se le pide a una textura.
+- **España y Argentina pierden el violeta.** Aquí el mapa va sin pines
+  (`pins={false}`), así que esas dos manchas se quedaban sin nada que las
+  explicara: a tamaño real se leían como un artefacto de render debajo de un
+  cargo. En `/careers` siguen en violeta, que es donde sí dicen algo.
+
+**`-z-10`, no `z-0`.** La sección ya es un contexto de apilado por su `z-10`
+—el que la pone por encima de las bandas apiladas—, y dentro de un contexto los
+hijos de z negativo pintan encima del fondo del propio contenedor pero debajo
+del contenido en flujo. Es exactamente el sitio del mapa: sobre el `bg-paper` y
+bajo los retratos, sin envolver el contenido en otro `div`.
+
+Los cuatro bordes se desvanecen con dos máscaras cruzadas (`mask-composite:
+intersect`). Sin eso el mapa se corta en seco —Alaska a la izquierda, y arriba
+una línea de flotación de puntos justo bajo el párrafo— y se delata como una
+imagen puesta detrás en vez de leerse como fondo.
+
+Por debajo de 900 px no se dibuja. Ahí la retícula es de dos columnas y la
+sección mide el triple de alto, así que el mapa quedaría como una franja suelta
+en mitad de la página; y su propia container query engorda los puntos a 6 px
+para sobrevivir al ancho de móvil, que es justo lo contrario de lo que se le
+pide de fondo.
 
 ### Contrastes medidos
 

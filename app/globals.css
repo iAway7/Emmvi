@@ -365,6 +365,32 @@ html:has(dialog[open]) {
   }
 }
 
+/* --------------------------------------------------------------------------
+   Las tres bandas de texto de /about-us se apilan al hacer scroll: cada una se
+   queda clavada arriba y la siguiente pasa por encima.
+
+   Es `position: sticky` y nada mas. Sin JS, sin animacion, y sin z-index entre
+   ellas: al ser las tres elementos posicionados, cada una pinta sobre la
+   anterior por orden del DOM. Lo que si necesita z-index —y fondo opaco— es la
+   seccion que viene detras, que sin posicionar se pintaria por debajo y
+   quedaria escondida tras la ultima banda. Eso va en el JSX.
+
+   El contenedor acota el efecto: una banda solo se queda clavada dentro de su
+   bloque contenedor, asi que al acabar `.band-stack` las tres se sueltan y el
+   resto de la pagina scrollea normal. Sin contenedor se quedarian clavadas
+   hasta el pie.
+
+   Solo a partir de 900px: en movil las bandas miden mas que el viewport, y
+   apilar lo que no cabe esconde texto en vez de ensenarlo. Y solo con
+   movimiento no reducido, como el resto de lo que se mueve al scrollear.
+   -------------------------------------------------------------------------- */
+@media (min-width: 900px) and (prefers-reduced-motion: no-preference) {
+  .band-stack > section {
+    position: sticky;
+    top: 0;
+  }
+}
+
 /* Entrada del hero (home-lab). Titular, lede, botones y escena aparecen en
    ese orden, con 90 ms entre uno y otro: dice que leer primero. Solo
    transform y opacity, y bajo reduced-motion no se mueve nada. */
@@ -854,6 +880,51 @@ html:has(dialog[open]) {
   stroke-width: 5px;
   stroke-opacity: 0.5;
   stroke-linejoin: round;
+}
+
+/* Variante clara, para fondo de papel: /about-us lo usa detras de "Our Team".
+   Los puntos pasan de blancos a tinta muy diluida —es fondo, no ilustracion, y
+   compite con siete retratos— y el halo del rotulo se invierte con ellos. El
+   violeta de Spain y Argentina no se toca: es lo unico que tiene que leerse. */
+.meet-map--light .meet-map__land {
+  stroke: var(--color-ink);
+  stroke-opacity: 0.16;
+}
+
+.meet-map--light .meet-map__pin text {
+  fill: var(--color-ink);
+  stroke: #fff;
+  stroke-opacity: 0.85;
+}
+
+/* De fondo, los bordes del mapa se cortan en seco —Alaska a la izquierda, el
+   Pacifico a la derecha, y arriba una linea de flotacion de puntos justo bajo
+   el parrafo— y eso lo delata como una imagen puesta detras. Se desvanecen por
+   los cuatro lados. Dos mascaras que se cruzan: `intersect` deja pasar solo lo
+   que las dos dejan pasar, asi que las esquinas se apagan las primeras. */
+/* De fondo hay que bajarlo mas que en /careers, donde el mapa es figura y no
+   tiene nada encima. Al 16 % los puntos caian justo detras de los nombres y
+   los cargos y competian con ellos; al 7 % quedan en textura de papel, mas o
+   menos el peso de --color-line.
+
+   Y Espana y Argentina pierden el violeta. Aqui el mapa va sin pines, asi que
+   esas dos manchas se quedaban sin nada que las explicara: a tamano real se
+   leian como un artefacto de render debajo de un cargo, no como un mapa. En
+   /careers siguen en violeta, que es donde si dicen algo — las fotos del
+   equipo van encima. */
+.team-map .meet-map__land,
+.team-map .meet-map__here {
+  stroke: var(--color-ink);
+  stroke-opacity: 0.07;
+}
+
+.team-map {
+  mask-image: linear-gradient(to bottom, transparent, #000 14% 86%, transparent),
+    linear-gradient(to right, transparent, #000 10% 90%, transparent);
+  mask-composite: intersect;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent),
+    linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+  -webkit-mask-composite: source-in;
 }
 
 /* Consulta el ancho del propio mapa, no el de la ventana: en la tarjeta de

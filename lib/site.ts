@@ -114,6 +114,7 @@ const currentRoutes = [
   "/",
   "/installers",
   "/contact-us",
+  "/careers",
   "/blog",
   "/privacy-policy",
   "/legal-notice",

@@ -435,7 +435,11 @@ export default function GoHighLevelAutomation() {
               <h1 className="mt-4 text-ink">
                 Your GoHighLevel, answering in under a minute
               </h1>
-              <p className="mt-5 max-w-[46ch] text-lede text-pretty text-ink-soft">
+              {/* `text-body` (18px fijo) y no `text-lede`, que escala hasta 24
+                  en escritorio. El token, no una medida a mano: lo obliga la
+                  regla `no-restricted-syntax` de ESLint, y asi el interlineado
+                  viene con el tamano en vez de quedarse el de la entradilla. */}
+              <p className="mt-5 max-w-[46ch] text-body text-pretty text-ink-soft">
                 You are already paying for the software. We build the part that
                 actually replies, chases and books, then hand it back to you
                 running.

@@ -3,7 +3,7 @@
 import Script from "next/script";
 import posthog from "posthog-js";
 
-const CALENDLY_URL = "https://calendly.com/emmvi/30min";
+import { CALENDLY_URL } from "@/lib/links";
 
 declare global {
   interface Window {

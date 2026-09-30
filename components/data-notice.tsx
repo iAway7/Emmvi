@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { chrome } from "@/lib/chrome-copy";
 import { localizePath, type Locale } from "@/lib/i18n";
-import { CONTACT_EMAIL, controller } from "@/lib/site";
+import { CONTACT_EMAIL } from "@/lib/site";
 
 /**
  * Primera capa del deber de informar (RGPD art. 13), junto al formulario.
@@ -36,6 +36,17 @@ import { CONTACT_EMAIL, controller } from "@/lib/site";
  *
  * Lo que NO se puede es quitarlo de esas dos paginas: ahi si es obligatorio.
  *
+ * **En prosa, sin rotulos "Controller:" / "Purpose:".** Esas etiquetas son el
+ * modelo de clausula de la AEPD: una convencion util en documentos largos, no
+ * una exigencia. El art. 13 pide que la informacion este, no que lleve
+ * titulillos. En cuatro lineas solo aportan ruido, y chocan con la voz del
+ * sitio —directo y llano, ver .claude/brand-voice-guidelines.md—.
+ *
+ * Sigue estando todo lo obligatorio y en este orden: quien trata los datos,
+ * para que, con que base ("el paso previo a cualquier contrato", que es el
+ * art. 6.1.b dicho en llano), los derechos y donde ejercerlos, ante quien
+ * reclamar, y donde esta el resto. Si se reescribe, que no se caiga ninguno.
+ *
  * **Corta a proposito.** El modelo por capas de la AEPD pide que la primera
  * sea *basica*: responsable, finalidad, base, derechos y donde esta el resto.
  * Destinatarios, plazos de conservacion y direccion completa viven en la
@@ -51,27 +62,23 @@ import { CONTACT_EMAIL, controller } from "@/lib/site";
  */
 export function DataNotice({ locale = "en" }: { locale?: Locale }) {
   const copy = chrome[locale].notice;
-  const strong = "font-semibold text-ink";
   const link = "text-ink underline underline-offset-[3px] hover:text-violet";
 
   return (
     <p className="mt-5 text-small text-pretty text-ink-soft">
-      <strong className={strong}>{copy.controller}</strong>{" "}
-      {controller.tradingName}. <strong className={strong}>{copy.purpose}</strong>{" "}
-      {copy.purposeText} <strong className={strong}>{copy.rights}</strong>{" "}
-      {copy.rightsText}{" "}
+      {copy.lead}{" "}
       <a href={`mailto:${CONTACT_EMAIL}`} className={link}>
         {CONTACT_EMAIL}
       </a>
-      {copy.complain}{" "}
+      {copy.middle}{" "}
       <a href="https://www.aepd.es" className={link}>
         AEPD
       </a>
-      . <strong className={strong}>{copy.rest}</strong>{" "}
+      {copy.tail}{" "}
       <Link href={localizePath("/privacy-policy", locale)} className={link}>
         {copy.privacy}
-      </Link>
-      .
+      </Link>{" "}
+      {copy.end}
     </p>
   );
 }

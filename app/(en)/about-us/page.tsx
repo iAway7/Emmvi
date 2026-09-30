@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 
 import { CtaLink } from "@/components/cta-link";
+import { MeetMap } from "@/components/meet-map";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { SalesForm } from "@/components/services/sales-form";
@@ -23,8 +24,8 @@ import { pageMetadata } from "@/lib/site";
  *    arriba.
  *  - La cita del panel de contacto es la de Email Marketing repetida y firmada
  *    con un logo de cliente sin verificar. Va una real.
- *  - "Explore Opportunities" no tiene destino en el archivo y no hay página de
- *    empleo: lleva al formulario.
+ *  - "Explore Opportunities" no tiene destino en el archivo: lleva a
+ *    /careers, que existe desde 2026-10-01.
  */
 
 export const metadata: Metadata = pageMetadata({
@@ -127,13 +128,13 @@ const values = [
  * otras seis.
  */
 const team = [
-  { name: "Nicolas Mastromarino", role: "SEO Analyst", photo: "nicolas-mastromarino" },
-  { name: "Gustavo Polin", role: "UI Designer", photo: "gustavo-polin" },
-  { name: "Ezequiel Cenicola", role: "UX Designer", photo: "ezequiel-cenicola" },
+  { name: "Nicolas Mastromarino", role: "Marketing Operations", photo: "nicolas-mastromarino" },
+  { name: "Gustavo Polin", role: "Product Designer", photo: "gustavo-polin" },
+  { name: "Ezequiel Cenicola", role: "Product Designer", photo: "ezequiel-cenicola" },
   { name: "Camila Garcia", role: "Software Engineer", photo: "camila-garcia" },
   { name: "Facundo Palombo", role: "Sr. Software Engineer", photo: "facundo-palombo" },
-  { name: "Araceli Villalba", role: "Graphic Designer", photo: "araceli-villalba" },
-  { name: "Lucas Burgos", role: "Social Media Strategist", photo: "lucas-burgos" },
+  { name: "Araceli Villalba", role: "Social Media Manager", photo: "araceli-villalba" },
+  { name: "Lucas Burgos", role: "Motion Designer", photo: "lucas-burgos" },
 ];
 
 export default function AboutUsPage() {
@@ -182,64 +183,97 @@ export default function AboutUsPage() {
           </ul>
         </section>
 
-        {/* --- About Us ------------------------------------------------ */}
-        {/* Banda a sangre en --color-ink, la única de esta pantalla. */}
-        <section className="bg-ink">
-          <div className={`reveal ${wrap} ${band}`}>
-            <p className={`${eyebrow} text-paper`}>About Us</p>
-            <div className="mt-4">
-              <Divider tone="violet-light" />
+        {/* --- Las tres bandas de texto -------------------------------- */}
+        {/* Se apilan al hacer scroll: cada una se queda clavada arriba y la
+            siguiente pasa por encima. Lo hace `position: sticky` desde
+            globals.css; aquí solo hace falta que las tres tengan fondo opaco y
+            que estén dentro del mismo contenedor, que es lo que suelta el
+            efecto al terminar. */}
+        <div className="band-stack">
+          {/* --- About Us ---------------------------------------------- */}
+          {/* Banda a sangre en --color-ink, la única de esta pantalla. */}
+          <section className="bg-ink">
+            <div className={`reveal ${wrap} ${band}`}>
+              <p className={`${eyebrow} text-paper`}>About Us</p>
+              <div className="mt-4">
+                <Divider tone="violet-light" />
+              </div>
+              <p className={`mt-6 ${lead30} text-paper`}>
+                At emmvi, we believe in simplicity and honesty. Founded in{" "}
+                {FOUNDED} by a team of professionals with over {yearsSinceFounding}{" "}
+                years of experience in digital marketing, design, and development,
+                our company was born out of a passion for helping entrepreneurs
+                establish effective online presences.
+              </p>
             </div>
-            <p className={`mt-6 ${lead30} text-paper`}>
-              At emmvi, we believe in simplicity and honesty. Founded in{" "}
-              {FOUNDED} by a team of professionals with over {yearsSinceFounding}{" "}
-              years of experience in digital marketing, design, and development,
-              our company was born out of a passion for helping entrepreneurs
-              establish effective online presences.
-            </p>
-          </div>
-        </section>
+          </section>
 
-        {/* --- Our mission --------------------------------------------- */}
-        {/* El archivo repite el rótulo del hero: allí es la chapa violeta y aquí
-            el antetítulo de banda. Se conservan los dos. */}
-        <section className="border-b border-line">
-          <div className={`reveal ${wrap} ${band}`}>
-            <p className={`${eyebrow} text-ink`}>Our mission</p>
-            <div className="mt-4">
-              <Divider tone="violet" />
+          {/* --- Our mission --------------------------------------------- */}
+          {/* El archivo repite el rótulo del hero: allí es la chapa violeta y aquí
+              el antetítulo de banda. Se conservan los dos. */}
+          <section className="border-b border-line bg-paper">
+            <div className={`reveal ${wrap} ${band}`}>
+              <p className={`${eyebrow} text-ink`}>Our mission</p>
+              <div className="mt-4">
+                <Divider tone="violet" />
+              </div>
+              <p className={`mt-6 ${lead30} text-ink-soft`}>
+                Our mission is to simplify the lives of entrepreneurs, from small
+                businesses to large agencies. We understand that establishing an
+                online presence can be overwhelming, which is why we offer
+                comprehensive services, including SEO, Email Marketing, Web Design,
+                and PPC, so you can focus on what you do best while we take care of
+                the rest.
+              </p>
             </div>
-            <p className={`mt-6 ${lead30} text-ink-soft`}>
-              Our mission is to simplify the lives of entrepreneurs, from small
-              businesses to large agencies. We understand that establishing an
-              online presence can be overwhelming, which is why we offer
-              comprehensive services, including SEO, Email Marketing, Web Design,
-              and PPC, so you can focus on what you do best while we take care of
-              the rest.
-            </p>
-          </div>
-        </section>
+          </section>
 
-        {/* --- The team behind ----------------------------------------- */}
-        <section className={`reveal ${wrap} ${band}`}>
-          <p className={`${eyebrow} text-ink`}>The team behind</p>
-          <h2 className={`mt-6 ${h2Class}`}>
-            Worldwide Digital Marketing Professionals.
-          </h2>
-          <div className="mt-4">
-            <Divider tone="ink" />
-          </div>
-          <p className={`mt-6 ${lead30} text-ink-soft`}>
-            Our story began when a group of experts decided to combine their
-            knowledge and experience in the digital world to establish emmvi.
-            After years of collaboration in the industry, we knew we could make a
-            difference by providing high-quality services with a focus on honesty
-            and transparency.
-          </p>
-        </section>
+          {/* --- The team behind --------------------------------------- */}
+          <section className="bg-paper">
+            <div className={`reveal ${wrap} ${band}`}>
+              <p className={`${eyebrow} text-ink`}>The team behind</p>
+              <h2 className={`mt-6 ${h2Class}`}>
+                Worldwide Digital Marketing Professionals.
+              </h2>
+              <div className="mt-4">
+                <Divider tone="ink" />
+              </div>
+              <p className={`mt-6 ${lead30} text-ink-soft`}>
+                Our story began when a group of experts decided to combine their
+                knowledge and experience in the digital world to establish emmvi.
+                After years of collaboration in the industry, we knew we could
+                make a difference by providing high-quality services with a focus
+                on honesty and transparency.
+              </p>
+            </div>
+          </section>
+        </div>
 
         {/* --- Our Team ------------------------------------------------ */}
-        <section className={`reveal ${wrap} py-16 lg:py-24`}>
+        {/* `relative z-10` y fondo propio: es la seccion que sube por encima
+            del apilado y lo tapa. Sin posicionar se pintaria por debajo. */}
+        <section
+          className={`reveal relative z-10 overflow-hidden bg-paper ${wrap} py-16 lg:py-24`}
+        >
+          {/* Mapa de fondo: el mismo de la home en su variante clara. La
+              sección se llama "Worldwide" y el mapa lo enseña en vez de
+              repetirlo.
+
+              `-z-10` dentro de la sección, que ya es un contexto de apilado por
+              su `z-10`: los hijos de z negativo pintan encima del fondo de la
+              sección pero debajo del contenido en flujo, que es justo lo que
+              hace falta. Con `z-0` taparía los retratos; sacándolo del contexto
+              se iría detrás del `bg-paper` y no se vería nada.
+
+              Decorativo: quién trabaja desde dónde ya lo anuncian el mapa de la
+              home y el de /careers, y aquí compite con siete nombres. */}
+          <div
+            aria-hidden="true"
+            className="team-map pointer-events-none absolute inset-x-0 top-1/2 -z-10 hidden -translate-y-1/2 min-[900px]:block"
+          >
+            <MeetMap tone="light" pins={false} />
+          </div>
+
           <h2 className={`text-center ${h2Class}`}>Our Team</h2>
           <p className="mx-auto mt-6 max-w-[658px] text-center text-body text-pretty text-ink-soft">
             emmvi started with helping people build awesome projects. Each day
@@ -302,9 +336,9 @@ export default function AboutUsPage() {
             <p className={`${lead30} text-ink-soft`}>
               Join us and shape the future of the web
             </p>
-            {/* El botón del Figma no tiene destino y no hay página de empleo:
-                lleva al formulario, que es donde llegaría la candidatura. */}
-            <CtaLink href="#contact">Explore Opportunities</CtaLink>
+            {/* El botón del Figma no tiene destino. Llevaba al formulario
+                mientras no hubo página de empleo; desde 2026-10-01 la hay. */}
+            <CtaLink href="/careers/">Explore Opportunities</CtaLink>
           </div>
         </section>
 

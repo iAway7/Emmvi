@@ -63,14 +63,24 @@ export type ChromeCopy = {
     sending: string;
     send: string;
   };
+  /**
+   * Aviso del art. 13, en prosa y sin rotulos tipo "Controller:". Esos son el
+   * modelo de clausula de la AEPD —una convencion util en documentos largos,
+   * no una exigencia legal— y en cuatro lineas solo hacen ruido. Ver el
+   * comentario de components/data-notice.tsx.
+   *
+   * Los tres tramos envuelven los dos enlaces (correo y AEPD) y el tercero
+   * cierra con el de la politica.
+   */
   notice: {
-    controller: string;
-    purpose: string;
-    purposeText: string;
-    rights: string;
-    rightsText: string;
-    complain: string;
-    rest: string;
+    /** Hasta el correo: quien, para que y con que base. */
+    lead: string;
+    /** Entre el correo y la AEPD. */
+    middle: string;
+    /** Entre la AEPD y el enlace a la politica. */
+    tail: string;
+    /** Cierra la frase despues del enlace. */
+    end: string;
     privacy: string;
   };
 };
@@ -146,6 +156,7 @@ const en: ChromeCopy = {
         title: "Company",
         links: [
           { href: "/about-us/", label: "About" },
+          { href: "/careers/", label: "Careers" },
           { href: "/blog/", label: "Blog" },
           { href: "/contact-us/", label: "Contact" },
         ],
@@ -175,14 +186,11 @@ const en: ChromeCopy = {
     send: "Send",
   },
   notice: {
-    controller: "Controller:",
-    purpose: "Purpose:",
-    purposeText:
-      "to answer you and quote for the work, on the basis of steps taken at your request before a contract.",
-    rights: "Your rights:",
-    rightsText: "access, erasure and objection at",
-    complain: ", or complain to the",
-    rest: "The rest:",
+    lead:
+      "What you send here goes to emmvi, and we use it to answer you and quote for the work. That is the step before any contract, which is what you came for. Ask to see it, change it or have it deleted at",
+    middle: ". If we handle it badly you can complain to the",
+    tail: ". The",
+    end: "has the rest.",
     privacy: "Privacy Policy",
   },
 };
@@ -246,14 +254,11 @@ const es: ChromeCopy = {
     send: "Enviar",
   },
   notice: {
-    controller: "Responsable:",
-    purpose: "Finalidad:",
-    purposeText:
-      "responderte y presupuestar el trabajo, como medida precontractual a petición tuya.",
-    rights: "Tus derechos:",
-    rightsText: "acceso, supresión y oposición en",
-    complain: ", o reclamar ante la",
-    rest: "El resto:",
+    lead:
+      "Lo que nos mandas aquí lo tratamos en emmvi para responderte y presupuestar el trabajo. Es el paso previo a cualquier contrato, que es a lo que vienes. Puedes pedir verlo, cambiarlo o que lo borremos en",
+    middle: ". Si lo hacemos mal, puedes reclamar ante la",
+    tail: ". El resto está en la",
+    end: ".",
     privacy: "Política de privacidad",
   },
 };

@@ -22,6 +22,28 @@ const noArbitraryTextSize = {
   rules: {
     "no-restricted-syntax": [
       "error",
+      // Nada de raya larga en texto del sitio. Ya se quitaron una vez
+      // ("Quitar las rayas largas de los textos del sitio", 6e9f503) y
+      // volvieron, asi que esto lo hace mecanico en vez de recordable.
+      //
+      // Solo mira literales de cadena, plantillas y texto JSX: los comentarios
+      // no son nodos del AST, asi que la prosa interna en castellano puede
+      // seguir usandolas sin que salte nada.
+      {
+        selector: "Literal[value=/\u2014/]",
+        message:
+          "Raya larga en texto del sitio. Usa un punto, una coma o parentesis.",
+      },
+      {
+        selector: "TemplateElement[value.raw=/\u2014/]",
+        message:
+          "Raya larga en texto del sitio. Usa un punto, una coma o parentesis.",
+      },
+      {
+        selector: "JSXText[value=/\u2014/]",
+        message:
+          "Raya larga en texto del sitio. Usa un punto, una coma o parentesis.",
+      },
       {
         selector: `Literal[value=/${ARBITRARY_TEXT_SIZE}/]`,
         message:

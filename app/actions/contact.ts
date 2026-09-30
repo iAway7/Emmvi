@@ -5,6 +5,7 @@ import { after } from "next/server";
 import { Resend } from "resend";
 
 import {
+  buildAutoReply,
   escapeHtml,
   formMessages,
   isRateLimited,
@@ -186,6 +187,36 @@ export async function submitContact(
       extras,
     };
   }
+
+  /**
+   * Acuse de recibo al visitante.
+   *
+   * Va en `after()` y con su propio try/catch a proposito: a estas alturas la
+   * consulta ya esta entregada al equipo, asi que si este correo falla no hay
+   * ningun motivo para enseñarle un error a quien acaba de escribir ni para
+   * que lo vuelva a enviar. Queda en los logs y ya.
+   *
+   * `replyTo` apunta al equipo y no a `fromEmail`: si el visitante responde a
+   * este correo, la respuesta tiene que caer donde alguien la lee.
+   */
+  after(async () => {
+    try {
+      const reply = buildAutoReply(locale, name);
+      const { error } = await resend.emails.send({
+        from: fromEmail,
+        to: email,
+        replyTo: toEmails,
+        subject: reply.subject,
+        html: reply.html,
+        text: reply.text,
+      });
+      if (error) {
+        console.error("[contact] Fallo el acuse de recibo:", error);
+      }
+    } catch (err) {
+      console.error("[contact] Fallo el acuse de recibo:", err);
+    }
+  });
 
   avisar(true);
 
