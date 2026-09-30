@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 
 import { CtaLink } from "@/components/cta-link";
 import { FaqAccordion, type FaqItem } from "@/components/faq-accordion";
@@ -410,17 +409,6 @@ export default function SeoPage() {
             <div className="grid items-center gap-12 min-[900px]:grid-cols-[minmax(0,460px)_minmax(0,1fr)] min-[900px]:gap-20">
               <div>
                 <SalesForm />
-                <p className="mt-5 max-w-[34em] text-small text-ink-soft">
-                  By submitting this form, I confirm that I have read and
-                  understood the emmvi{" "}
-                  <Link
-                    href="/privacy-policy/"
-                    className="text-ink underline underline-offset-[3px] hover:text-violet"
-                  >
-                    Privacy Statement
-                  </Link>
-                  .
-                </p>
               </div>
 
               <blockquote className="text-ink-soft">
