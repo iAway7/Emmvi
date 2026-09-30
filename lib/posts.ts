@@ -8,6 +8,7 @@ import { howToGetMore } from "@/content/posts/how-to-get-more-google-reviews";
 import { hvacCrm } from "@/content/posts/hvac-crm";
 import { missedCallTextBack } from "@/content/posts/missed-call-text-back";
 import { quoteFollowUp } from "@/content/posts/quote-follow-up";
+import { roofingCrm } from "@/content/posts/roofing-crm";
 import { solarCrm } from "@/content/posts/solar-crm";
 import { speedToLead } from "@/content/posts/speed-to-lead";
 import { streamlineLeadCaptureAnd } from "@/content/posts/streamline-lead-capture-and-sales-with-a-smarter-crm";
@@ -229,6 +230,7 @@ export type Post = {
  * content/rewrites/, sin publicar. Ver el README de esa carpeta.
  */
 export const posts: readonly Post[] = [
+  roofingCrm,
   crmForPlumbers,
   speedToLead,
   hvacCrm,
