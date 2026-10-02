@@ -1,5 +1,6 @@
 import { a5ProvenWaysTo } from "@/content/posts/5-proven-ways-to-get-more-leads-for-your-online-business";
 import { appointmentReminderText } from "@/content/posts/appointment-reminder-text";
+import { contractorWebsiteDesign } from "@/content/posts/contractor-website-design";
 import { crmForPlumbers } from "@/content/posts/crm-for-plumbers";
 import { emailAutomationAndFunnel } from "@/content/posts/email-automation-and-funnel-building-the-secret-to-driving-more-sales";
 import { harnessingAiWithoutCode } from "@/content/posts/harnessing-ai-without-code-how-crms-and-automation-tools-empower-online-businesses";
@@ -231,6 +232,7 @@ export type Post = {
  * content/rewrites/, sin publicar. Ver el README de esa carpeta.
  */
 export const posts: readonly Post[] = [
+  contractorWebsiteDesign,
   appointmentReminderText,
   roofingCrm,
   crmForPlumbers,
