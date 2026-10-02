@@ -526,10 +526,11 @@ delante (*"Resend , delivers"*), porque el salto de línea del código cuenta.
 
 ### Reescrituras
 
-`content/rewrites/` guarda ocho artículos escritos **antes** de recuperar el
-backup, cuando se daba por perdido el original. No se publican. Son la primera
-tanda de reescritura: sustituir un original es cambiar su `body` sin tocar
-`slug`, `title` ni `published`.
+`content/rewrites/` guardó ocho artículos escritos **antes** de recuperar el
+backup, cuando se daba por perdido el original. Siete se publicaron entre el 27
+y el 28 de septiembre de 2026 sustituyendo el `body` del original, sin tocar el
+`slug` ni `published`. La octava, la de Figma vs Adobe XD, se descartó el 2 de
+octubre de 2026. La carpeta ya no tiene nada pendiente.
 
 **`figma-vs-adobe-xd` ya no está publicado.** El original era de abril de 2025 y
 comparaba Figma con Adobe XD como si fueran dos rivales vivos; Adobe dejó XD en
@@ -542,9 +543,10 @@ mientras Google reintenta, y un redirect a la home sería un *soft 404* que
 además deja al visitante donde no quería ir. El explicativo es propio y dice
 por qué se cayó.
 
-**La reescritura de `content/rewrites/` sigue ahí y cuenta bien lo de XD.** Si
-se publica, la ruta `app/figma-vs-adobe-xd-…/route.ts` desaparece y el artículo
-vuelve con la URL intacta, que es lo único que esa URL tenía de valor.
+**El 410 es definitivo.** Hubo una reescritura en `content/rewrites/`, pero se
+descartó el 2 de octubre de 2026: era la mitad de larga que el original y un
+comparativo de dos herramientas de diseño no es lo que vende emmvi. La URL no
+vuelve.
 
 #### La ruta
 

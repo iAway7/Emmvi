@@ -17,9 +17,8 @@ import { gone } from "@/lib/gone";
  * que sirve para un servicio y no para un articulo. Mismo caso que
  * /cookie-preference/.
  *
- * **Hay una reescritura sin publicar** en `content/rewrites/` que cuenta bien
- * lo de XD. Si algun dia se publica, esta ruta desaparece y el articulo vuelve
- * a su sitio con la URL intacta, que es todo lo que esa URL tenia de valor.
+ * **Es definitivo.** Hubo una reescritura en `content/rewrites/`, pero se
+ * descarto el 2 de octubre de 2026: la URL no vuelve y esta ruta se queda.
  */
 export function GET() {
   return gone(

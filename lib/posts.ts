@@ -228,8 +228,9 @@ export type Post = {
  *
  * **Orden: el mas reciente primero.** Es lo que espera quien llega a un blog.
  *
- * Las ocho reescrituras que se hicieron antes de aparecer el backup estan en
- * content/rewrites/, sin publicar. Ver el README de esa carpeta.
+ * Las ocho reescrituras que se hicieron antes de aparecer el backup ya no estan
+ * pendientes: siete se publicaron y la de Figma vs Adobe XD se descarto. Ver el
+ * README de content/rewrites/.
  */
 export const posts: readonly Post[] = [
   contractorWebsiteDesign,
