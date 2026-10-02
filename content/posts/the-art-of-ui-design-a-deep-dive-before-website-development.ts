@@ -4,25 +4,26 @@ import type { Post } from "@/lib/posts";
  * Recuperado del backup del WordPress anterior (agosto de 2026), convertido
  * desde el marcado Gutenberg original.
  *
- * Texto intacto. Lo unico reescrito son los enlaces internos, que apuntaban a
- * rutas viejas: van al destino actual en vez de encadenar una redireccion, y
- * los que llevaban a una pagina retirada se quedan en texto llano.
+ * Revisado el 2026-10-02: InVision cerro a finales de 2024 y Adobe XD esta en
+ * modo mantenimiento desde 2023, asi que dejan de recomendarse como
+ * herramientas (con enlace a Adobe). Fuera el lenguaje de consultora
+ * ("magic", "pivotal", "seamless", "high-converting"). Misma estructura.
  */
 const body: Post["body"] = [
   { kind: "p", text: [
-    "In today’s digital age, the first impression of a website often dictates the user’s entire experience with it.",
+    "The first impression a website makes shapes much of what a visitor does next.",
     { text: "A great website doesn’t just function well", href: "/services/website-design" },
-    "; it also offers a smooth, intuitive, and visually appealing journey for its users. That’s where the magic of",
+    "; it is also easy to understand at a glance and pleasant to use. Getting there is the job of",
     { text: "UI (User Interface) design", bold: true },
-    "comes into play.",
+    ".",
   ] },
-  { kind: "p", text: "UI design isn’t just about creating aesthetically pleasing layouts and choosing pretty colors. It’s about creating a system that anticipates users’ needs, solves problems, and enhances their interactions. But before developers start coding, there’s a meticulous and strategic design process that sets the stage for a website’s success. This process not only requires creativity but a deep understanding of user psychology, business goals, and technology." },
-  { kind: "p", text: "In this article, we’ll explore the intricate UI design process that takes place before the development of any website, uncovering the essential steps and considerations that shape the final product." },
+  { kind: "p", text: "UI design isn’t just about attractive layouts and pretty colors. It is about building something that anticipates what visitors need, solves their problem and gets out of their way. Before developers write any code, there is a design process that decides most of how the site will work. It needs creativity, but also an understanding of how people behave, what the business needs from the site and what the technology can do." },
+  { kind: "p", text: "In this article, we’ll walk through the UI design process that happens before a website is developed: the steps, and what each one decides about the final product." },
   { kind: "h2", text: "1. Understanding the Users and Business Goals" },
   { kind: "p", text: [
-    "The first and most crucial step in the UI design process is",
+    "The first step in the UI design process, and the one the rest depends on, is",
     { text: "understanding the users", bold: true },
-    ". A website that is designed without knowledge of its target audience will inevitably fall short in providing a satisfying user experience. To start, UI designers must gather essential information through research and collaboration with stakeholders. This stage lays the groundwork for creating an interface that meets both business goals and user expectations.",
+    ". A website designed without knowing who it is for ends up designed for whoever made it. To start, UI designers gather information through research and conversations with the people who own the project. This stage is the groundwork for an interface that meets both the business’s goals and its visitors’ expectations.",
   ] },
   { kind: "h3", text: "a. User Research and Personas" },
   { kind: "p", text: [
@@ -50,7 +51,7 @@ const body: Post["body"] = [
     "are created. Personas are fictional, generalized representations of the website’s primary users, helping designers empathize with them and guide design decisions. These personas include key characteristics such as age, profession, challenges, preferences, and goals.",
   ] },
   { kind: "h3", text: "b. Business and Brand Goals" },
-  { kind: "p", text: "The user perspective is essential, but designers must also have a clear understanding of the business goals behind the website. Whether it’s increasing sales, capturing leads, or providing educational content, the UI design needs to align with these objectives." },
+  { kind: "p", text: "The user’s perspective comes first, but designers also need a clear picture of the business goals behind the website. Whether it’s increasing sales, capturing leads, or providing educational content, the UI design needs to align with these objectives." },
   { kind: "p", text: [
     "To accomplish this, designers often conduct",
     { text: "stakeholder interviews", bold: true },
@@ -73,23 +74,23 @@ const body: Post["body"] = [
       "of the site, which informs color schemes, typography, and overall visual style.",
     ],
   ] },
-  { kind: "p", text: "Understanding both the user’s needs and the business objectives allows UI designers to create a website that offers value to users while driving measurable results for the business." },
+  { kind: "p", text: "Understanding both the user’s needs and the business objectives lets UI designers build a site that is useful to visitors and does the job the business needs, whether that is a sale, a booking or a quote request." },
   { kind: "h2", text: "2. Wireframing and Prototyping" },
   { kind: "p", text: [
     "Once the research phase is complete, the next step is to create a blueprint for the website, ",
     { text: "wireframing", bold: true },
-    ". This is a critical stage in the UI design process that focuses on layout, content organization, and the structure of the website.",
+    ". This stage of the UI design process deals with layout, how the content is organised, and the structure of the website.",
   ] },
   { kind: "h3", text: "a. Wireframing: The Blueprint" },
   { kind: "p", text: "Wireframes are low-fidelity visual representations of a website’s layout. They act as a skeleton, showing where each element of the website: (navigation, buttons, images and text) will be placed. Wireframing is done in black-and-white, without detailed graphics or branding, as it is meant to emphasize functionality and user flow." },
   { kind: "p", text: [
-    "Wireframes can be created using design tools like",
-    { text: "Sketch", bold: true },
-    ",",
-    { text: "Adobe XD", bold: true },
-    ", or",
+    "Wireframes can be created in design tools like",
     { text: "Figma", bold: true },
-    ", and they typically feature:",
+    "or",
+    { text: "Sketch", bold: true },
+    ". Adobe XD was a common choice too, but Adobe has put it in",
+    { text: "maintenance mode", href: "https://helpx.adobe.com/support/xd.html" },
+    ", with no new features, so it is not a tool to start a new project in. Wireframes typically feature:",
   ] },
   { kind: "list", items: [
     [
@@ -116,17 +117,15 @@ const body: Post["body"] = [
   { kind: "p", text: [
     "Tools like",
     { text: "Figma", bold: true },
-    ",",
-    { text: "InVision", bold: true },
-    ", and",
+    "and",
     { text: "Marvel", bold: true },
-    "are commonly used to create prototypes that can be shared and tested with stakeholders or even real users.",
+    "are commonly used to create prototypes that can be shared and tested with the business or with real users. InVision, which older guides still recommend, shut down its design services at the end of 2024.",
   ] },
   { kind: "h2", text: "3. Visual Design and Branding" },
   { kind: "p", text: [
-    "Once the wireframes and prototypes have been tested and approved, the next step is to transform these blueprints into visually rich, polished designs. This is where the magic of",
+    "Once the wireframes and prototypes have been tested and approved, the next step is to turn these blueprints into finished designs. This is the job of",
     { text: "visual design", bold: true },
-    "comes into play, as the website’s aesthetics are finalized.",
+    ", where the look of the website is decided.",
   ] },
   { kind: "h3", text: "a. Typography and Color" },
   { kind: "p", text: [
@@ -134,7 +133,7 @@ const body: Post["body"] = [
     { text: "typography", bold: true },
     "and",
     { text: "color schemes", bold: true },
-    "plays a pivotal role in shaping the user’s experience.",
+    "shapes a large part of how the site feels to use.",
   ] },
   { kind: "list", items: [
     [
@@ -149,14 +148,14 @@ const body: Post["body"] = [
     ],
   ] },
   { kind: "h3", text: "b. Imagery and Iconography" },
-  { kind: "p", text: "Great UI design involves choosing imagery and iconography that enhances the overall experience. Images should be high-quality and optimized for fast loading times, while icons help break up text and provide intuitive visual cues for navigation." },
+  { kind: "p", text: "Good UI design uses imagery and iconography that help the visitor, not just decorate the page. Images should be high-quality and optimized for fast loading times, while icons help break up text and provide intuitive visual cues for navigation." },
   { kind: "p", text: [
     "UI designers will often create a",
     { text: "visual library", bold: true },
     "of icons, buttons, and other elements that maintain consistency throughout the site. This library ensures that every design element is aligned with the brand’s identity and creates a unified look and feel across pages.",
   ] },
   { kind: "h3", text: "c. Responsive Design" },
-  { kind: "p", text: "In today’s mobile-first world, a responsive design is crucial. A responsive UI ensures that the website looks great on devices of all sizes, from desktops to smartphones. Designers must account for various screen sizes and ensure that the layout adapts seamlessly without sacrificing functionality or aesthetics." },
+  { kind: "p", text: "Many visitors arrive on a phone, often first, so responsive design is not optional. A responsive UI works on screens of every size, from desktops to smartphones. Designers have to plan for those sizes and make sure the layout adapts without losing anything the visitor needs." },
   { kind: "p", text: "To achieve responsive design, UI designers often use flexible grids, scalable images, and media queries to ensure the website’s layout adjusts based on the device it’s viewed on." },
   { kind: "h2", text: "4. Design Handoff to Developers" },
   { kind: "p", text: [
@@ -171,23 +170,24 @@ const body: Post["body"] = [
   { kind: "aside", tone: "important", text: "This is general guidance, not a recommendation for every business. This is what a full design phase looks like, and a small site rarely needs all of it. Naming a tool is not an endorsement either: the steps matter more than the software you run them in." },
 
   { kind: "h2", text: "Final Thoughts" },
-  { kind: "p", text: "The UI design process is a foundational part of creating a successful website. By understanding the users and business goals, wireframing and prototyping the structure, refining the visual design, and collaborating closely with developers, designers lay the groundwork for an intuitive, engaging, and functional website." },
-  { kind: "p", text: "A strong UI design isn’t just about looking good. It’s about creating an experience that’s seamless, efficient, and tailored to the needs of the user. Whether you’re building a new website or redesigning an existing one, focusing on a thoughtful and thorough UI design process will set your project up for success." },
+  { kind: "p", text: "The UI design process is where most of a website’s quality is decided. By understanding the users and business goals, wireframing and prototyping the structure, refining the visual design, and working closely with developers, designers give the build a clear plan to follow." },
+  { kind: "p", text: "A strong UI design isn’t just about looking good. It is about a site that is easy to use and built around what its visitors need. Whether you’re building a new website or redesigning an existing one, the time spent on this process is cheaper than fixing the same problems after launch." },
   { kind: "p", text: [
-    "Ready to start designing a website that prioritizes user experience and business goals?",
-    { text: "Let’s connect", href: "/contact-us" },
-    "and create something exceptional together!",
+    "Planning a new site or a redesign?",
+    { text: "Book a free call", href: "/contact-us" },
+    "and we will walk through which of these steps your project actually needs.",
   ] },
 ];
 
 export const theArtOfUi: Post = {
   slug: "the-art-of-ui-design-a-deep-dive-before-website-development",
   title: "UI Design: What Happens Before the Build",
-  description: "Master the art of UI design before development: learn key principles, user-focused layouts, visual hierarchy, and best practices to build intuitive, high-converting websites.",
+  description: "The UI design work that comes before development: user research, wireframes, prototypes, visual design and the handoff to developers, step by step.",
   lede: "The research, wireframes and prototypes that come before anyone writes code.",
   category: "UI Design",
   // Fecha original de publicacion. No se toca: es parte de lo que se restaura.
   published: "2025-04-02",
+  updated: "2026-10-02",
   /** Destacada del WordPress. `alt` vacio a proposito: la imagen va dentro
    *  del enlace, pegada al titular que ya dice lo mismo, y describir una
    *  ilustracion generica ahi solo anade ruido a un lector de pantalla. */
