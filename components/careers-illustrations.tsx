@@ -16,7 +16,8 @@
  * "Northline", "Fernhouse", "Clinic site" y "Local gym" son ejemplos, los
  * mismos de las demas escenas; ninguno es un cliente nombrado.
  */
-import { Scene, type SceneData } from "@/components/scene";
+import { Scene, translateScene, type SceneData } from "@/components/scene";
+import type { Locale } from "@/lib/i18n";
 
 const scenes = {
   hero: {
@@ -53,16 +54,48 @@ const scenes = {
 
 export type CareersScene = keyof typeof scenes;
 
+/**
+ * El texto de las escenas en español, igual o mas corto que el ingles (ver
+ * `translateScene`). Los nombres de negocio de ejemplo se quedan.
+ */
+const spanish: Record<string, string> = {
+  "Build board": "Tablero",
+  "This week": "Esta semana",
+  "Quote follow-up flow": "Flujo de seguimiento",
+  Building: "En obra",
+  "Welcome email": "Bienvenida",
+  "Booking page": "Reservas",
+  "In review": "En revisión",
+  "Site launch": "Web lanzada",
+  "Review requests": "Pedir reseñas",
+  Live: "Listo",
+  "Clinic site": "Web clínica",
+  "Local gym": "Gimnasio",
+  "Something broke?": "¿Algo falló?",
+  "Whoever built it answers.": "Responde quien lo hizo.",
+  "Open positions": "Puestos abiertos",
+  "Nothing open right now": "Nada abierto ahora",
+  Open: "Candidatura",
+  application: "abierta",
+  "Always open": "Sin plazo",
+};
+
 export function CareersIllustration({
   name,
   label,
+  locale = "en",
   className,
 }: {
   name: CareersScene;
   label: string;
+  locale?: Locale;
   className?: string;
 }) {
+  const scene =
+    locale === "es"
+      ? { ...scenes[name], markup: translateScene(scenes[name].markup, spanish) }
+      : scenes[name];
   return (
-    <Scene id={`careers-${name}`} scene={scenes[name]} label={label} className={className} />
+    <Scene id={`careers-${name}`} scene={scene} label={label} className={className} />
   );
 }

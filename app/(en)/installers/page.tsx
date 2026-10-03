@@ -6,15 +6,15 @@ import { pageMetadata } from "@/lib/site";
 
 /**
  * /installers, la pagina de destino del outreach a instaladores. Composicion
- * en components/pages/installers.tsx y texto en lib/copy/installers.ts.
- * Solo en ingles.
+ * en components/pages/installers.tsx y texto en lib/copy/installers.ts,
+ * compartidos con app/(es)/es/installers/page.tsx.
  */
 export const metadata: Metadata = pageMetadata({
   path: "/installers",
-  title: installersCopy.meta.title,
-  description: installersCopy.meta.description,
+  title: installersCopy.en.meta.title,
+  description: installersCopy.en.meta.description,
 });
 
 export default function Installers() {
-  return <InstallersPage />;
+  return <InstallersPage locale="en" />;
 }

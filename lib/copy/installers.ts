@@ -1,11 +1,13 @@
+import type { Locale } from "@/lib/i18n";
+
 /**
- * El texto de /installers, la pagina para instaladores. La plantilla que lo
- * pinta es components/pages/installers.tsx.
+ * El texto de /installers y /es/installers, la pagina para instaladores. La
+ * plantilla que lo pinta es components/pages/installers.tsx.
  *
- * Solo en ingles: es la pagina de destino del outreach en frio, que sale en
- * ingles a clientes del Reino Unido y de EE. UU. Si algun dia se traduce, se
- * añade un objeto `es` del mismo tipo y la ruta a `translatedPaths` en
- * lib/i18n.ts, como hizo la home.
+ * El ingles es el del outreach en frio al Reino Unido y EE. UU. El español
+ * (2026-10-03) va mas corto a proposito, como el resto de /es/: titulares de
+ * cuatro a seis palabras y parrafos recortados, no traduccion literal. Dan,
+ * Mark y Northline son los mismos en los dos.
  *
  * Viene del borrador "emmvi Installers.html" (2026-09-28). Lo que cambio al
  * portarlo:
@@ -85,7 +87,7 @@ export type InstallersCopy = {
 
 export type SetupIcon = "form" | "reply" | "followup" | "list" | "review" | "report";
 
-export const installersCopy: InstallersCopy = {
+const en: InstallersCopy = {
   meta: {
     title: "For installers",
     description:
@@ -305,3 +307,226 @@ export const installersCopy: InstallersCopy = {
       "A booking calendar with 10:30 selected, next to what happens in the 30 minutes: we look at your site, follow one request through, and tell you what we would change.",
   },
 };
+
+const es: InstallersCopy = {
+  meta: {
+    title: "Para instaladores",
+    description:
+      "Cada solicitud de presupuesto respondida en menos de un minuto. Cada presupuesto con seguimiento. La web y los datos, tuyos.",
+  },
+  hero: {
+    eyebrow: "Para instaladores de solar, cargadores y hogar",
+    title: "Responde el primero a cada solicitud.",
+    lede:
+      "Si alguien rellena tu formulario a las 21:00, recibe respuesta en menos de un minuto, con tus palabras. Después, cada presupuesto tiene seguimiento para que el trabajo no se lo lleve quien cogió el teléfono.",
+    cta: "Reservar 30 minutos",
+    note: "No vendemos anuncios. Construimos la web y el seguimiento de detrás.",
+    panel: {
+      caption: "Lo que ve tu cliente",
+      time: "Mar 21:47",
+      requestLabel: "Solicitud · tu web",
+      request: "Hola, ¿precio de un cargador? Adosado, plaza en el garaje.",
+      sent: "21:47 · respondido",
+      replyLabel: "Mensaje de tu negocio",
+      reply:
+        "Gracias Mark, soy Dan. Estoy en una obra, pero tengo tu solicitud. ¿Te llamo mañana a las 9 para preguntarte un par de cosas del garaje?",
+      disclaimer:
+        "Ejemplo. Los mensajes reales los escribes con nosotros y apruebas cada uno antes de publicarlo.",
+      label:
+        "Ejemplo de lo que recibe tu cliente: una solicitud enviada a las 21:47 y un mensaje de tu negocio un momento después.",
+    },
+  },
+  paths: {
+    lead: "¿No eres instalador?",
+    clinics: "También clínicas",
+    agencies: "Y agencias",
+  },
+  noAds: {
+    eyebrow: "Antes de seguir",
+    title: "No te vendemos anuncios.",
+    lede:
+      "Ya recibes solicitudes. Pierdes algunas porque llegan cuando estás en un tejado. Eso es lo que arreglamos.",
+    rows: [
+      {
+        title: "Sin presupuesto de anuncios",
+        body: "No llevamos tus anuncios de Google ni de Facebook, ni te pediremos que empieces.",
+      },
+      {
+        title: "Sin software que aprender solo",
+        body: "Lo montamos, te enseñamos las dos pantallas que necesitas y lo arreglamos si falla.",
+      },
+      {
+        title: "Sin respuestas de robot",
+        body: "Cada mensaje va con tus palabras. No sale nada que no hayas leído.",
+      },
+      {
+        title: "Sin porcentajes prometidos",
+        body: "Prometemos la respuesta y el seguimiento, que los hace el sistema. Ganar el trabajo sigue siendo tuyo.",
+      },
+    ],
+  },
+  how: {
+    eyebrow: "Paso a paso",
+    title: "Una solicitud, de principio a fin.",
+    lede:
+      "Las horas son un ejemplo. Cuánto espera cada seguimiento se acuerda contigo.",
+    steps: [
+      {
+        when: "21:47",
+        title: "Entra la solicitud",
+        body: "Desde el formulario de tu web. Pregunta el trabajo, el código postal y la vivienda, para que no llames a preguntar.",
+      },
+      {
+        when: "21:47",
+        title: "El cliente recibe respuesta",
+        bubble: "Gracias Mark, soy Dan. Tengo tu solicitud. ¿Te llamo mañana a las 9?",
+        body: "Por SMS y correo, con el nombre de tu negocio.",
+      },
+      {
+        when: "21:48",
+        title: "Te llega al móvil",
+        body: "Nombre, teléfono, trabajo y código postal en una notificación. Léela en el sofá o déjala para mañana.",
+      },
+      {
+        when: "Mié",
+        title: "Está en tu lista de trabajos",
+        body: "Cada solicitud en un sitio, con quién la lleva. No repartida entre Gmail, WhatsApp y llamadas perdidas.",
+      },
+      {
+        when: "Día 3",
+        title: "El presupuesto tiene seguimiento",
+        bubble:
+          "Hola Mark, ¿te llegó bien el presupuesto? Si tienes dudas, responde aquí y te contesto.",
+        body: "Si ya ha contestado, no se envía.",
+      },
+      {
+        when: "Día 10",
+        title: "Una vez más, y para",
+        body: "Un segundo seguimiento. Después nadie recibe mensajes para siempre, y tú recibes una nota por si quieres llamar.",
+      },
+      {
+        when: "Trabajo hecho",
+        title: "Se pide la reseña",
+        body: "Cuando marcas el trabajo como terminado, el cliente recibe un enlace para dejar reseña. No tienes que acordarte.",
+      },
+    ],
+    card: {
+      label: "La solicitud de Mark",
+      done: "Trabajo hecho. Reseña pedida.",
+      now: "Ahora",
+      step: "Paso",
+      of: "de",
+    },
+  },
+  setup: {
+    eyebrow: "La lista, sin jerga",
+    title: "Qué montamos.",
+    items: [
+      {
+        icon: "form",
+        title: "Una web con formulario de verdad",
+        body: "Nueva, o la tuya arreglada. El formulario pregunta lo que hace falta para dar precio.",
+      },
+      {
+        icon: "reply",
+        title: "La respuesta en un minuto",
+        body: "SMS y correo, de día o de noche, con tus palabras.",
+      },
+      {
+        icon: "followup",
+        title: "Seguimiento de presupuestos",
+        body: "Dos, los días que elijas, y para.",
+      },
+      {
+        icon: "list",
+        title: "Una lista con cada trabajo",
+        body: "Web, teléfono y WhatsApp en el mismo sitio, cada uno con responsable.",
+      },
+      {
+        icon: "review",
+        title: "Petición de reseñas",
+        body: "Al marcar un trabajo como terminado.",
+      },
+      {
+        icon: "report",
+        title: "Tu mes en una pantalla",
+        body: "Qué entró, qué presupuestaste, qué ganaste.",
+      },
+    ],
+    note:
+      "Montado con GoHighLevel y conectado a lo que ya usas, cuando tiene por dónde. Si lo tuyo no, te lo decimos en la llamada.",
+  },
+  clients: {
+    eyebrow: "Clientes",
+    title: "Para quién hemos construido.",
+    lede:
+      "Nuestros clientes hasta ahora no son instaladores. Esto dicen de su web y su automatización, en sus sectores.",
+  },
+  process: {
+    eyebrow: "Proceso",
+    title: "Cómo es trabajar juntos.",
+    steps: [
+      {
+        title: "Una llamada de 30 minutos",
+        body: "Con una persona. Miramos qué pasa hoy con una solicitud y te decimos si cambiaríamos algo.",
+      },
+      {
+        title: "Un presupuesto por escrito",
+        body: "Qué construimos y qué cuesta. Nada empieza hasta que lo apruebes.",
+      },
+      {
+        title: "Construir y probar",
+        body: "Mandamos una solicitud a tu propio móvil y revisamos cada mensaje antes de publicarlo.",
+      },
+      {
+        title: "Funciona",
+        body: "Te lo enseñamos. Estamos en WhatsApp o correo cuando haya que cambiar algo.",
+      },
+    ],
+  },
+  faq: {
+    eyebrow: "Preguntas",
+    title: "Antes de la llamada.",
+    items: [
+      {
+        q: "¿Cuánto cuesta?",
+        a: "Depende de lo que ya tengas, así que no ponemos cifra aquí. Después de la llamada recibes un presupuesto por escrito. Nada empieza hasta que lo apruebes.",
+      },
+      {
+        q: "Ya tengo web. ¿Necesito otra?",
+        a: "No siempre. A veces la web está bien y el problema es lo que pasa después del formulario. Te lo diremos en la llamada.",
+      },
+      {
+        q: "¿Mis clientes notarán que es automático?",
+        a: "La primera respuesta es inmediata, así que algunos lo adivinarán. Está escrita como la escribirías tú y dice que les llamarás, que es lo que quieren oír. Nada finge ser una conversación.",
+      },
+      {
+        q: "¿Funciona con lo que ya uso?",
+        a: "Normalmente. Si lo tuyo no conecta, te lo diremos antes de que pagues nada.",
+      },
+      {
+        q: "¿Cuánto tiempo me lleva?",
+        a: "Algo al principio: cómo presupuestas, quién lleva qué, y leer los mensajes antes de publicarlos. Después, muy poco.",
+      },
+      {
+        q: "¿Y si no trae más trabajo?",
+        a: "No te prometemos un porcentaje. Prometemos que cada solicitud se responde en menos de un minuto y cada presupuesto tiene seguimiento, porque eso lo hace el sistema. Lo que pase en la llamada sigue siendo cosa tuya.",
+      },
+      {
+        q: "¿Dónde estáis y cuándo os localizo?",
+        a: "Valencia y Argentina: horario europeo y americano. Trabajamos en inglés y en español.",
+      },
+    ],
+  },
+  book: {
+    title: "Habla primero con una persona.",
+    lede:
+      "Treinta minutos. Miramos qué pasa hoy con una solicitud en tu web y te decimos claro si la cambiaríamos, y si nos necesitas.",
+    cta: "Reservar 30 minutos",
+    or: "O responde al correo que te enviamos.",
+    scene:
+      "Un calendario con las 10:30 seleccionadas, junto a lo que pasa en esos 30 minutos: miramos tu web, seguimos una solicitud y te decimos qué cambiaríamos.",
+  },
+};
+
+export const installersCopy: Record<Locale, InstallersCopy> = { en, es };

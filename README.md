@@ -774,8 +774,9 @@ páginas. Mientras tanto se llega a `/es/` solo por URL directa.
   ocupa un 20-30 % más, y en un h1 a tamaño display eso son dos líneas de más
   en el móvil. Titulares de cuatro a seis palabras; lo que explica va al
   párrafo. No es una traducción literal y no debe serlo.
-- **Las páginas traducidas son plantillas con diccionario**: la home y el
-  contacto están en `components/pages/` con su texto en `lib/copy/`, tipado
+- **Las páginas traducidas son plantillas con diccionario**: la home, el
+  contacto, instaladores y empleo están en `components/pages/` con su texto en
+  `lib/copy/`, tipado
   para que si el inglés gana una sección el español deje de compilar hasta
   tenerla. Gracias y 404 llevan el texto en la propia plantilla. Aviso legal y
   política de privacidad son páginas aparte (prosa con enlaces, cambia poco);
@@ -797,9 +798,11 @@ páginas. Mientras tanto se llega a `/es/` solo por URL directa.
 
 ### Las escenas ilustradas
 
-El texto de las escenas de la home es `<text>` dentro del SVG, y en `/es/` se
-sustituye al vuelo con el mapa `spanish` de `components/home-illustrations.tsx`
-(clave: el texto inglés exacto; valor: el español). **Cada frase española es
+El texto de las escenas es `<text>` dentro del SVG, y en `/es/` se sustituye
+al vuelo con `translateScene` (components/scene.tsx) y un mapa `spanish` por
+componente: `home-illustrations`, `book-call-illustration`,
+`installers-hero-illustration` y `careers-illustrations` (clave: el texto
+inglés exacto; valor: el español). **Cada frase española es
 igual o más corta que la inglesa**, porque las cajas del dibujo no crecen: si
 hay que alargar alguna, se comprueba en la escena, no en la lista. Lo que no
 está en el mapa se queda en inglés (nombres, horas, códigos postales y las

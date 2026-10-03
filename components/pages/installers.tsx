@@ -11,6 +11,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { homeCopy } from "@/lib/copy/home";
 import { installersCopy, type SetupIcon } from "@/lib/copy/installers";
+import { localizePath, type Locale } from "@/lib/i18n";
 
 /**
  * /installers: la pagina de destino del outreach a instaladores. Cabecera y
@@ -53,11 +54,18 @@ const section = "py-16 lg:py-[104px]";
  * El aviso de que es un ejemplo se queda como texto debajo: es la parte
  * honesta de la pieza y tiene que poder leerse y copiarse.
  */
-function CustomerScene({ t }: { t: typeof installersCopy.hero.panel }) {
+function CustomerScene({
+  t,
+  locale,
+}: {
+  t: (typeof installersCopy)["en"]["hero"]["panel"];
+  locale: Locale;
+}) {
   return (
     <figure className="m-0">
       <InstallersHeroIllustration
         label={t.label}
+        locale={locale}
         className="w-full max-md:mx-auto max-md:max-w-[340px]"
       />
       <figcaption className="mt-4 text-small text-pretty text-ink-soft max-md:text-center">
@@ -153,14 +161,14 @@ function Eyebrow({
    La pagina
    -------------------------------------------------------------------------- */
 
-export function InstallersPage() {
-  const t = installersCopy;
+export function InstallersPage({ locale = "en" }: { locale?: Locale }) {
+  const t = installersCopy[locale];
   // Los tres testimonios reales, los mismos de la home: una sola copia.
-  const testimonials = homeCopy.en.testimonials.items;
+  const testimonials = homeCopy[locale].testimonials.items;
 
   return (
     <>
-      <SiteHeader locale="en" path="/installers" />
+      <SiteHeader locale={locale} path="/installers" />
 
       <main id="top">
         {/* --- Hero ------------------------------------------------------ */}
@@ -180,7 +188,7 @@ export function InstallersPage() {
             </div>
             <p className="mt-6 text-copy text-pretty text-ink-soft">{t.hero.note}</p>
           </div>
-          <CustomerScene t={t.hero.panel} />
+          <CustomerScene t={t.hero.panel} locale={locale} />
         </section>
 
         {/* Los otros dos caminos, en una linea: esta pagina es para
@@ -192,13 +200,13 @@ export function InstallersPage() {
           >
             <span className="text-ink-soft">{t.paths.lead}</span>
             <Link
-              href="/#who"
+              href={localizePath("/#who", locale)}
               className="inline-flex min-h-[44px] items-center font-semibold text-ink hover:text-violet"
             >
               {t.paths.clinics} &rarr;
             </Link>
             <Link
-              href="/#who"
+              href={localizePath("/#who", locale)}
               className="inline-flex min-h-[44px] items-center font-semibold text-ink hover:text-violet"
             >
               {t.paths.agencies} &rarr;
@@ -326,7 +334,7 @@ export function InstallersPage() {
               </div>
             </div>
             <div className="mt-12 lg:mt-16">
-              <ClientMarquee locale="en" />
+              <ClientMarquee locale={locale} />
             </div>
           </div>
         </section>
@@ -384,7 +392,7 @@ export function InstallersPage() {
               </div>
             </div>
             <HomeIllustration
-              locale="en"
+              locale={locale}
               name="call"
               label={t.book.scene}
               className="overflow-hidden rounded-lg"
@@ -393,7 +401,7 @@ export function InstallersPage() {
         </section>
       </main>
 
-      <SiteFooter locale="en" path="/installers" />
+      <SiteFooter locale={locale} path="/installers" />
     </>
   );
 }

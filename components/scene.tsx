@@ -58,3 +58,22 @@ export function Scene({
     </div>
   );
 }
+
+/**
+ * Sustituye el contenido de cada <text> del markup que tenga entrada en el
+ * mapa. Clave: el texto exacto en ingles tal como esta en el markup (con las
+ * entidades, `&#x27;`); valor: lo que se pinta en el otro idioma.
+ *
+ * **Cada frase traducida debe medir igual o menos que la original**, porque
+ * las cajas del dibujo no crecen. Las que no estan en el mapa se quedan.
+ */
+export function translateScene(
+  markup: string,
+  texts: Record<string, string>,
+): string {
+  return markup.replace(
+    /(<text[^>]*>)([^<]+)(<\/text>)/g,
+    (match, open, text, close) =>
+      text in texts ? `${open}${texts[text]}${close}` : match,
+  );
+}

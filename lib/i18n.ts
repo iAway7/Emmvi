@@ -47,6 +47,8 @@ export const translatedPaths: readonly string[] = [
   "/thank-you",
   "/legal-notice",
   "/privacy-policy",
+  "/installers",
+  "/careers",
 ];
 
 /** "/contact-us" -> "/contact-us/", "/" -> "/". Con ancla: "/#faq" -> "/#faq". */
