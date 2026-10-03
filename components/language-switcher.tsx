@@ -51,7 +51,7 @@ export function LanguageSwitcher({
       {locales.map((code) => {
         const current = code === locale;
         const cls =
-          "inline-flex h-7 min-w-8 items-center justify-center rounded-[3px] px-1.5 uppercase transition-colors focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet";
+          "inline-flex h-7 min-w-8 items-center justify-center rounded-[6px] px-1.5 uppercase transition-colors focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet";
         if (current) {
           return (
             <span
