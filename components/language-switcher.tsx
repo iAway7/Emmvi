@@ -3,35 +3,29 @@ import {
   isTranslated,
   localeName,
   localizePath,
+  locales,
   type Locale,
 } from "@/lib/i18n";
 
 /**
- * **Retirado de momento.** Nadie lo monta: se quito de la cabecera, el menu
- * movil y el pie hasta que el español tenga mas paginas. Se conserva entero
- * para volver a ponerlo con un import; los props `locale` y `path` siguen
- * llegando a SiteHeader y SiteFooter.
- *
- * El selector de idioma: un solo enlace al otro idioma, con el nombre del
- * idioma escrito en ese idioma ("Español" desde el ingles, "English" desde el
- * español). Sin banderas: una bandera es un pais, no un idioma, y ninguna de
- * las dos cabe aqui —el español no es de España y el ingles no es del Reino
- * Unido.
+ * El conmutador de idioma: "EN | ES", dos letras y nada mas (decision del
+ * usuario, 2026-10-03). El idioma actual va en tinta y no es enlace; el otro
+ * va apagado y lleva a la pagina equivalente. Sin banderas y sin nombres
+ * largos: en la cabecera no hay sitio, y dos letras las entiende todo el
+ * mundo.
  *
  * **Lleva a la pagina equivalente, no a la home.** Quien esta leyendo el aviso
- * legal en ingles y cambia de idioma quiere el aviso legal en español, no
- * volver a empezar. Solo cuando la pagina no tiene traduccion (`translatedPaths`
- * en lib/i18n.ts) se va a la home del otro idioma, y entonces el enlace lo
- * dice en su `title` y en su texto accesible.
- *
- * `hrefLang` y `lang` en el enlace: lo primero le dice al navegador en que
- * idioma esta el destino; lo segundo, al lector de pantalla con que voz leer
- * la palabra "Español" en una pagina en ingles.
+ * legal en ingles y cambia de idioma quiere el aviso legal en español. Solo
+ * cuando la pagina no tiene traduccion (`translatedPaths` en lib/i18n.ts) se
+ * va a la home del otro idioma, y entonces el enlace lo dice en su `title` y
+ * en su texto accesible.
  *
  * Es un <a> y no <Link> a proposito: cambiar de idioma cambia de layout raiz,
- * y eso en el App Router es una carga completa de todas formas. Con un
- * enlace normal no hay prefetch de una pagina que no se puede montar en el
- * mismo arbol.
+ * y eso en el App Router es una carga completa de todas formas.
+ *
+ * Es un <nav> con nombre propio: un lector de pantalla lo anuncia como
+ * "Idioma" y lee "EN, pagina actual" y "ES, Español". El `lang` de cada letra
+ * evita que se pronuncien con la voz del idioma equivocado.
  */
 export function LanguageSwitcher({
   locale,
@@ -41,42 +35,57 @@ export function LanguageSwitcher({
   locale: Locale;
   /**
    * Ruta canonica en ingles de la pagina actual ("/contact-us"), si la
-   * pagina la conoce. Sin ella el selector lleva a la home del otro idioma.
+   * pagina la conoce. Sin ella el otro idioma lleva a su home.
    */
   path?: string;
   className?: string;
 }) {
-  const other: Locale = locale === "en" ? "es" : "en";
   const translated = path !== undefined && isTranslated(path);
-  const href = translated ? localizePath(path, other) : localizePath("/", other);
   const copy = chrome[locale].switcher;
 
   return (
-    <a
-      href={href}
-      hrefLang={other}
-      lang={other}
-      rel="alternate"
-      title={translated ? undefined : copy.homeOnly}
-      aria-label={
-        translated ? localeName[other] : `${localeName[other]}. ${copy.homeOnly}`
-      }
-      className={`inline-flex min-h-[44px] items-center gap-1.5 text-ui text-ink-soft transition-colors hover:text-ink-black focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet ${className}`}
+    <nav
+      aria-label={copy.label}
+      className={`inline-flex items-center rounded-sm border border-line p-0.5 text-small font-semibold tracking-[0.04em] ${className}`}
     >
-      <svg
-        aria-hidden="true"
-        viewBox="0 0 20 20"
-        className="size-4"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <circle cx="10" cy="10" r="7.5" />
-        <path d="M2.5 10h15M10 2.5c2.2 2.3 3.3 4.8 3.3 7.5s-1.1 5.2-3.3 7.5c-2.2-2.3-3.3-4.8-3.3-7.5S7.8 4.8 10 2.5Z" />
-      </svg>
-      {localeName[other]}
-    </a>
+      {locales.map((code) => {
+        const current = code === locale;
+        const cls =
+          "inline-flex h-7 min-w-8 items-center justify-center rounded-[3px] px-1.5 uppercase transition-colors focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet";
+        if (current) {
+          return (
+            <span
+              key={code}
+              lang={code}
+              aria-current="page"
+              className={`${cls} bg-ink text-paper`}
+            >
+              {code}
+            </span>
+          );
+        }
+        const href = translated
+          ? localizePath(path, code)
+          : localizePath("/", code);
+        return (
+          <a
+            key={code}
+            href={href}
+            hrefLang={code}
+            lang={code}
+            rel="alternate"
+            title={translated ? localeName[code] : copy.homeOnly}
+            aria-label={
+              translated
+                ? localeName[code]
+                : `${localeName[code]}. ${copy.homeOnly}`
+            }
+            className={`${cls} text-ink-soft hover:text-ink-black`}
+          >
+            {code}
+          </a>
+        );
+      })}
+    </nav>
   );
 }

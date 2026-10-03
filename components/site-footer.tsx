@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { chrome } from "@/lib/chrome-copy";
 import { localizePath, type Locale } from "@/lib/i18n";
+import { LanguageSwitcher } from "./language-switcher";
 import { Wordmark } from "./wordmark";
 
 /**
@@ -50,9 +51,9 @@ function CookiePreferences({ label }: { label: string }) {
 
 export function SiteFooter({
   locale = "en",
+  path,
 }: {
   locale?: Locale;
-  /** Sin uso mientras el selector de idioma este retirado. Ver arriba. */
   path?: string;
 } = {}) {
   const copy = chrome[locale];
@@ -105,9 +106,10 @@ export function SiteFooter({
           ))}
         </div>
 
-        <div className="mt-14 flex flex-wrap justify-between gap-6 border-t border-line pt-8 text-small text-ink-soft">
+        <div className="mt-14 flex flex-wrap items-center justify-between gap-6 border-t border-line pt-8 text-small text-ink-soft">
           <p>{copy.footer.rights}</p>
           <p>{copy.footer.trademark}</p>
+          <LanguageSwitcher locale={locale} path={path} />
         </div>
       </div>
     </footer>

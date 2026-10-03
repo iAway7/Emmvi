@@ -748,10 +748,10 @@ indexadas y a las que apuntan los 301 del WordPress anterior.
 de espera») y tampoco conviene: el rastreador de Google entra desde EE. UU. y
 una redirección automática le escondería una de las dos versiones.
 
-**El selector de idioma está retirado de momento.** El componente existe
-(`components/language-switcher.tsx`) y `SiteHeader` y `SiteFooter` siguen
-recibiendo `path` para él, pero no se monta hasta que el español tenga más
-páginas. Mientras tanto se llega a `/es/` solo por URL directa.
+**El conmutador de idioma es "EN | ES"**, dos letras y nada más
+(`components/language-switcher.tsx`), en la cabecera, el menú móvil y el pie.
+El idioma actual va en tinta y no es enlace; el otro lleva a la página
+equivalente, y en las páginas sin traducción, a la home del otro idioma.
 
 ### Cómo está montado
 
@@ -762,7 +762,7 @@ páginas. Mientras tanto se llega a `/es/` solo por URL directa.
 - **`lib/i18n.ts`** tiene la lista `translatedPaths` de páginas que existen en
   los dos idiomas, y las funciones que traducen rutas (`localizePath`) y
   generan el `hreflang` (`languageAlternates`). Esa lista decide tres cosas a
-  la vez: qué páginas llevan `hreflang`, a dónde iría el selector de idioma y
+  la vez: qué páginas llevan `hreflang`, a dónde va el conmutador de idioma y
   qué rutas en español entran en el sitemap.
 - **`pageMetadata`** (lib/site.ts) acepta `locale`. La canónica lleva el
   prefijo y el `hreflang` sale solo para las páginas de `translatedPaths`.
@@ -794,7 +794,7 @@ páginas. Mientras tanto se llega a `/es/` solo por URL directa.
    página existe pero no lleva `hreflang`, el selector no la encuentra y no
    entra en el sitemap.
 3. En la versión inglesa, pasar `path="/<ruta>"` a `SiteHeader` y `SiteFooter`,
-   para que el selector, cuando vuelva, lleve a la equivalente.
+   para que el conmutador lleve a la equivalente.
 
 ### Las escenas ilustradas
 

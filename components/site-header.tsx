@@ -3,6 +3,7 @@ import Link from "next/link";
 import { chrome } from "@/lib/chrome-copy";
 import { localizePath, type Locale } from "@/lib/i18n";
 import { CtaLink } from "./cta-link";
+import { LanguageSwitcher } from "./language-switcher";
 import { MobileMenu } from "./mobile-menu";
 import { NavDropdown } from "./nav-dropdown";
 import { Wordmark } from "./wordmark";
@@ -20,17 +21,16 @@ import { Wordmark } from "./wordmark";
  * header tienen su propia seccion con ese id, asi que no hace falta salir de
  * la pagina para llegar al formulario.
  *
- * `path` es la ruta canonica en ingles de la pagina que lo monta. Lo usaba el
- * selector de idioma (components/language-switcher.tsx), que **esta retirado
- * de momento**: se decidio no enseñarlo hasta que el español tenga mas
- * paginas. El prop se conserva para volver a montarlo sin tocar las paginas.
+ * `path` es la ruta canonica en ingles de la pagina que lo monta. Lo usa el
+ * conmutador de idioma (components/language-switcher.tsx) para llevar a la
+ * pagina equivalente; las paginas sin traduccion pueden no pasarlo y el
+ * conmutador cae en la home del otro idioma.
  */
 export function SiteHeader({
   locale = "en",
   path,
 }: {
   locale?: Locale;
-  /** Solo se pasa al menu movil mientras el selector este retirado. */
   path?: string;
 } = {}) {
   const copy = chrome[locale];
@@ -65,6 +65,10 @@ export function SiteHeader({
             ))}
           </ul>
         </nav>
+
+        {/* El conmutador va entre la nav y el CTA, con el CTA: en movil se
+            esconde con el, porque alli vive dentro del menu. */}
+        <LanguageSwitcher locale={locale} path={path} className="max-[899px]:hidden" />
 
         {/* A 375px el wordmark, el CTA y el boton de menu no caben juntos, asi
             que por debajo de 900px el CTA vive dentro del menu.

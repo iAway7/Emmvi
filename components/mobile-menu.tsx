@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { chrome, type NavLink } from "@/lib/chrome-copy";
 import type { Locale } from "@/lib/i18n";
+import { LanguageSwitcher } from "./language-switcher";
 import { Wordmark } from "./wordmark";
 
 /**
@@ -22,10 +23,11 @@ import { Wordmark } from "./wordmark";
  */
 export function MobileMenu({
   locale = "en",
+  path,
   links: override,
 }: {
   locale?: Locale;
-  /** Para el selector de idioma, retirado de momento (site-header.tsx). */
+  /** Para el conmutador de idioma. Ver site-header.tsx. */
   path?: string;
   links?: readonly NavLink[];
 }) {
@@ -158,10 +160,16 @@ export function MobileMenu({
             <a
               href="#contact"
               onClick={close}
-              className="mt-8 inline-flex h-12 w-full items-center justify-center rounded-sm bg-ink px-6 text-ui font-medium text-paper transition-colors duration-150 hover:bg-ink-black focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
+              className="mt-8 inline-flex h-12 w-full items-center justify-center rounded-sm bg-ink-deep px-6 text-ui font-medium text-paper transition-colors duration-150 hover:bg-ink-black focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
             >
               {copy.header.cta}
             </a>
+
+            {/* Cambiar de idioma es una carga completa, asi que no hace falta
+                cerrar el dialogo antes. */}
+            <div className="mt-6 flex justify-center">
+              <LanguageSwitcher locale={locale} path={path} />
+            </div>
           </nav>
         </div>
       </dialog>
