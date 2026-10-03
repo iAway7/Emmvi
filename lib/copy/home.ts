@@ -244,7 +244,7 @@ const es: HomeCopy = {
     title: "Cada solicitud, respondida en un minuto",
     lede:
       "La web que recibe la solicitud y el sistema que responde, persigue el presupuesto y pide la reseña.",
-    cta: "Reservar 30 minutos",
+    cta: "Agendar una llamada",
     seeMore: "Ver qué pasa con una solicitud",
     scene:
       "Una solicitud de presupuesto para un cargador de coche eléctrico, enviada desde la web a las 21:47 y respondida por mensaje 34 segundos después, con el seguimiento y la petición de reseña en cola.",
@@ -348,7 +348,7 @@ const es: HomeCopy = {
     after: "",
     lede:
       "Treinta minutos. Miramos tu web, seguimos una solicitud y te decimos qué cambiaríamos. Aunque no nos contrates.",
-    cta: "Reservar 30 minutos",
+    cta: "Agendar una llamada",
     or: "o escríbenos",
     scene:
       "Un calendario con las 10:30 seleccionadas, junto a lo que pasa en esos 30 minutos: miramos tu web, seguimos una solicitud y te decimos qué cambiaríamos.",
@@ -379,7 +379,7 @@ const es: HomeCopy = {
       },
       {
         q: "¿Cómo empiezo?",
-        a: "Reserva treinta minutos. Miramos qué pasa hoy con una solicitud en tu web y te decimos qué cambiaríamos. Sin presentaciones.",
+        a: "Agenda una llamada de treinta minutos. Miramos qué pasa hoy con una solicitud en tu web y te decimos qué cambiaríamos. Sin presentaciones.",
       },
     ],
   },

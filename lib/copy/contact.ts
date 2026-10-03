@@ -93,10 +93,10 @@ const es: ContactCopy = {
       "Cuéntanos qué intentas arreglar. Te diremos qué cambiaríamos, qué dejaríamos y si nos necesitas.",
   },
   book: {
-    title: "Reserva la llamada",
+    title: "Agenda la llamada",
     body:
       "Treinta minutos. Miramos qué pasa hoy con una solicitud en tu web y te decimos qué cambiaríamos. Es la vía más rápida.",
-    cta: "Reservar 30 minutos",
+    cta: "Agendar una llamada",
   },
   or: "o",
   afterwards: {

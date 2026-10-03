@@ -51,7 +51,7 @@ export const thankYouCopy = {
     title: "Gracias",
     description: "Tu mensaje ha llegado. Lo lee una persona y te contestamos.",
     lede: "Tu mensaje ha llegado. Lo lee una persona, no un bot.",
-    book: "Reservar la llamada",
+    book: "Agendar la llamada",
     home: "Volver al inicio",
     nothingElse: "No hay nada más que hacer. Si prefieres escribir, la dirección es",
   },

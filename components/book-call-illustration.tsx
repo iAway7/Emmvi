@@ -27,7 +27,7 @@ const copy: Record<Locale, { texts: Record<string, string>; label: string }> = {
   es: {
     texts: { "30-minute call": "Llamada de 30 min", Booked: "Hecho" },
     label:
-      "Reserva de la llamada de 30 minutos: un día elegido, las 10:30 seleccionadas y la llamada marcada como hecha.",
+      "Agendar la llamada de 30 minutos: un día elegido, las 10:30 seleccionadas y la llamada marcada como hecha.",
   },
 };
 

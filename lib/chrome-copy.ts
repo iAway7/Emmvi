@@ -210,7 +210,7 @@ const es: ChromeCopy = {
       { href: "/es/#about", label: "Nosotros" },
       { href: "/es/#faq", label: "Preguntas" },
     ],
-    cta: "Reservar llamada",
+    cta: "Agendar una llamada",
   },
   menu: { open: "Abrir el menú", close: "Cerrar el menú", label: "Menú" },
   switcher: {

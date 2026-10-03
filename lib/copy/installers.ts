@@ -319,7 +319,7 @@ const es: InstallersCopy = {
     title: "Responde el primero a cada solicitud.",
     lede:
       "Si alguien rellena tu formulario a las 21:00, recibe respuesta en menos de un minuto, con tus palabras. Después, cada presupuesto tiene seguimiento para que el trabajo no se lo lleve quien cogió el teléfono.",
-    cta: "Reservar 30 minutos",
+    cta: "Agendar una llamada",
     note: "No vendemos anuncios. Construimos la web y el seguimiento de detrás.",
     panel: {
       caption: "Lo que ve tu cliente",
@@ -522,7 +522,7 @@ const es: InstallersCopy = {
     title: "Habla primero con una persona.",
     lede:
       "Treinta minutos. Miramos qué pasa hoy con una solicitud en tu web y te decimos claro si la cambiaríamos, y si nos necesitas.",
-    cta: "Reservar 30 minutos",
+    cta: "Agendar una llamada",
     or: "O responde al correo que te enviamos.",
     scene:
       "Un calendario con las 10:30 seleccionadas, junto a lo que pasa en esos 30 minutos: miramos tu web, seguimos una solicitud y te decimos qué cambiaríamos.",

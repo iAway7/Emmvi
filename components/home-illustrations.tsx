@@ -103,7 +103,7 @@ const spanish: Record<string, string> = {
   "looked after by us": "y mantenida",
   "Changes when you need them": "Cambios cuando haga falta",
   // call
-  "Book a 30-minute call": "Reserva 30 minutos",
+  "Book a 30-minute call": "Agendar llamada",
   "Thursday 1 October": "Jueves 1 de octubre",
   "What happens in 30 minutes": "Qué pasa en 30 minutos",
   "We look at your site today": "Miramos tu web de hoy",
