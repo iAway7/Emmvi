@@ -191,21 +191,16 @@ const en: ChromeCopy = {
   },
 };
 
-/**
- * Mismas entradas que el ingles. Las paginas de servicio y /about-us siguen
- * en ingles (no estan traducidas), pero se enlazan igual: quitar los
- * servicios del menu español era peor que mandar a una pagina en ingles. Si
- * algun dia se traducen, solo cambia el prefijo de la ruta.
- */
+/** Mismas entradas que el ingles, cada una a su pagina en español. */
 const serviciosEs: readonly NavChild[] = [
   {
-    href: "/services/gohighlevel-automation/",
+    href: "/es/services/gohighlevel-automation/",
     label: "Automatización con GoHighLevel",
   },
-  { href: "/services/website-design/", label: "Diseño web" },
-  { href: "/services/email-marketing/", label: "Email marketing" },
-  { href: "/services/seo/", label: "SEO" },
-  { href: "/services/ppc/", label: "PPC" },
+  { href: "/es/services/website-design/", label: "Diseño web" },
+  { href: "/es/services/email-marketing/", label: "Email marketing" },
+  { href: "/es/services/seo/", label: "SEO" },
+  { href: "/es/services/ppc/", label: "PPC" },
 ];
 
 const es: ChromeCopy = {
@@ -215,7 +210,7 @@ const es: ChromeCopy = {
     links: [
       { href: "/es/#services", label: "Servicios", children: serviciosEs },
       { href: "/es/#who", label: "Clientes" },
-      { href: "/about-us/", label: "Nosotros" },
+      { href: "/es/about-us/", label: "Nosotros" },
       { href: "/es/#faq", label: "Preguntas" },
     ],
     cta: "Agendar una llamada",
@@ -232,18 +227,18 @@ const es: ChromeCopy = {
       {
         title: "Servicios",
         links: [
-          { href: "/services/website-design/", label: "Diseño web" },
-          { href: "/services/email-marketing/", label: "Email marketing" },
-          { href: "/services/seo/", label: "SEO" },
-          { href: "/services/ppc/", label: "PPC" },
+          { href: "/es/services/website-design/", label: "Diseño web" },
+          { href: "/es/services/email-marketing/", label: "Email marketing" },
+          { href: "/es/services/seo/", label: "SEO" },
+          { href: "/es/services/ppc/", label: "PPC" },
         ],
       },
       {
         title: "Empresa",
         links: [
-          { href: "/about-us/", label: "Nosotros" },
+          { href: "/es/about-us/", label: "Nosotros" },
           { href: "/es/careers/", label: "Empleo" },
-          { href: "/blog/", label: "Blog" },
+          { href: "/es/blog/", label: "Blog" },
           { href: "/es/contact-us/", label: "Contacto" },
         ],
       },

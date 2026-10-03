@@ -1,3 +1,5 @@
+import type { Locale } from "@/lib/i18n";
+
 /**
  * La columna que acompaña al formulario en el panel "Talk to our Sales team".
  *
@@ -24,35 +26,53 @@
  * No lleva enlace a la política porque el propio formulario ya tiene uno
  * justo al lado, debajo del botón de envío.
  */
-const points = [
-  {
-    title: "A person reads it, and a person answers it.",
-    /**
-     * Cuidado con esta frase: la primera version decia "nothing is filed away
-     * for later", que **contradice la propia politica** —las consultas se
-     * guardan doce meses, `ENQUIRY_RETENTION_MONTHS`—. Lo que la politica si
-     * firma es que no hay decision automatizada, y eso es lo que dice ahora.
-     */
-    body: "Nothing scores you or sorts you into a bucket first. It goes straight to the people who would do the work.",
+const copy: Record<
+  Locale,
+  { title: string; points: readonly { title: string; body: string }[] }
+> = {
+  en: {
+    title: "What happens when you send this",
+    points: [
+      {
+        title: "A person reads it, and a person answers it.",
+        body: "Nothing scores you or sorts you into a bucket first. It goes straight to the people who would do the work.",
+      },
+      {
+        title: "You are not signed up to anything.",
+        body: "There is no newsletter hidden inside this form. If we ever add one, it will be a box you tick.",
+      },
+      {
+        title: "If we are not the right fit, we say so.",
+        body: "You get our honest read on what you are trying to fix, whether you hire us or not.",
+      },
+    ],
   },
-  {
-    title: "You are not signed up to anything.",
-    body: "There is no newsletter hidden inside this form. If we ever add one, it will be a box you tick.",
+  es: {
+    title: "Qué pasa al enviarlo",
+    points: [
+      {
+        title: "Lo lee y lo contesta una persona.",
+        body: "Nada te puntúa ni te clasifica antes. Llega directo a quien haría el trabajo.",
+      },
+      {
+        title: "No te suscribes a nada.",
+        body: "No hay boletín escondido en este formulario. Si algún día lo hay, será una casilla que marques.",
+      },
+      {
+        title: "Si no encajamos, te lo decimos.",
+        body: "Te damos nuestra opinión sincera sobre lo que quieres arreglar, nos contrates o no.",
+      },
+    ],
   },
-  {
-    title: "If we are not the right fit, we say so.",
-    body: "You get our honest read on what you are trying to fix, whether you hire us or not.",
-  },
-];
+};
 
-export function AfterYouSend() {
+export function AfterYouSend({ locale = "en" }: { locale?: Locale }) {
+  const t = copy[locale];
   return (
     <div className="max-w-[34em]">
-      <h3 className="text-ink">
-        What happens when you send this
-      </h3>
+      <h3 className="text-ink">{t.title}</h3>
       <ul className="mt-7 flex list-none flex-col gap-6">
-        {points.map((point) => (
+        {t.points.map((point) => (
           <li key={point.title}>
             <p className="text-copy font-bold text-pretty text-ink">
               {point.title}

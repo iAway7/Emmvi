@@ -2,6 +2,8 @@
 
 import { useId, useRef, useState } from "react";
 
+import type { Locale } from "@/lib/i18n";
+
 /**
  * Las cinco etapas del catalogo de GoHighLevel, como recorrido.
  *
@@ -30,14 +32,24 @@ export type Stage = {
   items: { name: string; ours?: boolean }[];
 };
 
+/** Lo unico que dice el componente por su cuenta: los dos textos para el
+ *  lector de pantalla. El resto llega en `stages` y `label`. */
+const texts: Record<Locale, { panel: (stage: string) => string; ours: string }> = {
+  en: { panel: (stage) => `${stage} features`, ours: "We set this up: " },
+  es: { panel: (stage) => `Funciones de ${stage}`, ours: "Lo montamos: " },
+};
+
 export function StageTimeline({
   stages,
   label,
+  locale = "en",
 }: {
   stages: Stage[];
   /** Nombra la tira de pestanas para un lector de pantalla. */
   label: string;
+  locale?: Locale;
 }) {
+  const t = texts[locale];
   const [active, setActive] = useState(0);
   const id = useId();
   const tira = useRef<HTMLDivElement>(null);
@@ -181,7 +193,7 @@ export function StageTimeline({
         <div
           id={`${id}-panel-${i}`}
           role="tabpanel"
-          aria-label={`${s.stage} features`}
+          aria-label={t.panel(s.stage)}
           hidden={i !== active}
           className="mt-4 mb-2 lg:mt-6 lg:mb-0"
         >
@@ -203,7 +215,7 @@ export function StageTimeline({
               >
                 {item.ours ? (
                   <span className="shrink-0 text-violet">
-                    <span className="sr-only">We set this up: </span>
+                    <span className="sr-only">{t.ours}</span>
                     <span aria-hidden="true">&#10003;</span>
                   </span>
                 ) : (

@@ -11,7 +11,8 @@
  * cifras. La pagina misma dice que no garantiza el primer puesto; la escena
  * ensena a que se aspira, no lo promete. Las estrellas no llevan nota.
  */
-import { Scene, type SceneData } from "@/components/scene";
+import { Scene, translateScene, type SceneData } from "@/components/scene";
+import type { Locale } from "@/lib/i18n";
 
 export type SeoScene =
   | "hero"
@@ -22,16 +23,41 @@ const scenes: Record<SeoScene, SceneData> = {
   "review": { viewBox: "0 0 420 420", mobileViewBox: null, markup: "<g transform=\"rotate(-3 200.0 195.0)\"><rect fill=\"#e6e6ea\" x=\"58\" y=\"88\" width=\"320\" height=\"250\" rx=\"26\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"40\" y=\"70\" width=\"320\" height=\"250\" rx=\"26\"/></g><g transform=\"rotate(-3 200 195)\"><circle stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#dcdafe\" cx=\"96\" cy=\"130\" r=\"26\"/><rect x=\"136\" y=\"118\" width=\"120\" height=\"14\" rx=\"7.0\" fill=\"#171717\"/><rect x=\"136\" y=\"140\" width=\"80\" height=\"10\" rx=\"5.0\" fill=\"#e6e6ea\"/><polygon stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" points=\"80.0,176.0 85.3,188.7 99.0,189.8 88.6,198.8 91.8,212.2 80.0,205.0 68.2,212.2 71.4,198.8 61.0,189.8 74.7,188.7\"/><polygon stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" points=\"132.0,176.0 137.3,188.7 151.0,189.8 140.6,198.8 143.8,212.2 132.0,205.0 120.2,212.2 123.4,198.8 113.0,189.8 126.7,188.7\"/><polygon stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" points=\"184.0,176.0 189.3,188.7 203.0,189.8 192.6,198.8 195.8,212.2 184.0,205.0 172.2,212.2 175.4,198.8 165.0,189.8 178.7,188.7\"/><polygon stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" points=\"236.0,176.0 241.3,188.7 255.0,189.8 244.6,198.8 247.8,212.2 236.0,205.0 224.2,212.2 227.4,198.8 217.0,189.8 230.7,188.7\"/><polygon stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" points=\"288.0,176.0 293.3,188.7 307.0,189.8 296.6,198.8 299.8,212.2 288.0,205.0 276.2,212.2 279.4,198.8 269.0,189.8 282.7,188.7\"/><rect x=\"70\" y=\"244\" width=\"260\" height=\"12\" rx=\"6.0\" fill=\"#e6e6ea\"/><rect x=\"70\" y=\"266\" width=\"200\" height=\"12\" rx=\"6.0\" fill=\"#e6e6ea\"/></g><g transform=\"rotate(8 336.0 76.0)\"><rect fill=\"#e6e6ea\" x=\"300\" y=\"40\" width=\"92\" height=\"92\" rx=\"20.24\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" x=\"290\" y=\"30\" width=\"92\" height=\"92\" rx=\"20.24\"/><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" d=\"M336.0 96.0 c-26 -18 -30 -30 -24 -40 c6 -10 20 -8 24 2 c4 -10 18 -12 24 -2 c6 10 2 22 -24 40 z\"/></g><g transform=\"rotate(2 205.0 361.0)\"><rect fill=\"#e6e6ea\" x=\"88\" y=\"338\" width=\"250\" height=\"62\" rx=\"31\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"80\" y=\"330\" width=\"250\" height=\"62\" rx=\"31\"/></g><g transform=\"rotate(2 205 361)\"><circle stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" cx=\"116\" cy=\"361\" r=\"14\"/><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"none\" d=\"M108 361 l6 6 l11 -12\"/><text x=\"142\" y=\"368\" font-size=\"19\" font-weight=\"600\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">Posted on Google</text></g><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" d=\"M40 362 Q43.24 376.76 58 380 Q43.24 383.24 40 398 Q36.76 383.24 22 380 Q36.76 376.76 40 362 Z\"/><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#dcdafe\" d=\"M390 284 Q392.88 297.12 406 300 Q392.88 302.88 390 316 Q387.12 302.88 374 300 Q387.12 297.12 390 284 Z\"/>" },
 };
 
+/**
+ * El texto de las escenas en español. Igual o mas corto que el ingles, frase
+ * a frase, porque las cajas no crecen (ver `translateScene`). "Northline EV &
+ * Solar", Leeds y los meses se quedan como nombres y cifras. "Llamar" es la
+ * unica que supera al ingles en caracteres (6 por 4): el boton mide 96 px y
+ * le sobra sitio.
+ */
+const spanish: Record<string, string> = {
+  "ev charger installer leeds": "instalador cargador leeds",
+  "Open · Leeds": "Abierto",
+  Call: "Llamar",
+  "Another installer": "Otro instalador",
+  "Closes 5pm": "Cierra 17h",
+  "Clicks from Google": "Clics desde Google",
+  Jan: "Ene",
+  Apr: "Abr",
+  "Found on the map": "Sale en el mapa",
+  "Posted on Google": "Reseña en Google",
+};
+
 export function SeoIllustration({
   name,
   label,
+  locale = "en",
   className,
 }: {
   name: SeoScene;
   label: string;
+  locale?: Locale;
   className?: string;
 }) {
+  const scene = scenes[name];
+  const localized =
+    locale === "es" ? { ...scene, markup: translateScene(scene.markup, spanish) } : scene;
   return (
-    <Scene id={`seo-${name}`} scene={scenes[name]} label={label} className={className} />
+    <Scene id={`seo-${name}`} scene={localized} label={label} className={className} />
   );
 }

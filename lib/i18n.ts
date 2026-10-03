@@ -36,10 +36,10 @@ export const defaultLocale: Locale = "en";
  * Añadir una pagina en español es crear app/(es)/es/<ruta>/page.tsx **y**
  * apuntarla aqui. Sin lo segundo, existe pero nadie la encuentra.
  *
- * Fuera quedan, de momento: las cinco pantallas de servicio y /about-us (son
- * el posicionamiento viejo del Figma, ver `indexLegacyPages` en lib/site.ts),
- * el blog (se publica solo, en ingles, y traducirlo es otro proyecto) y las
- * URLs heredadas que devuelven 410.
+ * Fuera quedan solo los articulos del blog (se publican solos, en ingles) y
+ * las URLs heredadas que devuelven 410. Todo lo demas tiene su pagina en
+ * español (decision del usuario, 2026-10-03: "nada queda sin su pagina en
+ * ES").
  */
 export const translatedPaths: readonly string[] = [
   "/",
@@ -49,6 +49,14 @@ export const translatedPaths: readonly string[] = [
   "/privacy-policy",
   "/installers",
   "/careers",
+  "/about-us",
+  "/blog",
+  "/services/website-design",
+  "/services/email-marketing",
+  "/services/seo",
+  "/services/ppc",
+  "/services/gohighlevel-automation",
+  "/full-stack-development-services",
 ];
 
 /** "/contact-us" -> "/contact-us/", "/" -> "/". Con ancla: "/#faq" -> "/#faq". */

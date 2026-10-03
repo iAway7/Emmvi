@@ -774,9 +774,8 @@ equivalente, y en las páginas sin traducción, a la home del otro idioma.
   ocupa un 20-30 % más, y en un h1 a tamaño display eso son dos líneas de más
   en el móvil. Titulares de cuatro a seis palabras; lo que explica va al
   párrafo. No es una traducción literal y no debe serlo.
-- **Las páginas traducidas son plantillas con diccionario**: la home, el
-  contacto, instaladores y empleo están en `components/pages/` con su texto en
-  `lib/copy/`, tipado
+- **Las páginas traducidas son plantillas con diccionario**: cada página
+  está en `components/pages/` con su texto en `lib/copy/`, tipado
   para que si el inglés gana una sección el español deje de compilar hasta
   tenerla. Gracias y 404 llevan el texto en la propia plantilla. Aviso legal y
   política de privacidad son páginas aparte (prosa con enlaces, cambia poco);
@@ -801,8 +800,9 @@ equivalente, y en las páginas sin traducción, a la home del otro idioma.
 El texto de las escenas es `<text>` dentro del SVG, y en `/es/` se sustituye
 al vuelo con `translateScene` (components/scene.tsx) y un mapa `spanish` por
 componente: `home-illustrations`, `book-call-illustration`,
-`installers-hero-illustration` y `careers-illustrations` (clave: el texto
-inglés exacto; valor: el español). **Cada frase española es
+`installers-hero-illustration`, `careers-illustrations` y las ilustraciones
+de cada servicio en `components/services/*-illustrations.tsx` (clave: el
+texto inglés exacto; valor: el español). **Cada frase española es
 igual o más corta que la inglesa**, porque las cajas del dibujo no crecen: si
 hay que alargar alguna, se comprueba en la escena, no en la lista. Lo que no
 está en el mapa se queda en inglés (nombres, horas, códigos postales y las
@@ -811,14 +811,16 @@ tablero).
 
 ### Lo que no está traducido
 
-- **Las cinco pantallas de servicio y /about-us**: son el posicionamiento
-  viejo del Figma (`indexLegacyPages`). En español, «Servicios» y «Nosotros»
-  apuntan a las secciones de la home.
-- **El blog**: se publica solo, en inglés. El pie en español lo enlaza y lo
-  dice.
-- **Las citas de los testimonios están traducidas.** Nombre y empresa quedan
-  intactos. Si se prefiere dejarlas en el original, se cambian en
-  `lib/copy/home.ts`.
+Solo los **artículos del blog**: se publican solos, en inglés, y traducirlos
+es otro proyecto. `/es/blog/` existe, lista los mismos artículos y lo dice en
+la entradilla. Todo lo demás tiene su página en `/es/`: home, contacto,
+gracias, 404, legales, instaladores, empleo, about, los cinco servicios y
+full-stack (decisión del usuario, 2026-10-03: «nada queda sin su página en
+ES»).
+
+Las citas de los testimonios están traducidas en todas las páginas que las
+muestran; salen de `lib/copy/home.ts`, una sola copia. Nombre y empresa quedan
+intactos.
 
 ## Cabecera y pie
 

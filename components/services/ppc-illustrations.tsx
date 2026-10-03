@@ -9,7 +9,8 @@
  * gasto, ni clics, ni coste por consulta. Los iconos de tarjeta, las chapas y
  * los logos de plataformas se quedan como estaban.
  */
-import { Scene, type SceneData } from "@/components/scene";
+import { Scene, translateScene, type SceneData } from "@/components/scene";
+import type { Locale } from "@/lib/i18n";
 
 export type PpcScene =
   | "hero"
@@ -22,16 +23,61 @@ const scenes: Record<PpcScene, SceneData> = {
   "control": { viewBox: "0 0 420 420", mobileViewBox: null, markup: "<rect fill=\"#e6e6ea\" x=\"58\" y=\"68\" width=\"320\" height=\"320\" rx=\"26\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"40\" y=\"50\" width=\"320\" height=\"320\" rx=\"26\"/><text x=\"70\" y=\"100\" font-size=\"24\" font-weight=\"800\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">Channels</text><text x=\"70\" y=\"154\" font-size=\"21\" font-weight=\"600\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">Google</text><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" x=\"266\" y=\"128\" width=\"64\" height=\"36\" rx=\"18\"/><circle stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" cx=\"312\" cy=\"146\" r=\"12\"/><path d=\"M70 174 H330\" stroke=\"#e6e6ea\" stroke-width=\"2\"/><text x=\"70\" y=\"210\" font-size=\"21\" font-weight=\"600\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">Meta</text><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" x=\"266\" y=\"184\" width=\"64\" height=\"36\" rx=\"18\"/><circle stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" cx=\"312\" cy=\"202\" r=\"12\"/><path d=\"M70 230 H330\" stroke=\"#e6e6ea\" stroke-width=\"2\"/><text x=\"70\" y=\"266\" font-size=\"21\" font-weight=\"600\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">TikTok</text><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" x=\"266\" y=\"240\" width=\"64\" height=\"36\" rx=\"18\"/><circle stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" cx=\"312\" cy=\"258\" r=\"12\"/><path d=\"M70 286 H330\" stroke=\"#e6e6ea\" stroke-width=\"2\"/><text x=\"70\" y=\"322\" font-size=\"21\" font-weight=\"600\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">LinkedIn</text><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" x=\"266\" y=\"296\" width=\"64\" height=\"36\" rx=\"18\"/><circle stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" cx=\"312\" cy=\"314\" r=\"12\"/><g transform=\"rotate(8 342.0 62.0)\"><rect fill=\"#e6e6ea\" x=\"310\" y=\"30\" width=\"84\" height=\"84\" rx=\"18.48\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" x=\"300\" y=\"20\" width=\"84\" height=\"84\" rx=\"18.48\"/><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"none\" d=\"M322.0 50.0 h40 M322.0 74.0 h40\"/><circle stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" cx=\"336.0\" cy=\"50.0\" r=\"7\"/><circle stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" cx=\"350.0\" cy=\"74.0\" r=\"7\"/></g><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" d=\"M40 372 Q43.24 386.76 58 390 Q43.24 393.24 40 408 Q36.76 393.24 22 390 Q36.76 386.76 40 372 Z\"/><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#dcdafe\" d=\"M390 326 Q392.52 337.48 404 340 Q392.52 342.52 390 354 Q387.48 342.52 376 340 Q387.48 337.48 390 326 Z\"/>" },
 };
 
+/**
+ * El texto de las escenas en español. Igual o mas corto que el ingles, linea a
+ * linea, porque las cajas no crecen (ver `translateScene`). Las excepciones
+ * caben de sobra en su caja y estan anotadas. "northline.co.uk", "LS6 2AB",
+ * Leeds y los nombres de plataforma no se traducen.
+ */
+const spanish: Record<string, string> = {
+  // hero
+  "ev charger leeds": "cargador leeds",
+  Sponsored: "Anuncio",
+  "EV charger installed": "Cargador instalado",
+  "in Leeds": "en Leeds",
+  "EV chargers, Leeds": "Cargadores, Leeds",
+  "Your postcode": "Código postal",
+  "Get a quote": "Presupuesto",
+  "New enquiry": "Solicitud",
+  "From your Google ad": "Desde tu anuncio",
+  Campaign: "Campaña",
+  "EV chargers \u00b7 Leeds": "Cargadores \u00b7 Leeds",
+  Running: "Activa",
+  // roi. "Vio el anuncio" (14) y "Hizo clic" (9) pasan del ingles (10 y 7),
+  // pero van centradas en cajas de 560 y 440 de ancho a 26px: sobra sitio.
+  "Saw the ad": "Vio el anuncio",
+  Clicked: "Hizo clic",
+  "Asked for a quote": "Pidió presupuesto",
+  "Every step tracked": "Cada paso medido",
+  "Weekly report": "Informe",
+  "Sent every Monday": "Cada lunes",
+  Spend: "Gasto",
+  "Set by you": "Lo fijas",
+  Clicks: "Clics",
+  // "Counted" sale dos veces (clics y leads); "Medidos" concuerda con ambos.
+  Counted: "Medidos",
+  Enquiries: "Leads",
+  "Cost per enquiry": "Coste por lead",
+  "Worked out": "Calculado",
+  // control
+  Channels: "Canales",
+};
+
 export function PpcIllustration({
   name,
   label,
+  locale = "en",
   className,
 }: {
   name: PpcScene;
   label: string;
+  locale?: Locale;
   className?: string;
 }) {
+  const scene = scenes[name];
+  const localized =
+    locale === "es" ? { ...scene, markup: translateScene(scene.markup, spanish) } : scene;
   return (
-    <Scene id={`ppc-${name}`} scene={scenes[name]} label={label} className={className} />
+    <Scene id={`ppc-${name}`} scene={localized} label={label} className={className} />
   );
 }

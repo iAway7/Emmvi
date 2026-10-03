@@ -6,6 +6,7 @@ import { useActionState } from "react";
 
 import { submitContact, type ContactState } from "@/app/actions/contact";
 import { FIELD_LIMITS } from "@/lib/contact";
+import type { Locale } from "@/lib/i18n";
 
 /**
  * "Talk to our Sales team" del Figma: nombre partido en dos, tres preguntas de
@@ -18,14 +19,52 @@ import { FIELD_LIMITS } from "@/lib/contact";
  * y el precio es una decisión de negocio sin cerrar. Cambiarlos aquí.
  */
 
-const PAGE_RANGES = ["1-5", "6-10", "11-20", "More than 20"];
-const BUDGET_RANGES = [
-  "Less than $1.000",
-  "$1.000 - $3.000",
-  "$3.000 - $5.000",
-  "$5.000 - $10.000",
-  "More than $10.000",
-];
+/**
+ * Textos del formulario por idioma. Los rangos de paginas y presupuesto son
+ * los mismos valores en los dos: llegan tal cual al correo y a Slack.
+ */
+const copy = {
+  en: {
+    pages: ["1-5", "6-10", "11-20", "More than 20"],
+    budget: [
+      "Less than $1.000",
+      "$1.000 - $3.000",
+      "$3.000 - $5.000",
+      "$5.000 - $10.000",
+      "More than $10.000",
+    ],
+    sent: "Message sent",
+    honeypot: "Leave this empty",
+    name: "Full Name",
+    email: "Email Address",
+    company: "Company Name (Optional)",
+    pagesLabel: "How many pages do you need?",
+    budgetLabel: "What\u2019s your budget?",
+    message: "How Can We Help You?",
+    sending: "Sending\u2026",
+    submit: "Submit",
+  },
+  es: {
+    pages: ["1-5", "6-10", "11-20", "Más de 20"],
+    budget: [
+      "Menos de 1.000 $",
+      "1.000 - 3.000 $",
+      "3.000 - 5.000 $",
+      "5.000 - 10.000 $",
+      "Más de 10.000 $",
+    ],
+    sent: "Mensaje enviado",
+    honeypot: "Deja esto vacío",
+    name: "Nombre completo",
+    email: "Correo electrónico",
+    company: "Empresa (opcional)",
+    pagesLabel: "¿Cuántas páginas necesitas?",
+    budgetLabel: "¿Qué presupuesto tienes?",
+    message: "¿En qué podemos ayudarte?",
+    sending: "Enviando\u2026",
+    submit: "Enviar",
+  },
+} satisfies Record<Locale, unknown>;
 
 const initialState: ContactState = { status: "idle", message: "" };
 
@@ -62,7 +101,10 @@ function Required() {
   );
 }
 
-export function SalesForm() {
+export function SalesForm({ locale = "en" }: { locale?: Locale }) {
+  const t = copy[locale];
+  const PAGE_RANGES = t.pages;
+  const BUDGET_RANGES = t.budget;
   const [state, formAction, isPending] = useActionState(
     submitContact,
     initialState,
@@ -81,7 +123,7 @@ export function SalesForm() {
   if (state.status === "success") {
     return (
       <div role="status" className="rounded-md border border-line bg-paper p-8">
-        <p className="text-h3 text-balance text-ink">Message sent</p>
+        <p className="text-h3 text-balance text-ink">{t.sent}</p>
         <p className="mt-3 text-body text-pretty text-ink-soft">
           {state.message}
         </p>
@@ -94,9 +136,10 @@ export function SalesForm() {
 
   return (
     <form action={handleSubmit} className="rounded-md border border-line bg-paper p-6 min-[900px]:p-8">
+      <input type="hidden" name="locale" value={locale} />
       {/* Honeypot. Fuera de pantalla y fuera del orden de tabulacion. */}
       <div aria-hidden="true" className="absolute left-[-9999px] h-px w-px overflow-hidden">
-        <label htmlFor="s-website">Leave this empty</label>
+        <label htmlFor="s-website">{t.honeypot}</label>
         <input id="s-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
       </div>
 
@@ -112,7 +155,7 @@ export function SalesForm() {
       <div className="grid items-stretch gap-5 sm:grid-cols-2">
         <div className="flex flex-col sm:col-span-2">
           <label htmlFor="s-name" className={labelClass}>
-            Full Name
+            {t.name}
             <Required />
           </label>
           <input
@@ -129,7 +172,7 @@ export function SalesForm() {
 
         <div className="flex flex-col sm:col-span-2">
           <label htmlFor="s-email" className={labelClass}>
-            Email Address
+            {t.email}
             <Required />
           </label>
           <input
@@ -147,7 +190,7 @@ export function SalesForm() {
 
         <div className="flex flex-col">
           <label htmlFor="s-company" className={labelClass}>
-            Company Name (Optional)
+            {t.company}
           </label>
           <input
             id="s-company"
@@ -162,7 +205,7 @@ export function SalesForm() {
 
         <div className="flex flex-col">
           <label htmlFor="s-pages" className={labelClass}>
-            How many pages do you need?
+            {t.pagesLabel}
             <Required />
           </label>
           <select
@@ -181,7 +224,7 @@ export function SalesForm() {
 
         <div className="flex flex-col sm:col-span-2">
           <label htmlFor="s-budget" className={labelClass}>
-            What&rsquo;s your budget?
+            {t.budgetLabel}
             <Required />
           </label>
           <select
@@ -200,7 +243,7 @@ export function SalesForm() {
 
         <div className="flex flex-col sm:col-span-2">
           <label htmlFor="s-message" className={labelClass}>
-            How Can We Help You?
+            {t.message}
             <Required />
           </label>
           <textarea
@@ -218,11 +261,11 @@ export function SalesForm() {
       <button
         type="submit"
         disabled={isPending}
-        className="mt-6 inline-flex h-12 items-center justify-center rounded-sm bg-ink px-6 text-ui font-medium text-paper transition-colors duration-150 hover:bg-ink-black focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet disabled:opacity-70"
+        className="mt-6 inline-flex h-12 items-center justify-center rounded-sm bg-ink-deep px-6 text-ui font-medium text-paper transition-colors duration-150 hover:bg-ink-black focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet disabled:opacity-70"
       >
-        {isPending ? "Sending…" : "Submit"}
+        {isPending ? t.sending : t.submit}
       </button>
-      <DataNotice />
+      <DataNotice locale={locale} />
     </form>
   );
 }

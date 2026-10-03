@@ -9,8 +9,12 @@
  *
  * Los tres iconos de "Why work with us" siguen siendo los del WordPress hasta
  * que el usuario elija entre esos y los nuevos.
+ *
+ * En español se traduce el texto de las dos escenas con `translateScene`;
+ * cada frase mide igual o menos que la inglesa salvo las anotadas abajo.
  */
-import { Scene, type SceneData } from "@/components/scene";
+import { Scene, translateScene, type SceneData } from "@/components/scene";
+import type { Locale } from "@/lib/i18n";
 
 export type FullStackScene =
   | "hero"
@@ -21,16 +25,63 @@ const scenes: Record<FullStackScene, SceneData> = {
   "patchwork": { viewBox: "0 0 1200 620", mobileViewBox: "20 20 640 580", markup: "<text x=\"260\" y=\"56\" font-size=\"28\" font-weight=\"800\" fill=\"#171717\" text-anchor=\"middle\" opacity=\"1\">Now</text><text x=\"900\" y=\"56\" font-size=\"28\" font-weight=\"800\" fill=\"#171717\" text-anchor=\"middle\" opacity=\"1\">After</text><path d=\"M150 200 C 220 260, 300 180, 330 290 M200 370 C 260 330, 330 420, 380 380\" fill=\"none\" stroke=\"#171717\" stroke-width=\"3\" stroke-dasharray=\"6 10\" stroke-linecap=\"round\"/><g transform=\"rotate(-6 135.0 150.0)\"><rect fill=\"#e6e6ea\" x=\"48\" y=\"118\" width=\"190\" height=\"80\" rx=\"18\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"40\" y=\"110\" width=\"190\" height=\"80\" rx=\"18\"/></g><g transform=\"rotate(-6 135 150)\"><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" x=\"56\" y=\"132\" width=\"36\" height=\"36\" rx=\"9\"/><text x=\"106\" y=\"158\" font-size=\"18\" font-weight=\"700\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">Spreadsheet</text></g><g transform=\"rotate(5 355.0 190.0)\"><rect fill=\"#e6e6ea\" x=\"268\" y=\"158\" width=\"190\" height=\"80\" rx=\"18\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"260\" y=\"150\" width=\"190\" height=\"80\" rx=\"18\"/></g><g transform=\"rotate(5 355 190)\"><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#dcdafe\" x=\"276\" y=\"172\" width=\"36\" height=\"36\" rx=\"9\"/><text x=\"326\" y=\"198\" font-size=\"18\" font-weight=\"700\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">Email</text></g><g transform=\"rotate(4 155.0 320.0)\"><rect fill=\"#e6e6ea\" x=\"68\" y=\"288\" width=\"190\" height=\"80\" rx=\"18\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"60\" y=\"280\" width=\"190\" height=\"80\" rx=\"18\"/></g><g transform=\"rotate(4 155 320)\"><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#f7f1df\" x=\"76\" y=\"302\" width=\"36\" height=\"36\" rx=\"9\"/><text x=\"126\" y=\"328\" font-size=\"18\" font-weight=\"700\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">Forms</text></g><g transform=\"rotate(-5 365.0 370.0)\"><rect fill=\"#e6e6ea\" x=\"278\" y=\"338\" width=\"190\" height=\"80\" rx=\"18\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"270\" y=\"330\" width=\"190\" height=\"80\" rx=\"18\"/></g><g transform=\"rotate(-5 365 370)\"><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" x=\"286\" y=\"352\" width=\"36\" height=\"36\" rx=\"9\"/><text x=\"336\" y=\"378\" font-size=\"18\" font-weight=\"700\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">Invoices</text></g><g transform=\"rotate(-3 205.0 500.0)\"><rect fill=\"#e6e6ea\" x=\"118\" y=\"468\" width=\"190\" height=\"80\" rx=\"18\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"110\" y=\"460\" width=\"190\" height=\"80\" rx=\"18\"/></g><g transform=\"rotate(-3 205 500)\"><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#dcdafe\" x=\"126\" y=\"482\" width=\"36\" height=\"36\" rx=\"9\"/><text x=\"176\" y=\"508\" font-size=\"18\" font-weight=\"700\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">CRM</text></g><g transform=\"rotate(40 245 178)\"><rect fill=\"#f7f1df\" stroke=\"#171717\" stroke-width=\"2.5\" x=\"213\" y=\"167\" width=\"64\" height=\"22\" rx=\"3\" opacity=\"0.95\"/><path d=\"M221 167 v22\" stroke=\"#171717\" stroke-width=\"1\" opacity=\"0.3\"/><path d=\"M233 167 v22\" stroke=\"#171717\" stroke-width=\"1\" opacity=\"0.3\"/><path d=\"M245 167 v22\" stroke=\"#171717\" stroke-width=\"1\" opacity=\"0.3\"/><path d=\"M257 167 v22\" stroke=\"#171717\" stroke-width=\"1\" opacity=\"0.3\"/><path d=\"M269 167 v22\" stroke=\"#171717\" stroke-width=\"1\" opacity=\"0.3\"/></g><g transform=\"rotate(-30 262 352)\"><rect fill=\"#c9f7a8\" stroke=\"#171717\" stroke-width=\"2.5\" x=\"230\" y=\"341\" width=\"64\" height=\"22\" rx=\"3\" opacity=\"0.95\"/><path d=\"M238 341 v22\" stroke=\"#171717\" stroke-width=\"1\" opacity=\"0.3\"/><path d=\"M250 341 v22\" stroke=\"#171717\" stroke-width=\"1\" opacity=\"0.3\"/><path d=\"M262 341 v22\" stroke=\"#171717\" stroke-width=\"1\" opacity=\"0.3\"/><path d=\"M274 341 v22\" stroke=\"#171717\" stroke-width=\"1\" opacity=\"0.3\"/><path d=\"M286 341 v22\" stroke=\"#171717\" stroke-width=\"1\" opacity=\"0.3\"/></g><g transform=\"rotate(15 228 475)\"><rect fill=\"#dcdafe\" stroke=\"#171717\" stroke-width=\"2.5\" x=\"196\" y=\"464\" width=\"64\" height=\"22\" rx=\"3\" opacity=\"0.95\"/><path d=\"M204 464 v22\" stroke=\"#171717\" stroke-width=\"1\" opacity=\"0.3\"/><path d=\"M216 464 v22\" stroke=\"#171717\" stroke-width=\"1\" opacity=\"0.3\"/><path d=\"M228 464 v22\" stroke=\"#171717\" stroke-width=\"1\" opacity=\"0.3\"/><path d=\"M240 464 v22\" stroke=\"#171717\" stroke-width=\"1\" opacity=\"0.3\"/><path d=\"M252 464 v22\" stroke=\"#171717\" stroke-width=\"1\" opacity=\"0.3\"/></g><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#171717\" d=\"M560 320 h40 v-18 l34 30 l-34 30 v-18 h-40 z\"/><rect fill=\"#e6e6ea\" x=\"708\" y=\"128\" width=\"440\" height=\"420\" rx=\"30\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"690\" y=\"110\" width=\"440\" height=\"420\" rx=\"30\"/><text x=\"722\" y=\"160\" font-size=\"26\" font-weight=\"800\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">One system</text><text x=\"722\" y=\"194\" font-size=\"18\" font-weight=\"400\" fill=\"#5c5c66\" text-anchor=\"start\" opacity=\"1\">One place, one owner</text><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#f7f1df\" x=\"722\" y=\"226\" width=\"34\" height=\"34\" rx=\"9\"/><text x=\"772\" y=\"250\" font-size=\"19\" font-weight=\"600\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">Forms</text><circle stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" cx=\"1080\" cy=\"243\" r=\"13\"/><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"none\" d=\"M1072 243 l6 6 l11 -12\"/><path d=\"M760 268 H1100\" stroke=\"#e6e6ea\" stroke-width=\"2\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#dcdafe\" x=\"722\" y=\"282\" width=\"34\" height=\"34\" rx=\"9\"/><text x=\"772\" y=\"306\" font-size=\"19\" font-weight=\"600\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">Email</text><circle stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" cx=\"1080\" cy=\"299\" r=\"13\"/><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"none\" d=\"M1072 299 l6 6 l11 -12\"/><path d=\"M760 324 H1100\" stroke=\"#e6e6ea\" stroke-width=\"2\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#dcdafe\" x=\"722\" y=\"338\" width=\"34\" height=\"34\" rx=\"9\"/><text x=\"772\" y=\"362\" font-size=\"19\" font-weight=\"600\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">CRM</text><circle stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" cx=\"1080\" cy=\"355\" r=\"13\"/><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"none\" d=\"M1072 355 l6 6 l11 -12\"/><path d=\"M760 380 H1100\" stroke=\"#e6e6ea\" stroke-width=\"2\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" x=\"722\" y=\"394\" width=\"34\" height=\"34\" rx=\"9\"/><text x=\"772\" y=\"418\" font-size=\"19\" font-weight=\"600\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">Invoices</text><circle stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" cx=\"1080\" cy=\"411\" r=\"13\"/><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"none\" d=\"M1072 411 l6 6 l11 -12\"/><path d=\"M760 436 H1100\" stroke=\"#e6e6ea\" stroke-width=\"2\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" x=\"722\" y=\"450\" width=\"34\" height=\"34\" rx=\"9\"/><text x=\"772\" y=\"474\" font-size=\"19\" font-weight=\"600\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">Spreadsheet</text><circle stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" cx=\"1080\" cy=\"467\" r=\"13\"/><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"none\" d=\"M1072 467 l6 6 l11 -12\"/><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" d=\"M640 100 Q643.6 116.4 660 120 Q643.6 123.6 640 140 Q636.4 123.6 620 120 Q636.4 116.4 640 100 Z\"/><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#dcdafe\" d=\"M1160 562 Q1163.24 576.76 1178 580 Q1163.24 583.24 1160 598 Q1156.76 583.24 1142 580 Q1156.76 576.76 1160 562 Z\"/><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" d=\"M40 542 Q43.24 556.76 58 560 Q43.24 563.24 40 578 Q36.76 563.24 22 560 Q36.76 556.76 40 542 Z\"/>" },
 };
 
+/**
+ * El texto de las escenas en español, por escena. Igual o mas corto que el
+ * ingles porque las cajas no crecen (ver `translateScene`). Las excepciones,
+ * de uno o dos caracteres y en celdas con aire de sobra: "Obras" (Jobs),
+ * "Obra" (Job), "Aerotermia" (Heat pump), "Pagado" (Paid), "Nuevo" (New) y
+ * "Después" (After, titulo suelto sin caja). "Formularios" mide mas en
+ * caracteres que "Forms" pero menos en pixeles que "Spreadsheet", que iba en
+ * la misma caja. Northline, los nombres, las APIs y el codigo no se traducen.
+ */
+const spanish: Record<FullStackScene, Record<string, string>> = {
+  hero: {
+    "portal.yourbusiness.com": "portal.tunegocio.com",
+    Dashboard: "Panel",
+    Clients: "Cuentas",
+    Jobs: "Obras",
+    Invoices: "Facturas",
+    "Jobs this week": "Esta semana",
+    "New job": "+ Obra",
+    Client: "Quién",
+    Job: "Obra",
+    Status: "Estado",
+    "Heat pump": "Aerotermia",
+    "EV charger": "Cargador",
+    Battery: "Batería",
+    Paid: "Pagado",
+    Due: "Vence",
+    New: "Nuevo",
+    "Deployed \u00b7 yours to keep": "Desplegado \u00b7 y es tuyo",
+  },
+  patchwork: {
+    Now: "Hoy",
+    After: "Después",
+    Spreadsheet: "Excel",
+    Forms: "Formularios",
+    Invoices: "Facturas",
+    "One system": "Un sistema",
+    "One place, one owner": "Un sitio, un dueño",
+  },
+};
+
 export function FullStackIllustration({
   name,
   label,
+  locale = "en",
   className,
 }: {
   name: FullStackScene;
   label: string;
+  locale?: Locale;
   className?: string;
 }) {
+  const scene = scenes[name];
+  const localized =
+    locale === "es"
+      ? { ...scene, markup: translateScene(scene.markup, spanish[name]) }
+      : scene;
   return (
-    <Scene id={`fs-${name}`} scene={scenes[name]} label={label} className={className} />
+    <Scene id={`fs-${name}`} scene={localized} label={label} className={className} />
   );
 }

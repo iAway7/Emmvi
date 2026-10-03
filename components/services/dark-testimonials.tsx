@@ -1,5 +1,8 @@
 import Image from "next/image";
 
+import { homeCopy } from "@/lib/copy/home";
+import type { Locale } from "@/lib/i18n";
+
 /**
  * "What Our Clients Say" de /services/email-marketing: tres tarjetas sobre el
  * panel oscuro (Figma 165:1967).
@@ -14,31 +17,23 @@ import Image from "next/image";
  * medida para esto.
  */
 
-const testimonials = [
-  {
-    quote:
-      "Gustavo and Nico do great work. I’ve been really happy with multiple websites they’ve built for me. They have a great eye for design and a strong focus on user experience, making sure everything not only looks good but is easy to navigate.",
-    name: "Jared White",
-    role: "JBZ Beats",
-    photo: "/testimonials/jared-white.png",
-  },
-  {
-    quote:
-      "I was drowning in manual work and reached out to Nico for help with automations. He set up email flows, follow-ups, and little systems I didn’t even know I needed. Everything feels more organized now.",
-    name: "Adriana Patania",
-    role: "Local gym",
-    photo: "/testimonials/adriana-patania-1.png",
-  },
-  {
-    quote:
-      "Gus helped me redesign my website and honestly, it turned out way better than I imagined. It looks clean, it loads fast, and it works great on phones too. He really listened to what I needed.",
-    name: "Alicia Ryz",
-    role: "Ecommerce store",
-    photo: "/testimonials/alicia-ryz.png",
-  },
-];
+/**
+ * Las tres citas reales, las de la home (lib/copy/home.ts): una sola copia en
+ * los dos idiomas. Aqui van recortadas a la primera parte, que es lo que
+ * cabia en la tarjeta del Figma.
+ */
+function quotes(locale: Locale) {
+  return homeCopy[locale].testimonials.items.map((t) => ({
+    quote: t.quote.split(/(?<=\.)\s/).slice(0, 3).join(" "),
+    name: t.name,
+    role: t.org,
+    initials: t.initials,
+    photo: t.photo ?? "",
+  }));
+}
 
-export function DarkTestimonials() {
+export function DarkTestimonials({ locale = "en" }: { locale?: Locale }) {
+  const testimonials = quotes(locale);
   return (
     <ul className="grid list-none gap-6 min-[900px]:grid-cols-3 min-[900px]:gap-12">
       {testimonials.map((t) => (

@@ -1,6 +1,9 @@
 "use client";
 
 import Image from "next/image";
+
+import { homeCopy } from "@/lib/copy/home";
+import type { Locale } from "@/lib/i18n";
 import { useEffect, useRef, useState } from "react";
 
 /**
@@ -20,43 +23,23 @@ import { useEffect, useRef, useState } from "react";
  * realmente se desplaza: en escritorio las tres caben a la vez.
  */
 
-type Testimonial = {
-  quote: string;
-  name: string;
-  role: string;
-  initials: string;
-  /** Sin foto todavía: cae en las iniciales. */
-  photo?: string;
-};
+/**
+ * Las tres citas reales, las de la home (lib/copy/home.ts): una sola copia en
+ * los dos idiomas. Aqui van recortadas a la primera parte, que es lo que
+ * cabia en la tarjeta del Figma.
+ */
+function quotes(locale: Locale) {
+  return homeCopy[locale].testimonials.items.map((t) => ({
+    quote: t.quote.split(/(?<=\.)\s/).slice(0, 3).join(" "),
+    name: t.name,
+    role: t.org,
+    initials: t.initials,
+    photo: t.photo,
+  }));
+}
 
-const testimonials: Testimonial[] = [
-  {
-    quote:
-      "Gustavo and Nico do great work. I’ve been really happy with multiple websites they’ve built for me. They have a great eye for design and a strong focus on user experience, making sure everything not only looks good but is easy to navigate.",
-    name: "Jared White",
-    role: "JBZ Beats",
-    initials: "JW",
-    photo: "/testimonials/jared-white.png",
-  },
-  {
-    quote:
-      "I was drowning in manual work and reached out to Nico for help with automations. He set up email flows, follow-ups, and little systems I didn’t even know I needed. Everything feels more organized now.",
-    name: "Adriana Patania",
-    role: "Local gym",
-    initials: "AP",
-    photo: "/testimonials/adriana-patania-1.png",
-  },
-  {
-    quote:
-      "Gus helped me redesign my website and honestly, it turned out way better than I imagined. It looks clean, it loads fast, and it works great on phones too. He really listened to what I needed.",
-    name: "Alicia Ryz",
-    role: "Ecommerce store",
-    initials: "AR",
-    photo: "/testimonials/alicia-ryz.png",
-  },
-];
-
-export function Testimonials() {
+export function Testimonials({ locale = "en" }: { locale?: Locale }) {
+  const testimonials = quotes(locale);
   const trackRef = useRef<HTMLUListElement>(null);
   const [active, setActive] = useState(0);
 
@@ -137,7 +120,7 @@ export function Testimonials() {
             key={t.name}
             type="button"
             onClick={() => goTo(i)}
-            aria-label={`Show ${t.name}’s testimonial`}
+            aria-label={locale === "es" ? `Ver el testimonio de ${t.name}` : `Show ${t.name}’s testimonial`}
             aria-current={i === active ? "true" : undefined}
             className="inline-grid size-11 place-items-center rounded-sm focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
           >

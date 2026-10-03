@@ -12,7 +12,8 @@
  * pagina lo pone en un carril con desplazamiento horizontal por debajo de
  * 900px, como hacia con el PNG.
  */
-import { Scene, type SceneData } from "@/components/scene";
+import { Scene, translateScene, type SceneData } from "@/components/scene";
+import type { Locale } from "@/lib/i18n";
 
 export type EmailScene =
   | "hero"
@@ -33,16 +34,82 @@ const scenes: Record<EmailScene, SceneData> = {
   "flow": { viewBox: "0 0 1100 1000", mobileViewBox: null, markup: "<ellipse cx=\"550\" cy=\"500\" rx=\"375\" ry=\"360\" fill=\"none\" stroke=\"#171717\" stroke-width=\"3\" stroke-dasharray=\"4 14\" stroke-linecap=\"round\"/><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#171717\" d=\"M704.7 171.8 L689.4 156.1 L682.7 172.8 Z\"/><rect fill=\"#e6e6ea\" x=\"410.0\" y=\"108.0\" width=\"300\" height=\"84\" rx=\"20\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"400.0\" y=\"98.0\" width=\"300\" height=\"84\" rx=\"20\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#dcdafe\" x=\"416.0\" y=\"120.0\" width=\"40\" height=\"40\" rx=\"10\"/><text x=\"436.0\" y=\"148.0\" font-size=\"18\" font-weight=\"800\" fill=\"#171717\" text-anchor=\"middle\" opacity=\"1\">1</text><text x=\"470.0\" y=\"147.0\" font-size=\"18\" font-weight=\"700\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">Welcome series</text><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#171717\" d=\"M901.2 373.3 L901.5 351.3 L885.0 358.5 Z\"/><rect fill=\"#e6e6ea\" x=\"675.1650429449553\" y=\"213.4415587728429\" width=\"300\" height=\"84\" rx=\"20\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"665.1650429449553\" y=\"203.4415587728429\" width=\"300\" height=\"84\" rx=\"20\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#f7f1df\" x=\"681.1650429449553\" y=\"225.4415587728429\" width=\"40\" height=\"40\" rx=\"10\"/><text x=\"701.1650429449553\" y=\"253.4415587728429\" font-size=\"18\" font-weight=\"800\" fill=\"#171717\" text-anchor=\"middle\" opacity=\"1\">2</text><text x=\"735.1650429449553\" y=\"252.4415587728429\" font-size=\"18\" font-weight=\"700\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">Browse abandonment</text><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#171717\" d=\"M891.7 648.8 L907.9 634.0 L891.4 626.9 Z\"/><rect fill=\"#e6e6ea\" x=\"785.0\" y=\"468.0\" width=\"300\" height=\"84\" rx=\"20\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"775.0\" y=\"458.0\" width=\"300\" height=\"84\" rx=\"20\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" x=\"791.0\" y=\"480.0\" width=\"40\" height=\"40\" rx=\"10\"/><text x=\"811.0\" y=\"508.0\" font-size=\"18\" font-weight=\"800\" fill=\"#171717\" text-anchor=\"middle\" opacity=\"1\">3</text><text x=\"845.0\" y=\"507.0\" font-size=\"18\" font-weight=\"700\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">Abandoned cart</text><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#171717\" d=\"M682.4 837.0 L704.3 838.0 L697.6 821.3 Z\"/><rect fill=\"#e6e6ea\" x=\"675.1650429449553\" y=\"722.5584412271571\" width=\"300\" height=\"84\" rx=\"20\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"665.1650429449553\" y=\"712.5584412271571\" width=\"300\" height=\"84\" rx=\"20\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#dcdafe\" x=\"681.1650429449553\" y=\"734.5584412271571\" width=\"40\" height=\"40\" rx=\"10\"/><text x=\"701.1650429449553\" y=\"762.5584412271571\" font-size=\"18\" font-weight=\"800\" fill=\"#171717\" text-anchor=\"middle\" opacity=\"1\">4</text><text x=\"735.1650429449553\" y=\"761.5584412271571\" font-size=\"18\" font-weight=\"700\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">First sale</text><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#171717\" d=\"M395.3 828.2 L410.6 843.9 L417.3 827.2 Z\"/><rect fill=\"#e6e6ea\" x=\"410.0\" y=\"828.0\" width=\"300\" height=\"84\" rx=\"20\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"400.0\" y=\"818.0\" width=\"300\" height=\"84\" rx=\"20\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#f7f1df\" x=\"416.0\" y=\"840.0\" width=\"40\" height=\"40\" rx=\"10\"/><text x=\"436.0\" y=\"868.0\" font-size=\"18\" font-weight=\"800\" fill=\"#171717\" text-anchor=\"middle\" opacity=\"1\">5</text><text x=\"470.0\" y=\"867.0\" font-size=\"18\" font-weight=\"700\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">Post-purchase</text><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#171717\" d=\"M198.8 626.7 L198.5 648.7 L215.0 641.5 Z\"/><rect fill=\"#e6e6ea\" x=\"144.8349570550447\" y=\"722.5584412271571\" width=\"300\" height=\"84\" rx=\"20\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"134.8349570550447\" y=\"712.5584412271571\" width=\"300\" height=\"84\" rx=\"20\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" x=\"150.8349570550447\" y=\"734.5584412271571\" width=\"40\" height=\"40\" rx=\"10\"/><text x=\"170.8349570550447\" y=\"762.5584412271571\" font-size=\"18\" font-weight=\"800\" fill=\"#171717\" text-anchor=\"middle\" opacity=\"1\">6</text><text x=\"204.8349570550447\" y=\"761.5584412271571\" font-size=\"18\" font-weight=\"700\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">Upsell and cross-sell</text><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#171717\" d=\"M208.3 351.2 L192.1 366.0 L208.6 373.1 Z\"/><rect fill=\"#e6e6ea\" x=\"35.0\" y=\"468.00000000000006\" width=\"300\" height=\"84\" rx=\"20\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"25.0\" y=\"458.00000000000006\" width=\"300\" height=\"84\" rx=\"20\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#dcdafe\" x=\"41.0\" y=\"480.00000000000006\" width=\"40\" height=\"40\" rx=\"10\"/><text x=\"61.0\" y=\"508.00000000000006\" font-size=\"18\" font-weight=\"800\" fill=\"#171717\" text-anchor=\"middle\" opacity=\"1\">7</text><text x=\"95.0\" y=\"507.00000000000006\" font-size=\"18\" font-weight=\"700\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">Win-back</text><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#171717\" d=\"M417.6 163.0 L395.7 162.0 L402.4 178.7 Z\"/><rect fill=\"#e6e6ea\" x=\"144.83495705504464\" y=\"213.4415587728429\" width=\"300\" height=\"84\" rx=\"20\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"134.83495705504464\" y=\"203.4415587728429\" width=\"300\" height=\"84\" rx=\"20\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#f7f1df\" x=\"150.83495705504464\" y=\"225.4415587728429\" width=\"40\" height=\"40\" rx=\"10\"/><text x=\"170.83495705504464\" y=\"253.4415587728429\" font-size=\"18\" font-weight=\"800\" fill=\"#171717\" text-anchor=\"middle\" opacity=\"1\">8</text><text x=\"204.83495705504464\" y=\"252.4415587728429\" font-size=\"18\" font-weight=\"700\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">Sunset flow</text><rect fill=\"#e6e6ea\" x=\"418\" y=\"408\" width=\"300\" height=\"220\" rx=\"32\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"400\" y=\"390\" width=\"300\" height=\"220\" rx=\"32\"/><polygon stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" points=\"550.0,430.0 560.6,455.4 588.0,457.6 567.1,475.6 573.5,502.4 550.0,488.0 526.5,502.4 532.9,475.6 512.0,457.6 539.4,455.4\"/><text x=\"550\" y=\"550\" font-size=\"28\" font-weight=\"800\" fill=\"#171717\" text-anchor=\"middle\" opacity=\"1\">Loyal customer</text><text x=\"550\" y=\"582\" font-size=\"17\" font-weight=\"400\" fill=\"#5c5c66\" text-anchor=\"middle\" opacity=\"1\">Every flow leads back here</text><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" d=\"M80 56 Q84.32 75.68 104 80 Q84.32 84.32 80 104 Q75.68 84.32 56 80 Q75.68 75.68 80 56 Z\"/><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#dcdafe\" d=\"M1030 910 Q1033.6 926.4 1050 930 Q1033.6 933.6 1030 950 Q1026.4 933.6 1010 930 Q1026.4 926.4 1030 910 Z\"/>" },
 };
 
+/**
+ * El texto de las escenas en español, por escena. Cada frase mide igual o
+ * menos que la inglesa en caracteres, porque las cajas no crecen (ver
+ * `translateScene`), con dos excepciones medidas sobre el dibujo: "3 pedidos"
+ * (9 por 8) va en una pastilla de 110px donde sobran 25px, y "Mayo" (4 por 3)
+ * esta anclado a la derecha con 100px libres a su izquierda. Fernhouse, Lucy
+ * M., las cifras y "Aa" no se traducen. Las cuatro tarjetas no tienen texto.
+ *
+ * "Cesta" y no "carrito": es la palabra que cabe ("Cesta olvidada" mide lo
+ * mismo que "Abandoned cart") y la que usa el comercio online en España.
+ */
+const spanish: Partial<Record<EmailScene, Record<string, string>>> = {
+  hero: {
+    "New email": "Redactar",
+    To: "A",
+    "New subscribers": "Suscriptores",
+    Subject: "Asunto",
+    "Welcome to Fernhouse": "Hola desde Fernhouse",
+    "Glad you&#x27;re here": "Nos alegra verte",
+    "Shop now": "Comprar",
+    Inbox: "Buzón",
+    "You left something behind": "Te has dejado algo",
+    "Thanks for your order": "Gracias por tu pedido",
+    "Sends on sign-up": "Se envía al alta",
+  },
+  retention: {
+    "Customer since March": "Clienta desde marzo",
+    Subscriber: "Suscrita",
+    "3 orders": "3 pedidos",
+    "Order #1": "Pedido 1",
+    "Order #2": "Pedido 2",
+    "Order #3": "Pedido 3",
+    March: "Marzo",
+    May: "Mayo",
+    August: "Agosto",
+    "Welcome email": "Bienvenida",
+    "Sent on sign-up": "Enviado al alta",
+    "We saved your cart": "Cesta guardada",
+    "Sent an hour later": "Una hora después",
+    "Thank-you email": "Agradecimiento",
+    "Sent after checkout": "Tras la compra",
+    "Something new in": "Novedades",
+    "Sent to past buyers": "A quien ya compró",
+  },
+  flow: {
+    "Welcome series": "Bienvenida",
+    "Browse abandonment": "Visita sin compra",
+    "Abandoned cart": "Cesta olvidada",
+    "First sale": "1.ª compra",
+    "Post-purchase": "Posventa",
+    "Upsell and cross-sell": "Venta cruzada",
+    "Win-back": "Rescate",
+    "Sunset flow": "Despedida",
+    "Loyal customer": "Cliente fiel",
+    "Every flow leads back here": "Todo flujo vuelve aquí",
+  },
+};
+
 export function EmailIllustration({
   name,
   label,
+  locale = "en",
   className,
 }: {
   name: EmailScene;
   label: string;
+  locale?: Locale;
   className?: string;
 }) {
+  const scene = scenes[name];
+  const texts = spanish[name];
+  const localized =
+    locale === "es" && texts
+      ? { ...scene, markup: translateScene(scene.markup, texts) }
+      : scene;
   return (
-    <Scene id={`email-${name}`} scene={scenes[name]} label={label} className={className} />
+    <Scene id={`email-${name}`} scene={localized} label={label} className={className} />
   );
 }

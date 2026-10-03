@@ -9,7 +9,8 @@
  * negocio aparece en el buscador (SEO), se pide presupuesto sin esfuerzo (UX)
  * y la confirmacion llega al movil. "Northline" es un negocio de ejemplo.
  */
-import { Scene, type SceneData } from "@/components/scene";
+import { Scene, translateScene, type SceneData } from "@/components/scene";
+import type { Locale } from "@/lib/i18n";
 
 const scenes: Record<WebDesignScene, SceneData> = {
   "hero": { viewBox: "0 0 1200 1000", mobileViewBox: "880 140 300 740", markup: "<path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"none\" d=\"M200 110 V160\"/><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"none\" d=\"M1080 250 V300\"/><rect fill=\"#e6e6ea\" x=\"78\" y=\"178\" width=\"800\" height=\"600\" rx=\"32\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#f1f1f3\" x=\"60\" y=\"160\" width=\"800\" height=\"600\" rx=\"32\"/><circle stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" cx=\"100\" cy=\"200\" r=\"10\"/><circle stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" cx=\"134\" cy=\"200\" r=\"10\"/><circle stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" cx=\"168\" cy=\"200\" r=\"10\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"220\" y=\"182\" width=\"480\" height=\"36\" rx=\"18\"/><text x=\"460\" y=\"207\" font-size=\"18\" font-weight=\"500\" fill=\"#5c5c66\" text-anchor=\"middle\" opacity=\"1\">yourbusiness.com</text><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"84\" y=\"236\" width=\"752\" height=\"500\" rx=\"14\"/><text x=\"112\" y=\"280\" font-size=\"22\" font-weight=\"800\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">Northline</text><rect x=\"560\" y=\"266\" width=\"60\" height=\"14\" rx=\"7.0\" fill=\"#e6e6ea\"/><rect x=\"636\" y=\"266\" width=\"60\" height=\"14\" rx=\"7.0\" fill=\"#e6e6ea\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#171717\" x=\"716\" y=\"258\" width=\"96\" height=\"34\" rx=\"8\"/><text x=\"112\" y=\"360\" font-size=\"40\" font-weight=\"800\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">Solar installs</text><text x=\"112\" y=\"406\" font-size=\"40\" font-weight=\"800\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">across Leeds</text><rect x=\"112\" y=\"436\" width=\"300\" height=\"14\" rx=\"7.0\" fill=\"#e6e6ea\"/><rect x=\"112\" y=\"462\" width=\"240\" height=\"14\" rx=\"7.0\" fill=\"#e6e6ea\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#423af4\" x=\"112\" y=\"500\" width=\"180\" height=\"54\" rx=\"10\"/><text x=\"202\" y=\"534\" font-size=\"20\" font-weight=\"700\" fill=\"#ffffff\" text-anchor=\"middle\" opacity=\"1\">Get a quote</text><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#dcdafe\" x=\"480\" y=\"320\" width=\"330\" height=\"240\" rx=\"14\"/><circle stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#f7f1df\" cx=\"740\" cy=\"380\" r=\"30\"/><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"none\" d=\"M480 520 L580 430 L660 500 L720 450 L810 530\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#f7f1df\" x=\"112\" y=\"600\" width=\"210\" height=\"110\" rx=\"12\"/><rect x=\"132\" y=\"630\" width=\"120\" height=\"12\" rx=\"6.0\" fill=\"#e6e6ea\"/><rect x=\"132\" y=\"656\" width=\"160\" height=\"10\" rx=\"5.0\" fill=\"#e6e6ea\"/><rect x=\"132\" y=\"676\" width=\"100\" height=\"10\" rx=\"5.0\" fill=\"#e6e6ea\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"350\" y=\"600\" width=\"210\" height=\"110\" rx=\"12\"/><rect x=\"370\" y=\"630\" width=\"120\" height=\"12\" rx=\"6.0\" fill=\"#e6e6ea\"/><rect x=\"370\" y=\"656\" width=\"160\" height=\"10\" rx=\"5.0\" fill=\"#e6e6ea\"/><rect x=\"370\" y=\"676\" width=\"100\" height=\"10\" rx=\"5.0\" fill=\"#e6e6ea\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" x=\"588\" y=\"600\" width=\"210\" height=\"110\" rx=\"12\"/><rect x=\"608\" y=\"630\" width=\"120\" height=\"12\" rx=\"6.0\" fill=\"#e6e6ea\"/><rect x=\"608\" y=\"656\" width=\"160\" height=\"10\" rx=\"5.0\" fill=\"#e6e6ea\"/><rect x=\"608\" y=\"676\" width=\"100\" height=\"10\" rx=\"5.0\" fill=\"#e6e6ea\"/><rect fill=\"#e6e6ea\" x=\"898\" y=\"318\" width=\"280\" height=\"560\" rx=\"40\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"880\" y=\"300\" width=\"280\" height=\"560\" rx=\"40\"/><rect x=\"980\" y=\"318\" width=\"80\" height=\"12\" rx=\"6\" fill=\"#171717\"/><text x=\"906\" y=\"372\" font-size=\"18\" font-weight=\"800\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">Northline</text><rect x=\"1112\" y=\"358\" width=\"24\" height=\"3\" rx=\"1.5\" fill=\"#171717\"/><rect x=\"1112\" y=\"366\" width=\"24\" height=\"3\" rx=\"1.5\" fill=\"#171717\"/><rect x=\"1112\" y=\"374\" width=\"24\" height=\"3\" rx=\"1.5\" fill=\"#171717\"/><text x=\"906\" y=\"430\" font-size=\"26\" font-weight=\"800\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">Solar installs</text><text x=\"906\" y=\"462\" font-size=\"26\" font-weight=\"800\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">across Leeds</text><rect x=\"906\" y=\"484\" width=\"200\" height=\"10\" rx=\"5.0\" fill=\"#e6e6ea\"/><rect x=\"906\" y=\"504\" width=\"150\" height=\"10\" rx=\"5.0\" fill=\"#e6e6ea\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#423af4\" x=\"906\" y=\"530\" width=\"228\" height=\"48\" rx=\"10\"/><text x=\"1020\" y=\"561\" font-size=\"18\" font-weight=\"700\" fill=\"#ffffff\" text-anchor=\"middle\" opacity=\"1\">Get a quote</text><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#dcdafe\" x=\"906\" y=\"600\" width=\"228\" height=\"170\" rx=\"12\"/><circle stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#f7f1df\" cx=\"1090\" cy=\"640\" r=\"20\"/><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"none\" d=\"M906 740 L980 680 L1040 720 L1134 660\"/><rect x=\"906\" y=\"792\" width=\"180\" height=\"10\" rx=\"5.0\" fill=\"#e6e6ea\"/><rect x=\"906\" y=\"812\" width=\"120\" height=\"10\" rx=\"5.0\" fill=\"#e6e6ea\"/><g transform=\"rotate(-3 240.0 825.0)\"><rect fill=\"#e6e6ea\" x=\"38\" y=\"718\" width=\"440\" height=\"250\" rx=\"28\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"20\" y=\"700\" width=\"440\" height=\"250\" rx=\"28\"/></g><g transform=\"rotate(-3 240 825)\"><text x=\"56\" y=\"764\" font-size=\"24\" font-weight=\"700\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">Your brand</text><text x=\"56\" y=\"880\" font-size=\"96\" font-weight=\"800\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">Aa</text><circle stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#171717\" cx=\"230\" cy=\"850\" r=\"22\"/><circle stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#423af4\" cx=\"284\" cy=\"850\" r=\"22\"/><circle stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" cx=\"338\" cy=\"850\" r=\"22\"/><circle stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#f7f1df\" cx=\"392\" cy=\"850\" r=\"22\"/><text x=\"230\" y=\"910\" font-size=\"20\" font-weight=\"400\" fill=\"#5c5c66\" text-anchor=\"start\" opacity=\"1\">Colours and type</text></g><g transform=\"rotate(-8 200.0 90.0)\"><rect fill=\"#e6e6ea\" x=\"160\" y=\"50\" width=\"100\" height=\"100\" rx=\"22.0\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" x=\"150\" y=\"40\" width=\"100\" height=\"100\" rx=\"22.0\"/><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" d=\"M182.0 66.0 l0 44 l12 -10 l9 20 l10 -4 l-9 -20 l16 -2 z\"/></g><g transform=\"rotate(8 1080.0 210.0)\"><rect fill=\"#e6e6ea\" x=\"1040\" y=\"170\" width=\"100\" height=\"100\" rx=\"22.0\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#dcdafe\" x=\"1030\" y=\"160\" width=\"100\" height=\"100\" rx=\"22.0\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"1064.0\" y=\"182.0\" width=\"32\" height=\"56\" rx=\"8\"/><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"none\" d=\"M1074.0 228.0 h12\"/></g><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" d=\"M960 66 Q964.32 85.68 984 90 Q964.32 94.32 960 114 Q955.68 94.32 936 90 Q955.68 85.68 960 66 Z\"/><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#dcdafe\" d=\"M560 908 Q563.96 926.04 582 930 Q563.96 933.96 560 952 Q556.04 933.96 538 930 Q556.04 926.04 560 908 Z\"/><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" d=\"M1160 920 Q1163.6 936.4 1180 940 Q1163.6 943.6 1160 960 Q1156.4 943.6 1140 940 Q1156.4 936.4 1160 920 Z\"/>" },
@@ -21,16 +22,58 @@ const scenes: Record<WebDesignScene, SceneData> = {
 
 export type WebDesignScene = "hero" | "benefits" | "design" | "build" | "launch";
 
+/**
+ * El texto de las escenas en español, igual o mas corto que el ingles porque
+ * las cajas no crecen (ver `translateScene`). "Northline", "Leeds", el codigo
+ * postal y las URLs se quedan: son el negocio de ejemplo. Dos excepciones
+ * anotadas: "Home" se deja (es jerga web corriente en español y "Inicio" es
+ * mas largo) y "Live" pasa a "Online", dos letras mas en una pastilla de 120
+ * que las absorbe.
+ */
+const spanish: Record<string, string> = {
+  // hero
+  "yourbusiness.com": "tunegocio.com",
+  "Solar installs": "Placas solares",
+  "across Leeds": "en Leeds",
+  "Get a quote": "Presupuesto",
+  "Your brand": "Tu marca",
+  "Colours and type": "Colores y fuente",
+  // build
+  Design: "Diseño",
+  "Live site": "Publicada",
+  // launch
+  "Before launch": "Comprobamos",
+  "Forms connected": "Formularios ok",
+  "Works on mobile": "Móvil probado",
+  "Speed tested": "Carga rápida",
+  "SSL on": "SSL ok",
+  Live: "Online",
+  // benefits
+  "solar installer leeds": "placas solares leeds",
+  "Solar installs across Leeds": "Placas solares en Leeds",
+  "What do you need?": "¿Qué necesitas?",
+  "Solar panels, 3-bed semi": "Placas solares, adosado",
+  Postcode: "CP",
+  "Send request": "Enviar",
+  "Request sent": "Enviado",
+  "We&#x27;ll reply in": "Te respondemos",
+  "under a minute": "en un minuto",
+  "Back to site": "Volver",
+};
+
 export function WebDesignIllustration({
   name,
   label,
+  locale = "en",
   className,
 }: {
   name: WebDesignScene;
   label: string;
+  locale?: Locale;
   className?: string;
 }) {
-  return (
-    <Scene id={name} scene={scenes[name]} label={label} className={className} />
-  );
+  const scene = scenes[name];
+  const localized =
+    locale === "es" ? { ...scene, markup: translateScene(scene.markup, spanish) } : scene;
+  return <Scene id={name} scene={localized} label={label} className={className} />;
 }

@@ -5,6 +5,8 @@ import {
   SearchIcon,
   WrenchIcon,
 } from "./icons";
+import { websiteDesignCopy } from "@/lib/copy/website-design";
+import type { Locale } from "@/lib/i18n";
 
 /**
  * "Navigating the Web Design Journey": cinco semanas sobre un raíl central,
@@ -16,52 +18,22 @@ import {
  *
  * En móvil el raíl se va a la izquierda y las burbujas se apilan: un círculo de
  * 350px no cabe en 375px de viewport.
+ *
+ * El texto (semana, titulo, cuerpo y chip) sale de `journey` en
+ * lib/copy/website-design.ts segun `locale`; aqui solo quedan el icono, el
+ * lado y si hay reunion, que son iguales en los dos idiomas.
  */
 
 const weeks = [
-  {
-    week: "Week 1",
-    title: "Research & Planning",
-    body: "Research and assess competitors’ websites to identify strengths and areas for differentiation.",
-    meeting: true,
-    Icon: SearchIcon,
-    side: "left" as const,
-  },
-  {
-    week: "Week 2",
-    title: "Design & Structure",
-    body: "Develop wireframes and design mockups for visual and structural planning.",
-    meeting: true,
-    Icon: FigmaIcon,
-    side: "right" as const,
-  },
-  {
-    week: "Week 3",
-    title: "Content Assembly",
-    body: "Use the page builder to assemble the website’s layout and integrate required functionalities.",
-    meeting: false,
-    Icon: ChipIcon,
-    side: "left" as const,
-  },
-  {
-    week: "Week 4",
-    title: "Testing & Optimization",
-    body: "Thoroughly test and optimize the site for performance and user experience.",
-    meeting: false,
-    Icon: WrenchIcon,
-    side: "right" as const,
-  },
-  {
-    week: "Week 5",
-    title: "Launch & Promotion",
-    body: "Deploy the website and implement promotion strategies for a successful launch.",
-    meeting: true,
-    Icon: PowerIcon,
-    side: "left" as const,
-  },
+  { meeting: true, Icon: SearchIcon, side: "left" as const },
+  { meeting: true, Icon: FigmaIcon, side: "right" as const },
+  { meeting: false, Icon: ChipIcon, side: "left" as const },
+  { meeting: false, Icon: WrenchIcon, side: "right" as const },
+  { meeting: true, Icon: PowerIcon, side: "left" as const },
 ];
 
-export function Journey() {
+export function Journey({ locale = "en" }: { locale?: Locale }) {
+  const t = websiteDesignCopy[locale].journey;
   return (
     <ol className="relative mt-14 list-none min-[900px]:mt-20">
       {/* Raíl. Va de centro a centro de nodo, por eso el inset de 16px. */}
@@ -76,9 +48,9 @@ export function Journey() {
         className="journey__progress absolute top-4 left-4 w-px bg-violet min-[900px]:left-1/2"
       />
 
-      {weeks.map(({ week, title, body, meeting, Icon, side }, i) => (
+      {weeks.map(({ meeting, Icon, side }, i) => (
         <li
-          key={week}
+          key={i}
           className={`relative pl-14 min-[900px]:grid min-[900px]:grid-cols-2 min-[900px]:items-start min-[900px]:gap-x-32 min-[900px]:pl-0 ${
             i === 0 ? "" : "mt-16 min-[900px]:mt-24"
           }`}
@@ -100,7 +72,7 @@ export function Journey() {
                 : "min-[900px]:col-start-1 min-[900px]:justify-self-end"
             }`}
           >
-            {week}
+            {`${t.week} ${i + 1}`}
           </p>
 
           <div
@@ -115,18 +87,18 @@ export function Journey() {
               <div className="grid size-full place-items-center rounded-full bg-[#f0edff] px-6 text-center">
                 <div>
                   <Icon className="mx-auto size-8 text-ink" />
-                  <h3 className="mt-4 text-ink">{title}</h3>
+                  <h3 className="mt-4 text-ink">{t.steps[i].title}</h3>
                 </div>
               </div>
             </div>
 
             <p className="mt-6 max-w-[411px] text-copy text-pretty text-ink-soft min-[900px]:text-center">
-              {body}
+              {t.steps[i].body}
             </p>
 
             {meeting ? (
               <p className="mt-5 inline-flex rounded-sm bg-[#f2f2f4] px-4 py-2 text-small font-bold text-ink">
-                Meeting with Client
+                {t.meeting}
               </p>
             ) : null}
           </div>

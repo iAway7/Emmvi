@@ -9,8 +9,12 @@
  *   texto de cada SMS. Sustituye a la captura; los bloques son los mismos.
  * - "connect": GoHighLevel en el centro y las cinco conexiones de la lista
  *   de debajo, con los mismos nombres.
+ *
+ * En /es/ el texto de cada escena se sustituye con `translateScene` y los
+ * mapas de abajo, igual que la escena del hero de /installers.
  */
-import { Scene, type SceneData } from "@/components/scene";
+import { Scene, translateScene, type SceneData } from "@/components/scene";
+import type { Locale } from "@/lib/i18n";
 
 export type GhlScene =
   | "hero"
@@ -25,16 +29,95 @@ const scenes: Record<GhlScene, SceneData> = {
   "connect": { viewBox: "0 0 1200 560", mobileViewBox: "430 40 760 500", markup: "<path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"none\" d=\"M270 135 L600 280\"/><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"none\" d=\"M270 425 L600 280\"/><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"none\" d=\"M970 105 L600 280\"/><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"none\" d=\"M1000 295 L600 280\"/><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"none\" d=\"M970 485 L600 280\"/><rect fill=\"#e6e6ea\" x=\"468\" y=\"198\" width=\"300\" height=\"200\" rx=\"30\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"450\" y=\"180\" width=\"300\" height=\"200\" rx=\"30\"/><rect fill=\"#e6e6ea\" x=\"570\" y=\"210\" width=\"80\" height=\"80\" rx=\"17.6\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" x=\"560\" y=\"200\" width=\"80\" height=\"80\" rx=\"17.6\"/><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" d=\"M606.0 216.0 L586.0 244.0 H600.0 L594.0 264.0 L614.0 236.0 H600.0 Z\"/><text x=\"600\" y=\"326\" font-size=\"26\" font-weight=\"800\" fill=\"#171717\" text-anchor=\"middle\" opacity=\"1\">GoHighLevel</text><text x=\"600\" y=\"356\" font-size=\"16\" font-weight=\"500\" fill=\"#5c5c66\" text-anchor=\"middle\" opacity=\"1\">Built and connected</text><rect fill=\"#e6e6ea\" x=\"100\" y=\"100\" width=\"280\" height=\"90\" rx=\"22\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"90\" y=\"90\" width=\"280\" height=\"90\" rx=\"22\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#dcdafe\" x=\"108\" y=\"112\" width=\"46\" height=\"46\" rx=\"12\"/><text x=\"170\" y=\"134\" font-size=\"20\" font-weight=\"700\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">Your website</text><text x=\"170\" y=\"160\" font-size=\"16\" font-weight=\"400\" fill=\"#5c5c66\" text-anchor=\"start\" opacity=\"1\">Requests in</text><rect fill=\"#e6e6ea\" x=\"100\" y=\"390\" width=\"280\" height=\"90\" rx=\"22\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"90\" y=\"380\" width=\"280\" height=\"90\" rx=\"22\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#f7f1df\" x=\"108\" y=\"402\" width=\"46\" height=\"46\" rx=\"12\"/><text x=\"170\" y=\"424\" font-size=\"20\" font-weight=\"700\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">Kickserv</text><text x=\"170\" y=\"450\" font-size=\"16\" font-weight=\"400\" fill=\"#5c5c66\" text-anchor=\"start\" opacity=\"1\">Jobs and schedule</text><rect fill=\"#e6e6ea\" x=\"820\" y=\"70\" width=\"280\" height=\"90\" rx=\"22\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"810\" y=\"60\" width=\"280\" height=\"90\" rx=\"22\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" x=\"828\" y=\"82\" width=\"46\" height=\"46\" rx=\"12\"/><text x=\"890\" y=\"104\" font-size=\"20\" font-weight=\"700\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">Stripe</text><text x=\"890\" y=\"130\" font-size=\"16\" font-weight=\"400\" fill=\"#5c5c66\" text-anchor=\"start\" opacity=\"1\">Payments</text><rect fill=\"#e6e6ea\" x=\"850\" y=\"260\" width=\"280\" height=\"90\" rx=\"22\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"840\" y=\"250\" width=\"280\" height=\"90\" rx=\"22\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#dcdafe\" x=\"858\" y=\"272\" width=\"46\" height=\"46\" rx=\"12\"/><text x=\"920\" y=\"294\" font-size=\"20\" font-weight=\"700\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">Airtable</text><text x=\"920\" y=\"320\" font-size=\"16\" font-weight=\"400\" fill=\"#5c5c66\" text-anchor=\"start\" opacity=\"1\">Your records</text><rect fill=\"#e6e6ea\" x=\"820\" y=\"450\" width=\"280\" height=\"90\" rx=\"22\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#ffffff\" x=\"810\" y=\"440\" width=\"280\" height=\"90\" rx=\"22\"/><rect stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#f7f1df\" x=\"828\" y=\"462\" width=\"46\" height=\"46\" rx=\"12\"/><text x=\"890\" y=\"484\" font-size=\"20\" font-weight=\"700\" fill=\"#171717\" text-anchor=\"start\" opacity=\"1\">Zapier and Make</text><text x=\"890\" y=\"510\" font-size=\"16\" font-weight=\"400\" fill=\"#5c5c66\" text-anchor=\"start\" opacity=\"1\">Everything else</text><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#c9f7a8\" d=\"M600 60 Q603.6 76.4 620 80 Q603.6 83.6 600 100 Q596.4 83.6 580 80 Q596.4 76.4 600 60 Z\"/><path stroke=\"#171717\" stroke-width=\"3.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" fill=\"#dcdafe\" d=\"M560 482 Q563.24 496.76 578 500 Q563.24 503.24 560 518 Q556.76 503.24 542 500 Q556.76 496.76 560 482 Z\"/>" },
 };
 
+/**
+ * El texto de las escenas en español. Cada frase mide igual o menos que la
+ * inglesa, linea a linea, porque las cajas no crecen (ver `translateScene`).
+ * Mark, Marbella, las horas y los nombres de producto se quedan. Las claves
+ * son el texto exacto del markup; lo que no esta aqui se pinta en ingles.
+ *
+ * Cuatro se pasan de largo a sabiendas, porque la abreviatura era peor y la
+ * caja tiene sitio medido: "Respondida" (la fila del pipeline corre de 696 a
+ * ~1000), "Enviar SMS" y "Espera 1 día" (la tarjeta del flujo mide 360 y el
+ * texto arranca a 100 de su borde) y "Pagada" (sello de 84 a 15px).
+ */
+const spanish: Record<GhlScene, Record<string, string>> = {
+  hero: {
+    "New quote request": "Nueva solicitud",
+    "Hi, do you cover the": "Hola, ¿llegáis a",
+    "Marbella area? Looking": "Marbella? Busco precio",
+    "for a quote on a full": "de limpieza completa",
+    "clean before the weekend.": "antes del fin de semana.",
+    "34 seconds later": "34 seg. después",
+    "Hi Mark, yes we do. I": "Hola Mark, sí. Tengo",
+    "have Friday morning or": "viernes por la mañana",
+    "Saturday at 2pm open,": "o sábado a las 14:00,",
+    "which suits you better?": "¿qué te viene mejor?",
+    "Saturday!": "¡Sábado!",
+    Message: "Mensaje",
+    Opportunity: "Oportunidad",
+    "Full clean · Marbella": "Limpieza · Marbella",
+    "New lead": "Nuevo",
+    Replied: "Respondida",
+    Booked: "Cita",
+    Next: "Sig.",
+    "Answered while you were out": "Respondida en tu ausencia",
+  },
+  licence: {
+    "Your GoHighLevel": "Tu GoHighLevel",
+    Conversations: "Mensajes",
+    Empty: "Vacío",
+    "0 running": "0 activos",
+    Calendars: "Agendas",
+    Reputation: "Reputación",
+    "Not set up": "Sin montar",
+    "Monthly licence": "Cuota mensual",
+    "Charged every month": "Se cobra cada mes",
+    Paid: "Pagada",
+  },
+  flow: {
+    Trigger: "Inicio",
+    "Quote sent": "Enviado",
+    "Send SMS": "Enviar SMS",
+    "Hi Mark, did the": "Hola Mark, ¿te",
+    "quote come": "llegó bien",
+    "through OK?": "el precio?",
+    "Wait 1 day": "Espera 1 día",
+    "Any questions on": "¿Alguna duda con",
+    "the quote? Happy": "el precio? Aquí",
+    "to help.": "estamos.",
+    End: "Fin",
+    "Customer replies?": "¿Te responde?",
+    "It stops on its own": "Se detiene solo",
+  },
+  connect: {
+    "Built and connected": "Montado y conectado",
+    "Your website": "Tu web",
+    "Requests in": "Solicitudes",
+    "Jobs and schedule": "Trabajos y agenda",
+    Payments: "Pagos",
+    "Your records": "Tus datos",
+    "Zapier and Make": "Zapier y Make",
+    "Everything else": "Todo lo demás",
+  },
+};
+
 export function GhlIllustration({
   name,
   label,
+  locale = "en",
   className,
 }: {
   name: GhlScene;
   label: string;
+  locale?: Locale;
   className?: string;
 }) {
+  const scene = scenes[name];
+  const localized =
+    locale === "es"
+      ? { ...scene, markup: translateScene(scene.markup, spanish[name]) }
+      : scene;
   return (
-    <Scene id={`ghl-${name}`} scene={scenes[name]} label={label} className={className} />
+    <Scene id={`ghl-${name}`} scene={localized} label={label} className={className} />
   );
 }

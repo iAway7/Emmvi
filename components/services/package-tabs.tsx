@@ -22,7 +22,14 @@ import { useId, useState } from "react";
 
 export type PackageTab = { title: string; heading?: string; body?: string };
 
-export function PackageTabs({ tabs }: { tabs: PackageTab[] }) {
+export function PackageTabs({
+  tabs,
+  label = "What the SEO package includes",
+}: {
+  tabs: PackageTab[];
+  /** El `aria-label` de la lista de pestañas, en el idioma de la pagina. */
+  label?: string;
+}) {
   const [active, setActive] = useState(0);
   const id = useId();
 
@@ -54,7 +61,7 @@ export function PackageTabs({ tabs }: { tabs: PackageTab[] }) {
     <div className="grid gap-10 min-[900px]:grid-cols-[408px_minmax(0,1fr)] min-[900px]:items-start min-[900px]:gap-16">
       <div
         role="tablist"
-        aria-label="What the SEO package includes"
+        aria-label={label}
         aria-orientation="vertical"
         onKeyDown={onKeyDown}
         className="grid gap-6"
