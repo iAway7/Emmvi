@@ -9,7 +9,7 @@ capitalización: es el logotipo, que es un wordmark en caja baja.
 Alcanza a todo lo que ve alguien, incluidos los sitios donde es fácil
 olvidarlo: `<title>` y su plantilla (`%s · emmvi`), `SITE_NAME` en
 `lib/site.ts`, los `aria-label` del header, el pie y el mapa, el `alt` de la
-tarjeta de Open Graph, el JSON-LD de organización, el aviso de marca del pie y
+tarjeta de Open Graph, el JSON-LD de organización y
 el `<title>` del SVG de BIMI.
 
 Los comentarios del código también lo escriben en minúscula. No es cosmética:

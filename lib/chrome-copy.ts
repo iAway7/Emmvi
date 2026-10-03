@@ -50,7 +50,6 @@ export type ChromeCopy = {
     columns: readonly FooterColumn[];
     cookies: string;
     rights: string;
-    trademark: string;
   };
   form: {
     sent: string;
@@ -172,7 +171,6 @@ const en: ChromeCopy = {
     ],
     cookies: "Cookie preferences",
     rights: "© 2026 emmvi. All rights reserved.",
-    trademark: "emmvi® is a registered trademark in Spain.",
   },
   form: {
     sent: "Message sent",
@@ -240,7 +238,6 @@ const es: ChromeCopy = {
     ],
     cookies: "Preferencias de cookies",
     rights: "© 2026 emmvi. Todos los derechos reservados.",
-    trademark: "emmvi® es una marca registrada en España.",
   },
   form: {
     sent: "Mensaje enviado",
