@@ -6,11 +6,9 @@ import type { Locale } from "@/lib/i18n";
  * `locale` y lee de aqui; las paginas no tienen que saber nada de esto.
  *
  * Las rutas van **con prefijo ya puesto** cuando el destino cambia de idioma.
- * En español, "Servicios" y "Nosotros" apuntan a secciones de la home y no a
- * /services/... ni a /about-us/: esas paginas son el posicionamiento viejo del
- * Figma (ver `indexLegacyPages` en lib/site.ts) y no se han traducido. El
- * blog se enlaza en ingles y se dice: se publica solo, en ingles, y mandar a
- * alguien sin avisar a una pagina en otro idioma es peor que no enlazarla.
+ * El menu y el pie en español tienen **las mismas entradas que el ingles**:
+ * los servicios, /about-us y el blog se enlazan aunque sigan en ingles,
+ * porque esconderlos deja la version española sin oferta a la vista.
  */
 
 export type NavChild = { href: string; label: string };
@@ -193,19 +191,31 @@ const en: ChromeCopy = {
   },
 };
 
+/**
+ * Mismas entradas que el ingles. Las paginas de servicio y /about-us siguen
+ * en ingles (no estan traducidas), pero se enlazan igual: quitar los
+ * servicios del menu español era peor que mandar a una pagina en ingles. Si
+ * algun dia se traducen, solo cambia el prefijo de la ruta.
+ */
+const serviciosEs: readonly NavChild[] = [
+  {
+    href: "/services/gohighlevel-automation/",
+    label: "Automatización con GoHighLevel",
+  },
+  { href: "/services/website-design/", label: "Diseño web" },
+  { href: "/services/email-marketing/", label: "Email marketing" },
+  { href: "/services/seo/", label: "SEO" },
+  { href: "/services/ppc/", label: "PPC" },
+];
+
 const es: ChromeCopy = {
   header: {
     homeLabel: "emmvi, inicio",
     navLabel: "Principal",
     links: [
-      /**
-       * Etiquetas cortas a proposito: "Con quién trabajamos" y "Preguntas
-       * frecuentes" partian en dos lineas y la nav se comia el CTA. En la
-       * home las secciones conservan su titulo largo.
-       */
-      { href: "/es/#services", label: "Servicios" },
+      { href: "/es/#services", label: "Servicios", children: serviciosEs },
       { href: "/es/#who", label: "Clientes" },
-      { href: "/es/#about", label: "Nosotros" },
+      { href: "/about-us/", label: "Nosotros" },
       { href: "/es/#faq", label: "Preguntas" },
     ],
     cta: "Agendar una llamada",
@@ -220,10 +230,20 @@ const es: ChromeCopy = {
       "Webs y los sistemas de detrás, para pequeñas empresas de Europa y América.",
     columns: [
       {
+        title: "Servicios",
+        links: [
+          { href: "/services/website-design/", label: "Diseño web" },
+          { href: "/services/email-marketing/", label: "Email marketing" },
+          { href: "/services/seo/", label: "SEO" },
+          { href: "/services/ppc/", label: "PPC" },
+        ],
+      },
+      {
         title: "Empresa",
         links: [
-          { href: "/es/#about", label: "Nosotros" },
-          { href: "/blog/", label: "Blog (en inglés)" },
+          { href: "/about-us/", label: "Nosotros" },
+          { href: "/es/careers/", label: "Empleo" },
+          { href: "/blog/", label: "Blog" },
           { href: "/es/contact-us/", label: "Contacto" },
         ],
       },
