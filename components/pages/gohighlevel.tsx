@@ -69,7 +69,7 @@ const counts = {
 
 const wrap =
   "mx-auto w-full max-w-[var(--container-wrap)] px-6 lg:px-[var(--spacing-gut)]";
-const section = "py-14 lg:py-[84px]";
+const section = "py-16 lg:py-[104px]";
 /** El archivo pone los rotulos a 11px; la escala arranca en `text-small` (14),
  *  que es lo mas cerca sin estrenar una medida para esta sola pagina. */
 const eyebrow = "text-small font-bold tracking-[0.16em] uppercase";
@@ -101,16 +101,16 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
 
       <main id="top">
         {/* --- Hero: el texto y el recorrido empezando -------------------- */}
-        <section className={`${wrap} pt-10 pb-12 lg:pt-11 lg:pb-16`}>
+        <section className={`${wrap} pt-12 pb-16 lg:pt-[88px] lg:pb-20`}>
           <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
             <div>
               <p className={`${eyebrow} text-violet`}>{t.hero.eyebrow}</p>
-              <h1 className="mt-4 text-ink">{t.hero.title}</h1>
+              <h1 className="mt-6 text-ink">{t.hero.title}</h1>
               {/* `text-body` (18px fijo) y no `text-lede`, que escala hasta 24
                   en escritorio. El token, no una medida a mano: lo obliga la
                   regla `no-restricted-syntax` de ESLint, y asi el interlineado
                   viene con el tamano en vez de quedarse el de la entradilla. */}
-              <p className="mt-5 max-w-[46ch] text-body text-pretty text-ink-soft">
+              <p className="mt-6 max-w-[46ch] text-body text-pretty text-ink-soft">
                 {t.hero.lede}
               </p>
               <div className="mt-7 flex flex-wrap gap-3">
@@ -143,7 +143,7 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
             {t.journey.map((j, i) => (
               <li
                 key={j.label}
-                className={`border-white/28 px-6 py-7 lg:px-8 lg:py-8 ${
+                className={`border-white/28 px-6 py-9 lg:px-8 lg:py-11 ${
                   i < t.journey.length - 1 ? "max-sm:border-b" : ""
                 } ${i < 2 ? "sm:max-lg:border-b" : ""} ${
                   i % 2 === 0 ? "sm:max-lg:border-r" : ""
@@ -155,7 +155,7 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
                 <p className="mt-4 font-mono text-stat leading-none font-bold text-white">
                   {j.figure}
                 </p>
-                <p className="mt-1.5 text-small text-white">{j.body}</p>
+                <p className="mt-2 text-small text-white">{j.body}</p>
               </li>
             ))}
           </ol>
@@ -166,8 +166,8 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
           <div className="grid items-start gap-8 lg:grid-cols-2 lg:gap-14">
             <div>
               <p className={`${eyebrow} text-ink-soft`}>{t.licence.eyebrow}</p>
-              <h2 className="mt-3.5 text-ink">{t.licence.title}</h2>
-              <p className="mt-3.5 max-w-[34ch] text-copy text-pretty text-ink-soft">
+              <h2 className="mt-5 text-ink">{t.licence.title}</h2>
+              <p className="mt-5 max-w-[34ch] text-copy text-pretty text-ink-soft">
                 {t.licence.lede}
               </p>
               <GhlIllustration
@@ -196,7 +196,7 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
 
         {/* --- Lo que cambia, sobre oscuro -------------------------------- */}
         <section className="bg-ink-deep">
-          <div className={`${wrap} py-14 lg:py-[88px]`}>
+          <div className={`${wrap} ${section}`}>
             {/* Titular y parrafo en dos columnas, como "The licence is not
                 the system" mas arriba. Apilados eran once lineas seguidas con
                 media pantalla vacia al lado: el titular ya ocupa cuatro, y el
@@ -291,10 +291,10 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
               mirarla; las cifras viven en el parrafo, donde tienen sitio para
               explicarse. */}
           <p className={`${eyebrow} mt-5 text-ink-soft`}>{t.catalogue.eyebrow}</p>
-          <h2 className="mt-3.5 max-w-[24ch] text-balance text-ink">
+          <h2 className="mt-5 max-w-[24ch] text-balance text-ink">
             {t.catalogue.title}
           </h2>
-          <p className="mt-3.5 max-w-[48ch] text-copy text-pretty text-ink-soft">
+          <p className="mt-5 max-w-[48ch] text-copy text-pretty text-ink-soft">
             {t.catalogue.intro(counts)}
           </p>
 
@@ -317,8 +317,8 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
         <section id="build" className="scroll-mt-24 bg-paper-panel">
           <div className={`${wrap} ${section}`}>
             <p className={`${eyebrow} text-ink-soft`}>{t.build.eyebrow}</p>
-            <h2 className="mt-3.5 max-w-[24ch] text-ink">{t.build.title}</h2>
-            <p className="mt-3.5 max-w-[40ch] text-copy text-pretty text-ink-soft">
+            <h2 className="mt-5 max-w-[24ch] text-ink">{t.build.title}</h2>
+            <p className="mt-5 max-w-[40ch] text-copy text-pretty text-ink-soft">
               {t.build.lede}
             </p>
 
@@ -382,10 +382,10 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
               <p className={`${eyebrow} text-ink-soft`}>
                 {t.missedCall.eyebrow}
               </p>
-              <h2 className="mt-3.5 max-w-[16ch] text-ink">
+              <h2 className="mt-5 max-w-[16ch] text-ink">
                 {t.missedCall.title}
               </h2>
-              <p className="mt-3.5 max-w-[44ch] text-copy text-pretty text-ink-soft">
+              <p className="mt-5 max-w-[44ch] text-copy text-pretty text-ink-soft">
                 {t.missedCall.body}
               </p>
             </div>
@@ -406,7 +406,7 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
               suelta tres secciones mas arriba y no se entendia. El 52/15 se
               queda solo donde la frase se explica a si misma. */}
           <h2 className="max-w-[20ch] text-ink">{t.order.title}</h2>
-          <p className="mt-3.5 max-w-[56ch] text-lede text-pretty text-ink-soft">
+          <p className="mt-5 max-w-[56ch] text-lede text-pretty text-ink-soft">
             {t.order.lede}
           </p>
           {/* Los tres primeros llevan filete violeta y los seis siguientes
@@ -443,11 +443,11 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
             <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
               <div>
                 <p className={`${eyebrow} text-ink-soft`}>{t.flow.eyebrow}</p>
-                <h2 className="mt-3.5 text-ink">{t.flow.title}</h2>
+                <h2 className="mt-5 text-ink">{t.flow.title}</h2>
                 <p className="mt-2.5 max-w-[42ch] text-copy text-pretty text-ink-soft">
                   {t.flow.lede}
                 </p>
-                <p className="mt-3.5 max-w-[46ch] text-copy text-pretty text-ink-soft">
+                <p className="mt-5 max-w-[46ch] text-copy text-pretty text-ink-soft">
                   {t.flow.body}
                 </p>
                 {/* Los cuatro bloques del flujo, en palabras. Son los mismos
@@ -483,7 +483,7 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
         {/* --- Con qué se conecta ----------------------------------------- */}
         <section className={`${wrap} ${section}`}>
           <p className={`${eyebrow} text-ink-soft`}>{t.connect.eyebrow}</p>
-          <h2 className="mt-3.5 max-w-[24ch] text-ink">{t.connect.title}</h2>
+          <h2 className="mt-5 max-w-[24ch] text-ink">{t.connect.title}</h2>
           <p className="mt-2.5 max-w-[42ch] text-copy text-pretty text-ink-soft">
             {t.connect.lede}
           </p>
@@ -525,10 +525,10 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
           <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
             <div className="lg:order-2">
               <p className={`${eyebrow} text-ink-soft`}>{t.website.eyebrow}</p>
-              <h2 className="mt-3.5 max-w-[16ch] text-ink">
+              <h2 className="mt-5 max-w-[16ch] text-ink">
                 {t.website.title}
               </h2>
-              <p className="mt-3.5 max-w-[44ch] text-copy text-pretty text-ink-soft">
+              <p className="mt-5 max-w-[44ch] text-copy text-pretty text-ink-soft">
                 {t.website.body}
               </p>
               <div className="mt-7">
@@ -552,7 +552,7 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
         {/* --- Cómo funciona, sobre oscuro -------------------------------- */}
         <section className="bg-ink-deep">
           <div
-            className={`${wrap} flex flex-wrap items-start gap-8 py-11 lg:gap-14 lg:py-[68px]`}
+            className={`${wrap} ${section} flex flex-wrap items-start gap-8 lg:gap-14`}
           >
             <div className="min-w-0 flex-[1_1_560px]">
               <p className={`${eyebrow} text-violet-light`}>{t.how.eyebrow}</p>
@@ -561,16 +561,16 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
                   todo lo ancho, que de un 1-2-3 hace una escalera rota. En
                   columna se leen en orden y los titulos dejan de partirse en
                   dos lineas; a partir de `sm` vuelven a ser tres. */}
-              <ol className="mt-5 grid list-none gap-5 sm:grid-cols-3 lg:gap-7">
+              <ol className="mt-7 grid list-none gap-6 sm:grid-cols-3 lg:gap-7">
                 {t.how.steps.map((s) => (
                   <li key={s.n} className="min-w-0">
                     <p className="font-mono text-stat leading-none font-bold text-violet-light">
                       {s.n}
                     </p>
-                    <p className="mt-2 text-ui font-bold text-white">
+                    <p className="mt-3 text-ui font-bold text-white">
                       {s.title}
                     </p>
-                    <p className="mt-1.5 text-small text-white/78">{s.body}</p>
+                    <p className="mt-2 text-small text-white/78">{s.body}</p>
                   </li>
                 ))}
               </ol>
@@ -707,7 +707,7 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
                   formulario es la segunda. */}
               <div>
                 <h2 className="text-white">{t.contact.title}</h2>
-                <p className="mt-3.5 max-w-[40ch] text-lede text-pretty text-white">
+                <p className="mt-5 max-w-[40ch] text-lede text-pretty text-white">
                   {t.contact.lede}
                 </p>
                 <ol className="mt-10 m-0 list-none border-t border-white/25 p-0">
