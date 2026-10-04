@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import { CalendlyButton } from "@/components/calendly-button";
 import { ContactForm } from "@/components/contact-form";
+import { FaqSchema } from "@/components/faq-schema";
 import { CtaLink } from "@/components/cta-link";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -84,6 +85,17 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
 
   return (
     <>
+      {/* Las preguntas, declaradas. No es por el carrusel de Google, que desde
+          2023 solo sale en sitios de administracion y salud: es para las
+          maquinas que leen la pagina y sintetizan la respuesta, y este FAQ es
+          casi literal lo que alguien escribe antes de contratar esto. Mientras
+          la pagina pida `noindex` no la lee nadie, pero el marcado ya esta
+          cuando se publique. */}
+      <FaqSchema
+        locale={locale}
+        items={t.faq.items}
+        path="/services/gohighlevel-automation"
+      />
       <SiteHeader locale={locale} path="/services/gohighlevel-automation" />
 
       <main id="top">
@@ -582,6 +594,57 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
           </div>
         </section>
 
+        {/* --- El caso, todavia sin rellenar ------------------------------ */}
+        {/* Va detras del testimonio y no en su lugar. La cita de Adriana dice
+            que trabajar con nosotros se siente de una manera; esto tiene que
+            decir que una cuenta concreta acabo haciendo algo concreto. Son dos
+            pruebas distintas, y la segunda es la que pedian las veinte ofertas
+            de GoHighLevel que se leyeron en Upwork.
+
+            **Esta vacio a proposito.** Los cuerpos son huecos `TODO` que se
+            ven en pantalla, no texto de relleno plausible: la captura
+            anonimizada y los datos los trae el cliente, y hasta entonces
+            cualquier cifra aqui seria inventada. Tres secciones mas arriba
+            esta pagina promete que no prometemos cifras.
+
+            El hueco de la imagen lleva borde discontinuo y texto en mono para
+            que no se lea como una foto que no carga. Sobre papel y no sobre
+            `paper-panel`, que es el fondo de la banda del testimonio: dos
+            paneles seguidos se leen como uno. */}
+        <section className={`${wrap} ${section}`}>
+          <p className={`${eyebrow} text-ink-soft`}>{t.caseStudy.eyebrow}</p>
+          <h2 className="mt-3.5 max-w-[24ch] text-ink">{t.caseStudy.title}</h2>
+          <div className="mt-8 grid items-start gap-8 lg:mt-10 lg:grid-cols-2 lg:gap-14">
+            <div className="grid aspect-[16/10] place-items-center rounded-md border-2 border-dashed border-ink-soft/40 bg-paper-panel p-6">
+              <p className="text-center font-mono text-small text-balance text-ink-soft">
+                {t.caseStudy.shot}
+              </p>
+            </div>
+            {/* Lista de descripcion y no tarjetas: son tres partes de un solo
+                relato, con el mismo filete superior que las preguntas de
+                abajo. */}
+            <dl>
+              {t.caseStudy.blocks.map((b, i) => (
+                <div
+                  key={b.label}
+                  className={`py-4 ${
+                    i === 0 ? "border-t-2 border-ink" : "border-t border-line"
+                  } ${
+                    i === t.caseStudy.blocks.length - 1
+                      ? "border-b border-line"
+                      : ""
+                  }`}
+                >
+                  <dt className="text-ui font-bold text-ink">{b.label}</dt>
+                  <dd className="mt-1.5 text-copy text-pretty text-ink-soft">
+                    {b.body}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </section>
+
         {/* --- Contacto ---------------------------------------------------- */}
         {/* El archivo pintaba tres campos sueltos sin destino. Aqui va el
             `ContactForm` del sitio, que es el que valida, lleva honeypot,
@@ -593,11 +656,43 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
         >
           <div className={`${wrap} ${section}`}>
             <div className="grid items-start gap-8 lg:grid-cols-2 lg:gap-14">
+              {/* La columna de la izquierda llevaba solo titulo y parrafo, y
+                  al lado de un formulario de cuatro campos quedaba vacia.
+                  Ahora cuenta que pasa en la media hora y lleva el boton de
+                  agendar, que es la via principal en todo el sitio; el
+                  formulario es la segunda. */}
               <div>
                 <h2 className="text-white">{t.contact.title}</h2>
                 <p className="mt-3.5 max-w-[40ch] text-lede text-pretty text-white">
                   {t.contact.lede}
                 </p>
+                <ol className="mt-10 m-0 list-none border-t border-white/25 p-0">
+                  {t.contact.steps.map((step, i) => (
+                    <li
+                      key={step.title}
+                      className="grid grid-cols-[2rem_1fr] gap-x-4 border-b border-white/25 py-5"
+                    >
+                      <span
+                        aria-hidden="true"
+                        className="font-mono text-ui font-bold text-white/70"
+                      >
+                        {i + 1}
+                      </span>
+                      <div>
+                        <h4 className="text-white">{step.title}</h4>
+                        <p className="mt-1 text-copy text-pretty text-white/85">
+                          {step.body}
+                        </p>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+                <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3">
+                  <CalendlyButton variant="light" className="max-md:w-full">
+                    {t.contact.cta}
+                  </CalendlyButton>
+                  <p className="text-small text-white/85">{t.contact.or}</p>
+                </div>
               </div>
               <div className="rounded-lg bg-paper p-6 lg:p-8">
                 <ContactForm locale={locale} />

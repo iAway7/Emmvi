@@ -36,7 +36,8 @@ export type GohighlevelCopy = {
     title: string;
     lede: string;
     label: string;
-    /** Lo que pasa hoy, en el mismo orden que el recorrido. */
+    /** Lo que pasa hoy. Los cuatro primeros van en el mismo orden que el
+     *  recorrido; el quinto no es un momento, es lo que quedo de intentarlo. */
     symptoms: readonly string[];
   };
   changes: {
@@ -96,11 +97,39 @@ export type GohighlevelCopy = {
     items: readonly { title: string; body: string }[];
   };
   testimonial: { quote: string; name: string; org: string };
+  /**
+   * El caso de InstallPros, **sin rellenar**.
+   *
+   * Lo unico real aqui es quien es el cliente y a que se dedica. Todo lo
+   * demas —el problema, lo que se monto, lo que cambio y la captura— llega del
+   * usuario, asi que va como hueco marcado `TODO` y se ve en pantalla. Un
+   * caso de estudio con cifras inventadas es exactamente lo que esta pagina
+   * dice que no hace tres secciones mas arriba.
+   *
+   * La captura tendra que traer su propio `alt` cuando entre: describir lo que
+   * ensena el panel, no "captura del panel".
+   */
+  caseStudy: {
+    eyebrow: string;
+    title: string;
+    /** El texto del hueco, hasta que haya imagen. */
+    shot: string;
+    /** El problema, lo que montamos y lo que cambio. */
+    blocks: readonly { label: string; body: string }[];
+  };
   faq: {
     eyebrow: string;
     items: readonly { q: string; a: string }[];
   };
-  contact: { title: string; lede: string };
+  contact: {
+    title: string;
+    lede: string;
+    /** Que pasa en la media hora: tres pasos, numerados. */
+    steps: readonly { title: string; body: string }[];
+    cta: string;
+    /** La frase que presenta el formulario como segunda via. */
+    or: string;
+  };
   trademark: string;
 };
 
@@ -243,6 +272,7 @@ const en: GohighlevelCopy = {
       "The quote you sent on Thursday was never followed up, because Friday happened.",
       "Half a day went on messages agreeing a time that a booking link would have settled.",
       "The customer was happy and nobody ever asked them for a review.",
+      "Workflows someone built years ago that nobody dares to touch.",
     ],
   },
   changes: {
@@ -313,7 +343,7 @@ const en: GohighlevelCopy = {
       {
         n: "06",
         title: "One screen that tells the truth",
-        body: "Where quote requests came from, how many turned into work, what is still open, and whether this month is going better than the last one.",
+        body: "Where quote requests came from, how many turned into work, what is still open, and whether this month is going better than the last one. Which ads and sources bring jobs that close, not just form fills.",
       },
     ],
   },
@@ -448,6 +478,10 @@ const en: GohighlevelCopy = {
         title: "We don't promise a revenue number",
         body: "Anyone who does is guessing. We will tell you what we are building and what it is meant to stop.",
       },
+      {
+        title: "We don't change what you haven't approved",
+        body: "We map what is connected first and show you what we would change. Nothing moves until you say yes.",
+      },
     ],
   },
   // El texto real de Adriana. El archivo de diseno traia una frase reescrita
@@ -458,6 +492,25 @@ const en: GohighlevelCopy = {
       "I was drowning in manual work and reached out to Nico for help with automations. He set up email flows, follow-ups, and little systems I didn’t even know I needed. Everything feels more organized now.",
     name: "Adriana Patania",
     org: "Local gym",
+  },
+  caseStudy: {
+    eyebrow: "Case study",
+    title: "InstallPros, an installations company",
+    shot: "TODO: anonymised dashboard screenshot",
+    blocks: [
+      {
+        label: "The problem",
+        body: "TODO: what was being lost before, and where it was going.",
+      },
+      {
+        label: "What we built",
+        body: "TODO: the workflows and connections that went in.",
+      },
+      {
+        label: "What changed",
+        body: "TODO: what the account does now that it did not do before. No percentages.",
+      },
+    ],
   },
   /**
    * La primera es la del archivo con la respuesta cambiada: alli decia "We are
@@ -478,6 +531,14 @@ const en: GohighlevelCopy = {
         a: "That is the usual starting point. The licence stays where it is and we build inside the account you already have.",
       },
       {
+        q: "My account is already a mess. Do we start over?",
+        a: "Rarely. We map which workflows, tags and fields are actually doing something, remove what is duplicated or broken, and keep the rest. You see the list before anything is deleted.",
+      },
+      {
+        q: "Will my texts get blocked?",
+        a: "In the US, business texting needs A2P 10DLC registration, or carriers start filtering your messages. We prepare and submit it with you. Approval depends on the carriers and can take from a few days to a few weeks.",
+      },
+      {
         q: "Who owns the data?",
         a: "You do, and the account is in your name. We work in it with the access you give us and you can take it away.",
       },
@@ -494,6 +555,22 @@ const en: GohighlevelCopy = {
   contact: {
     title: "Show us the account",
     lede: "Half an hour on a call, screen shared. You will leave knowing what is worth building and what is not, whether or not you hire us.",
+    steps: [
+      {
+        title: "We look at the account as it is",
+        body: "Pipelines, workflows, what fires and what has been switched off.",
+      },
+      {
+        title: "We follow one lead through it",
+        body: "From the form to the first reply, and where it stops.",
+      },
+      {
+        title: "We tell you what we would build",
+        body: "And what we would leave alone. No slide deck.",
+      },
+    ],
+    cta: "Book the 30 minutes",
+    or: "Or write to us and we will reply by email.",
   },
   trademark:
     "GoHighLevel is a trademark of GoHighLevel Inc. emmvi is an independent service provider and is not affiliated with, endorsed by or certified by GoHighLevel Inc.",
@@ -529,7 +606,7 @@ const es: GohighlevelCopy = {
     {
       label: "Se responde",
       figure: "34s",
-      body: "Por SMS y email, con su nombre y dos horas a elegir.",
+      body: "Por WhatsApp y email, con su nombre y dos horas a elegir.",
     },
     {
       label: "Se persigue",
@@ -553,6 +630,7 @@ const es: GohighlevelCopy = {
       "El presupuesto que enviaste el jueves nunca tuvo seguimiento, porque llegó el viernes.",
       "Media jornada en mensajes para cuadrar una hora que un enlace de agenda habría resuelto.",
       "El cliente quedó contento y nadie le pidió una reseña.",
+      "Workflows que montó alguien hace años y que nadie se atreve a tocar.",
     ],
   },
   changes: {
@@ -623,7 +701,7 @@ const es: GohighlevelCopy = {
       {
         n: "06",
         title: "Una pantalla que dice la verdad",
-        body: "De dónde vienen las solicitudes, cuántas acaban en trabajo, qué sigue abierto y si este mes va mejor que el anterior.",
+        body: "De dónde vienen las solicitudes, cuántas acaban en trabajo, qué sigue abierto y si este mes va mejor que el anterior. Qué anuncios y canales traen trabajos cerrados, no solo formularios.",
       },
     ],
   },
@@ -682,11 +760,11 @@ const es: GohighlevelCopy = {
     eyebrow: "Aquí va uno",
     title: "Cuatro bloques en un lienzo.",
     lede: "Y la diferencia entre un presupuesto con seguimiento y uno sin él.",
-    body: "El presupuesto pasa a enviado, el cliente calla, al día siguiente sale un SMS y, si sigue callado, para. Eso es todo, y corre aunque no pienses en ello.",
-    blocks: ["Cambia la oportunidad", "Enviar SMS", "Esperar 1 día"],
+    body: "El presupuesto pasa a enviado, el cliente calla, al día siguiente sale un WhatsApp y, si sigue callado, para. Eso es todo, y corre aunque no pienses en ello.",
+    blocks: ["Cambia la oportunidad", "Enviar WhatsApp", "Esperar 1 día"],
     end: "Fin",
     label:
-      "Un workflow de GoHighLevel: al enviar un presupuesto, un SMS pregunta si llegó bien, espera un día y un segundo SMS ofrece ayuda; si el cliente responde, se detiene solo.",
+      "Un workflow de GoHighLevel: al enviar un presupuesto, un WhatsApp pregunta si llegó bien, espera un día y un segundo mensaje ofrece ayuda; si el cliente responde, se detiene solo.",
   },
   connect: {
     eyebrow: "Y con qué se conecta",
@@ -755,6 +833,10 @@ const es: GohighlevelCopy = {
         title: "No prometemos una cifra de ingresos",
         body: "Quien lo hace, adivina. Te diremos qué montamos y qué debe evitar.",
       },
+      {
+        title: "No cambiamos nada que no hayas aprobado",
+        body: "Primero vemos qué está conectado con qué y te enseñamos lo que cambiaríamos. No se toca nada hasta que digas que sí.",
+      },
     ],
   },
   // La misma traduccion de la cita de Adriana que usa la home en español,
@@ -764,6 +846,25 @@ const es: GohighlevelCopy = {
       "Me ahogaba en trabajo manual y le pedí ayuda a Nico con las automatizaciones. Montó flujos de correo, seguimientos y pequeños sistemas que ni sabía que necesitaba. Ahora todo está más ordenado.",
     name: "Adriana Patania",
     org: "Gimnasio local",
+  },
+  caseStudy: {
+    eyebrow: "Un caso",
+    title: "InstallPros, empresa de instalaciones",
+    shot: "TODO: captura del panel, anonimizada",
+    blocks: [
+      {
+        label: "El problema",
+        body: "TODO: qué se estaba perdiendo antes y por dónde se iba.",
+      },
+      {
+        label: "Lo que montamos",
+        body: "TODO: los workflows y las conexiones que entraron.",
+      },
+      {
+        label: "Lo que cambió",
+        body: "TODO: qué hace la cuenta ahora que antes no hacía. Sin porcentajes.",
+      },
+    ],
   },
   faq: {
     eyebrow: "Preguntas",
@@ -775,6 +876,14 @@ const es: GohighlevelCopy = {
       {
         q: "Ya lo pago y apenas lo uso.",
         a: "Es el punto de partida habitual. La licencia se queda donde está y montamos dentro de la cuenta que ya tienes.",
+      },
+      {
+        q: "Mi cuenta ya es un lío. ¿Hay que empezar de cero?",
+        a: "Casi nunca. Vemos qué workflows, etiquetas y campos hacen algo de verdad, quitamos lo duplicado o roto y mantenemos el resto. Ves la lista antes de que se borre nada.",
+      },
+      {
+        q: "¿Funciona con WhatsApp?",
+        a: "Sí, con la API oficial de WhatsApp Business. Hay que verificar la empresa con Meta, y los mensajes enviados pasadas 24 horas desde la última respuesta del cliente necesitan plantillas aprobadas. Te guiamos en las dos cosas.",
       },
       {
         q: "¿De quién son los datos?",
@@ -793,6 +902,22 @@ const es: GohighlevelCopy = {
   contact: {
     title: "Enséñanos la cuenta",
     lede: "Media hora de llamada, pantalla compartida. Saldrás sabiendo qué merece montarse y qué no, nos contrates o no.",
+    steps: [
+      {
+        title: "Miramos la cuenta tal como está",
+        body: "Pipelines, workflows, qué se dispara y qué está apagado.",
+      },
+      {
+        title: "Seguimos un lead de principio a fin",
+        body: "Del formulario a la primera respuesta, y dónde se para.",
+      },
+      {
+        title: "Te decimos qué montaríamos",
+        body: "Y qué dejaríamos como está. Sin presentaciones.",
+      },
+    ],
+    cta: "Agendar los 30 minutos",
+    or: "O escríbenos y te contestamos por correo.",
   },
   trademark:
     "GoHighLevel es una marca de GoHighLevel Inc. emmvi es un proveedor independiente y no está afiliado, respaldado ni certificado por GoHighLevel Inc.",

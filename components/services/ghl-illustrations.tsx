@@ -37,8 +37,13 @@ const scenes: Record<GhlScene, SceneData> = {
  *
  * Cuatro se pasan de largo a sabiendas, porque la abreviatura era peor y la
  * caja tiene sitio medido: "Respondida" (la fila del pipeline corre de 696 a
- * ~1000), "Enviar SMS" y "Espera 1 día" (la tarjeta del flujo mide 360 y el
- * texto arranca a 100 de su borde) y "Pagada" (sello de 84 a 15px).
+ * ~1000), "Enviar WhatsApp" y "Espera 1 día" (la tarjeta del flujo mide 360 y
+ * el texto arranca a 100 de su borde) y "Pagada" (sello de 84 a 15px).
+ *
+ * **"Send SMS" se traduce por "Enviar WhatsApp", no por "Enviar SMS".** En
+ * España el SMS comercial no se usa y WhatsApp es el canal por defecto, asi
+ * que el ejemplo en español describe el workflow que de verdad se monta aqui.
+ * Mide 186 unidades a 22px en negrita y la caja le deja 260 desde su x.
  */
 const spanish: Record<GhlScene, Record<string, string>> = {
   hero: {
@@ -77,7 +82,7 @@ const spanish: Record<GhlScene, Record<string, string>> = {
   flow: {
     Trigger: "Inicio",
     "Quote sent": "Enviado",
-    "Send SMS": "Enviar SMS",
+    "Send SMS": "Enviar WhatsApp",
     "Hi Mark, did the": "Hola Mark, ¿te",
     "quote come": "llegó bien",
     "through OK?": "el precio?",

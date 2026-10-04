@@ -1,4 +1,4 @@
-import type { Locale } from "@/lib/i18n";
+import { localizePath, type Locale } from "@/lib/i18n";
 import { homeCopy } from "@/lib/copy/home";
 import { SITE_URL } from "@/lib/site";
 
@@ -24,21 +24,38 @@ import { SITE_URL } from "@/lib/site";
  *
  * Se ata a la organizacion por `@id` —igual que hace `ArticleSchema`— para que
  * los tres marcados del sitio formen un grafo y no tres islas.
+ *
+ * **Sirve para cualquier pagina con preguntas, no solo para la home.** Sin
+ * `items` declara las de `lib/copy/home.ts`, que es para lo que se escribio;
+ * con `items` y `path` declara las de quien lo llame. Es lo que usa
+ * /services/gohighlevel-automation, cuyo FAQ es lo mas parecido a lo que
+ * alguien le pregunta a un modelo antes de contratar esto ("ya lo pago y
+ * apenas lo uso", "mi cuenta es un lio").
  */
-export function FaqSchema({ locale }: { locale: Locale }) {
-  const t = homeCopy[locale];
-  // La home inglesa vive en la raiz y la espanola en /es/. Dos URLs distintas,
-  // dos bloques de preguntas distintos: el `@id` tiene que distinguirlos o el
-  // segundo se lee como una redefinicion del primero.
-  const base = locale === "en" ? SITE_URL : `${SITE_URL}/es`;
+export function FaqSchema({
+  locale,
+  items,
+  path = "/",
+}: {
+  locale: Locale;
+  items?: readonly { q: string; a: string }[];
+  /** La ruta canonica sin idioma ni barra final, como la toma `pageMetadata`. */
+  path?: string;
+}) {
+  const preguntas = items ?? homeCopy[locale].faq.items;
+  // Cada idioma vive en su URL, y el `@id` tiene que distinguirlos o el
+  // segundo se lee como una redefinicion del primero. La URL la arma
+  // `localizePath`, que es la que ya decide el prefijo y la barra final en las
+  // canonicas: construirla a mano aqui era una segunda version de esa regla.
+  const url = `${SITE_URL}${localizePath(`${path}#faq`, locale)}`;
 
   const faqPage = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "@id": `${base}/#faq`,
+    "@id": url,
     inLanguage: locale,
     publisher: { "@id": `${SITE_URL}/#organization` },
-    mainEntity: t.faq.items.map((f) => ({
+    mainEntity: preguntas.map((f) => ({
       "@type": "Question",
       name: f.q,
       acceptedAnswer: { "@type": "Answer", text: f.a },
