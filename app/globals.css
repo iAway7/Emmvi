@@ -225,6 +225,35 @@
   background-image: var(--dusk);
 }
 
+/* Textura de puntos sobre los fondos oscuros.
+
+   No es ruido de verdad —no hay aleatoriedad— sino una retícula de puntos de
+   6px, que es lo que hacen casi todas las librerías que lo llaman "noise". Un
+   ruido real pediría un SVG con `feTurbulence` y un filtro por pintado; esto
+   es un degradado radial repetido y no cuesta nada.
+
+   Va de color por variable para que sirva en los dos lados: el valor por
+   defecto son puntos blancos, para fondos oscuros, y sobre papel se le pasa
+   `[--noise:...]` con un negro flojo.
+
+   El 5,5 % está medido sobre `ink-deep` (#101010): da puntos de rgb(29,29,29),
+   que se ven de cerca y desaparecen a tamaño de lectura, que es lo que tiene
+   que hacer una textura. Más arriba empieza a leerse como una trama y compite
+   con el texto blanco de encima.
+
+   `background-image` y no un div encima: la banda solo lleva color de fondo,
+   así que caben las dos cosas en el mismo elemento. En las bandas violetas no
+   serviría, porque ahí el degradado ya ocupa el `background-image`. */
+@utility bg-noise {
+  --noise: rgb(255 255 255 / 0.055);
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    var(--noise) 1px,
+    transparent 0
+  );
+  background-size: 6px 6px;
+}
+
 /* --------------------------------------------------------------------------
    ReplyProof: la respuesta llega sola. El estado por defecto es "ya entregada",
    asi que si la animacion no corre (reduced motion, pestana oculta, render sin

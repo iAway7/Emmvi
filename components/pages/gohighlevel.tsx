@@ -199,7 +199,7 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
         </section>
 
         {/* --- Lo que cambia, sobre oscuro -------------------------------- */}
-        <section className="bg-ink-deep">
+        <section className="bg-ink-deep bg-noise">
           <div className={`${wrap} ${section}`}>
             {/* Titular y parrafo en dos columnas, como "The licence is not
                 the system" mas arriba. Apilados eran once lineas seguidas con
@@ -591,7 +591,7 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
         </section>
 
         {/* --- Cómo funciona, sobre oscuro -------------------------------- */}
-        <section className="bg-ink-deep">
+        <section className="bg-ink-deep bg-noise">
           <div
             className={`${wrap} ${section} flex flex-wrap items-start gap-8 lg:gap-14`}
           >
