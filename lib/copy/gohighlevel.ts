@@ -63,6 +63,12 @@ export type GohighlevelCopy = {
     lead: readonly { n: string; title: string; body: string }[];
     rest: readonly { n: string; title: string; body: string }[];
   };
+  /**
+   * La llamada que nadie coge. Es el recorrido del hero por el otro canal, y
+   * la objecion mas cara para quien vive de instalar: el que llama y no
+   * recibe respuesta llama al siguiente de la lista.
+   */
+  missedCall: { eyebrow: string; title: string; body: string; label: string };
   order: {
     title: string;
     lede: string;
@@ -84,6 +90,18 @@ export type GohighlevelCopy = {
     lede: string;
     label: string;
     items: readonly { name: string; body: string }[];
+  };
+  /**
+   * "¿La web va a parecer una plantilla?". Va con escena propia y no con una
+   * linea en el acordeon porque la respuesta es ensenarla, y porque es de lo
+   * que vive emmvi: en esta pagina solo salia como el paso 06 de nueve.
+   */
+  website: {
+    eyebrow: string;
+    title: string;
+    body: string;
+    cta: string;
+    label: string;
   };
   how: {
     eyebrow: string;
@@ -347,6 +365,13 @@ const en: GohighlevelCopy = {
       },
     ],
   },
+  missedCall: {
+    eyebrow: "When the phone rings out",
+    title: "The call nobody picked up.",
+    body: "Whoever called gets a text within seconds, so they are not sitting there deciding to ring the next company on the list. The conversation carries on by text and email until they book, and whoever should step in is told.",
+    label:
+      "A call at 21:47 that nobody answered, and the text that went out on its own twelve seconds later offering Friday morning or Saturday afternoon.",
+  },
   order: {
     title: "Knowing what to build.",
     lede: "That is half the job. The other half is setting it up so it keeps running after we leave. This is the order we work in.",
@@ -440,6 +465,14 @@ const en: GohighlevelCopy = {
       },
     ],
   },
+  website: {
+    eyebrow: "And where they come from",
+    title: "A site, not a template.",
+    body: "We design and build it inside GoHighLevel, on your domain and in your own brand, instead of dropping your logo onto a theme. Every form on it lands in the right pipeline, so nothing gets retyped and nothing falls down the gap between the site and the system.",
+    cta: "See the sites we build",
+    label:
+      "A website on its own domain and in its own brand, with its quote form feeding straight into the New lead stage of the pipeline.",
+  },
   how: {
     eyebrow: "How it works",
     steps: [
@@ -513,42 +546,67 @@ const en: GohighlevelCopy = {
     ],
   },
   /**
-   * La primera es la del archivo con la respuesta cambiada: alli decia "We are
-   * a certified admin and automation partner" y no lo somos. Decir que no, y
-   * ofrecer lo que si se puede ensenar, es lo que pasa el filtro de PRODUCT.md
-   * —y es lo que mas separa a emmvi del resto de resultados de esta busqueda,
-   * que viven del sello.
+   * **Las preguntas son las del analisis de Upwork, y solo esas.** Salen de
+   * leer veinte ofertas reales de GoHighLevel y quedarse con lo que la gente
+   * pregunta de verdad antes de contratar, asi que no se mezclan con las que
+   * habia antes: una pregunta que nadie hace ocupa el mismo sitio que una que
+   * si, y el acordeon se lee de arriba abajo.
+   *
+   * Varias se contestan ademas con diseno mas arriba (la llamada perdida, la
+   * web, que anuncios traen trabajo cerrado, las resenas, con que se conecta).
+   * La repeticion es a proposito: quien escanea la pagina lo ve, y quien baja
+   * buscando su duda concreta la encuentra escrita.
+   *
+   * Ya no esta "Are you a certified GoHighLevel partner?". Que emmvi no lo es
+   * sigue dicho en el aviso de marca del pie de la pagina, que es donde tiene
+   * que estar.
    */
   faq: {
     eyebrow: "Questions",
     items: [
       {
-        q: "Are you a certified GoHighLevel partner?",
-        a: "No. HighLevel runs its own certification programme and we have not taken it. What we can show you is an account we built, the workflows running inside it and a client who will talk to you. Ask for that from us, and from anyone else you are considering.",
+        q: "We already use GoHighLevel. Do we have to start over?",
+        a: "No. We start by auditing your account, mapping how your workflows, tags and pipelines connect, and finding what is broken or duplicated. Then we fix it.",
       },
       {
-        q: "I already pay for it and barely use it.",
-        a: "That is the usual starting point. The licence stays where it is and we build inside the account you already have.",
+        q: "Will you change things in our account without asking?",
+        a: "No. You get a short report with what we found and what we suggest. We only make the changes you approve.",
       },
       {
-        q: "My account is already a mess. Do we start over?",
-        a: "Rarely. We map which workflows, tags and fields are actually doing something, remove what is duplicated or broken, and keep the rest. You see the list before anything is deleted.",
+        q: "Can you build our website inside GoHighLevel? Will it look like a template?",
+        a: "Yes, we design and build sites and landing pages directly in GoHighLevel, made for your business. They work on any device, and every form goes straight into the right pipeline.",
       },
       {
-        q: "Will my texts get blocked?",
-        a: "In the US, business texting needs A2P 10DLC registration, or carriers start filtering your messages. We prepare and submit it with you. Approval depends on the carriers and can take from a few days to a few weeks.",
+        q: "How will we know which ads bring paying jobs, not just leads?",
+        a: "We track every lead from the first click to the closed job, so you can see which campaigns actually make you money.",
       },
       {
-        q: "Who owns the data?",
-        a: "You do, and the account is in your name. We work in it with the access you give us and you can take it away.",
+        q: "What happens when we miss a call?",
+        a: "The caller gets an automatic text right away, and new leads get follow-up by text and email until they book. Your team is notified when someone needs to step in.",
       },
       {
-        q: "Can you move me from another CRM?",
-        a: "Usually, yes. Contacts and history come across first, then we rebuild the parts that were doing real work.",
+        q: "Do you handle A2P registration?",
+        a: "Yes, we prepare and submit your A2P 10DLC registration so your texts don't get blocked. Approval depends on the carriers and can take from a few days to a few weeks.",
       },
       {
-        q: "How long does it take?",
-        a: "Weeks, not months, for the first workflows. We would rather have two things running than ten half built.",
+        q: "Can it ask happy customers for reviews?",
+        a: "Yes. When a job is marked as complete, the customer gets a review request, and a reminder if they don't leave one.",
+      },
+      {
+        q: "Does it connect with the tools we already use?",
+        a: "Usually yes: Facebook Lead Ads, Google Ads, Stripe, Zapier or Make, Dropbox and others. If something can't be connected cleanly, we tell you before we start.",
+      },
+      {
+        q: "How do you make sure everything works?",
+        a: "We test every flow end-to-end with real scenarios before handover, and you get simple documentation your team can follow.",
+      },
+      {
+        q: "How does pricing work?",
+        a: "Fixed-price phases with a clear scope. The first phase is small, so you can judge our work before committing to the rest.",
+      },
+      {
+        q: "Do we pay for GoHighLevel separately?",
+        a: "Either way works. We recommend the licence in your own name, paid to HighLevel directly, because then the account is yours whatever happens between us. If you would rather not deal with another supplier, we can hold it under our agency account and bill you for it, and move it to your name later.",
       },
     ],
   },
@@ -705,6 +763,13 @@ const es: GohighlevelCopy = {
       },
     ],
   },
+  missedCall: {
+    eyebrow: "Cuando no lo coges",
+    title: "La llamada que no cogiste.",
+    body: "Quien llama recibe un mensaje a los pocos segundos, así que no se queda ahí decidiendo llamar a la siguiente empresa de la lista. La conversación sigue por WhatsApp y email hasta que agenda, y avisa a quien tenga que entrar.",
+    label:
+      "Una llamada a las 21:47 que nadie cogió, y el mensaje que salió solo doce segundos después ofreciendo el viernes por la mañana o el sábado por la tarde.",
+  },
   order: {
     title: "Saber qué montar.",
     lede: "Es la mitad del trabajo. La otra mitad es dejarlo montado para que siga funcionando cuando nos vayamos. Este es el orden.",
@@ -795,6 +860,14 @@ const es: GohighlevelCopy = {
       },
     ],
   },
+  website: {
+    eyebrow: "Y de dónde salen",
+    title: "Una web, no una plantilla.",
+    body: "La diseñamos y la montamos dentro de GoHighLevel, en tu dominio y con tu marca, en vez de poner tu logo sobre una plantilla. Cada formulario cae en el pipeline que toca, así no se reescribe nada ni se pierde nada entre la web y el sistema.",
+    cta: "Ver las webs que hacemos",
+    label:
+      "Una web en su propio dominio y con su marca, con el formulario de presupuesto entrando directo a la etapa Nuevo del pipeline.",
+  },
   how: {
     eyebrow: "Cómo funciona",
     steps: [
@@ -870,32 +943,20 @@ const es: GohighlevelCopy = {
     eyebrow: "Preguntas",
     items: [
       {
-        q: "¿Sois partner certificado de GoHighLevel?",
-        a: "No. HighLevel tiene su propio programa de certificación y no lo hemos hecho. Lo que podemos enseñarte es una cuenta que montamos, los workflows que corren dentro y un cliente que hablará contigo. Pídenoslo a nosotros, y a cualquier otro que estés valorando.",
-      },
-      {
-        q: "Ya lo pago y apenas lo uso.",
-        a: "Es el punto de partida habitual. La licencia se queda donde está y montamos dentro de la cuenta que ya tienes.",
-      },
-      {
-        q: "Mi cuenta ya es un lío. ¿Hay que empezar de cero?",
-        a: "Casi nunca. Vemos qué workflows, etiquetas y campos hacen algo de verdad, quitamos lo duplicado o roto y mantenemos el resto. Ves la lista antes de que se borre nada.",
+        q: "¿Tengo que dejar el programa o el Excel que uso ahora?",
+        a: "No necesariamente. Primero vemos cómo trabajas hoy. Si tiene sentido pasar a un sistema nuevo, importamos tus contactos para que no se pierda nada.",
       },
       {
         q: "¿Funciona con WhatsApp?",
-        a: "Sí, con la API oficial de WhatsApp Business. Hay que verificar la empresa con Meta, y los mensajes enviados pasadas 24 horas desde la última respuesta del cliente necesitan plantillas aprobadas. Te guiamos en las dos cosas.",
+        a: "Sí. Los clientes que te escriben reciben respuesta y seguimiento por WhatsApp, y tu equipo contesta desde un solo sitio. Usamos la API oficial de WhatsApp Business, que requiere verificar la empresa con Meta.",
       },
       {
-        q: "¿De quién son los datos?",
-        a: "Tuyos, y la cuenta va a tu nombre. Trabajamos con el acceso que nos das y puedes retirarlo.",
+        q: "¿Qué pasa si no cojo el teléfono?",
+        a: "El cliente recibe un mensaje automático al momento, para que no llame a otro instalador mientras tanto.",
       },
       {
-        q: "¿Podéis migrarme desde otro CRM?",
-        a: "Normalmente sí. Primero pasan contactos e historial, luego rehacemos lo que de verdad trabajaba.",
-      },
-      {
-        q: "¿Cuánto tarda?",
-        a: "Semanas, no meses, para los primeros workflows. Preferimos dos cosas funcionando que diez a medias.",
+        q: "¿Cómo sé qué anuncios me traen instalaciones y no solo contactos?",
+        a: "Seguimos cada contacto desde el anuncio hasta el presupuesto aceptado, así ves qué campañas te dan trabajo de verdad.",
       },
     ],
   },

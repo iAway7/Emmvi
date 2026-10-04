@@ -4,12 +4,13 @@ import { CalendlyButton } from "@/components/calendly-button";
 import { ContactForm } from "@/components/contact-form";
 import { FaqSchema } from "@/components/faq-schema";
 import { CtaLink } from "@/components/cta-link";
+import { FaqAccordion } from "@/components/faq-accordion";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { StageTimeline, type Stage } from "@/components/services/stage-timeline";
 import { GhlIllustration } from "@/components/services/ghl-illustrations";
 import { catalogue, gohighlevelCopy } from "@/lib/copy/gohighlevel";
-import type { Locale } from "@/lib/i18n";
+import { localizePath, type Locale } from "@/lib/i18n";
 
 /**
  * Pagina de servicio del posicionamiento nuevo, no una replica del Figma.
@@ -362,6 +363,41 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
           </div>
         </section>
 
+        {/* --- La llamada que nadie coge ---------------------------------- */}
+        {/* El recorrido del hero entra por un formulario a las 21:47. Esta es
+            la misma historia por el otro canal, y para quien vive de instalar
+            es la objecion mas cara: el que llama y no recibe respuesta no
+            espera, llama al siguiente de la lista.
+
+            Va aqui, detras de "lo que montamos dentro", porque a esta altura
+            el lector ya sabe que se construye y esto es el ejemplo que mas
+            duele. Antes del recorrido violeta habria sido una segunda foto
+            del "despues" sin haber contado todavia el problema.
+
+            Con escena propia y no con una tarjeta mas: una llamada perdida se
+            entiende mirandola, y la pagina ya tiene lenguaje para dibujarla. */}
+        <section className={`${wrap} ${section}`}>
+          <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
+            <div>
+              <p className={`${eyebrow} text-ink-soft`}>
+                {t.missedCall.eyebrow}
+              </p>
+              <h2 className="mt-3.5 max-w-[16ch] text-ink">
+                {t.missedCall.title}
+              </h2>
+              <p className="mt-3.5 max-w-[44ch] text-copy text-pretty text-ink-soft">
+                {t.missedCall.body}
+              </p>
+            </div>
+            <GhlIllustration
+              name="missedcall"
+              locale={locale}
+              label={t.missedCall.label}
+              className="w-full max-w-[560px] lg:justify-self-end"
+            />
+          </div>
+        </section>
+
         {/* --- El orden de trabajo ---------------------------------------- */}
         <section className={`${wrap} ${section}`}>
           {/* Antes decia "Knowing which fifteen is half the job". El numero
@@ -469,6 +505,50 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
           </div>
         </section>
 
+        {/* --- La web que lo alimenta ------------------------------------- */}
+        {/* "¿La web va a parecer una plantilla?" era la unica pregunta de la
+            lista que esta pagina no contestaba por ningun lado: la web salia
+            como el paso 06 de nueve, en letra pequena, y es de lo que vive
+            emmvi.
+
+            La escena contesta ensenandola: dominio propio, marca propia y el
+            formulario cayendo en el pipeline. El boton lleva a
+            /services/website-design, que es donde esta el trabajo de verdad;
+            `localizePath` le pone el prefijo del idioma y la barra final.
+
+            En escritorio la escena va a la izquierda y el texto a la derecha,
+            al reves que la llamada perdida: dos secciones seguidas con la
+            imagen del mismo lado se leen como una sola. El orden se cambia con
+            `order` y no en el DOM porque en movil las columnas se apilan como
+            esten escritas, y el titular tiene que ir antes que el dibujo. */}
+        <section className={`${wrap} ${section}`}>
+          <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
+            <div className="lg:order-2">
+              <p className={`${eyebrow} text-ink-soft`}>{t.website.eyebrow}</p>
+              <h2 className="mt-3.5 max-w-[16ch] text-ink">
+                {t.website.title}
+              </h2>
+              <p className="mt-3.5 max-w-[44ch] text-copy text-pretty text-ink-soft">
+                {t.website.body}
+              </p>
+              <div className="mt-7">
+                <CtaLink
+                  href={localizePath("/services/website-design", locale)}
+                  variant="outline"
+                >
+                  {t.website.cta}
+                </CtaLink>
+              </div>
+            </div>
+            <GhlIllustration
+              name="website"
+              locale={locale}
+              label={t.website.label}
+              className="w-full max-w-[560px] lg:order-1"
+            />
+          </div>
+        </section>
+
         {/* --- Cómo funciona, sobre oscuro -------------------------------- */}
         <section className="bg-ink-deep">
           <div
@@ -546,6 +626,19 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
               {/* El texto real de Adriana. El archivo traia una frase
                   reescrita que ella no dijo; esta es la misma cita que usan la
                   home y /services/email-marketing. */}
+              {/* La cita acompana al acordeon en vez de quedarse arriba.
+
+                  Con las once preguntas del analisis de Upwork la columna de
+                  la derecha mide 1533px y la cita 241: sin esto quedaban 1292
+                  de blanco al lado de un testimonio de cuatro lineas. El
+                  `items-start` del grid es justo lo que lo hace posible: la
+                  celda mide lo que la fila, pero la cita mide su contenido, y
+                  en esa diferencia es por donde viaja. Con `self-stretch` la
+                  cita llenaria la celda y no se moveria nada.
+
+                  Solo en escritorio: en movil las dos cosas van apiladas y una
+                  cita pegada taparia las preguntas. */}
+              <div className="lg:sticky lg:top-28">
               <blockquote className="m-0">
                 <p className="text-h3 leading-snug font-medium text-pretty text-ink">
                   {t.testimonial.quote}
@@ -569,26 +662,20 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
                   </span>
                 </cite>
               </blockquote>
+              </div>
 
+              {/* El acordeon del sitio, el mismo que la home.
+
+                  Esta pagina lo tenia y lo perdio al portar el diseno del
+                  recorrido: quedaron once preguntas abiertas a la vez, que es
+                  una pagina de texto, no un FAQ. `FaqAccordion` ya es el unico
+                  marcado para las seis paginas que llevan preguntas, asi que
+                  volver a el tambien deshace la copia. */}
               <div>
-                <p className={`${eyebrow} mb-3.5 text-ink-soft`}>{t.faq.eyebrow}</p>
-                {t.faq.items.map((f, i) => (
-                  <div
-                    key={f.q}
-                    className={`py-4 ${
-                      i === 0
-                        ? "border-t-2 border-ink"
-                        : "border-t border-line"
-                    } ${i === t.faq.items.length - 1 ? "border-b border-line" : ""}`}
-                  >
-                    <p className="text-ui font-bold text-balance text-ink">
-                      {f.q}
-                    </p>
-                    <p className="mt-1.5 text-copy text-pretty text-ink-soft">
-                      {f.a}
-                    </p>
-                  </div>
-                ))}
+                <p className={`${eyebrow} mb-2 text-ink-soft`}>
+                  {t.faq.eyebrow}
+                </p>
+                <FaqAccordion items={[...t.faq.items]} />
               </div>
             </div>
           </div>
