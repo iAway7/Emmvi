@@ -222,6 +222,57 @@ export const catalogue: readonly { name: string; ours?: boolean }[][] = [
   ],
 ];
 
+/**
+ * Los logos de la fila de "con que se conecta", **en el mismo orden que
+ * `connect.items`** de los dos idiomas.
+ *
+ * Van aqui y no dentro de cada idioma porque una marca se llama igual en los
+ * dos. Si se reordena `connect.items`, hay que reordenar esto.
+ *
+ * **El logo sustituye al nombre, no lo acompana.** Los archivos que publica
+ * cada marca son el logotipo completo, con el nombre dentro; encima de un
+ * "Stripe" en negrita se leeria la marca dos veces. El nombre sigue existiendo
+ * para quien no ve la imagen: va en el `alt`.
+ *
+ * `alto` es a medida y no comun a los cinco. Las proporciones no se parecen
+ * (Airtable 4,6:1 y Stripe 2,1:1, que ademas trae mucho aire en su viewBox, y
+ * el de Kickserv son dos lineas), asi que a una misma altura en pixeles unos
+ * pesan el doble que otros. Estan medidos de a uno hasta que la fila se lee
+ * pareja.
+ *
+ * El primero es `null`: la web del cliente no es una marca y se queda con su
+ * nombre escrito.
+ */
+export type ConnectLogo = {
+  src: string;
+  /** El nombre de la marca: es lo que oye quien no ve la imagen. */
+  alt: string;
+  /** Las del archivo, para que next/image reserve el hueco. */
+  w: number;
+  h: number;
+  /** La altura a la que se pinta, medida a ojo contra las otras. */
+  alto: string;
+  /** Una marca de la misma celda de la que aun no tenemos el SVG. */
+  pendiente?: string;
+};
+
+export const connectLogos: readonly (readonly ConnectLogo[] | null)[] = [
+  null,
+  [{ src: "/tools/kickserv.svg", alt: "Kickserv", w: 197, h: 81, alto: "h-[34px]" }],
+  [{ src: "/tools/stripe.svg", alt: "Stripe", w: 468, h: 223, alto: "h-8" }],
+  [{ src: "/tools/airtable.svg", alt: "Airtable", w: 395, h: 86, alto: "h-5" }],
+  [
+    {
+      src: "/tools/zapier.svg",
+      alt: "Zapier",
+      w: 500,
+      h: 136,
+      alto: "h-[21px]",
+      pendiente: "Make",
+    },
+  ],
+];
+
 const en: GohighlevelCopy = {
   meta: {
     title: "GoHighLevel Automation Setup and Workflows",

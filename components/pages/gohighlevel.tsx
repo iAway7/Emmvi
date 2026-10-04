@@ -9,7 +9,11 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { StageTimeline, type Stage } from "@/components/services/stage-timeline";
 import { GhlIllustration } from "@/components/services/ghl-illustrations";
-import { catalogue, gohighlevelCopy } from "@/lib/copy/gohighlevel";
+import {
+  catalogue,
+  connectLogos,
+  gohighlevelCopy,
+} from "@/lib/copy/gohighlevel";
 import { localizePath, type Locale } from "@/lib/i18n";
 
 /**
@@ -493,15 +497,52 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
             label={t.connect.label}
             className="mx-auto mt-8 w-full max-w-[900px]"
           />
+          {/* El logo de cada marca ocupa el sitio de su nombre. Los archivos
+              oficiales ya traen el nombre dentro, asi que ponerlos encima de
+              un "Stripe" en negrita lo diria dos veces; quien no ve la imagen
+              lo tiene en el `alt`.
+
+              La caja de altura fija los alinea por abajo aunque midan distinto,
+              y es la misma que ocupa el nombre escrito de la primera celda. */}
           <div className="mt-7 grid sm:grid-cols-2 lg:mt-8 lg:grid-cols-5">
-            {t.connect.items.map((c) => (
-              <div key={c.name} className="border-t border-ink py-4 pr-5">
-                <p className="text-ui font-bold text-ink">{c.name}</p>
-                <p className="mt-1.5 text-small text-pretty text-ink-soft">
-                  {c.body}
-                </p>
-              </div>
-            ))}
+            {t.connect.items.map((c, i) => {
+              const logos = connectLogos[i];
+              return (
+                <div key={c.name} className="border-t border-ink py-4 pr-5">
+                  <div className="flex h-9 items-center gap-4">
+                    {logos ? (
+                      <>
+                        {logos.map((l) => (
+                          <Image
+                            key={l.src}
+                            src={l.src}
+                            alt={l.alt}
+                            width={l.w}
+                            height={l.h}
+                            className={`${l.alto} w-auto`}
+                          />
+                        ))}
+                        {logos.map((l) =>
+                          l.pendiente ? (
+                            <span
+                              key={`${l.src}-pendiente`}
+                              className="text-ui font-bold text-ink"
+                            >
+                              {l.pendiente}
+                            </span>
+                          ) : null,
+                        )}
+                      </>
+                    ) : (
+                      <p className="text-ui font-bold text-ink">{c.name}</p>
+                    )}
+                  </div>
+                  <p className="mt-3 text-small text-pretty text-ink-soft">
+                    {c.body}
+                  </p>
+                </div>
+              );
+            })}
           </div>
         </section>
 
