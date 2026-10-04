@@ -115,26 +115,6 @@ export type GohighlevelCopy = {
     items: readonly { title: string; body: string }[];
   };
   testimonial: { quote: string; name: string; org: string };
-  /**
-   * El caso de InstallPros, **sin rellenar**.
-   *
-   * Lo unico real aqui es quien es el cliente y a que se dedica. Todo lo
-   * demas —el problema, lo que se monto, lo que cambio y la captura— llega del
-   * usuario, asi que va como hueco marcado `TODO` y se ve en pantalla. Un
-   * caso de estudio con cifras inventadas es exactamente lo que esta pagina
-   * dice que no hace tres secciones mas arriba.
-   *
-   * La captura tendra que traer su propio `alt` cuando entre: describir lo que
-   * ensena el panel, no "captura del panel".
-   */
-  caseStudy: {
-    eyebrow: string;
-    title: string;
-    /** El texto del hueco, hasta que haya imagen. */
-    shot: string;
-    /** El problema, lo que montamos y lo que cambio. */
-    blocks: readonly { label: string; body: string }[];
-  };
   faq: {
     eyebrow: string;
     items: readonly { q: string; a: string }[];
@@ -526,41 +506,6 @@ const en: GohighlevelCopy = {
     name: "Adriana Patania",
     org: "Local gym",
   },
-  caseStudy: {
-    eyebrow: "Case study",
-    title: "InstallPros, an installations company",
-    shot: "TODO: anonymised dashboard screenshot",
-    blocks: [
-      {
-        label: "The problem",
-        body: "TODO: what was being lost before, and where it was going.",
-      },
-      {
-        label: "What we built",
-        body: "TODO: the workflows and connections that went in.",
-      },
-      {
-        label: "What changed",
-        body: "TODO: what the account does now that it did not do before. No percentages.",
-      },
-    ],
-  },
-  /**
-   * **Las preguntas son las del analisis de Upwork, y solo esas.** Salen de
-   * leer veinte ofertas reales de GoHighLevel y quedarse con lo que la gente
-   * pregunta de verdad antes de contratar, asi que no se mezclan con las que
-   * habia antes: una pregunta que nadie hace ocupa el mismo sitio que una que
-   * si, y el acordeon se lee de arriba abajo.
-   *
-   * Varias se contestan ademas con diseno mas arriba (la llamada perdida, la
-   * web, que anuncios traen trabajo cerrado, las resenas, con que se conecta).
-   * La repeticion es a proposito: quien escanea la pagina lo ve, y quien baja
-   * buscando su duda concreta la encuentra escrita.
-   *
-   * Ya no esta "Are you a certified GoHighLevel partner?". Que emmvi no lo es
-   * sigue dicho en el aviso de marca del pie de la pagina, que es donde tiene
-   * que estar.
-   */
   faq: {
     eyebrow: "Questions",
     items: [
@@ -919,25 +864,6 @@ const es: GohighlevelCopy = {
       "Me ahogaba en trabajo manual y le pedí ayuda a Nico con las automatizaciones. Montó flujos de correo, seguimientos y pequeños sistemas que ni sabía que necesitaba. Ahora todo está más ordenado.",
     name: "Adriana Patania",
     org: "Gimnasio local",
-  },
-  caseStudy: {
-    eyebrow: "Un caso",
-    title: "InstallPros, empresa de instalaciones",
-    shot: "TODO: captura del panel, anonimizada",
-    blocks: [
-      {
-        label: "El problema",
-        body: "TODO: qué se estaba perdiendo antes y por dónde se iba.",
-      },
-      {
-        label: "Lo que montamos",
-        body: "TODO: los workflows y las conexiones que entraron.",
-      },
-      {
-        label: "Lo que cambió",
-        body: "TODO: qué hace la cuenta ahora que antes no hacía. Sin porcentajes.",
-      },
-    ],
   },
   faq: {
     eyebrow: "Preguntas",

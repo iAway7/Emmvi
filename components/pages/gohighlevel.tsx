@@ -681,57 +681,6 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
           </div>
         </section>
 
-        {/* --- El caso, todavia sin rellenar ------------------------------ */}
-        {/* Va detras del testimonio y no en su lugar. La cita de Adriana dice
-            que trabajar con nosotros se siente de una manera; esto tiene que
-            decir que una cuenta concreta acabo haciendo algo concreto. Son dos
-            pruebas distintas, y la segunda es la que pedian las veinte ofertas
-            de GoHighLevel que se leyeron en Upwork.
-
-            **Esta vacio a proposito.** Los cuerpos son huecos `TODO` que se
-            ven en pantalla, no texto de relleno plausible: la captura
-            anonimizada y los datos los trae el cliente, y hasta entonces
-            cualquier cifra aqui seria inventada. Tres secciones mas arriba
-            esta pagina promete que no prometemos cifras.
-
-            El hueco de la imagen lleva borde discontinuo y texto en mono para
-            que no se lea como una foto que no carga. Sobre papel y no sobre
-            `paper-panel`, que es el fondo de la banda del testimonio: dos
-            paneles seguidos se leen como uno. */}
-        <section className={`${wrap} ${section}`}>
-          <p className={`${eyebrow} text-ink-soft`}>{t.caseStudy.eyebrow}</p>
-          <h2 className="mt-3.5 max-w-[24ch] text-ink">{t.caseStudy.title}</h2>
-          <div className="mt-8 grid items-start gap-8 lg:mt-10 lg:grid-cols-2 lg:gap-14">
-            <div className="grid aspect-[16/10] place-items-center rounded-md border-2 border-dashed border-ink-soft/40 bg-paper-panel p-6">
-              <p className="text-center font-mono text-small text-balance text-ink-soft">
-                {t.caseStudy.shot}
-              </p>
-            </div>
-            {/* Lista de descripcion y no tarjetas: son tres partes de un solo
-                relato, con el mismo filete superior que las preguntas de
-                abajo. */}
-            <dl>
-              {t.caseStudy.blocks.map((b, i) => (
-                <div
-                  key={b.label}
-                  className={`py-4 ${
-                    i === 0 ? "border-t-2 border-ink" : "border-t border-line"
-                  } ${
-                    i === t.caseStudy.blocks.length - 1
-                      ? "border-b border-line"
-                      : ""
-                  }`}
-                >
-                  <dt className="text-ui font-bold text-ink">{b.label}</dt>
-                  <dd className="mt-1.5 text-copy text-pretty text-ink-soft">
-                    {b.body}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        </section>
-
         {/* --- Contacto ---------------------------------------------------- */}
         {/* El archivo pintaba tres campos sueltos sin destino. Aqui va el
             `ContactForm` del sitio, que es el que valida, lleva honeypot,
