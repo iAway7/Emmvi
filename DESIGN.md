@@ -75,13 +75,14 @@ la página demuestra algo en vez de afirmarlo.
 | `--color-ink` | `#171717` | títulos y texto primario |
 | `--color-ink-soft` | `#666666` | cuerpo |
 | `--color-ink-black` | `#000000` | nav activo |
+| `--color-ink-deep` | `#101010` | fondos oscuros: botones primarios, bandas oscuras, inicio de `--night` |
 | `--color-line` | `#eaeaea` | bordes y reglas |
 | `--color-violet` | `#423af4` | acento único, de la marca |
 | `--color-pink` | `#ff5d92` | borde del badge de Email Marketing |
 | `--color-pink-ink` | `#d81b60` | su texto: el rosa de marca da 2.78:1 y falla AA |
 | `--color-pink-wash` | `#fff8fc` | relleno de ese badge |
 | `--dusk` | `linear-gradient(90deg,#242428,#16151e 50%,#080714)` | paneles oscuros de Email Marketing |
-| `--night` | `linear-gradient(180deg,#171717,#000 62%,#2e2e2e)` | paneles de demostración |
+| `--night` | `linear-gradient(180deg,#101010,#000 62%,#2e2e2e)` | paneles de demostración |
 
 Restricción medida, y ya no la hay en claro: el violeta rinde 6.68:1 sobre
 blanco y 6.40:1 sobre `#f9fafd` — AA de texto chico en las dos. El violeta

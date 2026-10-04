@@ -100,7 +100,7 @@ export function JourneySteps({
       {/* El hilo que une las tarjetas: detras, a la altura de las pastillas. */}
       <span
         aria-hidden="true"
-        className="absolute top-6 bottom-6 left-9 w-0.5 bg-ink"
+        className="absolute top-6 bottom-6 left-9 w-0.5 bg-ink-deep"
       />
       {steps[locale].map((s) => (
         <li

@@ -3,7 +3,7 @@
  * minuto". Este panel no la afirma: la deja ocurrir. La respuesta llega sola
  * unos segundos despues de cargar.
  *
- * Contraste: el gradiente se queda entre #171717 y #000 a proposito. Cuando se
+ * Contraste: el gradiente se queda entre #101010 y #000 a proposito. Cuando se
  * escribio esto, --night terminaba en #7d7d7d y el blanco al 62% de las
  * etiquetas caia alli a 2.62:1. Hoy --night acaba en #2e2e2e y ya no haria
  * falta acotarlo, pero se conserva: este panel es un movil y el degradado corto
@@ -11,7 +11,7 @@
  */
 export function ReplyProof() {
   return (
-    <figure className="reply-proof m-0 w-full max-w-[420px] rounded-lg bg-[linear-gradient(180deg,#171717_0%,#000_100%)] p-6 sm:p-7">
+    <figure className="reply-proof m-0 w-full max-w-[420px] rounded-lg bg-[linear-gradient(180deg,#101010_0%,#000_100%)] p-6 sm:p-7">
       <figcaption className="sr-only">
         A quote request arriving at 9:47pm and the automatic reply that goes out
         thirty-four seconds later.

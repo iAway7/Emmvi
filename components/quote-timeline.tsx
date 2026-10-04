@@ -132,7 +132,7 @@ export function QuoteTimeline({
                 <span
                   className={`relative z-[1] block size-6 rounded-full border-2 transition-colors duration-300 ${
                     next ? "border-white/25" : "border-violet"
-                  } ${done ? "bg-violet" : "bg-ink"}`}
+                  } ${done ? "bg-violet" : "bg-ink-deep"}`}
                 >
                   <span
                     className={`absolute top-1.5 left-1.5 size-2 rounded-full bg-violet transition-opacity duration-300 ${

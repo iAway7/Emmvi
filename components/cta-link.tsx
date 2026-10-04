@@ -24,7 +24,7 @@ const base =
  * archivo, no deducido de uno.
  */
 const variants: Record<Variant, string> = {
-  primary: "border-transparent bg-ink text-paper hover:bg-ink-black",
+  primary: "border-transparent bg-ink-deep text-paper hover:bg-ink-black",
   ghost: "border-line bg-paper text-ink hover:border-ink",
   outline: "border-ink-black bg-paper text-ink hover:bg-paper-alt",
   light:

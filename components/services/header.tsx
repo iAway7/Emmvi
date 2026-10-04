@@ -74,7 +74,7 @@ export function WebsiteDesignHeader({ current }: { current?: string }) {
 
           <a
             href="#contact"
-            className="inline-flex h-8 items-center justify-center rounded-sm bg-ink-black px-4 text-small font-semibold text-paper transition-colors hover:bg-ink focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
+            className="inline-flex h-8 items-center justify-center rounded-sm bg-ink-black px-4 text-small font-semibold text-paper transition-colors hover:bg-ink-deep focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
           >
             Our Packages
           </a>
