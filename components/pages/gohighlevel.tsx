@@ -556,9 +556,14 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
           >
             <div className="min-w-0 flex-[1_1_560px]">
               <p className={`${eyebrow} text-violet-light`}>{t.how.eyebrow}</p>
-              <ol className="mt-5 flex list-none flex-wrap gap-5 lg:gap-7">
+              {/* Grid y no `flex-wrap` con base de 130px: a 375 los tres
+                  pasos entraban como dos arriba y el tercero solo abajo a
+                  todo lo ancho, que de un 1-2-3 hace una escalera rota. En
+                  columna se leen en orden y los titulos dejan de partirse en
+                  dos lineas; a partir de `sm` vuelven a ser tres. */}
+              <ol className="mt-5 grid list-none gap-5 sm:grid-cols-3 lg:gap-7">
                 {t.how.steps.map((s) => (
-                  <li key={s.n} className="min-w-0 flex-[1_1_130px]">
+                  <li key={s.n} className="min-w-0">
                     <p className="font-mono text-stat leading-none font-bold text-violet-light">
                       {s.n}
                     </p>
@@ -570,7 +575,10 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
                 ))}
               </ol>
             </div>
-            <div className="flex min-w-0 flex-[1_1_260px] flex-col items-start gap-3 pt-7">
+            {/* El `pt-7` alinea el boton con el primer numeral, pero solo
+                cuando las dos columnas van lado a lado. Apiladas era un hueco
+                muerto encima del boton. */}
+            <div className="flex min-w-0 flex-[1_1_260px] flex-col items-start gap-3 lg:pt-7">
               {/* El archivo pedia oscuro con borde blanco; va con la variante
                   `light`, que es la que la home ya usa para un CTA sobre panel
                   oscuro. Una variante mas para una sola pagina no compensa. */}
