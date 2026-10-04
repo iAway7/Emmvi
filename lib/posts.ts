@@ -9,6 +9,7 @@ import { howEmailMarketingAnd } from "@/content/posts/how-email-marketing-and-au
 import { howEmailMarketingHelps } from "@/content/posts/how-email-marketing-helps-maximize-customer-engagement";
 import { howToGetMore } from "@/content/posts/how-to-get-more-google-reviews";
 import { hvacCrm } from "@/content/posts/hvac-crm";
+import { leadSourceTracking } from "@/content/posts/lead-source-tracking";
 import { missedCallTextBack } from "@/content/posts/missed-call-text-back";
 import { quoteFollowUp } from "@/content/posts/quote-follow-up";
 import { roofingCrm } from "@/content/posts/roofing-crm";
@@ -234,6 +235,7 @@ export type Post = {
  * README de content/rewrites/.
  */
 export const posts: readonly Post[] = [
+  leadSourceTracking,
   crmForContractors,
   contractorWebsiteDesign,
   appointmentReminderText,
