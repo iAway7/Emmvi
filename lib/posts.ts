@@ -11,6 +11,7 @@ import { howToGetMore } from "@/content/posts/how-to-get-more-google-reviews";
 import { hvacCrm } from "@/content/posts/hvac-crm";
 import { leadSourceTracking } from "@/content/posts/lead-source-tracking";
 import { missedCallTextBack } from "@/content/posts/missed-call-text-back";
+import { onlineBookingForContractors } from "@/content/posts/online-booking-for-contractors";
 import { quoteFollowUp } from "@/content/posts/quote-follow-up";
 import { roofingCrm } from "@/content/posts/roofing-crm";
 import { solarCrm } from "@/content/posts/solar-crm";
@@ -235,6 +236,7 @@ export type Post = {
  * README de content/rewrites/.
  */
 export const posts: readonly Post[] = [
+  onlineBookingForContractors,
   leadSourceTracking,
   crmForContractors,
   contractorWebsiteDesign,
