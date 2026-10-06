@@ -15,6 +15,7 @@
   --color-ink: #171717;              /* títulos y texto primario */
   --color-ink-soft: #666666;         /* cuerpo de texto */
   --color-ink-black: #000000;        /* nav activo, labels de link */
+  --color-ink-deep: #101010;         /* fondos oscuros: bandas y pastillas */
   --color-line: #eaeaea;
   --color-violet: #423af4;           /* violeta de marca */
   /* Existia como variante oscurecida porque el violeta anterior (#635dff) se
