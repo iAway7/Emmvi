@@ -509,30 +509,21 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
               const logos = connectLogos[i];
               return (
                 <div key={c.name} className="border-t border-ink py-4 pr-5">
-                  <div className="flex h-9 items-center gap-4">
+                  {/* `min-h` y no alto fijo: la celda de Zapier y Make lleva
+                      dos logos, y si algun dia no caben de lado prefiero que
+                      bajen a la linea siguiente antes que se salgan. */}
+                  <div className="flex min-h-9 flex-wrap items-center gap-x-3 gap-y-2">
                     {logos ? (
-                      <>
-                        {logos.map((l) => (
-                          <Image
-                            key={l.src}
-                            src={l.src}
-                            alt={l.alt}
-                            width={l.w}
-                            height={l.h}
-                            className={`${l.alto} w-auto`}
-                          />
-                        ))}
-                        {logos.map((l) =>
-                          l.pendiente ? (
-                            <span
-                              key={`${l.src}-pendiente`}
-                              className="text-ui font-bold text-ink"
-                            >
-                              {l.pendiente}
-                            </span>
-                          ) : null,
-                        )}
-                      </>
+                      logos.map((l) => (
+                        <Image
+                          key={l.src}
+                          src={l.src}
+                          alt={l.alt}
+                          width={l.w}
+                          height={l.h}
+                          className={`${l.alto} w-auto`}
+                        />
+                      ))
                     ) : (
                       <p className="text-ui font-bold text-ink">{c.name}</p>
                     )}

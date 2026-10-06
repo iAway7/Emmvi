@@ -252,8 +252,6 @@ export type ConnectLogo = {
   h: number;
   /** La altura a la que se pinta, medida a ojo contra las otras. */
   alto: string;
-  /** Una marca de la misma celda de la que aun no tenemos el SVG. */
-  pendiente?: string;
 };
 
 export const connectLogos: readonly (readonly ConnectLogo[] | null)[] = [
@@ -261,15 +259,12 @@ export const connectLogos: readonly (readonly ConnectLogo[] | null)[] = [
   [{ src: "/tools/kickserv.svg", alt: "Kickserv", w: 197, h: 81, alto: "h-[34px]" }],
   [{ src: "/tools/stripe.svg", alt: "Stripe", w: 468, h: 223, alto: "h-8" }],
   [{ src: "/tools/airtable.svg", alt: "Airtable", w: 395, h: 86, alto: "h-5" }],
+  // Dos marcas en una celda. Juntas miden 178 de los 215 que da la columna a
+  // 1280, asi que entran de lado; mas abajo el `flex-wrap` las baja de linea
+  // en vez de sacarlas de la celda.
   [
-    {
-      src: "/tools/zapier.svg",
-      alt: "Zapier",
-      w: 500,
-      h: 136,
-      alto: "h-[21px]",
-      pendiente: "Make",
-    },
+    { src: "/tools/zapier.svg", alt: "Zapier", w: 500, h: 136, alto: "h-5" },
+    { src: "/tools/make.svg", alt: "Make", w: 412, h: 85, alto: "h-[19px]" },
   ],
 ];
 
