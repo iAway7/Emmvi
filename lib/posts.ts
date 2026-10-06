@@ -1,4 +1,5 @@
 import { a5ProvenWaysTo } from "@/content/posts/5-proven-ways-to-get-more-leads-for-your-online-business";
+import { afterHoursAnsweringService } from "@/content/posts/after-hours-answering-service";
 import { appointmentReminderText } from "@/content/posts/appointment-reminder-text";
 import { contractorWebsiteDesign } from "@/content/posts/contractor-website-design";
 import { crmForContractors } from "@/content/posts/crm-for-contractors";
@@ -236,6 +237,7 @@ export type Post = {
  * README de content/rewrites/.
  */
 export const posts: readonly Post[] = [
+  afterHoursAnsweringService,
   onlineBookingForContractors,
   leadSourceTracking,
   crmForContractors,
