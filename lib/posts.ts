@@ -1,4 +1,5 @@
 import { a5ProvenWaysTo } from "@/content/posts/5-proven-ways-to-get-more-leads-for-your-online-business";
+import { afterHoursAnsweringService } from "@/content/posts/after-hours-answering-service";
 import { appointmentReminderText } from "@/content/posts/appointment-reminder-text";
 import { contractorWebsiteDesign } from "@/content/posts/contractor-website-design";
 import { crmForContractors } from "@/content/posts/crm-for-contractors";
@@ -9,7 +10,9 @@ import { howEmailMarketingAnd } from "@/content/posts/how-email-marketing-and-au
 import { howEmailMarketingHelps } from "@/content/posts/how-email-marketing-helps-maximize-customer-engagement";
 import { howToGetMore } from "@/content/posts/how-to-get-more-google-reviews";
 import { hvacCrm } from "@/content/posts/hvac-crm";
+import { leadSourceTracking } from "@/content/posts/lead-source-tracking";
 import { missedCallTextBack } from "@/content/posts/missed-call-text-back";
+import { onlineBookingForContractors } from "@/content/posts/online-booking-for-contractors";
 import { quoteFollowUp } from "@/content/posts/quote-follow-up";
 import { roofingCrm } from "@/content/posts/roofing-crm";
 import { solarCrm } from "@/content/posts/solar-crm";
@@ -234,6 +237,9 @@ export type Post = {
  * README de content/rewrites/.
  */
 export const posts: readonly Post[] = [
+  afterHoursAnsweringService,
+  onlineBookingForContractors,
+  leadSourceTracking,
   crmForContractors,
   contractorWebsiteDesign,
   appointmentReminderText,
