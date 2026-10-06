@@ -25,7 +25,7 @@ declare global {
  */
 const variants = {
   /** Tinta llena, sobre fondo claro. */
-  primary: "bg-ink text-paper hover:bg-ink-black focus-visible:outline-violet",
+  primary: "bg-ink-deep text-paper hover:bg-ink-black focus-visible:outline-violet",
   /** Blanco, sobre panel oscuro. */
   light:
     "bg-paper text-ink hover:bg-[#e9e9e9] focus-visible:outline-violet-light",

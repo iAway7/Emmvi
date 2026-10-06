@@ -62,7 +62,7 @@ export default function GlobalError({
           <div className="mt-9 flex flex-wrap gap-3">
             <button
               onClick={reset}
-              className="inline-flex h-12 items-center justify-center rounded-sm bg-ink px-6 text-ui font-medium text-paper transition-colors duration-150 hover:bg-ink-black focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
+              className="inline-flex h-12 items-center justify-center rounded-sm bg-ink-deep px-6 text-ui font-medium text-paper transition-colors duration-150 hover:bg-ink-black focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet"
             >
               Try again
             </button>

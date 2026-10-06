@@ -2,13 +2,19 @@ import Image from "next/image";
 
 import { CalendlyButton } from "@/components/calendly-button";
 import { ContactForm } from "@/components/contact-form";
+import { FaqSchema } from "@/components/faq-schema";
 import { CtaLink } from "@/components/cta-link";
+import { FaqAccordion } from "@/components/faq-accordion";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { StageTimeline, type Stage } from "@/components/services/stage-timeline";
 import { GhlIllustration } from "@/components/services/ghl-illustrations";
-import { catalogue, gohighlevelCopy } from "@/lib/copy/gohighlevel";
-import type { Locale } from "@/lib/i18n";
+import {
+  catalogue,
+  connectLogos,
+  gohighlevelCopy,
+} from "@/lib/copy/gohighlevel";
+import { localizePath, type Locale } from "@/lib/i18n";
 
 /**
  * Pagina de servicio del posicionamiento nuevo, no una replica del Figma.
@@ -67,7 +73,7 @@ const counts = {
 
 const wrap =
   "mx-auto w-full max-w-[var(--container-wrap)] px-6 lg:px-[var(--spacing-gut)]";
-const section = "py-14 lg:py-[84px]";
+const section = "py-16 lg:py-[104px]";
 /** El archivo pone los rotulos a 11px; la escala arranca en `text-small` (14),
  *  que es lo mas cerca sin estrenar una medida para esta sola pagina. */
 const eyebrow = "text-small font-bold tracking-[0.16em] uppercase";
@@ -84,20 +90,31 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
 
   return (
     <>
+      {/* Las preguntas, declaradas. No es por el carrusel de Google, que desde
+          2023 solo sale en sitios de administracion y salud: es para las
+          maquinas que leen la pagina y sintetizan la respuesta, y este FAQ es
+          casi literal lo que alguien escribe antes de contratar esto. Mientras
+          la pagina pida `noindex` no la lee nadie, pero el marcado ya esta
+          cuando se publique. */}
+      <FaqSchema
+        locale={locale}
+        items={t.faq.items}
+        path="/services/gohighlevel-automation"
+      />
       <SiteHeader locale={locale} path="/services/gohighlevel-automation" />
 
       <main id="top">
         {/* --- Hero: el texto y el recorrido empezando -------------------- */}
-        <section className={`${wrap} pt-10 pb-12 lg:pt-11 lg:pb-16`}>
+        <section className={`${wrap} pt-12 pb-16 lg:pt-[88px] lg:pb-20`}>
           <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
             <div>
               <p className={`${eyebrow} text-violet`}>{t.hero.eyebrow}</p>
-              <h1 className="mt-4 text-ink">{t.hero.title}</h1>
+              <h1 className="mt-6 text-ink">{t.hero.title}</h1>
               {/* `text-body` (18px fijo) y no `text-lede`, que escala hasta 24
                   en escritorio. El token, no una medida a mano: lo obliga la
                   regla `no-restricted-syntax` de ESLint, y asi el interlineado
                   viene con el tamano en vez de quedarse el de la entradilla. */}
-              <p className="mt-5 max-w-[46ch] text-body text-pretty text-ink-soft">
+              <p className="mt-6 max-w-[46ch] text-body text-pretty text-ink-soft">
                 {t.hero.lede}
               </p>
               <div className="mt-7 flex flex-wrap gap-3">
@@ -130,7 +147,7 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
             {t.journey.map((j, i) => (
               <li
                 key={j.label}
-                className={`border-white/28 px-6 py-7 lg:px-8 lg:py-8 ${
+                className={`border-white/28 px-6 py-9 lg:px-8 lg:py-11 ${
                   i < t.journey.length - 1 ? "max-sm:border-b" : ""
                 } ${i < 2 ? "sm:max-lg:border-b" : ""} ${
                   i % 2 === 0 ? "sm:max-lg:border-r" : ""
@@ -142,7 +159,7 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
                 <p className="mt-4 font-mono text-stat leading-none font-bold text-white">
                   {j.figure}
                 </p>
-                <p className="mt-1.5 text-small text-white">{j.body}</p>
+                <p className="mt-2 text-small text-white">{j.body}</p>
               </li>
             ))}
           </ol>
@@ -153,8 +170,8 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
           <div className="grid items-start gap-8 lg:grid-cols-2 lg:gap-14">
             <div>
               <p className={`${eyebrow} text-ink-soft`}>{t.licence.eyebrow}</p>
-              <h2 className="mt-3.5 text-ink">{t.licence.title}</h2>
-              <p className="mt-3.5 max-w-[34ch] text-copy text-pretty text-ink-soft">
+              <h2 className="mt-5 text-ink">{t.licence.title}</h2>
+              <p className="mt-5 max-w-[34ch] text-copy text-pretty text-ink-soft">
                 {t.licence.lede}
               </p>
               <GhlIllustration
@@ -182,8 +199,8 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
         </section>
 
         {/* --- Lo que cambia, sobre oscuro -------------------------------- */}
-        <section className="bg-ink-deep">
-          <div className={`${wrap} py-14 lg:py-[88px]`}>
+        <section className="bg-ink-deep bg-noise">
+          <div className={`${wrap} ${section}`}>
             {/* Titular y parrafo en dos columnas, como "The licence is not
                 the system" mas arriba. Apilados eran once lineas seguidas con
                 media pantalla vacia al lado: el titular ya ocupa cuatro, y el
@@ -278,10 +295,10 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
               mirarla; las cifras viven en el parrafo, donde tienen sitio para
               explicarse. */}
           <p className={`${eyebrow} mt-5 text-ink-soft`}>{t.catalogue.eyebrow}</p>
-          <h2 className="mt-3.5 max-w-[24ch] text-balance text-ink">
+          <h2 className="mt-5 max-w-[24ch] text-balance text-ink">
             {t.catalogue.title}
           </h2>
-          <p className="mt-3.5 max-w-[48ch] text-copy text-pretty text-ink-soft">
+          <p className="mt-5 max-w-[48ch] text-copy text-pretty text-ink-soft">
             {t.catalogue.intro(counts)}
           </p>
 
@@ -304,8 +321,8 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
         <section id="build" className="scroll-mt-24 bg-paper-panel">
           <div className={`${wrap} ${section}`}>
             <p className={`${eyebrow} text-ink-soft`}>{t.build.eyebrow}</p>
-            <h2 className="mt-3.5 max-w-[24ch] text-ink">{t.build.title}</h2>
-            <p className="mt-3.5 max-w-[40ch] text-copy text-pretty text-ink-soft">
+            <h2 className="mt-5 max-w-[24ch] text-ink">{t.build.title}</h2>
+            <p className="mt-5 max-w-[40ch] text-copy text-pretty text-ink-soft">
               {t.build.lede}
             </p>
 
@@ -350,6 +367,41 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
           </div>
         </section>
 
+        {/* --- La llamada que nadie coge ---------------------------------- */}
+        {/* El recorrido del hero entra por un formulario a las 21:47. Esta es
+            la misma historia por el otro canal, y para quien vive de instalar
+            es la objecion mas cara: el que llama y no recibe respuesta no
+            espera, llama al siguiente de la lista.
+
+            Va aqui, detras de "lo que montamos dentro", porque a esta altura
+            el lector ya sabe que se construye y esto es el ejemplo que mas
+            duele. Antes del recorrido violeta habria sido una segunda foto
+            del "despues" sin haber contado todavia el problema.
+
+            Con escena propia y no con una tarjeta mas: una llamada perdida se
+            entiende mirandola, y la pagina ya tiene lenguaje para dibujarla. */}
+        <section className={`${wrap} ${section}`}>
+          <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
+            <div>
+              <p className={`${eyebrow} text-ink-soft`}>
+                {t.missedCall.eyebrow}
+              </p>
+              <h2 className="mt-5 max-w-[16ch] text-ink">
+                {t.missedCall.title}
+              </h2>
+              <p className="mt-5 max-w-[44ch] text-copy text-pretty text-ink-soft">
+                {t.missedCall.body}
+              </p>
+            </div>
+            <GhlIllustration
+              name="missedcall"
+              locale={locale}
+              label={t.missedCall.label}
+              className="w-full max-w-[560px] lg:justify-self-end"
+            />
+          </div>
+        </section>
+
         {/* --- El orden de trabajo ---------------------------------------- */}
         <section className={`${wrap} ${section}`}>
           {/* Antes decia "Knowing which fifteen is half the job". El numero
@@ -358,7 +410,7 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
               suelta tres secciones mas arriba y no se entendia. El 52/15 se
               queda solo donde la frase se explica a si misma. */}
           <h2 className="max-w-[20ch] text-ink">{t.order.title}</h2>
-          <p className="mt-3.5 max-w-[56ch] text-lede text-pretty text-ink-soft">
+          <p className="mt-5 max-w-[56ch] text-lede text-pretty text-ink-soft">
             {t.order.lede}
           </p>
           {/* Los tres primeros llevan filete violeta y los seis siguientes
@@ -395,11 +447,11 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
             <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
               <div>
                 <p className={`${eyebrow} text-ink-soft`}>{t.flow.eyebrow}</p>
-                <h2 className="mt-3.5 text-ink">{t.flow.title}</h2>
+                <h2 className="mt-5 text-ink">{t.flow.title}</h2>
                 <p className="mt-2.5 max-w-[42ch] text-copy text-pretty text-ink-soft">
                   {t.flow.lede}
                 </p>
-                <p className="mt-3.5 max-w-[46ch] text-copy text-pretty text-ink-soft">
+                <p className="mt-5 max-w-[46ch] text-copy text-pretty text-ink-soft">
                   {t.flow.body}
                 </p>
                 {/* Los cuatro bloques del flujo, en palabras. Son los mismos
@@ -435,7 +487,7 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
         {/* --- Con qué se conecta ----------------------------------------- */}
         <section className={`${wrap} ${section}`}>
           <p className={`${eyebrow} text-ink-soft`}>{t.connect.eyebrow}</p>
-          <h2 className="mt-3.5 max-w-[24ch] text-ink">{t.connect.title}</h2>
+          <h2 className="mt-5 max-w-[24ch] text-ink">{t.connect.title}</h2>
           <p className="mt-2.5 max-w-[42ch] text-copy text-pretty text-ink-soft">
             {t.connect.lede}
           </p>
@@ -445,40 +497,120 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
             label={t.connect.label}
             className="mx-auto mt-8 w-full max-w-[900px]"
           />
+          {/* El logo de cada marca ocupa el sitio de su nombre. Los archivos
+              oficiales ya traen el nombre dentro, asi que ponerlos encima de
+              un "Stripe" en negrita lo diria dos veces; quien no ve la imagen
+              lo tiene en el `alt`.
+
+              La caja de altura fija los alinea por abajo aunque midan distinto,
+              y es la misma que ocupa el nombre escrito de la primera celda. */}
           <div className="mt-7 grid sm:grid-cols-2 lg:mt-8 lg:grid-cols-5">
-            {t.connect.items.map((c) => (
-              <div key={c.name} className="border-t border-ink py-4 pr-5">
-                <p className="text-ui font-bold text-ink">{c.name}</p>
-                <p className="mt-1.5 text-small text-pretty text-ink-soft">
-                  {c.body}
-                </p>
+            {t.connect.items.map((c, i) => {
+              const logos = connectLogos[i];
+              return (
+                <div key={c.name} className="border-t border-ink py-4 pr-5">
+                  {/* `min-h` y no alto fijo: la celda de Zapier y Make lleva
+                      dos logos, y si algun dia no caben de lado prefiero que
+                      bajen a la linea siguiente antes que se salgan. */}
+                  <div className="flex min-h-9 flex-wrap items-center gap-x-3 gap-y-2">
+                    {logos ? (
+                      logos.map((l) => (
+                        <Image
+                          key={l.src}
+                          src={l.src}
+                          alt={l.alt}
+                          width={l.w}
+                          height={l.h}
+                          className={`${l.alto} w-auto`}
+                        />
+                      ))
+                    ) : (
+                      <p className="text-ui font-bold text-ink">{c.name}</p>
+                    )}
+                  </div>
+                  <p className="mt-3 text-small text-pretty text-ink-soft">
+                    {c.body}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* --- La web que lo alimenta ------------------------------------- */}
+        {/* "¿La web va a parecer una plantilla?" era la unica pregunta de la
+            lista que esta pagina no contestaba por ningun lado: la web salia
+            como el paso 06 de nueve, en letra pequena, y es de lo que vive
+            emmvi.
+
+            La escena contesta ensenandola: dominio propio, marca propia y el
+            formulario cayendo en el pipeline. El boton lleva a
+            /services/website-design, que es donde esta el trabajo de verdad;
+            `localizePath` le pone el prefijo del idioma y la barra final.
+
+            En escritorio la escena va a la izquierda y el texto a la derecha,
+            al reves que la llamada perdida: dos secciones seguidas con la
+            imagen del mismo lado se leen como una sola. El orden se cambia con
+            `order` y no en el DOM porque en movil las columnas se apilan como
+            esten escritas, y el titular tiene que ir antes que el dibujo. */}
+        <section className={`${wrap} ${section}`}>
+          <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
+            <div className="lg:order-2">
+              <p className={`${eyebrow} text-ink-soft`}>{t.website.eyebrow}</p>
+              <h2 className="mt-5 max-w-[16ch] text-ink">
+                {t.website.title}
+              </h2>
+              <p className="mt-5 max-w-[44ch] text-copy text-pretty text-ink-soft">
+                {t.website.body}
+              </p>
+              <div className="mt-7">
+                <CtaLink
+                  href={localizePath("/services/website-design", locale)}
+                  variant="outline"
+                >
+                  {t.website.cta}
+                </CtaLink>
               </div>
-            ))}
+            </div>
+            <GhlIllustration
+              name="website"
+              locale={locale}
+              label={t.website.label}
+              className="w-full max-w-[560px] lg:order-1"
+            />
           </div>
         </section>
 
         {/* --- Cómo funciona, sobre oscuro -------------------------------- */}
-        <section className="bg-ink-deep">
+        <section className="bg-ink-deep bg-noise">
           <div
-            className={`${wrap} flex flex-wrap items-start gap-8 py-11 lg:gap-14 lg:py-[68px]`}
+            className={`${wrap} ${section} flex flex-wrap items-start gap-8 lg:gap-14`}
           >
             <div className="min-w-0 flex-[1_1_560px]">
               <p className={`${eyebrow} text-violet-light`}>{t.how.eyebrow}</p>
-              <ol className="mt-5 flex list-none flex-wrap gap-5 lg:gap-7">
+              {/* Grid y no `flex-wrap` con base de 130px: a 375 los tres
+                  pasos entraban como dos arriba y el tercero solo abajo a
+                  todo lo ancho, que de un 1-2-3 hace una escalera rota. En
+                  columna se leen en orden y los titulos dejan de partirse en
+                  dos lineas; a partir de `sm` vuelven a ser tres. */}
+              <ol className="mt-7 grid list-none gap-6 sm:grid-cols-3 lg:gap-7">
                 {t.how.steps.map((s) => (
-                  <li key={s.n} className="min-w-0 flex-[1_1_130px]">
+                  <li key={s.n} className="min-w-0">
                     <p className="font-mono text-stat leading-none font-bold text-violet-light">
                       {s.n}
                     </p>
-                    <p className="mt-2 text-ui font-bold text-white">
+                    <p className="mt-3 text-ui font-bold text-white">
                       {s.title}
                     </p>
-                    <p className="mt-1.5 text-small text-white/78">{s.body}</p>
+                    <p className="mt-2 text-small text-white/78">{s.body}</p>
                   </li>
                 ))}
               </ol>
             </div>
-            <div className="flex min-w-0 flex-[1_1_260px] flex-col items-start gap-3 pt-7">
+            {/* El `pt-7` alinea el boton con el primer numeral, pero solo
+                cuando las dos columnas van lado a lado. Apiladas era un hueco
+                muerto encima del boton. */}
+            <div className="flex min-w-0 flex-[1_1_260px] flex-col items-start gap-3 lg:pt-7">
               {/* El archivo pedia oscuro con borde blanco; va con la variante
                   `light`, que es la que la home ya usa para un CTA sobre panel
                   oscuro. Una variante mas para una sola pagina no compensa. */}
@@ -534,6 +666,19 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
               {/* El texto real de Adriana. El archivo traia una frase
                   reescrita que ella no dijo; esta es la misma cita que usan la
                   home y /services/email-marketing. */}
+              {/* La cita acompana al acordeon en vez de quedarse arriba.
+
+                  Con las once preguntas del analisis de Upwork la columna de
+                  la derecha mide 1533px y la cita 241: sin esto quedaban 1292
+                  de blanco al lado de un testimonio de cuatro lineas. El
+                  `items-start` del grid es justo lo que lo hace posible: la
+                  celda mide lo que la fila, pero la cita mide su contenido, y
+                  en esa diferencia es por donde viaja. Con `self-stretch` la
+                  cita llenaria la celda y no se moveria nada.
+
+                  Solo en escritorio: en movil las dos cosas van apiladas y una
+                  cita pegada taparia las preguntas. */}
+              <div className="lg:sticky lg:top-28">
               <blockquote className="m-0">
                 <p className="text-h3 leading-snug font-medium text-pretty text-ink">
                   {t.testimonial.quote}
@@ -557,26 +702,20 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
                   </span>
                 </cite>
               </blockquote>
+              </div>
 
+              {/* El acordeon del sitio, el mismo que la home.
+
+                  Esta pagina lo tenia y lo perdio al portar el diseno del
+                  recorrido: quedaron once preguntas abiertas a la vez, que es
+                  una pagina de texto, no un FAQ. `FaqAccordion` ya es el unico
+                  marcado para las seis paginas que llevan preguntas, asi que
+                  volver a el tambien deshace la copia. */}
               <div>
-                <p className={`${eyebrow} mb-3.5 text-ink-soft`}>{t.faq.eyebrow}</p>
-                {t.faq.items.map((f, i) => (
-                  <div
-                    key={f.q}
-                    className={`py-4 ${
-                      i === 0
-                        ? "border-t-2 border-ink"
-                        : "border-t border-line"
-                    } ${i === t.faq.items.length - 1 ? "border-b border-line" : ""}`}
-                  >
-                    <p className="text-ui font-bold text-balance text-ink">
-                      {f.q}
-                    </p>
-                    <p className="mt-1.5 text-copy text-pretty text-ink-soft">
-                      {f.a}
-                    </p>
-                  </div>
-                ))}
+                <p className={`${eyebrow} mb-2 text-ink-soft`}>
+                  {t.faq.eyebrow}
+                </p>
+                <FaqAccordion items={[...t.faq.items]} />
               </div>
             </div>
           </div>
@@ -593,11 +732,43 @@ export function GohighlevelPage({ locale }: { locale: Locale }) {
         >
           <div className={`${wrap} ${section}`}>
             <div className="grid items-start gap-8 lg:grid-cols-2 lg:gap-14">
+              {/* La columna de la izquierda llevaba solo titulo y parrafo, y
+                  al lado de un formulario de cuatro campos quedaba vacia.
+                  Ahora cuenta que pasa en la media hora y lleva el boton de
+                  agendar, que es la via principal en todo el sitio; el
+                  formulario es la segunda. */}
               <div>
                 <h2 className="text-white">{t.contact.title}</h2>
-                <p className="mt-3.5 max-w-[40ch] text-lede text-pretty text-white">
+                <p className="mt-5 max-w-[40ch] text-lede text-pretty text-white">
                   {t.contact.lede}
                 </p>
+                <ol className="mt-10 m-0 list-none border-t border-white/25 p-0">
+                  {t.contact.steps.map((step, i) => (
+                    <li
+                      key={step.title}
+                      className="grid grid-cols-[2rem_1fr] gap-x-4 border-b border-white/25 py-5"
+                    >
+                      <span
+                        aria-hidden="true"
+                        className="font-mono text-ui font-bold text-white/70"
+                      >
+                        {i + 1}
+                      </span>
+                      <div>
+                        <h4 className="text-white">{step.title}</h4>
+                        <p className="mt-1 text-copy text-pretty text-white/85">
+                          {step.body}
+                        </p>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+                <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3">
+                  <CalendlyButton variant="light" className="max-md:w-full">
+                    {t.contact.cta}
+                  </CalendlyButton>
+                  <p className="text-small text-white/85">{t.contact.or}</p>
+                </div>
               </div>
               <div className="rounded-lg bg-paper p-6 lg:p-8">
                 <ContactForm locale={locale} />

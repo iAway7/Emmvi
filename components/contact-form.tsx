@@ -146,7 +146,7 @@ export function ContactForm({ locale = "en" }: { locale?: Locale }) {
       <button
         type="submit"
         disabled={isPending}
-        className="inline-flex h-12 w-full items-center justify-center rounded-sm bg-ink px-6 text-ui font-medium text-paper transition-colors duration-150 hover:bg-ink-black focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet disabled:opacity-70"
+        className="inline-flex h-12 w-full items-center justify-center rounded-sm bg-ink-deep px-6 text-ui font-medium text-paper transition-colors duration-150 hover:bg-ink-black focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet disabled:opacity-70"
       >
         {isPending ? copy.sending : copy.send}
       </button>
