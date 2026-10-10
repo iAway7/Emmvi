@@ -2,6 +2,7 @@ import { a5ProvenWaysTo } from "@/content/posts/5-proven-ways-to-get-more-leads-
 import { afterHoursAnsweringService } from "@/content/posts/after-hours-answering-service";
 import { appointmentReminderText } from "@/content/posts/appointment-reminder-text";
 import { businessTextingForContractors } from "@/content/posts/business-texting-for-contractors";
+import { contractorSalesPipeline } from "@/content/posts/contractor-sales-pipeline";
 import { contractorWebsiteDesign } from "@/content/posts/contractor-website-design";
 import { crmForContractors } from "@/content/posts/crm-for-contractors";
 import { crmForElectricians } from "@/content/posts/crm-for-electricians";
@@ -240,6 +241,7 @@ export type Post = {
  * README de content/rewrites/.
  */
 export const posts: readonly Post[] = [
+  contractorSalesPipeline,
   reactivateOldLeads,
   businessTextingForContractors,
   crmForElectricians,
