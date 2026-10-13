@@ -13,6 +13,7 @@ import { howEmailMarketingAnd } from "@/content/posts/how-email-marketing-and-au
 import { howEmailMarketingHelps } from "@/content/posts/how-email-marketing-helps-maximize-customer-engagement";
 import { howToGetMore } from "@/content/posts/how-to-get-more-google-reviews";
 import { hvacCrm } from "@/content/posts/hvac-crm";
+import { landscapingCrm } from "@/content/posts/landscaping-crm";
 import { leadSourceTracking } from "@/content/posts/lead-source-tracking";
 import { missedCallTextBack } from "@/content/posts/missed-call-text-back";
 import { onlineBookingForContractors } from "@/content/posts/online-booking-for-contractors";
@@ -242,6 +243,7 @@ export type Post = {
  * README de content/rewrites/.
  */
 export const posts: readonly Post[] = [
+  landscapingCrm,
   remodelingCrm,
   contractorSalesPipeline,
   reactivateOldLeads,
