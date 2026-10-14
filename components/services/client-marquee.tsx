@@ -90,7 +90,7 @@ export function ClientMarquee({ locale = "en" }: { locale?: Locale }) {
       </p>
 
       <div
-        className="marquee mt-7"
+        className="marquee marquee--grid mt-7"
         aria-labelledby="client-marquee-label"
         role="group"
       >

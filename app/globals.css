@@ -541,6 +541,58 @@ html:has(dialog[open]) {
    parar la animacion sin mas dejaria la mitad de los logos fuera del recorte.
    `animation: none` pone animation-name en none, asi que el
    `animation-duration: .01ms !important` de la capa base ya no pinta nada. */
+/* En escritorio la cinta deja de correr y se abre en rejilla de 5x2, que es
+   justo el numero de clientes con permiso de marca (10). Asi se leen: en
+   movimiento los de los extremos quedan siempre cortados por el desvanecido.
+
+   No se duplica el DOM. Es el mismo marcado que en movil, reordenado por CSS,
+   igual que ya hacia la caida de `prefers-reduced-motion`. Por debajo de 900px
+   sigue siendo la cinta de siempre.
+
+   Los filetes van en las celdas y no en el contenedor: `border-left` a todas
+   menos a la primera de cada fila, y `border-top` a partir de la sexta. Asi no
+   queda borde por fuera del bloque. */
+@media (min-width: 900px) {
+  .marquee--grid {
+    overflow: visible;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+
+  .marquee--grid .marquee__track {
+    display: block;
+    width: auto;
+    animation: none;
+  }
+
+  /* La segunda copia solo existe para tapar la vuelta. Aqui no hay vuelta. */
+  .marquee--grid .marquee__list[aria-hidden="true"] {
+    display: none;
+  }
+
+  .marquee--grid .marquee__list {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0;
+    padding-right: 0;
+  }
+
+  .marquee--grid .marquee__list > li {
+    display: grid;
+    place-items: center;
+    min-height: 120px;
+    padding: 24px;
+  }
+
+  .marquee--grid .marquee__list > li:not(:nth-child(5n + 1)) {
+    border-left: 1px solid var(--color-line);
+  }
+
+  .marquee--grid .marquee__list > li:nth-child(n + 6) {
+    border-top: 1px solid var(--color-line);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .marquee {
     mask-image: none;
