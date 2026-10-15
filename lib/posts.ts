@@ -22,6 +22,7 @@ import { reactivateOldLeads } from "@/content/posts/reactivate-old-leads";
 import { remodelingCrm } from "@/content/posts/remodeling-crm";
 import { roofingCrm } from "@/content/posts/roofing-crm";
 import { solarCrm } from "@/content/posts/solar-crm";
+import { solarWebsiteDesign } from "@/content/posts/solar-website-design";
 import { speedToLead } from "@/content/posts/speed-to-lead";
 import { streamlineLeadCaptureAnd } from "@/content/posts/streamline-lead-capture-and-sales-with-a-smarter-crm";
 import { streamlineScaleSucceedUsing } from "@/content/posts/streamline-scale-succeed-using-zapier-and-gohighlevel-to-grow-your-business";
@@ -243,6 +244,7 @@ export type Post = {
  * README de content/rewrites/.
  */
 export const posts: readonly Post[] = [
+  solarWebsiteDesign,
   landscapingCrm,
   remodelingCrm,
   contractorSalesPipeline,
