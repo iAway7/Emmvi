@@ -18,6 +18,7 @@ import { landscapingCrm } from "@/content/posts/landscaping-crm";
 import { leadSourceTracking } from "@/content/posts/lead-source-tracking";
 import { missedCallTextBack } from "@/content/posts/missed-call-text-back";
 import { onlineBookingForContractors } from "@/content/posts/online-booking-for-contractors";
+import { plumbingWebsiteDesign } from "@/content/posts/plumbing-website-design";
 import { quoteFollowUp } from "@/content/posts/quote-follow-up";
 import { reactivateOldLeads } from "@/content/posts/reactivate-old-leads";
 import { remodelingCrm } from "@/content/posts/remodeling-crm";
@@ -245,6 +246,7 @@ export type Post = {
  * README de content/rewrites/.
  */
 export const posts: readonly Post[] = [
+  plumbingWebsiteDesign,
   hvacWebsiteDesign,
   solarWebsiteDesign,
   landscapingCrm,
