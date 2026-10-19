@@ -8,6 +8,7 @@ import { crmForContractors } from "@/content/posts/crm-for-contractors";
 import { crmForElectricians } from "@/content/posts/crm-for-electricians";
 import { crmForPlumbers } from "@/content/posts/crm-for-plumbers";
 import { emailAutomationAndFunnel } from "@/content/posts/email-automation-and-funnel-building-the-secret-to-driving-more-sales";
+import { gohighlevelForContractors } from "@/content/posts/gohighlevel-for-contractors";
 import { harnessingAiWithoutCode } from "@/content/posts/harnessing-ai-without-code-how-crms-and-automation-tools-empower-online-businesses";
 import { howEmailMarketingAnd } from "@/content/posts/how-email-marketing-and-automated-series-can-increase-roi";
 import { howEmailMarketingHelps } from "@/content/posts/how-email-marketing-helps-maximize-customer-engagement";
@@ -247,6 +248,7 @@ export type Post = {
  * README de content/rewrites/.
  */
 export const posts: readonly Post[] = [
+  gohighlevelForContractors,
   quoteRequestForm,
   plumbingWebsiteDesign,
   hvacWebsiteDesign,
