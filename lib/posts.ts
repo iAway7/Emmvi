@@ -24,6 +24,7 @@ import { quoteFollowUp } from "@/content/posts/quote-follow-up";
 import { quoteRequestForm } from "@/content/posts/quote-request-form";
 import { reactivateOldLeads } from "@/content/posts/reactivate-old-leads";
 import { remodelingCrm } from "@/content/posts/remodeling-crm";
+import { respondToNegativeReviews } from "@/content/posts/respond-to-negative-reviews";
 import { roofingCrm } from "@/content/posts/roofing-crm";
 import { solarCrm } from "@/content/posts/solar-crm";
 import { solarWebsiteDesign } from "@/content/posts/solar-website-design";
@@ -248,6 +249,7 @@ export type Post = {
  * README de content/rewrites/.
  */
 export const posts: readonly Post[] = [
+  respondToNegativeReviews,
   gohighlevelForContractors,
   quoteRequestForm,
   plumbingWebsiteDesign,
