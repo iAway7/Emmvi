@@ -9,6 +9,7 @@ import { crmForElectricians } from "@/content/posts/crm-for-electricians";
 import { crmForPlumbers } from "@/content/posts/crm-for-plumbers";
 import { electricianWebsiteDesign } from "@/content/posts/electrician-website-design";
 import { emailAutomationAndFunnel } from "@/content/posts/email-automation-and-funnel-building-the-secret-to-driving-more-sales";
+import { evChargerInstallerWebsite } from "@/content/posts/ev-charger-installer-website";
 import { gohighlevelForContractors } from "@/content/posts/gohighlevel-for-contractors";
 import { harnessingAiWithoutCode } from "@/content/posts/harnessing-ai-without-code-how-crms-and-automation-tools-empower-online-businesses";
 import { howEmailMarketingAnd } from "@/content/posts/how-email-marketing-and-automated-series-can-increase-roi";
@@ -251,6 +252,7 @@ export type Post = {
  * README de content/rewrites/.
  */
 export const posts: readonly Post[] = [
+  evChargerInstallerWebsite,
   electricianWebsiteDesign,
   roofingWebsiteDesign,
   respondToNegativeReviews,
