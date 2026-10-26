@@ -1,6 +1,7 @@
 import { a5ProvenWaysTo } from "@/content/posts/5-proven-ways-to-get-more-leads-for-your-online-business";
 import { afterHoursAnsweringService } from "@/content/posts/after-hours-answering-service";
 import { appointmentReminderText } from "@/content/posts/appointment-reminder-text";
+import { askForReferrals } from "@/content/posts/ask-for-referrals";
 import { businessTextingForContractors } from "@/content/posts/business-texting-for-contractors";
 import { contractorSalesPipeline } from "@/content/posts/contractor-sales-pipeline";
 import { contractorWebsiteDesign } from "@/content/posts/contractor-website-design";
@@ -254,6 +255,7 @@ export type Post = {
  * README de content/rewrites/.
  */
 export const posts: readonly Post[] = [
+  askForReferrals,
   hvacMaintenanceReminders,
   evChargerInstallationLeads,
   evChargerInstallerWebsite,
