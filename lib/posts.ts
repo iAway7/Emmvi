@@ -21,6 +21,7 @@ import { hvacCrm } from "@/content/posts/hvac-crm";
 import { hvacMaintenanceReminders } from "@/content/posts/hvac-maintenance-reminders";
 import { hvacWebsiteDesign } from "@/content/posts/hvac-website-design";
 import { landscapingCrm } from "@/content/posts/landscaping-crm";
+import { leadNurturingForContractors } from "@/content/posts/lead-nurturing-for-contractors";
 import { leadSourceTracking } from "@/content/posts/lead-source-tracking";
 import { missedCallTextBack } from "@/content/posts/missed-call-text-back";
 import { onlineBookingForContractors } from "@/content/posts/online-booking-for-contractors";
@@ -255,6 +256,7 @@ export type Post = {
  * README de content/rewrites/.
  */
 export const posts: readonly Post[] = [
+  leadNurturingForContractors,
   askForReferrals,
   hvacMaintenanceReminders,
   evChargerInstallationLeads,
