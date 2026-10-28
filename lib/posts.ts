@@ -34,6 +34,7 @@ import { respondToNegativeReviews } from "@/content/posts/respond-to-negative-re
 import { roofingCrm } from "@/content/posts/roofing-crm";
 import { roofingWebsiteDesign } from "@/content/posts/roofing-website-design";
 import { solarCrm } from "@/content/posts/solar-crm";
+import { solarLeadFollowUp } from "@/content/posts/solar-lead-follow-up";
 import { solarWebsiteDesign } from "@/content/posts/solar-website-design";
 import { speedToLead } from "@/content/posts/speed-to-lead";
 import { streamlineLeadCaptureAnd } from "@/content/posts/streamline-lead-capture-and-sales-with-a-smarter-crm";
@@ -256,6 +257,7 @@ export type Post = {
  * README de content/rewrites/.
  */
 export const posts: readonly Post[] = [
+  solarLeadFollowUp,
   leadNurturingForContractors,
   askForReferrals,
   hvacMaintenanceReminders,
