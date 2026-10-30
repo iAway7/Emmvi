@@ -27,6 +27,7 @@ import { leadSourceTracking } from "@/content/posts/lead-source-tracking";
 import { missedCallTextBack } from "@/content/posts/missed-call-text-back";
 import { onlineBookingForContractors } from "@/content/posts/online-booking-for-contractors";
 import { plumbingWebsiteDesign } from "@/content/posts/plumbing-website-design";
+import { postJobFollowUp } from "@/content/posts/post-job-follow-up";
 import { quoteFollowUp } from "@/content/posts/quote-follow-up";
 import { quoteRequestForm } from "@/content/posts/quote-request-form";
 import { reactivateOldLeads } from "@/content/posts/reactivate-old-leads";
@@ -258,6 +259,7 @@ export type Post = {
  * README de content/rewrites/.
  */
 export const posts: readonly Post[] = [
+  postJobFollowUp,
   leadManagementForContractors,
   solarLeadFollowUp,
   leadNurturingForContractors,
