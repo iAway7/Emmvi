@@ -24,6 +24,7 @@ import { landscapingCrm } from "@/content/posts/landscaping-crm";
 import { leadManagementForContractors } from "@/content/posts/lead-management-for-contractors";
 import { leadNurturingForContractors } from "@/content/posts/lead-nurturing-for-contractors";
 import { leadSourceTracking } from "@/content/posts/lead-source-tracking";
+import { localServicesAdsFor } from "@/content/posts/local-services-ads-for-contractors";
 import { missedCallTextBack } from "@/content/posts/missed-call-text-back";
 import { onlineBookingForContractors } from "@/content/posts/online-booking-for-contractors";
 import { plumbingWebsiteDesign } from "@/content/posts/plumbing-website-design";
@@ -259,6 +260,7 @@ export type Post = {
  * README de content/rewrites/.
  */
 export const posts: readonly Post[] = [
+  localServicesAdsFor,
   postJobFollowUp,
   leadManagementForContractors,
   solarLeadFollowUp,
