@@ -49,6 +49,7 @@ import { top5BestAi } from "@/content/posts/top-5-best-ai-tools-for-images";
 import { top7WebDesign } from "@/content/posts/top-7-web-design-mistakes-that-are-killing-your-conversions-in-2025";
 import { turnLeadsIntoLoyal } from "@/content/posts/turn-leads-into-loyal-customers-with-funnels-automations-digital-firepower-powered-by-gohighlevel";
 import { unlockingEfficiencyHowGohighlevel } from "@/content/posts/unlocking-efficiency-how-gohighlevel-streamlines-your-business-operations";
+import { voicemailGreetingForContractors } from "@/content/posts/voicemail-greeting-for-contractors";
 import { webflowVsWixThe } from "@/content/posts/webflow-vs-wix-the-ultimate-website-builder-showdown";
 import { zapierTheNoCode } from "@/content/posts/zapier-the-no-code-automation-revolution-for-businesses";
 
@@ -260,6 +261,7 @@ export type Post = {
  * README de content/rewrites/.
  */
 export const posts: readonly Post[] = [
+  voicemailGreetingForContractors,
   localServicesAdsFor,
   postJobFollowUp,
   leadManagementForContractors,
