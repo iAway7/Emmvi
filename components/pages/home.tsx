@@ -5,6 +5,7 @@ import { ContactForm } from "@/components/contact-form";
 import { HomeIllustration } from "@/components/home-illustrations";
 import { JourneySteps } from "@/components/journey-steps";
 import { MeetMap } from "@/components/meet-map";
+import { FaqAccordion } from "@/components/faq-accordion";
 import { ClientMarquee } from "@/components/services/client-marquee";
 import { StatBand } from "@/components/stat-band";
 import { ToolMarquee } from "@/components/tool-marquee";
@@ -12,6 +13,7 @@ import { stats, tools } from "@/lib/capabilities";
 import { SiteFooter } from "@/components/site-footer";
 import { FaqSchema } from "@/components/faq-schema";
 import { SiteHeader } from "@/components/site-header";
+import { SplitWords, wordCount } from "@/components/split-words";
 import { homeCopy } from "@/lib/copy/home";
 import type { Locale } from "@/lib/i18n";
 
@@ -69,7 +71,9 @@ function StorySection({
         }`}
       >
         <div className={flip ? "md:order-2" : ""}>
-          <h2 className="text-ink">{title}</h2>
+          <h2 className="split text-ink">
+            <SplitWords text={title} />
+          </h2>
           <div className="mt-5 max-w-[30em] text-lede text-pretty text-ink-soft">
             {body}
           </div>
@@ -97,8 +101,8 @@ export function HomePage({ locale }: { locale: Locale }) {
             la escena se recorta al telefono, que es lo que tiene que leerse. */}
         <section className={`${wrap} grid items-center gap-10 pt-12 pb-16 md:grid-cols-2 md:gap-12 md:pt-16 md:pb-20 lg:pt-[88px] lg:pb-24`}>
           <div>
-            <h1 className="max-w-[14em] text-ink">
-              {t.hero.title}
+            <h1 className="split-load max-w-[14em] text-ink">
+              <SplitWords text={t.hero.title} />
             </h1>
             <p className="mt-5 max-w-[30em] text-lede text-pretty text-ink-soft md:mt-6">
               {t.hero.lede}
@@ -146,7 +150,9 @@ export function HomePage({ locale }: { locale: Locale }) {
             el laboratorio para que no se separen. */}
         <section className={`reveal bg-night ${section}`}>
           <div className={wrap}>
-            <h2 className="text-white">{t.tools.title}</h2>
+            <h2 className="split text-white">
+              <SplitWords text={t.tools.title} />
+            </h2>
             <p className="mt-5 max-w-[34em] text-body text-pretty text-white/80">
               {t.tools.body}
             </p>
@@ -170,8 +176,8 @@ export function HomePage({ locale }: { locale: Locale }) {
             columna, porque en fila no se leen a 390px. */}
         <section id="services" className={`reveal scroll-mt-24 ${section}`}>
           <div className={wrap}>
-            <h2 className="text-ink md:text-center">
-              {t.services.title}
+            <h2 className="split text-ink md:text-center">
+              <SplitWords text={t.services.title} />
             </h2>
             <p className="mt-5 max-w-[30em] text-lede text-pretty text-ink-soft md:mx-auto md:text-center">
               {t.services.lede}
@@ -199,7 +205,9 @@ export function HomePage({ locale }: { locale: Locale }) {
             #7d7d7d y habia que reservar el tramo claro como aire. */}
         <section id="about" className={`bg-night scroll-mt-24 ${section}`}>
           <div className={`reveal ${wrap}`}>
-            <h2 className="text-white">{t.about.title}</h2>
+            <h2 className="split text-white">
+              <SplitWords text={t.about.title} />
+            </h2>
             {/* Sin nombres propios y sin repartir roles entre personas: las
                 dos cosas dicen cuanta gente hay. Ciudades si — eso es donde se
                 trabaja, no cuantos. Ver PRODUCT.md. */}
@@ -220,7 +228,9 @@ export function HomePage({ locale }: { locale: Locale }) {
 
         <section id="who" className={`reveal scroll-mt-24 ${section}`}>
           <div className={wrap}>
-            <h2 className="text-ink">{t.who.title}</h2>
+            <h2 className="split text-ink">
+              <SplitWords text={t.who.title} />
+            </h2>
             <div className="mt-14 border-t border-line">
               {t.who.rows.map((row) => (
                 <div
@@ -243,8 +253,8 @@ export function HomePage({ locale }: { locale: Locale }) {
         <section className={`reveal ${section}`}>
           <div className={wrap}>
             <p className="text-eyebrow text-ink">{t.testimonials.eyebrow}</p>
-            <h2 className="mt-2 text-ink">
-              {t.testimonials.title}
+            <h2 className="split mt-2 text-ink">
+              <SplitWords text={t.testimonials.title} />
             </h2>
             <div className="mt-12 grid items-stretch gap-6 min-[900px]:grid-cols-3">
               {t.testimonials.items.map((item) => (
@@ -294,10 +304,18 @@ export function HomePage({ locale }: { locale: Locale }) {
             className={`reveal ${wrap} grid items-center gap-8 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-16`}
           >
             <div>
-              <h2 className="text-ink">
-                {t.call.before}
-                <span className="whitespace-nowrap">{t.call.nowrap}</span>
-                {t.call.after}
+              <h2 className="split text-ink">
+                <SplitWords text={t.call.before} />
+                <span className="whitespace-nowrap">
+                  <SplitWords
+                    text={t.call.nowrap}
+                    from={wordCount(t.call.before)}
+                  />
+                </span>
+                <SplitWords
+                  text={t.call.after}
+                  from={wordCount(t.call.before) + wordCount(t.call.nowrap)}
+                />
               </h2>
               <p className="mt-5 max-w-[30em] text-lede text-pretty text-ink-soft">
                 {t.call.lede}
@@ -323,39 +341,31 @@ export function HomePage({ locale }: { locale: Locale }) {
           </div>
         </section>
 
-        <section id="faq" className={`reveal scroll-mt-24 ${section}`}>
-          <div className={wrap}>
-            <h2 className="text-ink">{t.faq.title}</h2>
-            <div className="mt-12 max-w-[920px]">
-              {t.faq.items.map((f) => (
-                <details
-                  key={f.q}
-                  open={f.open}
-                  className="group border-b border-line py-6"
-                >
-                  <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-6 text-h4 font-semibold text-ink group-open:text-violet focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-violet [&::-webkit-details-marker]:hidden">
-                    {f.q}
-                    <span
-                      aria-hidden="true"
-                      className="shrink-0 text-ui font-normal text-ink-black group-open:text-violet"
-                    >
-                      <span className="group-open:hidden">+</span>
-                      <span className="hidden group-open:inline">&ndash;</span>
-                    </span>
-                  </summary>
-                  <p className="mt-4 text-body text-pretty text-ink-soft">
-                    {f.a}
-                  </p>
-                </details>
-              ))}
+          {/* Dos columnas: el titulo se queda quieto a la izquierda y las
+              preguntas corren a la derecha. A una sola columna el titular se
+              perdia arriba y la lista quedaba suelta.
+
+              El acordeon pasa a ser el componente compartido. Aqui vivia una
+              copia del marcado, identica a la de components/faq-accordion.tsx
+              salvo por el guion: usaba &ndash; en vez del signo menos. */}
+          <section id="faq" className={`reveal scroll-mt-24 ${section}`}>
+            <div
+              className={`${wrap} grid gap-10 min-[900px]:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] min-[900px]:gap-16`}
+            >
+              <h2 className="split text-ink min-[900px]:max-w-[8em]">
+                <SplitWords text={t.faq.title} />
+              </h2>
+
+              <FaqAccordion items={t.faq.items} />
             </div>
-          </div>
-        </section>
+          </section>
 
         <section id="contact" className={`reveal ${wrap} scroll-mt-24 ${section}`}>
           <div className="grid items-start gap-10 rounded-lg bg-paper-panel p-9 min-[900px]:grid-cols-2 min-[900px]:gap-16 min-[900px]:p-16">
             <div>
-              <h2 className="text-ink">{t.contact.title}</h2>
+              <h2 className="split text-ink">
+                <SplitWords text={t.contact.title} />
+              </h2>
               <p className="mt-5 max-w-[34em] text-lede text-pretty text-ink-soft">
                 {t.contact.lede}
               </p>

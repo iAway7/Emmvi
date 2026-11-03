@@ -435,6 +435,52 @@ html:has(dialog[open]) {
   }
 }
 
+/* Titulares que se enfocan palabra a palabra: cada `.w` (components/
+   split-words.tsx) pasa de desenfocada y transparente a nitida, con un paso
+   de retraso por palabra. Con titulares de 4 a 6 palabras el barrido entero
+   cabe en medio segundo; con uno largo se haria pesado.
+
+   Dos variantes:
+   - `.split-load`, solo el H1: arranca al cargar, por tiempo.
+   - `.split`, los H2: va con el scroll, como `.reveal`, y sin JS. El titular
+     publica su propia linea de tiempo (`--split`) y cada palabra la lee con
+     un tramo desplazado `--i` pasos; asi el escalonado se mide sobre la caja
+     del titular entero y no sobre la de cada palabra, que comparten fila y
+     entrarian a la vez. Los tramos van en `cover` y no en `entry`: `entry`
+     dura lo que mide el titular, unos 100px, y el escalonado no se veria.
+     Termina en `cover 26%`, en linea con el `cover 28%` de `.reveal`.
+
+   `inline-block` porque el filtro no se aplica bien a cajas en linea partidas.
+   Como `.reveal`, el estado inicial vive dentro del @supports y de
+   no-preference: sin soporte o con movimiento reducido no se oculta nada. */
+@keyframes focus-in {
+  from { opacity: 0; filter: blur(8px); }
+  to { opacity: 1; filter: blur(0); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .split-load .w {
+    display: inline-block;
+    animation: focus-in 420ms ease-out both;
+    animation-delay: calc(var(--i, 0) * 70ms + 60ms);
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .split {
+      view-timeline-name: --split;
+    }
+    .split .w {
+      display: inline-block;
+      animation: focus-in linear both;
+      animation-timeline: --split;
+      animation-range: cover calc(4% + var(--i, 0) * 2%) cover
+        calc(14% + var(--i, 0) * 2%);
+    }
+  }
+}
+
 /* Respuesta al puntero.
    Todo el hover del sitio cambiaba solo de color —31 `transition-colors`
    contra 2 `transition-transform`— y por eso se sentia inerte: la interaccion

@@ -28,7 +28,9 @@ export type FaqItem = {
   open?: boolean;
 };
 
-export function FaqAccordion({ items }: { items: FaqItem[] }) {
+// `readonly`: el componente solo lee, y asi acepta tanto los arrays de
+// lib/copy —que van congelados— como los que declara cada pagina.
+export function FaqAccordion({ items }: { items: readonly FaqItem[] }) {
   const answered = items.filter((item) => item.a);
   if (answered.length === 0) return null;
 

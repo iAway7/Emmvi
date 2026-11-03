@@ -237,16 +237,16 @@ hero centrado → "Does this sound familiar?" (4 objeciones en 2×2, banda gris)
 
 ## Motion
 
-La home no lleva animación de entrada: el diseño elegido no la pide. Solo
-transiciones de color en hover (150ms) y el acordeón nativo del FAQ.
+La home lleva `.reveal` en sus secciones y el enfoque palabra a palabra en los
+titulares (ver *Titulares* más abajo).
 
 `ReplyProof` (el panel de mensajes que se completa solo) queda en
 `components/` sin usar en la home, reservado para `/for/installers`. Con
 `prefers-reduced-motion: reduce` aparece ya entregado.
 
-**`/about-us` sí lleva aparición al entrar**, y es la única por ahora. Son 7,5
-pantallas de secciones apiladas: ahí el reveal le da ritmo al scroll. La home,
-que cuenta una historia con ilustraciones, no lo necesita.
+**La aparición al entrar empezó en `/about-us`**: son 7,5 pantallas de
+secciones apiladas y el reveal le da ritmo al scroll. Hoy la llevan también la
+home, `/services/seo` y `/services/ppc`.
 
 Se hace con `.reveal` en globals.css, **sin librería**: `animation-timeline:
 view()`, que corre en el compositor. Tres decisiones que conviene no deshacer:
@@ -262,6 +262,29 @@ view()`, que corre en el compositor. Tres decisiones que conviene no deshacer:
 
 El easing es el de `reply-arrive`, para que el sitio se mueva igual en todas
 partes.
+
+### Titulares
+
+Los titulares de la home se enfocan palabra a palabra: cada palabra pasa de
+`blur(8px)` y transparente a nítida, una detrás de otra. `SplitWords`
+(components/split-words.tsx) parte el texto en `<span class="w">` con su
+índice en `--i`; los espacios quedan como texto, así que se copia y se lee en
+voz alta igual.
+
+- **El H1 (`.split-load`) va por tiempo, al cargar**, 70 ms por palabra. Es la
+  excepción a *la primera sección no se anima*: no desplaza nada, solo enfoca,
+  y termina en medio segundo.
+- **Los H2 (`.split`) van con el scroll**, sin JS, como `.reveal`. El titular
+  publica su línea de tiempo (`view-timeline-name: --split`) y cada palabra la
+  lee con un tramo desplazado; si cada palabra fuera su propio sujeto, las de
+  una misma fila entrarían a la vez. Los tramos van en `cover` y no en
+  `entry`: `entry` dura lo que mide el titular, ~50 px, y el escalonado no se
+  vería. Todo está nítido cuando el titular llega al 75% de la pantalla.
+- **Depende de los titulares cortos.** Con 4 a 6 palabras el barrido cabe en
+  medio segundo; con diez se hace pesado.
+
+Todo vive dentro de `prefers-reduced-motion: no-preference`, y lo de scroll
+además dentro de `@supports (animation-timeline: view())`.
 
 ### Respuesta al puntero
 
