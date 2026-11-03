@@ -36,6 +36,7 @@ import { reactivateOldLeads } from "@/content/posts/reactivate-old-leads";
 import { remodelingCrm } from "@/content/posts/remodeling-crm";
 import { respondToNegativeReviews } from "@/content/posts/respond-to-negative-reviews";
 import { roofingCrm } from "@/content/posts/roofing-crm";
+import { roofingLeadFollowUp } from "@/content/posts/roofing-lead-follow-up";
 import { roofingWebsiteDesign } from "@/content/posts/roofing-website-design";
 import { solarCrm } from "@/content/posts/solar-crm";
 import { solarLeadFollowUp } from "@/content/posts/solar-lead-follow-up";
@@ -262,6 +263,7 @@ export type Post = {
  * README de content/rewrites/.
  */
 export const posts: readonly Post[] = [
+  roofingLeadFollowUp,
   hvacLeadFollowUp,
   voicemailGreetingForContractors,
   localServicesAdsFor,
