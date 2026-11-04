@@ -34,6 +34,7 @@ import { quoteFollowUp } from "@/content/posts/quote-follow-up";
 import { quoteRequestForm } from "@/content/posts/quote-request-form";
 import { reactivateOldLeads } from "@/content/posts/reactivate-old-leads";
 import { remodelingCrm } from "@/content/posts/remodeling-crm";
+import { remodelingLeadFollowUp } from "@/content/posts/remodeling-lead-follow-up";
 import { respondToNegativeReviews } from "@/content/posts/respond-to-negative-reviews";
 import { roofingCrm } from "@/content/posts/roofing-crm";
 import { roofingLeadFollowUp } from "@/content/posts/roofing-lead-follow-up";
@@ -263,6 +264,7 @@ export type Post = {
  * README de content/rewrites/.
  */
 export const posts: readonly Post[] = [
+  remodelingLeadFollowUp,
   roofingLeadFollowUp,
   hvacLeadFollowUp,
   voicemailGreetingForContractors,
