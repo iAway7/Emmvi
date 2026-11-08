@@ -7,6 +7,7 @@ import { contractorSalesPipeline } from "@/content/posts/contractor-sales-pipeli
 import { contractorWebsiteDesign } from "@/content/posts/contractor-website-design";
 import { crmForContractors } from "@/content/posts/crm-for-contractors";
 import { crmForElectricians } from "@/content/posts/crm-for-electricians";
+import { crmForPaintingContractors } from "@/content/posts/crm-for-painting-contractors";
 import { crmForPlumbers } from "@/content/posts/crm-for-plumbers";
 import { electricianLeadFollowUp } from "@/content/posts/electrician-lead-follow-up";
 import { electricianWebsiteDesign } from "@/content/posts/electrician-website-design";
@@ -267,6 +268,7 @@ export type Post = {
  * README de content/rewrites/.
  */
 export const posts: readonly Post[] = [
+  crmForPaintingContractors,
   googleBusinessProfileFor,
   plumberLeadFollowUp,
   electricianLeadFollowUp,
