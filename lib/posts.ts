@@ -25,6 +25,7 @@ import { hvacLeadFollowUp } from "@/content/posts/hvac-lead-follow-up";
 import { hvacMaintenanceReminders } from "@/content/posts/hvac-maintenance-reminders";
 import { hvacWebsiteDesign } from "@/content/posts/hvac-website-design";
 import { landscapingCrm } from "@/content/posts/landscaping-crm";
+import { landscapingLeadFollowUp } from "@/content/posts/landscaping-lead-follow-up";
 import { leadManagementForContractors } from "@/content/posts/lead-management-for-contractors";
 import { leadNurturingForContractors } from "@/content/posts/lead-nurturing-for-contractors";
 import { leadSourceTracking } from "@/content/posts/lead-source-tracking";
@@ -270,6 +271,7 @@ export type Post = {
  * README de content/rewrites/.
  */
 export const posts: readonly Post[] = [
+  landscapingLeadFollowUp,
   paintingLeadFollowUp,
   paintingContractorWebsiteDesign,
   crmForPaintingContractors,
