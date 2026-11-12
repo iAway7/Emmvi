@@ -34,6 +34,7 @@ import { missedCallTextBack } from "@/content/posts/missed-call-text-back";
 import { onlineBookingForContractors } from "@/content/posts/online-booking-for-contractors";
 import { paintingContractorWebsiteDesign } from "@/content/posts/painting-contractor-website-design";
 import { paintingLeadFollowUp } from "@/content/posts/painting-lead-follow-up";
+import { pestControlCrm } from "@/content/posts/pest-control-crm";
 import { plumberLeadFollowUp } from "@/content/posts/plumber-lead-follow-up";
 import { plumbingWebsiteDesign } from "@/content/posts/plumbing-website-design";
 import { postJobFollowUp } from "@/content/posts/post-job-follow-up";
@@ -271,6 +272,7 @@ export type Post = {
  * README de content/rewrites/.
  */
 export const posts: readonly Post[] = [
+  pestControlCrm,
   landscapingLeadFollowUp,
   paintingLeadFollowUp,
   paintingContractorWebsiteDesign,
