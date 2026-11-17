@@ -4,6 +4,7 @@ import { appointmentReminderText } from "@/content/posts/appointment-reminder-te
 import { askForReferrals } from "@/content/posts/ask-for-referrals";
 import { businessTextingForContractors } from "@/content/posts/business-texting-for-contractors";
 import { cleaningBusinessCrm } from "@/content/posts/cleaning-business-crm";
+import { cleaningBusinessLeadFollow } from "@/content/posts/cleaning-business-lead-follow-up";
 import { contractorSalesPipeline } from "@/content/posts/contractor-sales-pipeline";
 import { contractorWebsiteDesign } from "@/content/posts/contractor-website-design";
 import { crmForContractors } from "@/content/posts/crm-for-contractors";
@@ -276,6 +277,7 @@ export type Post = {
  * README de content/rewrites/.
  */
 export const posts: readonly Post[] = [
+  cleaningBusinessLeadFollow,
   pestControlLeadFollow,
   poolServiceCrm,
   cleaningBusinessCrm,
