@@ -42,6 +42,7 @@ import { plumberLeadFollowUp } from "@/content/posts/plumber-lead-follow-up";
 import { plumbingWebsiteDesign } from "@/content/posts/plumbing-website-design";
 import { poolBuilderLeadFollow } from "@/content/posts/pool-builder-lead-follow-up";
 import { poolServiceCrm } from "@/content/posts/pool-service-crm";
+import { poolServiceLeadFollow } from "@/content/posts/pool-service-lead-follow-up";
 import { postJobFollowUp } from "@/content/posts/post-job-follow-up";
 import { quoteFollowUp } from "@/content/posts/quote-follow-up";
 import { quoteRequestForm } from "@/content/posts/quote-request-form";
@@ -277,6 +278,7 @@ export type Post = {
  * README de content/rewrites/.
  */
 export const posts: readonly Post[] = [
+  poolServiceLeadFollow,
   cleaningBusinessLeadFollow,
   pestControlLeadFollow,
   poolServiceCrm,
