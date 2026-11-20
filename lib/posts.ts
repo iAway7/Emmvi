@@ -16,6 +16,7 @@ import { electricianWebsiteDesign } from "@/content/posts/electrician-website-de
 import { emailAutomationAndFunnel } from "@/content/posts/email-automation-and-funnel-building-the-secret-to-driving-more-sales";
 import { evChargerInstallationLeads } from "@/content/posts/ev-charger-installation-leads";
 import { evChargerInstallerWebsite } from "@/content/posts/ev-charger-installer-website";
+import { garageDoorLeadFollow } from "@/content/posts/garage-door-lead-follow-up";
 import { gohighlevelForContractors } from "@/content/posts/gohighlevel-for-contractors";
 import { googleBusinessProfileFor } from "@/content/posts/google-business-profile-for-contractors";
 import { harnessingAiWithoutCode } from "@/content/posts/harnessing-ai-without-code-how-crms-and-automation-tools-empower-online-businesses";
@@ -278,6 +279,7 @@ export type Post = {
  * README de content/rewrites/.
  */
 export const posts: readonly Post[] = [
+  garageDoorLeadFollow,
   poolServiceLeadFollow,
   cleaningBusinessLeadFollow,
   pestControlLeadFollow,
