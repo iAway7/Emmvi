@@ -19,6 +19,7 @@ import { evChargerInstallerWebsite } from "@/content/posts/ev-charger-installer-
 import { garageDoorLeadFollow } from "@/content/posts/garage-door-lead-follow-up";
 import { gohighlevelForContractors } from "@/content/posts/gohighlevel-for-contractors";
 import { googleBusinessProfileFor } from "@/content/posts/google-business-profile-for-contractors";
+import { handymanLeadFollowUp } from "@/content/posts/handyman-lead-follow-up";
 import { harnessingAiWithoutCode } from "@/content/posts/harnessing-ai-without-code-how-crms-and-automation-tools-empower-online-businesses";
 import { howEmailMarketingAnd } from "@/content/posts/how-email-marketing-and-automated-series-can-increase-roi";
 import { howEmailMarketingHelps } from "@/content/posts/how-email-marketing-helps-maximize-customer-engagement";
@@ -279,6 +280,7 @@ export type Post = {
  * README de content/rewrites/.
  */
 export const posts: readonly Post[] = [
+  handymanLeadFollowUp,
   garageDoorLeadFollow,
   poolServiceLeadFollow,
   cleaningBusinessLeadFollow,
