@@ -14,6 +14,7 @@ import { crmForPlumbers } from "@/content/posts/crm-for-plumbers";
 import { electricianLeadFollowUp } from "@/content/posts/electrician-lead-follow-up";
 import { electricianWebsiteDesign } from "@/content/posts/electrician-website-design";
 import { emailAutomationAndFunnel } from "@/content/posts/email-automation-and-funnel-building-the-secret-to-driving-more-sales";
+import { estimateCloseRate } from "@/content/posts/estimate-close-rate";
 import { estimateFollowUpCall } from "@/content/posts/estimate-follow-up-call-script";
 import { estimateFollowUpEmail } from "@/content/posts/estimate-follow-up-email";
 import { estimateFollowUpText } from "@/content/posts/estimate-follow-up-text";
@@ -284,6 +285,7 @@ export type Post = {
  * README de content/rewrites/.
  */
 export const posts: readonly Post[] = [
+  estimateCloseRate,
   unsoldEstimates,
   estimateFollowUpCall,
   estimateFollowUpEmail,
